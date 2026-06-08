@@ -1,0 +1,237 @@
+{
+  "generatedAt": "2026-06-08T12:00:00+08:00",
+  "matches": [
+    {
+      "id": "001",
+      "date": "2026-06-08",
+      "kickoff": "18:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "Brazil",
+      "awayTeam": "Serbia",
+      "status": "live",
+      "score": { "home": 1, "away": 0 },
+      "minute": 58,
+      "tags": ["focus", "live-edge"],
+      "dataQuality": 94,
+      "importance": 92,
+      "risk": "Low",
+      "odds": { "home": 1.62, "draw": 3.75, "away": 5.4, "over25": 1.88, "under25": 1.82 },
+      "stats": { "form": "W W W D W", "attack": 88, "defense": 82, "tempo": 76, "homeAway": "Neutral pitch, Brazil crowd edge" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.72, "confidence": 86, "risk": "Low", "reason": "Brazil lead the shot map and retain stronger late-match control." },
+        "ou": { "line": 2.5, "pick": "Over", "probability": 0.58, "confidence": 70, "risk": "Medium", "reason": "Serbia must open the shape, raising transition volume." },
+        "htft": { "pick": "Home/Home", "probability": 0.48, "confidence": 69, "risk": "Medium", "reason": "The live score already supports the early lead path." }
+      }
+    },
+    {
+      "id": "002",
+      "date": "2026-06-08",
+      "kickoff": "20:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "France",
+      "awayTeam": "Denmark",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["focus", "goal-trend"],
+      "dataQuality": 91,
+      "importance": 87,
+      "risk": "Medium",
+      "odds": { "home": 1.86, "draw": 3.35, "away": 4.2, "over25": 1.92, "under25": 1.78 },
+      "stats": { "form": "W W D W L", "attack": 84, "defense": 78, "tempo": 72, "homeAway": "France edge +8" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.62, "confidence": 78, "risk": "Medium", "reason": "France carry the stronger attack profile and better late-game pressure." },
+        "ou": { "line": 2.5, "pick": "Over", "probability": 0.59, "confidence": 73, "risk": "Medium", "reason": "Both sides trend above tournament average in shot creation." },
+        "htft": { "pick": "Draw/Home", "probability": 0.36, "confidence": 62, "risk": "High", "reason": "Denmark often hold compact early before pressure rises after halftime." }
+      }
+    },
+    {
+      "id": "003",
+      "date": "2026-06-08",
+      "kickoff": "22:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "Argentina",
+      "awayTeam": "Mexico",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["focus", "low-risk"],
+      "dataQuality": 89,
+      "importance": 90,
+      "risk": "Low",
+      "odds": { "home": 1.72, "draw": 3.5, "away": 5.05, "over25": 2.04, "under25": 1.68 },
+      "stats": { "form": "W D W W W", "attack": 81, "defense": 83, "tempo": 66, "homeAway": "Argentina edge +10" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.66, "confidence": 82, "risk": "Low", "reason": "Argentina rate higher in chance quality and defensive control." },
+        "ou": { "line": 2.5, "pick": "Under", "probability": 0.61, "confidence": 76, "risk": "Medium", "reason": "Mexico games compress centrally and slow after turnovers." },
+        "htft": { "pick": "Draw/Home", "probability": 0.39, "confidence": 64, "risk": "High", "reason": "The model sees a cautious first half followed by pressure growth." }
+      }
+    },
+    {
+      "id": "004",
+      "date": "2026-06-08",
+      "kickoff": "23:30",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "Germany",
+      "awayTeam": "Japan",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["upset-watch", "goal-trend"],
+      "dataQuality": 84,
+      "importance": 82,
+      "risk": "High",
+      "odds": { "home": 1.7, "draw": 3.65, "away": 5.15, "over25": 1.83, "under25": 1.88 },
+      "stats": { "form": "D W L W D", "attack": 79, "defense": 69, "tempo": 80, "homeAway": "Neutral, fast transition risk" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.57, "confidence": 68, "risk": "High", "reason": "Germany create volume, but defensive transition risk lowers certainty." },
+        "ou": { "line": 2.5, "pick": "Over", "probability": 0.64, "confidence": 79, "risk": "Medium", "reason": "Both teams project high tempo and early wide overloads." },
+        "htft": { "pick": "Home/Home", "probability": 0.34, "confidence": 58, "risk": "High", "reason": "Best path is an early German breakthrough, but volatility remains high." }
+      }
+    },
+    {
+      "id": "005",
+      "date": "2026-06-08",
+      "kickoff": "16:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "Spain",
+      "awayTeam": "Costa Rica",
+      "status": "finished",
+      "score": { "home": 3, "away": 0 },
+      "minute": 90,
+      "tags": ["finished", "hit"],
+      "dataQuality": 92,
+      "importance": 76,
+      "risk": "Low",
+      "odds": { "home": 1.28, "draw": 5.2, "away": 10.8, "over25": 1.7, "under25": 2.02 },
+      "stats": { "form": "W W D W W", "attack": 86, "defense": 85, "tempo": 70, "homeAway": "Spain edge +18" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.78, "confidence": 89, "risk": "Low", "reason": "Spain dominated possession territory and final-third pressure." },
+        "ou": { "line": 2.5, "pick": "Over", "probability": 0.63, "confidence": 77, "risk": "Medium", "reason": "High box entries supported a multi-goal outcome." },
+        "htft": { "pick": "Home/Home", "probability": 0.52, "confidence": 73, "risk": "Medium", "reason": "Early territorial control made the path stable." }
+      }
+    },
+    {
+      "id": "006",
+      "date": "2026-06-09",
+      "kickoff": "18:00",
+      "competition": "World Cup Knockout Preview",
+      "homeTeam": "Portugal",
+      "awayTeam": "Uruguay",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["tomorrow", "under-watch"],
+      "dataQuality": 86,
+      "importance": 88,
+      "risk": "Medium",
+      "odds": { "home": 2.05, "draw": 3.18, "away": 3.7, "over25": 2.08, "under25": 1.66 },
+      "stats": { "form": "W D W L W", "attack": 76, "defense": 80, "tempo": 61, "homeAway": "Tight tactical matchup" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.51, "confidence": 66, "risk": "Medium", "reason": "Portugal edge the shot quality model, but game state may stay narrow." },
+        "ou": { "line": 2.5, "pick": "Under", "probability": 0.64, "confidence": 81, "risk": "Low", "reason": "Both sides allow few central entries and prefer controlled phases." },
+        "htft": { "pick": "Draw/Draw", "probability": 0.31, "confidence": 55, "risk": "High", "reason": "First-half caution and low tempo keep draw paths alive." }
+      }
+    },
+    {
+      "id": "007",
+      "date": "2026-06-09",
+      "kickoff": "21:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "England",
+      "awayTeam": "Croatia",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["tomorrow", "stable"],
+      "dataQuality": 88,
+      "importance": 84,
+      "risk": "Medium",
+      "odds": { "home": 1.95, "draw": 3.3, "away": 4.0, "over25": 1.96, "under25": 1.75 },
+      "stats": { "form": "W W D L W", "attack": 78, "defense": 79, "tempo": 68, "homeAway": "England set-piece edge" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.56, "confidence": 70, "risk": "Medium", "reason": "England hold the set-piece and pressing recovery edge." },
+        "ou": { "line": 2.5, "pick": "Under", "probability": 0.55, "confidence": 67, "risk": "Medium", "reason": "Croatia can slow the center and reduce transition frequency." },
+        "htft": { "pick": "Draw/Home", "probability": 0.33, "confidence": 58, "risk": "High", "reason": "The strongest model path comes through a late England push." }
+      }
+    },
+    {
+      "id": "008",
+      "date": "2026-06-09",
+      "kickoff": "23:00",
+      "competition": "World Cup Group Stage",
+      "homeTeam": "Netherlands",
+      "awayTeam": "Senegal",
+      "status": "pre",
+      "score": { "home": null, "away": null },
+      "minute": null,
+      "tags": ["tomorrow", "goal-trend"],
+      "dataQuality": 82,
+      "importance": 79,
+      "risk": "Medium",
+      "odds": { "home": 1.98, "draw": 3.32, "away": 3.85, "over25": 1.9, "under25": 1.82 },
+      "stats": { "form": "W D W W D", "attack": 80, "defense": 74, "tempo": 74, "homeAway": "Wide-channel duel" },
+      "markets": {
+        "wdl": { "pick": "Home Win", "probability": 0.54, "confidence": 68, "risk": "Medium", "reason": "Netherlands have a small chance-quality edge in wide attacks." },
+        "ou": { "line": 2.5, "pick": "Over", "probability": 0.6, "confidence": 74, "risk": "Medium", "reason": "Both attacks generate enough transition touches to keep goal paths open." },
+        "htft": { "pick": "Draw/Home", "probability": 0.32, "confidence": 57, "risk": "High", "reason": "Senegal can hold early, but the model leans Dutch after the break." }
+      }
+    }
+  ],
+  "parlaySeeds": [
+    {
+      "id": "stable-2",
+      "type": "稳健二串一",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": ["001", "003"],
+      "markets": ["wdl", "wdl"],
+      "risk": "Low",
+      "note": "选择两场基础概率较高的强势方向，优先追求命中稳定性。"
+    },
+    {
+      "id": "balanced-3-2",
+      "type": "均衡三串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "matchIds": ["002", "003", "006"],
+      "markets": ["wdl", "ou", "ou"],
+      "risk": "Medium",
+      "note": "用胜平负和大小球混合降低单一市场波动，允许一场失手。"
+    },
+    {
+      "id": "coverage-4-2",
+      "type": "覆盖四串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "matchIds": ["002", "004", "006", "008"],
+      "markets": ["ou", "ou", "ou", "ou"],
+      "risk": "Medium",
+      "note": "围绕进球趋势做覆盖，适合观察临场节奏变化。"
+    },
+    {
+      "id": "attack-4-3",
+      "type": "进攻四串三",
+      "mode": "atLeast",
+      "requiredHits": 3,
+      "matchIds": ["001", "002", "004", "008"],
+      "markets": ["wdl", "wdl", "ou", "ou"],
+      "risk": "High",
+      "note": "回报空间更高，但德国与荷兰两场波动会放大组合风险。"
+    }
+  ],
+  "history": [
+    { "date": "2026-06-07", "type": "稳健二串一", "result": "hit", "probability": 0.58 },
+    { "date": "2026-06-07", "type": "均衡三串二", "result": "hit", "probability": 0.64 },
+    { "date": "2026-06-07", "type": "进攻四串三", "result": "miss", "probability": 0.42 },
+    { "date": "2026-06-06", "type": "稳健二串一", "result": "hit", "probability": 0.61 },
+    { "date": "2026-06-06", "type": "覆盖四串二", "result": "miss", "probability": 0.72 }
+  ],
+  "tomorrowPool": [
+    { "category": "稳胆候选", "matchId": "006", "market": "ou", "reason": "葡萄牙和乌拉圭节奏偏慢，小球方向更清晰。" },
+    { "category": "稳胆候选", "matchId": "007", "market": "wdl", "reason": "英格兰定位球优势明显，可进入二串一观察池。" },
+    { "category": "进球候选", "matchId": "008", "market": "ou", "reason": "荷兰和塞内加尔两翼推进活跃，转化为大球观察。" },
+    { "category": "冷门观察", "matchId": "004", "market": "wdl", "reason": "德国胜面存在，但防守转换风险让冷门价格值得观察。" },
+    { "category": "暂不推荐", "matchId": "007", "market": "htft", "reason": "半全场路径分散，临场阵容出来前不进入主推。" }
+  ]
+}

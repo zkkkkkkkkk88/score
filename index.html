@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Cup Match Radar</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="top-nav" aria-label="Dashboard navigation">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <p>World Cup Desk</p>
+            <h1>世界杯赛事雷达</h1>
+          </div>
+        </div>
+
+        <div class="nav-stats">
+          <span id="matchCount">0 场赛事</span>
+          <span id="refreshTime">等待数据</span>
+          <span class="live-pill">LIVE</span>
+        </div>
+      </header>
+
+      <section class="dashboard-grid" aria-label="Match radar dashboard">
+        <aside class="match-rail" aria-label="Near two day matches">
+          <div class="section-heading">
+            <p>Fixture Board</p>
+            <h2>近两日赛程</h2>
+          </div>
+
+          <div class="filter-tabs" role="tablist" aria-label="Date filter">
+            <button class="tab is-active" type="button" data-filter="all">全部</button>
+            <button class="tab" type="button" data-filter="today">今日</button>
+            <button class="tab" type="button" data-filter="tomorrow">明日</button>
+          </div>
+
+          <div id="matchList" class="match-list" aria-live="polite"></div>
+        </aside>
+
+        <section class="analysis-panel" aria-label="Selected match analysis">
+          <div id="matchAnalysis"></div>
+        </section>
+
+        <aside class="parlay-panel" aria-label="Daily parlay strategy center">
+          <div class="section-heading">
+            <p>Strategy Center</p>
+            <h2>每日串单</h2>
+          </div>
+          <div id="parlayList" class="parlay-list"></div>
+        </aside>
+      </section>
+
+      <section class="lower-grid" aria-label="Tracking and tomorrow preparation">
+        <article class="review-panel">
+          <div class="section-heading">
+            <p>Result Tracker</p>
+            <h2>今日命中追踪</h2>
+          </div>
+          <div id="hitTracker" class="hit-tracker"></div>
+        </article>
+
+        <article class="tomorrow-panel">
+          <div class="section-heading">
+            <p>Next Day Prep</p>
+            <h2>明日预选池</h2>
+          </div>
+          <div id="tomorrowPool" class="tomorrow-pool"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
