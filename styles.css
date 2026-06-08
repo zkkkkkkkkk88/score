@@ -1,36 +1,40 @@
 :root {
   color-scheme: dark;
-  --pitch: #061c14;
-  --pitch-2: #0c3325;
-  --pitch-3: #123d2d;
-  --ink: #f7fff6;
-  --muted: #a9c3b7;
-  --soft: #d7eadf;
-  --line: rgba(255, 255, 255, 0.14);
-  --gold: #d8b45d;
-  --gold-2: #f4d27a;
-  --home: #e4444e;
-  --away: #3f8cff;
-  --green: #40d47e;
-  --panel: rgba(9, 28, 22, 0.9);
-  --panel-2: rgba(14, 43, 34, 0.84);
-  --shadow: rgba(0, 0, 0, 0.34);
+  --pitch: #071914;
+  --pitch-2: #0c241d;
+  --panel: #10291f;
+  --panel-2: #153327;
+  --panel-3: #0d2119;
+  --ink: #f5f3e8;
+  --soft: #d8d1bd;
+  --muted: #a39c89;
+  --line: rgba(216, 209, 189, 0.2);
+  --line-strong: rgba(216, 209, 189, 0.34);
+  --gold: #c6a15b;
+  --gold-2: #e2c879;
+  --home: #c84545;
+  --away: #3c6fa8;
+  --green: #4ca46d;
+  --warn: #c88d48;
+  --danger: #c65050;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  background: var(--pitch);
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 18% 12%, rgba(216, 180, 93, 0.22), transparent 30rem),
-    radial-gradient(circle at 82% 10%, rgba(63, 140, 255, 0.18), transparent 26rem),
-    linear-gradient(135deg, #04120e 0%, var(--pitch) 44%, #091820 100%);
-  background-size: 72px 72px, 72px 72px, auto, auto, auto;
+    linear-gradient(90deg, rgba(216, 209, 189, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(216, 209, 189, 0.028) 1px, transparent 1px),
+    linear-gradient(180deg, #071914 0%, #0b211a 62%, #091712 100%);
+  background-size: 56px 56px, 56px 56px, auto;
   color: var(--ink);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -42,11 +46,11 @@ button {
 }
 
 .app-shell {
-  width: min(1760px, 100%);
+  width: min(1680px, 100%);
   margin: 0 auto;
-  padding: 20px;
+  padding: 18px;
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .top-nav,
@@ -56,47 +60,54 @@ button {
 .review-panel,
 .tomorrow-panel {
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
-    var(--panel);
-  box-shadow: 0 24px 70px var(--shadow);
+  border-radius: 6px;
+  background: var(--panel);
 }
 
 .top-nav {
-  min-height: 88px;
-  padding: 16px 18px;
+  min-height: 82px;
+  padding: 14px 16px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
+  border-top: 3px solid var(--gold);
 }
 
 .brand-lockup {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .brand-mark {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   flex: 0 0 auto;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
   background:
-    radial-gradient(circle, var(--gold-2) 0 19%, transparent 20%),
-    conic-gradient(from 0deg, var(--gold), transparent, var(--green), transparent, var(--gold));
-  box-shadow: 0 0 28px rgba(216, 180, 93, 0.48);
+    linear-gradient(90deg, transparent 48%, rgba(245, 243, 232, 0.35) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(245, 243, 232, 0.35) 49% 51%, transparent 52%),
+    var(--pitch-2);
+  position: relative;
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid var(--gold-2);
+  border-radius: 50%;
 }
 
 .brand-lockup p,
 .section-heading p,
 .eyebrow {
-  margin: 0 0 3px;
+  margin: 0 0 4px;
   color: var(--gold-2);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -110,18 +121,18 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(24px, 3vw, 40px);
-  line-height: 1.05;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.08;
 }
 
 h2 {
-  font-size: 19px;
+  font-size: 18px;
 }
 
 .nav-stats {
   display: grid;
   grid-auto-flow: column;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -130,26 +141,26 @@ h2 {
 .status-pill,
 .score-chip,
 .tag {
-  min-height: 30px;
-  padding: 6px 10px;
+  min-height: 28px;
+  padding: 5px 9px;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  background: var(--panel-3);
   color: var(--soft);
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
 .live-pill {
-  border-color: rgba(64, 212, 126, 0.5);
-  color: var(--green);
-  box-shadow: 0 0 18px rgba(64, 212, 126, 0.22);
+  border-color: rgba(76, 164, 109, 0.6);
+  color: #b7e2c4;
+  font-weight: 800;
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(270px, 0.8fr) minmax(420px, 1.6fr) minmax(320px, 0.95fr);
-  gap: 16px;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(420px, 1.62fr) minmax(330px, 0.98fr);
+  gap: 14px;
   align-items: start;
 }
 
@@ -157,22 +168,22 @@ h2 {
 .parlay-panel,
 .review-panel,
 .tomorrow-panel {
-  padding: 16px;
+  padding: 14px;
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .filter-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .tab {
-  min-height: 38px;
+  min-height: 36px;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  background: var(--panel-3);
   color: var(--muted);
   cursor: pointer;
 }
@@ -180,8 +191,8 @@ h2 {
 .tab.is-active,
 .tab:hover,
 .tab:focus-visible {
-  border-color: rgba(216, 180, 93, 0.72);
-  background: rgba(216, 180, 93, 0.16);
+  border-color: var(--gold);
+  background: #1d3a2b;
   color: var(--ink);
   outline: none;
 }
@@ -191,31 +202,30 @@ h2 {
 .tomorrow-pool,
 .history-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .match-card {
   width: 100%;
-  min-height: 138px;
-  padding: 13px;
+  min-height: 132px;
+  padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    linear-gradient(90deg, rgba(228, 68, 78, 0.14), transparent 34%),
-    linear-gradient(270deg, rgba(63, 140, 255, 0.12), transparent 38%),
-    var(--panel-2);
+  border-left: 4px solid transparent;
+  border-radius: 4px;
+  background: var(--panel-2);
   color: var(--ink);
   text-align: left;
   display: grid;
-  gap: 10px;
+  gap: 9px;
   cursor: pointer;
 }
 
 .match-card.is-selected,
 .match-card:hover,
 .match-card:focus-visible {
-  border-color: rgba(244, 210, 122, 0.72);
-  box-shadow: inset 0 0 0 1px rgba(244, 210, 122, 0.2);
+  border-color: var(--line-strong);
+  border-left-color: var(--gold);
+  background: #18392b;
   outline: none;
 }
 
@@ -245,7 +255,7 @@ h2 {
 
 .teams strong {
   min-width: 0;
-  font-size: 17px;
+  font-size: 16px;
   overflow-wrap: anywhere;
 }
 
@@ -258,11 +268,12 @@ h2 {
 .score-chip {
   color: var(--gold-2);
   font-variant-numeric: tabular-nums;
+  font-weight: 800;
 }
 
 .status-live,
 .status-halftime {
-  color: var(--green);
+  color: #b7e2c4;
 }
 
 .status-finished {
@@ -272,13 +283,13 @@ h2 {
 .tags,
 .analysis-tags {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
 .tag {
-  min-height: 24px;
-  padding: 4px 8px;
+  min-height: 23px;
+  padding: 4px 7px;
   color: var(--muted);
   font-size: 11px;
 }
@@ -288,9 +299,9 @@ h2 {
 }
 
 .analysis-card {
-  padding: 18px;
+  padding: 16px;
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .analysis-header {
@@ -302,22 +313,22 @@ h2 {
 
 .analysis-header h2 {
   max-width: 100%;
-  font-size: clamp(28px, 4vw, 54px);
-  line-height: 1.06;
+  font-size: clamp(26px, 3.6vw, 46px);
+  line-height: 1.08;
   overflow-wrap: anywhere;
 }
 
 .analysis-header h2 span {
   color: var(--gold-2);
-  font-size: 0.5em;
+  font-size: 0.48em;
 }
 
 .score-board {
   min-width: 150px;
-  padding: 13px;
-  border: 1px solid rgba(244, 210, 122, 0.42);
-  border-radius: 8px;
-  background: rgba(216, 180, 93, 0.13);
+  padding: 12px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  background: #1b3025;
   text-align: center;
 }
 
@@ -335,14 +346,14 @@ h2 {
 .score-board strong {
   display: block;
   color: var(--gold-2);
-  font-size: 34px;
+  font-size: 32px;
   font-variant-numeric: tabular-nums;
 }
 
 .radar-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .radar-strip div,
@@ -353,39 +364,38 @@ h2 {
 .tracker-metrics > div,
 .history-row {
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.055);
+  border-radius: 4px;
+  background: var(--panel-3);
 }
 
 .radar-strip div {
-  padding: 12px;
+  padding: 11px;
   display: grid;
   gap: 4px;
 }
 
 .radar-strip strong {
-  font-size: 22px;
+  font-size: 20px;
   overflow-wrap: anywhere;
 }
 
 .momentum-card {
-  padding: 14px;
+  padding: 12px;
   display: grid;
-  grid-template-columns: minmax(190px, 0.8fr) minmax(0, 1.2fr);
-  gap: 16px;
+  grid-template-columns: minmax(190px, 0.78fr) minmax(0, 1.22fr);
+  gap: 14px;
   align-items: stretch;
 }
 
 .pitch-lines {
-  min-height: 170px;
-  padding: 14px;
-  border-radius: 8px;
+  min-height: 160px;
+  padding: 12px;
+  border-radius: 4px;
   background:
-    radial-gradient(circle at center, transparent 0 32px, rgba(255, 255, 255, 0.18) 33px 34px, transparent 35px),
-    linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.18) 50%, transparent 51%),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
-    rgba(7, 40, 28, 0.78);
-  background-size: auto, auto, 100% 48px, auto;
+    linear-gradient(90deg, transparent 49%, rgba(216, 209, 189, 0.24) 50%, transparent 51%),
+    linear-gradient(0deg, rgba(216, 209, 189, 0.12) 1px, transparent 1px),
+    #0b2b1e;
+  background-size: auto, 100% 40px, auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: end;
@@ -395,9 +405,16 @@ h2 {
 .pitch-lines i {
   display: block;
   min-height: 30px;
-  border-radius: 6px 6px 0 0;
-  background: linear-gradient(180deg, var(--gold-2), var(--green));
-  box-shadow: 0 0 18px rgba(64, 212, 126, 0.24);
+  border-radius: 3px 3px 0 0;
+  background: var(--gold);
+}
+
+.pitch-lines i:nth-child(2) {
+  background: var(--green);
+}
+
+.pitch-lines i:nth-child(3) {
+  background: var(--away);
 }
 
 .factor-list {
@@ -410,22 +427,22 @@ h2 {
 }
 
 .factor-list li {
-  padding-left: 12px;
-  border-left: 2px solid rgba(244, 210, 122, 0.52);
+  padding-left: 10px;
+  border-left: 2px solid var(--gold);
 }
 
 .market-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .market-card,
 .parlay-card,
 .watch-card {
-  padding: 13px;
+  padding: 12px;
   display: grid;
-  gap: 10px;
+  gap: 9px;
 }
 
 .market-title,
@@ -446,22 +463,22 @@ h2 {
 .market-score strong,
 .parlay-head strong {
   color: var(--gold-2);
-  font-size: 26px;
+  font-size: 24px;
   font-variant-numeric: tabular-nums;
 }
 
 .probability-bar {
-  height: 8px;
+  height: 7px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.11);
+  background: #263b31;
 }
 
 .probability-bar span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--home), var(--gold-2), var(--green));
+  background: var(--gold);
 }
 
 .market-card p,
@@ -474,29 +491,29 @@ h2 {
 }
 
 .risk-low {
-  border-color: rgba(64, 212, 126, 0.36);
+  border-left: 3px solid var(--green);
 }
 
 .risk-medium {
-  border-color: rgba(216, 180, 93, 0.36);
+  border-left: 3px solid var(--warn);
 }
 
 .risk-high {
-  border-color: rgba(228, 68, 78, 0.42);
+  border-left: 3px solid var(--danger);
 }
 
 .pick-list {
   display: grid;
-  gap: 8px;
+  gap: 7px;
 }
 
 .pick-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 3px;
-  padding: 9px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.18);
+  padding: 8px;
+  border-radius: 4px;
+  background: #0a1a14;
 }
 
 .pick-row em {
@@ -508,28 +525,28 @@ h2 {
 .lower-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .tracker-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .tracker-metrics > div {
-  padding: 13px;
+  padding: 12px;
   display: grid;
-  gap: 6px;
+  gap: 5px;
 }
 
 .tracker-metrics strong {
   color: var(--gold-2);
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .history-row {
-  padding: 11px;
+  padding: 10px;
 }
 
 .history-row strong {
@@ -542,11 +559,11 @@ h2 {
 }
 
 .hit {
-  color: var(--green);
+  color: #b7e2c4;
 }
 
 .miss {
-  color: var(--home);
+  color: #e4b0aa;
 }
 
 .tomorrow-pool {
@@ -554,9 +571,7 @@ h2 {
 }
 
 .watch-card {
-  background:
-    linear-gradient(135deg, rgba(216, 180, 93, 0.12), transparent 44%),
-    rgba(255, 255, 255, 0.055);
+  background: var(--panel-3);
 }
 
 .watch-market strong {
@@ -568,7 +583,7 @@ h2 {
   min-height: 120px;
   padding: 20px;
   border: 1px dashed var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   color: var(--muted);
   display: grid;
   place-items: center;
@@ -616,7 +631,7 @@ h2 {
 
 @media (max-width: 560px) {
   .top-nav {
-    padding: 14px;
+    padding: 12px;
   }
 
   .brand-lockup {
