@@ -28,6 +28,25 @@ python -m http.server 4173
 http://localhost:4173
 ```
 
+## 更新真实数据
+
+当前项目用 `scripts/update-real-data.js` 从 TheSportsDB 拉取近两天足球赛程和比分，并写入 `data/matches.json`：
+
+```powershell
+node scripts/update-real-data.js
+```
+
+可选环境变量：
+
+```powershell
+$env:SPORTSDB_API_KEY="你的 TheSportsDB Key"
+$env:SPORTSDB_DATES="2026-06-08,2026-06-09"
+$env:SPORTSDB_LIMIT="16"
+node scripts/update-real-data.js
+```
+
+说明：赛程和比分来自真实 API；竞彩赔率、官方胜平负盘口和更细的临场事件需要接入授权数据源后再补强。当前页面里的概率是基于真实赛程/比分生成的本地模型估算，不是官方赔率。
+
 ## 视觉素材
 
 - 背景视频来自 Pixabay：Football / grass / sport area / ball，1920×1080 MP4。

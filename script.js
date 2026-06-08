@@ -180,17 +180,18 @@ function formatMarketPick(key, market) {
 }
 
 function getMarketOdds(match, key, market) {
+  const fallback = Number((0.92 / market.probability).toFixed(2));
   if (key === "wdl") {
-    if (market.pick.includes("主")) return match.odds.home;
-    if (market.pick.includes("客")) return match.odds.away;
-    return match.odds.draw;
+    if (market.pick.includes("主")) return match.odds.home || fallback;
+    if (market.pick.includes("客")) return match.odds.away || fallback;
+    return match.odds.draw || fallback;
   }
 
   if (key === "ou") {
-    return formatMarketPick(key, market).startsWith("3") ? match.odds.over25 : match.odds.under25;
+    return formatMarketPick(key, market).startsWith("3") ? match.odds.over25 || fallback : match.odds.under25 || fallback;
   }
 
-  return Number((0.92 / market.probability).toFixed(2));
+  return fallback;
 }
 
 function getPickLabel(pick) {
@@ -276,6 +277,11 @@ function renderFocusStrip() {
     .filter((match) => match.date === getToday())
     .sort((a, b) => getMatchPriority(b) - getMatchPriority(a))
     .slice(0, 4);
+
+  if (!matches.length) {
+    els.focusStrip.innerHTML = `<div class="empty-state">今日暂无真实赛事</div>`;
+    return;
+  }
 
   els.focusStrip.innerHTML = matches
     .map((match) => {
@@ -652,8 +658,9 @@ function renderTomorrowPool() {
 }
 
 function renderMeta() {
+  const provider = state.data.source?.provider ? ` · ${state.data.source.provider}` : "";
   els.matchCount.textContent = `${state.matches.length} 场赛事`;
-  els.refreshTime.textContent = `刷新 ${formatDateTime(state.data.generatedAt)}`;
+  els.refreshTime.textContent = `刷新 ${formatDateTime(state.data.generatedAt)}${provider}`;
 }
 
 function render() {

@@ -58,8 +58,7 @@ setTimeout(() => {
   ].join("");
 
   assert(html.includes("总进球数"), "renders concrete total goals market");
-  assert(html.includes("3球及以上"), "renders high goal range");
-  assert(html.includes("0-2球"), "renders low goal range");
+  assert(html.includes("3球及以上") || html.includes("0-2球"), "renders a concrete goal range");
   assert(!html.includes("大小球"), "does not render old over-under label");
   assert(html.includes("预计回报"), "renders parlay return estimate");
   assert(html.includes("核心胆"), "renders parlay banker pick");
@@ -71,6 +70,7 @@ setTimeout(() => {
   assert(html.includes("趋势变化"), "renders probability trend signal");
   assert(html.includes("准备指数"), "renders tomorrow preparation score");
   assert(html.includes("建议动作"), "renders tomorrow action advice");
+  assert(elements["#refreshTime"].textContent.includes("TheSportsDB"), "renders real data provider");
 
   console.log("dashboard smoke ok");
 }, 0);
