@@ -19,7 +19,7 @@
       "stats": { "form": "胜 胜 胜 平 胜", "attack": 88, "defense": 82, "tempo": 76, "homeAway": "中立场，巴西人气占优" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.72, "confidence": 86, "risk": "低", "reason": "巴西已经取得领先，射门质量和后程控制力仍然占优。" },
-        "ou": { "line": 2.5, "pick": "大球", "probability": 0.58, "confidence": 70, "risk": "中", "reason": "塞尔维亚落后后需要压上，转换空间会被进一步拉开。" },
+        "ou": { "line": 2.5, "pick": "3球及以上", "goalRange": "3球及以上", "probability": 0.58, "confidence": 70, "risk": "中", "reason": "塞尔维亚落后后需要压上，预计全场总进球更接近 3 球或以上。" },
         "htft": { "pick": "胜/胜", "probability": 0.48, "confidence": 69, "risk": "中", "reason": "当前比分已经支持半场领先并保持到终场的路径。" }
       }
     },
@@ -41,7 +41,7 @@
       "stats": { "form": "胜 胜 平 胜 负", "attack": 84, "defense": 78, "tempo": 72, "homeAway": "法国综合优势 +8" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.62, "confidence": 78, "risk": "中", "reason": "法国进攻端更稳定，比赛后段制造压力的能力更强。" },
-        "ou": { "line": 2.5, "pick": "大球", "probability": 0.59, "confidence": 73, "risk": "中", "reason": "两队射门创造能力都高于本轮平均线，进球路径较清晰。" },
+        "ou": { "line": 2.5, "pick": "3球及以上", "goalRange": "3球及以上", "probability": 0.59, "confidence": 73, "risk": "中", "reason": "两队射门创造能力都高于本轮平均线，预计总进球落在 3 球或以上。" },
         "htft": { "pick": "平/胜", "probability": 0.36, "confidence": 62, "risk": "高", "reason": "丹麦开局防线紧凑，法国更可能在下半场拉开优势。" }
       }
     },
@@ -63,7 +63,7 @@
       "stats": { "form": "胜 平 胜 胜 胜", "attack": 81, "defense": 83, "tempo": 66, "homeAway": "阿根廷综合优势 +10" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.66, "confidence": 82, "risk": "低", "reason": "阿根廷机会质量和防守控制都更稳，基础面更适合进串。" },
-        "ou": { "line": 2.5, "pick": "小球", "probability": 0.61, "confidence": 76, "risk": "中", "reason": "墨西哥中路压缩明显，比赛节奏可能被拖慢。" },
+        "ou": { "line": 2.5, "pick": "0-2球", "goalRange": "0-2球", "probability": 0.61, "confidence": 76, "risk": "中", "reason": "墨西哥中路压缩明显，比赛节奏可能被拖慢，预计总进球控制在 0-2 球。" },
         "htft": { "pick": "平/胜", "probability": 0.39, "confidence": 64, "risk": "高", "reason": "模型倾向谨慎上半场，随后阿根廷压力逐步增加。" }
       }
     },
@@ -85,7 +85,7 @@
       "stats": { "form": "平 胜 负 胜 平", "attack": 79, "defense": 69, "tempo": 80, "homeAway": "中立场，转换风险偏高" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.57, "confidence": 68, "risk": "高", "reason": "德国进攻量占优，但防守转换风险会压低确定性。" },
-        "ou": { "line": 2.5, "pick": "大球", "probability": 0.64, "confidence": 79, "risk": "中", "reason": "双方节奏都偏快，边路推进和反击空间较多。" },
+        "ou": { "line": 2.5, "pick": "3球及以上", "goalRange": "3球及以上", "probability": 0.64, "confidence": 79, "risk": "中", "reason": "双方节奏都偏快，边路推进和反击空间较多，预计总进球在 3 球或以上。" },
         "htft": { "pick": "胜/胜", "probability": 0.34, "confidence": 58, "risk": "高", "reason": "最优路径是德国早早打开局面，但整体波动较大。" }
       }
     },
@@ -107,7 +107,7 @@
       "stats": { "form": "胜 胜 平 胜 胜", "attack": 86, "defense": 85, "tempo": 70, "homeAway": "西班牙综合优势 +18" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.78, "confidence": 89, "risk": "低", "reason": "西班牙控球和前场压迫明显占优，结果路径稳定。" },
-        "ou": { "line": 2.5, "pick": "大球", "probability": 0.63, "confidence": 77, "risk": "中", "reason": "禁区进入次数充足，支持多进球结果。" },
+        "ou": { "line": 2.5, "pick": "3球及以上", "goalRange": "3球及以上", "probability": 0.63, "confidence": 77, "risk": "中", "reason": "禁区进入次数充足，支持全场 3 球或以上的多进球结果。" },
         "htft": { "pick": "胜/胜", "probability": 0.52, "confidence": 73, "risk": "中", "reason": "早段场面优势明显，半全场走势较顺。" }
       }
     },
@@ -121,7 +121,7 @@
       "status": "pre",
       "score": { "home": null, "away": null },
       "minute": null,
-      "tags": ["明日", "小球观察"],
+      "tags": ["明日", "0-2球观察"],
       "dataQuality": 86,
       "importance": 88,
       "risk": "中",
@@ -129,7 +129,7 @@
       "stats": { "form": "胜 平 胜 负 胜", "attack": 76, "defense": 80, "tempo": 61, "homeAway": "战术对抗偏谨慎" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.51, "confidence": 66, "risk": "中", "reason": "葡萄牙机会质量略高，但比赛状态可能长期胶着。" },
-        "ou": { "line": 2.5, "pick": "小球", "probability": 0.64, "confidence": 81, "risk": "低", "reason": "双方中路保护较好，倾向于控制节奏和减少失误。" },
+        "ou": { "line": 2.5, "pick": "0-2球", "goalRange": "0-2球", "probability": 0.64, "confidence": 81, "risk": "低", "reason": "双方中路保护较好，倾向于控制节奏和减少失误，预计总进球在 0-2 球。" },
         "htft": { "pick": "平/平", "probability": 0.31, "confidence": 55, "risk": "高", "reason": "上半场谨慎和低节奏让平局路径保持活跃。" }
       }
     },
@@ -151,7 +151,7 @@
       "stats": { "form": "胜 胜 平 负 胜", "attack": 78, "defense": 79, "tempo": 68, "homeAway": "英格兰定位球优势" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.56, "confidence": 70, "risk": "中", "reason": "英格兰定位球和反抢恢复更有优势。" },
-        "ou": { "line": 2.5, "pick": "小球", "probability": 0.55, "confidence": 67, "risk": "中", "reason": "克罗地亚能压慢中路节奏，减少转换频率。" },
+        "ou": { "line": 2.5, "pick": "0-2球", "goalRange": "0-2球", "probability": 0.55, "confidence": 67, "risk": "中", "reason": "克罗地亚能压慢中路节奏，减少转换频率，预计总进球不超过 2 球。" },
         "htft": { "pick": "平/胜", "probability": 0.33, "confidence": 58, "risk": "高", "reason": "更强路径来自英格兰下半场持续施压。" }
       }
     },
@@ -173,7 +173,7 @@
       "stats": { "form": "胜 平 胜 胜 平", "attack": 80, "defense": 74, "tempo": 74, "homeAway": "边路对抗强度高" },
       "markets": {
         "wdl": { "pick": "主胜", "probability": 0.54, "confidence": 68, "risk": "中", "reason": "荷兰边路进攻的机会质量略占上风。" },
-        "ou": { "line": 2.5, "pick": "大球", "probability": 0.6, "confidence": 74, "risk": "中", "reason": "双方转换触球充足，进球通道相对开放。" },
+        "ou": { "line": 2.5, "pick": "3球及以上", "goalRange": "3球及以上", "probability": 0.6, "confidence": 74, "risk": "中", "reason": "双方转换触球充足，进球通道相对开放，预计总进球在 3 球或以上。" },
         "htft": { "pick": "平/胜", "probability": 0.32, "confidence": 57, "risk": "高", "reason": "塞内加尔有能力顶住开局，但模型倾向荷兰后程占优。" }
       }
     }
@@ -197,7 +197,7 @@
       "matchIds": ["002", "003", "006"],
       "markets": ["wdl", "ou", "ou"],
       "risk": "中",
-      "note": "用胜平负和大小球混合降低单一市场波动，允许一场失手。"
+      "note": "用胜平负和总进球数混合降低单一市场波动，允许一场失手。"
     },
     {
       "id": "coverage-4-2",
@@ -228,9 +228,9 @@
     { "date": "2026-06-06", "type": "覆盖四串二", "result": "miss", "probability": 0.72 }
   ],
   "tomorrowPool": [
-    { "category": "稳胆候选", "matchId": "006", "market": "ou", "reason": "葡萄牙和乌拉圭节奏偏慢，小球方向更清晰。" },
+    { "category": "稳胆候选", "matchId": "006", "market": "ou", "reason": "葡萄牙和乌拉圭节奏偏慢，0-2 球方向更清晰。" },
     { "category": "稳胆候选", "matchId": "007", "market": "wdl", "reason": "英格兰定位球优势明显，可进入二串一观察池。" },
-    { "category": "进球候选", "matchId": "008", "market": "ou", "reason": "荷兰和塞内加尔两翼推进活跃，转化为大球观察。" },
+    { "category": "进球候选", "matchId": "008", "market": "ou", "reason": "荷兰和塞内加尔两翼推进活跃，转化为 3 球及以上观察。" },
     { "category": "冷门观察", "matchId": "004", "market": "wdl", "reason": "德国胜面存在，但防守转换风险让冷门价格值得观察。" },
     { "category": "暂不推荐", "matchId": "007", "market": "htft", "reason": "半全场路径分散，临场阵容出来前不进入主推。" }
   ]

@@ -19,7 +19,7 @@ const els = {
 
 const marketNames = {
   wdl: "胜平负",
-  ou: "大小球",
+  ou: "总进球数",
   htft: "半全场",
 };
 
@@ -142,6 +142,11 @@ function getMarket(match, key) {
   return match.markets[key];
 }
 
+function formatMarketPick(key, market) {
+  if (key !== "ou") return market.pick;
+  return market.goalRange ?? market.pick;
+}
+
 function getParlayPicks(seed, useLive = true) {
   return seed.matchIds
     .map((matchId, index) => {
@@ -226,7 +231,7 @@ function renderMarketCard(match, key) {
     <article class="market-card ${riskClass(market.risk)}">
       <div class="market-title">
         <span>${marketNames[key]}</span>
-        <strong>${escapeHtml(market.pick)}${key === "ou" ? ` ${market.line}` : ""}</strong>
+        <strong>${escapeHtml(formatMarketPick(key, market))}</strong>
       </div>
       <div class="market-score">
         <span>实时概率</span>
@@ -342,7 +347,7 @@ function renderParlays() {
                 (pick) => `
                   <div class="pick-row">
                     <span>${pick.match.id} ${escapeHtml(pick.match.homeTeam)} 对 ${escapeHtml(pick.match.awayTeam)}</span>
-                    <strong>${marketNames[pick.marketKey]} · ${escapeHtml(pick.market.pick)}</strong>
+                    <strong>${marketNames[pick.marketKey]} · ${escapeHtml(formatMarketPick(pick.marketKey, pick.market))}</strong>
                     <em>${pct(pick.probability)}</em>
                   </div>
                 `,
@@ -413,7 +418,7 @@ function renderTomorrowPool() {
           </div>
           <div class="watch-market">
             <span>${marketNames[item.market]}</span>
-            <strong>${escapeHtml(market.pick)} · ${pct(market.probability)}</strong>
+            <strong>${escapeHtml(formatMarketPick(item.market, market))} · ${pct(market.probability)}</strong>
           </div>
           <p>${escapeHtml(item.reason)}</p>
         </article>
