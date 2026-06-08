@@ -50,6 +50,7 @@ vm.runInContext(fs.readFileSync("script.js", "utf8"), context);
 
 setTimeout(() => {
   const html = [
+    elements["#focusStrip"].innerHTML,
     elements["#matchAnalysis"].innerHTML,
     elements["#parlayList"].innerHTML,
     elements["#hitTracker"].innerHTML,
@@ -65,6 +66,11 @@ setTimeout(() => {
   assert(html.includes("风险点"), "renders parlay weak link");
   assert(html.includes("玩法表现"), "renders market performance history");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
+  assert(html.includes("今日重点"), "renders focus match strip");
+  assert(html.includes("临场信号"), "renders live tactical signals");
+  assert(html.includes("趋势变化"), "renders probability trend signal");
+  assert(html.includes("准备指数"), "renders tomorrow preparation score");
+  assert(html.includes("建议动作"), "renders tomorrow action advice");
 
   console.log("dashboard smoke ok");
 }, 0);

@@ -79,6 +79,7 @@ button {
 }
 
 .top-nav,
+.focus-strip-panel,
 .match-rail,
 .analysis-card,
 .parlay-panel,
@@ -194,10 +195,67 @@ h2 {
 .match-rail,
 .parlay-panel,
 .review-panel,
-.tomorrow-panel {
+.tomorrow-panel,
+.focus-strip-panel {
   padding: 14px;
   display: grid;
   gap: 12px;
+}
+
+.focus-strip-panel {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.focus-strip {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.focus-card {
+  min-width: 0;
+  min-height: 112px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  background: rgba(91, 23, 27, 0.88);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+}
+
+.focus-card:hover,
+.focus-card:focus-visible {
+  border-color: var(--gold);
+  background: rgba(106, 26, 30, 0.95);
+  outline: none;
+}
+
+.focus-card span,
+.focus-card small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.focus-card strong,
+.focus-card em {
+  overflow-wrap: anywhere;
+}
+
+.focus-card div {
+  display: grid;
+  gap: 3px;
+}
+
+.focus-card em {
+  color: var(--gold-2);
+  font-size: 12px;
+  font-style: normal;
 }
 
 .filter-tabs {
@@ -535,7 +593,8 @@ h2 {
 }
 
 .parlay-insights,
-.ledger-grid {
+.ledger-grid,
+.signal-grid {
   display: grid;
   gap: 7px;
 }
@@ -545,7 +604,9 @@ h2 {
 }
 
 .parlay-insights div,
-.ledger-card {
+.ledger-card,
+.signal-card,
+.prep-score {
   min-width: 0;
   padding: 8px;
   border: 1px solid var(--line);
@@ -557,15 +618,44 @@ h2 {
 
 .parlay-insights span,
 .ledger-card span,
-.ledger-card em {
+.ledger-card em,
+.signal-card span,
+.signal-card em,
+.prep-score span,
+.prep-score em {
   color: var(--muted);
   font-size: 12px;
 }
 
 .parlay-insights strong,
-.ledger-card strong {
+.ledger-card strong,
+.signal-card strong,
+.prep-score strong {
   color: var(--gold-2);
   overflow-wrap: anywhere;
+}
+
+.signal-panel {
+  display: grid;
+  gap: 8px;
+}
+
+.signal-panel h3 {
+  font-size: 16px;
+}
+
+.signal-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.signal-card strong {
+  font-size: 18px;
+}
+
+.signal-card em,
+.prep-score em {
+  font-style: normal;
+  line-height: 1.45;
 }
 
 .pick-row {
@@ -656,6 +746,14 @@ h2 {
   background: rgba(53, 16, 18, 0.88);
 }
 
+.prep-score {
+  background: rgba(45, 12, 14, 0.7);
+}
+
+.prep-score strong {
+  font-size: 22px;
+}
+
 .watch-market strong {
   color: var(--gold-2);
   font-size: 13px;
@@ -691,10 +789,13 @@ h2 {
 
   .top-nav,
   .nav-stats,
+  .focus-strip-panel,
+  .focus-strip,
   .analysis-header,
   .momentum-card,
   .market-grid,
   .radar-strip,
+  .signal-grid,
   .tracker-metrics,
   .parlay-insights,
   .ledger-grid,

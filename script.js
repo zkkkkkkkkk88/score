@@ -9,6 +9,7 @@ const state = {
 const els = {
   matchCount: document.querySelector("#matchCount"),
   refreshTime: document.querySelector("#refreshTime"),
+  focusStrip: document.querySelector("#focusStrip"),
   matchList: document.querySelector("#matchList"),
   matchAnalysis: document.querySelector("#matchAnalysis"),
   parlayList: document.querySelector("#parlayList"),
@@ -142,6 +143,13 @@ function riskClass(risk) {
   return "risk-medium";
 }
 
+function riskPenalty(risk) {
+  if (risk === "低" || risk === "Low") return 0;
+  if (risk === "中" || risk === "Medium") return 6;
+  if (risk === "高" || risk === "High") return 14;
+  return 6;
+}
+
 function statusClass(status) {
   return `status-${status}`;
 }
@@ -154,6 +162,12 @@ function getFilteredMatches() {
 
 function getSelectedMatch() {
   return state.matches.find((match) => match.id === state.selectedId) ?? state.matches[0];
+}
+
+function getMatchPriority(match) {
+  const liveBonus = match.status === "live" ? 16 : 0;
+  const finishedPenalty = match.status === "finished" ? 18 : 0;
+  return match.importance + match.dataQuality * 0.35 + match.markets.wdl.probability * 24 + liveBonus - riskPenalty(match.risk) - finishedPenalty;
 }
 
 function getMarket(match, key) {
@@ -200,6 +214,11 @@ function getReturnEstimate(seed, picks) {
   );
 
   return groups.length ? total / groups.length : 0;
+}
+
+function getTrendText(base, live) {
+  const delta = live - base;
+  return `${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%`;
 }
 
 function getParlayInsight(picks) {
@@ -250,6 +269,33 @@ function renderProbabilityBar(value, label) {
 
 function renderTags(tags) {
   return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+}
+
+function renderFocusStrip() {
+  const matches = state.matches
+    .filter((match) => match.date === getToday())
+    .sort((a, b) => getMatchPriority(b) - getMatchPriority(a))
+    .slice(0, 4);
+
+  els.focusStrip.innerHTML = matches
+    .map((match) => {
+      const wdl = match.markets.wdl;
+      const goals = match.markets.ou;
+      const live = liveProbability(wdl.probability, match);
+
+      return `
+        <button class="focus-card" type="button" data-match-id="${match.id}">
+          <span>${match.id} · 今日重点 · ${statusLabels[match.status]}</span>
+          <strong>${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
+          <div>
+            <em>${marketNames.wdl} ${escapeHtml(wdl.pick)} · ${pct(live)}</em>
+            <em>${marketNames.ou} ${escapeHtml(formatMarketPick("ou", goals))}</em>
+          </div>
+          <small>趋势变化 ${getTrendText(wdl.probability, live)}</small>
+        </button>
+      `;
+    })
+    .join("");
 }
 
 function renderMatchList() {
@@ -309,6 +355,66 @@ function renderMarketCard(match, key) {
       </div>
       <p>${escapeHtml(market.reason)}</p>
     </article>
+  `;
+}
+
+function getLiveSignals(match) {
+  const wdl = match.markets.wdl;
+  const goals = match.markets.ou;
+  const primary = liveProbability(wdl.probability, match);
+  const goalProbability = liveProbability(goals.probability, match);
+  const action =
+    primary >= 0.68
+      ? "可进入主推"
+      : primary >= 0.58
+        ? "等待临场确认"
+        : "只做观察";
+
+  return [
+    {
+      title: "趋势变化",
+      value: getTrendText(wdl.probability, primary),
+      detail: `${wdl.pick} 实时概率 ${pct(primary)}`,
+    },
+    {
+      title: "总进球数",
+      value: formatMarketPick("ou", goals),
+      detail: `当前路径概率 ${pct(goalProbability)}`,
+    },
+    {
+      title: "风险温度",
+      value: riskLabels[match.risk] ?? match.risk,
+      detail: `数据质量 ${match.dataQuality} / 节奏 ${match.stats.tempo}`,
+    },
+    {
+      title: "建议动作",
+      value: action,
+      detail: match.status === "finished" ? "完场复盘" : "结合首发和临场赔率再确认",
+    },
+  ];
+}
+
+function renderLiveSignals(match) {
+  return `
+    <div class="signal-panel">
+      <div class="section-heading">
+        <p>临场信号</p>
+        <h3>实时决策提示</h3>
+      </div>
+      <div class="signal-grid">
+        ${getLiveSignals(match)
+          .map(
+            (signal) => `
+              <div class="signal-card">
+                <span>${escapeHtml(signal.title)}</span>
+                <strong>${escapeHtml(signal.value)}</strong>
+                <em>${escapeHtml(signal.detail)}</em>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
   `;
 }
 
@@ -372,6 +478,8 @@ function renderAnalysis() {
           </ul>
         </div>
       </div>
+
+      ${renderLiveSignals(match)}
 
       <div class="market-grid">
         ${renderMarketCard(match, "wdl")}
@@ -513,12 +621,24 @@ function renderTomorrowPool() {
       const match = state.matches.find((candidate) => candidate.id === item.matchId);
       if (!match) return "";
       const market = match.markets[item.market];
+      const readiness = clamp(
+        Math.round(match.dataQuality * 0.45 + market.confidence * 0.4 + market.probability * 100 * 0.15 - riskPenalty(market.risk)),
+        38,
+        95,
+      );
+      const action = readiness >= 78 ? "建议动作：进入主推池" : readiness >= 66 ? "建议动作：等待首发确认" : "建议动作：只做观察";
 
       return `
         <article class="watch-card ${riskClass(market.risk)}">
           <div>
             <span>${escapeHtml(item.category)}</span>
             <strong>${match.id} ${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
+          </div>
+          <div class="prep-score">
+            <span>准备指数</span>
+            <strong>${readiness}</strong>
+            ${renderProbabilityBar(readiness / 100, "准备指数")}
+            <em>${action}</em>
           </div>
           <div class="watch-market">
             <span>${marketNames[item.market]}</span>
@@ -538,6 +658,7 @@ function renderMeta() {
 
 function render() {
   renderMeta();
+  renderFocusStrip();
   renderMatchList();
   renderAnalysis();
   renderParlays();
