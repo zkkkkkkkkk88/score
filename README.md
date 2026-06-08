@@ -25,3 +25,8 @@ python -m http.server 4173
 ```text
 http://localhost:4173
 ```
+
+## 视觉素材
+
+- 背景视频来自 Pixabay：Football / grass / sport area / ball，1920×1080 MP4。
+- Pixabay 内容按其内容许可免费使用，当前项目将视频保存为 `assets/football-field-bg.mp4` 作为本地静态资源。
