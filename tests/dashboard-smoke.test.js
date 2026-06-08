@@ -20,6 +20,18 @@ const tabs = [
   { dataset: { filter: "today" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { filter: "tomorrow" }, classList: { toggle() {} }, addEventListener() {} },
 ];
+const viewButtons = [
+  { dataset: { viewButton: "overview" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { viewButton: "analysis" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { viewButton: "plans" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { viewButton: "review" }, classList: { toggle() {} }, addEventListener() {} },
+];
+const views = [
+  { dataset: { view: "overview" }, classList: { toggle() {} } },
+  { dataset: { view: "analysis" }, classList: { toggle() {} } },
+  { dataset: { view: "plans" }, classList: { toggle() {} } },
+  { dataset: { view: "review" }, classList: { toggle() {} } },
+];
 
 const document = {
   querySelector(selector) {
@@ -27,7 +39,10 @@ const document = {
     return elements[selector];
   },
   querySelectorAll(selector) {
-    return selector === "[data-filter]" ? tabs : [];
+    if (selector === "[data-filter]") return tabs;
+    if (selector === "[data-view-button]") return viewButtons;
+    if (selector === "[data-view]") return views;
+    return [];
   },
 };
 
@@ -54,6 +69,7 @@ setTimeout(() => {
     elements["#matchAnalysis"].innerHTML,
     elements["#parlayList"].innerHTML,
     elements["#hitTracker"].innerHTML,
+    elements["#dailySummary"].innerHTML,
     elements["#tomorrowPool"].innerHTML,
   ].join("");
 
@@ -67,7 +83,10 @@ setTimeout(() => {
   assert(html.includes("风险点"), "renders parlay weak link");
   assert(html.includes("玩法表现"), "renders market performance history");
   assert(html.includes("自动复盘"), "renders automatic hit summary");
+  assert(html.includes("每日方案汇总"), "renders daily plan summary");
+  assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
+  assert(viewButtons.length === 4 && views.length === 4, "renders page navigation views");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("社会因素"), "renders social factor analysis");

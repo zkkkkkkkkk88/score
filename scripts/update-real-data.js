@@ -368,6 +368,56 @@ function buildAutoReview(history) {
   };
 }
 
+function buildDailyPlanSummaries(oldData, plans, history, today) {
+  const previous = oldData?.dailyPlanSummaries || [];
+  const byDate = new Map(previous.map((item) => [item.date, { ...item }]));
+  const current = byDate.get(today) || {
+    date: today,
+    totalPlans: 0,
+    reviewedPlans: 0,
+    hitPlans: 0,
+    hitRate: 0,
+    planTypes: [],
+    summary: "",
+  };
+
+  current.totalPlans = plans.length;
+  current.planTypes = plans.map((plan) => plan.type);
+  byDate.set(today, current);
+
+  history.forEach((item) => {
+    if (!byDate.has(item.date)) {
+      byDate.set(item.date, {
+        date: item.date,
+        totalPlans: 0,
+        reviewedPlans: 0,
+        hitPlans: 0,
+        hitRate: 0,
+        planTypes: [],
+        summary: "",
+      });
+    }
+
+    const summary = byDate.get(item.date);
+    summary.reviewedPlans += 1;
+    if (item.result === "hit") summary.hitPlans += 1;
+  });
+
+  return [...byDate.values()]
+    .map((item) => {
+      const hitRate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
+      return {
+        ...item,
+        hitRate,
+        summary: item.reviewedPlans
+          ? `${item.date} 已复盘 ${item.reviewedPlans} 个购买方案，命中 ${item.hitPlans} 个，命中率 ${Math.round(hitRate * 100)}%。`
+          : `${item.date} 已推出 ${item.totalPlans} 个购买方案，等待比赛完场后统计命中率。`,
+      };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 30);
+}
+
 function buildTomorrowPool(matches, tomorrow) {
   return matches
     .filter((match) => match.date === tomorrow)
@@ -390,6 +440,7 @@ async function main() {
   const plans = buildPurchasePlans(concernMatches);
   const history = buildHistory(oldData, allMatches);
   const today = todayInShanghai();
+  const dailyPlanSummaries = buildDailyPlanSummaries(oldData, plans, history, today);
 
   const data = {
     generatedAt: nowIsoShanghai(),
@@ -406,6 +457,7 @@ async function main() {
     parlaySeeds: plans,
     history,
     autoReview: buildAutoReview(history),
+    dailyPlanSummaries,
     marketHistory: buildMarketHistory(allMatches),
     tomorrowPool: buildTomorrowPool(concernMatches, addDays(today, 1)),
   };

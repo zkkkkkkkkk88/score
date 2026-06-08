@@ -15,7 +15,10 @@ const els = {
   parlayList: document.querySelector("#parlayList"),
   hitTracker: document.querySelector("#hitTracker"),
   tomorrowPool: document.querySelector("#tomorrowPool"),
+  dailySummary: document.querySelector("#dailySummary"),
   tabs: [...document.querySelectorAll("[data-filter]")],
+  viewButtons: [...document.querySelectorAll("[data-view-button]")],
+  views: [...document.querySelectorAll("[data-view]")],
 };
 
 const marketNames = {
@@ -180,7 +183,7 @@ function formatMarketPick(key, market) {
 }
 
 function getPickLabel(pick) {
-  return `${pick.match.id} ${pick.match.homeTeam} 对 ${pick.match.awayTeam} · ${marketNames[pick.marketKey]} ${formatMarketPick(
+  return `${pick.match.sportteryNo ?? pick.match.id} ${pick.match.homeTeam} 对 ${pick.match.awayTeam} · ${marketNames[pick.marketKey]} ${formatMarketPick(
     pick.marketKey,
     pick.market,
   )}`;
@@ -632,6 +635,38 @@ function renderHitTracker() {
   `;
 }
 
+function renderDailySummary() {
+  const summaries = state.data.dailyPlanSummaries ?? [];
+
+  if (!summaries.length) {
+    els.dailySummary.innerHTML = `<div class="empty-state">今日方案生成后开始累计每日命中率</div>`;
+    return;
+  }
+
+  els.dailySummary.innerHTML = summaries
+    .map((item, index) => {
+      const rate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
+      const label = index === 0 ? "今日方案" : "历史方案";
+
+      return `
+        <article class="summary-card">
+          <div>
+            <span>每日方案汇总 · ${label} · ${escapeHtml(item.date)}</span>
+            <strong>${item.totalPlans} 个购买方案</strong>
+          </div>
+          <div class="summary-metrics">
+            <span>已复盘 ${item.reviewedPlans}</span>
+            <span>命中 ${item.hitPlans}</span>
+            <span>命中率 ${pct(rate)}</span>
+          </div>
+          ${renderProbabilityBar(rate, `${item.date} 命中率`)}
+          <p>${escapeHtml(item.summary)}</p>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function renderTomorrowPool() {
   els.tomorrowPool.innerHTML = state.data.tomorrowPool
     .map((item) => {
@@ -681,6 +716,7 @@ function render() {
   renderAnalysis();
   renderParlays();
   renderHitTracker();
+  renderDailySummary();
   renderTomorrowPool();
 }
 
@@ -702,10 +738,20 @@ els.tabs.forEach((tab) => {
   });
 });
 
+els.viewButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const viewName = button.dataset.viewButton;
+    els.viewButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+    els.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === viewName));
+  });
+});
+
 window.addEventListener("click", (event) => {
   const row = event.target.closest("[data-match-id]");
   if (!row) return;
   state.selectedId = row.dataset.matchId;
+  els.viewButtons.forEach((item) => item.classList.toggle("is-active", item.dataset.viewButton === "analysis"));
+  els.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === "analysis"));
   render();
 });
 

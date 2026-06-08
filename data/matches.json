@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T23:31:02.338+08:00",
+  "generatedAt": "2026-06-08T23:42:34.869+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -2268,6 +2268,30 @@
     "hitRate": 1,
     "summary": "已自动复盘 3 个购买方案，命中 3 个。"
   },
+  "dailyPlanSummaries": [
+    {
+      "date": "2026-06-08",
+      "totalPlans": 3,
+      "reviewedPlans": 0,
+      "hitPlans": 0,
+      "hitRate": 0,
+      "planTypes": [
+        "竞彩二串一购买方案",
+        "竞彩三串二购买方案",
+        "竞彩四串三购买方案"
+      ],
+      "summary": "2026-06-08 已推出 3 个购买方案，等待比赛完场后统计命中率。"
+    },
+    {
+      "date": "2026-05-28",
+      "totalPlans": 0,
+      "reviewedPlans": 3,
+      "hitPlans": 3,
+      "hitRate": 1,
+      "planTypes": [],
+      "summary": "2026-05-28 已复盘 3 个购买方案，命中 3 个，命中率 100%。"
+    }
+  ],
   "marketHistory": [
     {
       "market": "wdl",
