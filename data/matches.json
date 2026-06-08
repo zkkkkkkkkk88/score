@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T23:04:51.812+08:00",
+  "generatedAt": "2026-06-08T23:15:10.697+08:00",
   "source": {
     "type": "real",
     "provider": "TheSportsDB",
@@ -8,7 +8,7 @@
       "2026-06-08",
       "2026-06-09"
     ],
-    "note": "赛程和比分来自真实公开 API；赔率、竞彩盘口和预测概率为本地模型或待接入授权数据源。"
+    "note": "赛程和比分来自真实公开 API；购买方向为本地模型估算，仅作信息分析。"
   },
   "matches": [
     {
@@ -16,9 +16,9 @@
       "sourceEventId": "2406366",
       "date": "2026-06-08",
       "kickoff": "18:30",
-      "competition": "Argentina Primera B Metropolitana",
-      "homeTeam": "UAI Urquiza",
-      "awayTeam": "Liniers",
+      "competition": "阿根廷大都会乙级联赛",
+      "homeTeam": "乌尔基萨大学竞技",
+      "awayTeam": "利尼尔斯",
       "status": "pre",
       "score": {
         "home": null,
@@ -32,19 +32,12 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
         "defense": 62,
         "tempo": 58,
-        "homeAway": "场地：Estadio Monumental de Villa Lynch"
+        "homeAway": "场地：维拉林奇纪念球场"
       },
       "markets": {
         "wdl": {
@@ -52,7 +45,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -61,15 +54,22 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前未接入积分榜，按中性偏谨慎处理。",
+        "politicalFactor": "普通俱乐部联赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
+        "integrityRisk": "低级别或关注度较低赛事信息透明度相对有限，若缺少首发、伤停和监管信息，应降低方案权重。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "建议小权重观察，优先选择信息更透明的比赛组合。"
       }
     },
     {
@@ -77,9 +77,9 @@
       "sourceEventId": "2408425",
       "date": "2026-06-08",
       "kickoff": "18:30",
-      "competition": "Argentinian Primera C",
-      "homeTeam": "Berazategui",
-      "awayTeam": "Juventud Unida",
+      "competition": "阿根廷丙级联赛",
+      "homeTeam": "贝拉萨特吉",
+      "awayTeam": "尤文图德联",
       "status": "pre",
       "score": {
         "home": null,
@@ -93,19 +93,12 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
         "defense": 62,
         "tempo": 58,
-        "homeAway": "场地：Estadio Norman Lee"
+        "homeAway": "场地：诺曼李球场"
       },
       "markets": {
         "wdl": {
@@ -113,7 +106,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -122,15 +115,22 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前未接入积分榜，按中性偏谨慎处理。",
+        "politicalFactor": "普通俱乐部联赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
+        "integrityRisk": "低级别或关注度较低赛事信息透明度相对有限，若缺少首发、伤停和监管信息，应降低方案权重。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "建议小权重观察，优先选择信息更透明的比赛组合。"
       }
     },
     {
@@ -138,9 +138,9 @@
       "sourceEventId": "2413230",
       "date": "2026-06-08",
       "kickoff": "17:00",
-      "competition": "Swedish Division 1 South",
-      "homeTeam": "Ängelholm",
-      "awayTeam": "BK Olympic",
+      "competition": "瑞典南区一级联赛",
+      "homeTeam": "恩厄尔霍尔姆",
+      "awayTeam": "奥林匹克俱乐部",
       "status": "pre",
       "score": {
         "home": null,
@@ -154,19 +154,12 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
         "defense": 62,
         "tempo": 58,
-        "homeAway": "场地：Änglavallen"
+        "homeAway": "场地：恩格拉瓦伦球场"
       },
       "markets": {
         "wdl": {
@@ -174,7 +167,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -183,15 +176,22 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前未接入积分榜，按中性偏谨慎处理。",
+        "politicalFactor": "普通俱乐部联赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
+        "integrityRisk": "低级别或关注度较低赛事信息透明度相对有限，若缺少首发、伤停和监管信息，应降低方案权重。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "建议小权重观察，优先选择信息更透明的比赛组合。"
       }
     },
     {
@@ -199,9 +199,9 @@
       "sourceEventId": "2382789",
       "date": "2026-06-09",
       "kickoff": "23:00",
-      "competition": "CONMEBOL Liga de Naciones Femenina",
-      "homeTeam": "Ecuador Women",
-      "awayTeam": "Argentina Women",
+      "competition": "南美足联女子国家联赛",
+      "homeTeam": "厄瓜多尔女子队",
+      "awayTeam": "阿根廷女子队",
       "status": "pre",
       "score": {
         "home": null,
@@ -215,13 +215,6 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
@@ -235,7 +228,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -244,15 +237,22 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或地区代表队比赛通常受荣誉、排名和出线形势影响，需关注阵容轮换与备战优先级。",
+        "politicalFactor": "涉及国家或地区代表队时，舆论压力可能放大比赛态度，但不能直接等同于赛果倾向。",
+        "integrityRisk": "当前仅基于公开赛程源，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "可纳入观察池，但仍需结合首发和实时事件确认。"
       }
     },
     {
@@ -260,9 +260,9 @@
       "sourceEventId": "2382790",
       "date": "2026-06-09",
       "kickoff": "23:00",
-      "competition": "CONMEBOL Liga de Naciones Femenina",
-      "homeTeam": "Paraguay Women",
-      "awayTeam": "Colombia Women",
+      "competition": "南美足联女子国家联赛",
+      "homeTeam": "巴拉圭女子队",
+      "awayTeam": "哥伦比亚女子队",
       "status": "pre",
       "score": {
         "home": null,
@@ -276,13 +276,6 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
@@ -296,7 +289,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -305,15 +298,22 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或地区代表队比赛通常受荣誉、排名和出线形势影响，需关注阵容轮换与备战优先级。",
+        "politicalFactor": "涉及国家或地区代表队时，舆论压力可能放大比赛态度，但不能直接等同于赛果倾向。",
+        "integrityRisk": "当前仅基于公开赛程源，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "可纳入观察池，但仍需结合首发和实时事件确认。"
       }
     },
     {
@@ -321,9 +321,9 @@
       "sourceEventId": "2382791",
       "date": "2026-06-09",
       "kickoff": "23:00",
-      "competition": "CONMEBOL Liga de Naciones Femenina",
-      "homeTeam": "Peru Women",
-      "awayTeam": "Bolivia Women",
+      "competition": "南美足联女子国家联赛",
+      "homeTeam": "秘鲁女子队",
+      "awayTeam": "玻利维亚女子队",
       "status": "pre",
       "score": {
         "home": null,
@@ -337,13 +337,6 @@
       "dataQuality": 76,
       "importance": 72,
       "risk": "中",
-      "odds": {
-        "home": 0,
-        "draw": 0,
-        "away": 0,
-        "over25": 0,
-        "under25": 0
-      },
       "stats": {
         "form": "等待球队近况源",
         "attack": 62,
@@ -357,7 +350,7 @@
           "probability": 0.46,
           "confidence": 64,
           "risk": "中",
-          "reason": "根据真实赛程和基础强弱模型生成赛前方向，等待赔率源补强。"
+          "reason": "根据真实赛程、主客位置和基础胜负模型生成赛前方向。"
         },
         "ou": {
           "line": 2.5,
@@ -366,38 +359,50 @@
           "probability": 0.54,
           "confidence": 62,
           "risk": "中",
-          "reason": "暂无授权赔率源，先用赛程基础模型给出总进球数观察区间。"
+          "reason": "根据赛程节奏和默认进球模型给出总进球数观察区间。"
         },
         "htft": {
           "pick": "平/平",
           "probability": 0.3,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场需要首发和临场数据支撑，当前仅做观察。"
+          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
         }
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或地区代表队比赛通常受荣誉、排名和出线形势影响，需关注阵容轮换与备战优先级。",
+        "politicalFactor": "涉及国家或地区代表队时，舆论压力可能放大比赛态度，但不能直接等同于赛果倾向。",
+        "integrityRisk": "当前仅基于公开赛程源，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
+        "consequence": "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
+        "recommendation": "可纳入观察池，但仍需结合首发和实时事件确认。"
       }
     }
   ],
-  "parlaySeeds": [
+  "purchasePlans": [
     {
       "id": "real-stable-2",
-      "type": "真实数据二串一",
+      "type": "真实数据二串一购买方案",
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
         "001",
         "002"
       ],
+      "eventIds": [
+        "2406366",
+        "2408425"
+      ],
       "markets": [
         "wdl",
         "wdl"
       ],
       "risk": "中",
-      "note": "基于真实赛程生成，赛前概率仍需赔率源进一步校准。"
+      "note": "基于真实赛程生成，优先选择胜平负方向较清晰的比赛。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
     },
     {
       "id": "real-balanced-3-2",
-      "type": "真实数据三串二",
+      "type": "真实数据三串二购买方案",
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
@@ -405,17 +410,23 @@
         "002",
         "003"
       ],
+      "eventIds": [
+        "2406366",
+        "2408425",
+        "2413230"
+      ],
       "markets": [
         "wdl",
         "ou",
         "wdl"
       ],
       "risk": "中",
-      "note": "使用真实赛程组合，允许一场失手。"
+      "note": "使用胜平负和总进球数混合，允许一场失手。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
     },
     {
       "id": "real-coverage-4-3",
-      "type": "真实数据四串三",
+      "type": "真实数据四串三购买方案",
       "mode": "atLeast",
       "requiredHits": 3,
       "matchIds": [
@@ -424,6 +435,12 @@
         "003",
         "004"
       ],
+      "eventIds": [
+        "2406366",
+        "2408425",
+        "2413230",
+        "2382789"
+      ],
       "markets": [
         "wdl",
         "ou",
@@ -431,31 +448,113 @@
         "ou"
       ],
       "risk": "高",
-      "note": "覆盖真实赛程中排序靠前的比赛，适合临场前再确认。"
+      "note": "覆盖真实赛程中排序靠前的比赛，适合临场前再确认。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
+    }
+  ],
+  "parlaySeeds": [
+    {
+      "id": "real-stable-2",
+      "type": "真实数据二串一购买方案",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "001",
+        "002"
+      ],
+      "eventIds": [
+        "2406366",
+        "2408425"
+      ],
+      "markets": [
+        "wdl",
+        "wdl"
+      ],
+      "risk": "中",
+      "note": "基于真实赛程生成，优先选择胜平负方向较清晰的比赛。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
+    },
+    {
+      "id": "real-balanced-3-2",
+      "type": "真实数据三串二购买方案",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "matchIds": [
+        "001",
+        "002",
+        "003"
+      ],
+      "eventIds": [
+        "2406366",
+        "2408425",
+        "2413230"
+      ],
+      "markets": [
+        "wdl",
+        "ou",
+        "wdl"
+      ],
+      "risk": "中",
+      "note": "使用胜平负和总进球数混合，允许一场失手。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
+    },
+    {
+      "id": "real-coverage-4-3",
+      "type": "真实数据四串三购买方案",
+      "mode": "atLeast",
+      "requiredHits": 3,
+      "matchIds": [
+        "001",
+        "002",
+        "003",
+        "004"
+      ],
+      "eventIds": [
+        "2406366",
+        "2408425",
+        "2413230",
+        "2382789"
+      ],
+      "markets": [
+        "wdl",
+        "ou",
+        "wdl",
+        "ou"
+      ],
+      "risk": "高",
+      "note": "覆盖真实赛程中排序靠前的比赛，适合临场前再确认。",
+      "socialNote": "组合含信息透明度较低赛事，建议降低权重并等待首发确认。"
     }
   ],
   "history": [],
+  "autoReview": {
+    "label": "自动复盘",
+    "reviewed": 0,
+    "hits": 0,
+    "hitRate": 0,
+    "summary": "等待比分完场后自动复盘购买方案命中率。"
+  },
   "marketHistory": [
     {
       "market": "wdl",
       "name": "胜平负",
       "hits": 0,
       "total": 0,
-      "streak": "等待真实复盘数据"
+      "streak": "等待更多完场数据"
     },
     {
       "market": "ou",
       "name": "总进球数",
       "hits": 0,
       "total": 0,
-      "streak": "等待真实复盘数据"
+      "streak": "等待更多完场数据"
     },
     {
       "market": "htft",
       "name": "半全场",
       "hits": 0,
       "total": 0,
-      "streak": "等待真实复盘数据"
+      "streak": "只做观察"
     }
   ],
   "tomorrowPool": [
@@ -463,19 +562,19 @@
       "category": "真实赛程候选",
       "matchId": "004",
       "market": "wdl",
-      "reason": "来自真实赛程源，等待赔率、首发和临场事件补强。"
+      "reason": "来自真实赛程源，等待首发、赛程压力和临场事件补强。"
     },
     {
       "category": "真实赛程候选",
       "matchId": "005",
       "market": "ou",
-      "reason": "来自真实赛程源，等待赔率、首发和临场事件补强。"
+      "reason": "来自真实赛程源，等待首发、赛程压力和临场事件补强。"
     },
     {
       "category": "明日观察",
       "matchId": "006",
       "market": "wdl",
-      "reason": "来自真实赛程源，等待赔率、首发和临场事件补强。"
+      "reason": "来自真实赛程源，等待首发、赛程压力和临场事件补强。"
     }
   ]
 }

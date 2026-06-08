@@ -594,7 +594,8 @@ h2 {
 
 .parlay-insights,
 .ledger-grid,
-.signal-grid {
+.signal-grid,
+.social-grid {
   display: grid;
   gap: 7px;
 }
@@ -606,7 +607,8 @@ h2 {
 .parlay-insights div,
 .ledger-card,
 .signal-card,
-.prep-score {
+.prep-score,
+.social-grid div {
   min-width: 0;
   padding: 8px;
   border: 1px solid var(--line);
@@ -622,7 +624,8 @@ h2 {
 .signal-card span,
 .signal-card em,
 .prep-score span,
-.prep-score em {
+.prep-score em,
+.social-grid span {
   color: var(--muted);
   font-size: 12px;
 }
@@ -630,7 +633,8 @@ h2 {
 .parlay-insights strong,
 .ledger-card strong,
 .signal-card strong,
-.prep-score strong {
+.prep-score strong,
+.social-grid strong {
   color: var(--gold-2);
   overflow-wrap: anywhere;
 }
@@ -656,6 +660,34 @@ h2 {
 .prep-score em {
   font-style: normal;
   line-height: 1.45;
+}
+
+.social-panel {
+  display: grid;
+  gap: 8px;
+}
+
+.social-panel h3 {
+  font-size: 16px;
+}
+
+.social-panel p {
+  margin: 0;
+  color: var(--soft);
+  line-height: 1.55;
+}
+
+.social-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.social-grid div {
+  background: rgba(45, 12, 14, 0.72);
+}
+
+.social-grid strong {
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .pick-row {
@@ -703,6 +735,19 @@ h2 {
 .market-ledger {
   display: grid;
   gap: 8px;
+}
+
+.auto-review {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(45, 12, 14, 0.72);
+}
+
+.auto-review strong {
+  color: var(--gold-2);
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .market-ledger h3 {
@@ -796,6 +841,7 @@ h2 {
   .market-grid,
   .radar-strip,
   .signal-grid,
+  .social-grid,
   .tracker-metrics,
   .parlay-insights,
   .ledger-grid,

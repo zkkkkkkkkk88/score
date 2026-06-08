@@ -179,42 +179,11 @@ function formatMarketPick(key, market) {
   return market.goalRange ?? market.pick;
 }
 
-function getMarketOdds(match, key, market) {
-  const fallback = Number((0.92 / market.probability).toFixed(2));
-  if (key === "wdl") {
-    if (market.pick.includes("主")) return match.odds.home || fallback;
-    if (market.pick.includes("客")) return match.odds.away || fallback;
-    return match.odds.draw || fallback;
-  }
-
-  if (key === "ou") {
-    return formatMarketPick(key, market).startsWith("3") ? match.odds.over25 || fallback : match.odds.under25 || fallback;
-  }
-
-  return fallback;
-}
-
 function getPickLabel(pick) {
   return `${pick.match.id} ${pick.match.homeTeam} 对 ${pick.match.awayTeam} · ${marketNames[pick.marketKey]} ${formatMarketPick(
     pick.marketKey,
     pick.market,
   )}`;
-}
-
-function getReturnEstimate(seed, picks) {
-  const odds = picks.map((pick) => getMarketOdds(pick.match, pick.marketKey, pick.market));
-
-  if (seed.mode === "all") {
-    return odds.reduce((product, value) => product * value, 1);
-  }
-
-  const groups = combinations(odds, seed.requiredHits);
-  const total = groups.reduce(
-    (sum, group) => sum + group.reduce((product, value) => product * value, 1),
-    0,
-  );
-
-  return groups.length ? total / groups.length : 0;
 }
 
 function getTrendText(base, live) {
@@ -395,7 +364,7 @@ function getLiveSignals(match) {
     {
       title: "建议动作",
       value: action,
-      detail: match.status === "finished" ? "完场复盘" : "结合首发和临场赔率再确认",
+      detail: match.status === "finished" ? "完场复盘" : "结合首发、赛程和临场事件再确认",
     },
   ];
 }
@@ -420,6 +389,44 @@ function renderLiveSignals(match) {
           )
           .join("")}
       </div>
+    </div>
+  `;
+}
+
+function renderSocialFactors(match) {
+  const factors = match.socialFactors ?? {
+    clubMotivation: "球队动机数据待接入，当前按中性处理。",
+    politicalFactor: "未接入地区舆情数据，暂按常规比赛处理。",
+    integrityRisk: "未发现可核验异常信息，避免作未经证实的假赛判断。",
+    consequence: "若赛果偏离模型，需要在完场后进入复盘。",
+    recommendation: "谨慎观察，不做激进方案。",
+  };
+
+  return `
+    <div class="social-panel">
+      <div class="section-heading">
+        <p>社会因素</p>
+        <h3>非技术面研判</h3>
+      </div>
+      <div class="social-grid">
+        <div>
+          <span>俱乐部动机</span>
+          <strong>${escapeHtml(factors.clubMotivation)}</strong>
+        </div>
+        <div>
+          <span>政治及地区因素</span>
+          <strong>${escapeHtml(factors.politicalFactor)}</strong>
+        </div>
+        <div>
+          <span>异常风险</span>
+          <strong>${escapeHtml(factors.integrityRisk)}</strong>
+        </div>
+        <div>
+          <span>潜在后果</span>
+          <strong>${escapeHtml(factors.consequence)}</strong>
+        </div>
+      </div>
+      <p>${escapeHtml(factors.recommendation)}</p>
     </div>
   `;
 }
@@ -480,12 +487,12 @@ function renderAnalysis() {
             <li>攻防：进攻 ${match.stats.attack} / 防守 ${match.stats.defense}</li>
             <li>节奏：比赛节奏 ${match.stats.tempo}</li>
             <li>场地：${escapeHtml(match.stats.homeAway)}</li>
-            <li>赔率：主 ${match.odds.home} / 平 ${match.odds.draw} / 客 ${match.odds.away}</li>
           </ul>
         </div>
       </div>
 
       ${renderLiveSignals(match)}
+      ${renderSocialFactors(match)}
 
       <div class="market-grid">
         ${renderMarketCard(match, "wdl")}
@@ -498,7 +505,7 @@ function renderAnalysis() {
 
 function renderParlays() {
   if (!state.data?.parlaySeeds?.length) {
-    els.parlayList.innerHTML = `<div class="empty-state">当前没有安全串单推荐</div>`;
+    els.parlayList.innerHTML = `<div class="empty-state">当前没有可执行购买方案</div>`;
     return;
   }
 
@@ -509,8 +516,8 @@ function renderParlays() {
       const prematch = getParlayProbability(seed, false);
       const delta = live - prematch;
       const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
-      const returnEstimate = getReturnEstimate(seed, picks);
       const insight = getParlayInsight(picks);
+      const socialNote = seed.socialNote ?? "社会因素未见可核验异常，按常规谨慎方案处理。";
 
       return `
         <article class="parlay-card ${riskClass(seed.risk)}">
@@ -524,16 +531,16 @@ function renderParlays() {
           ${renderProbabilityBar(live, seed.type)}
           <div class="parlay-insights">
             <div>
-              <span>预计回报</span>
-              <strong>${returnEstimate.toFixed(2)}x</strong>
-            </div>
-            <div>
               <span>核心胆</span>
               <strong>${escapeHtml(getPickLabel(insight.banker))}</strong>
             </div>
             <div>
               <span>风险点</span>
               <strong>${escapeHtml(getPickLabel(insight.weak))}</strong>
+            </div>
+            <div>
+              <span>社会因素</span>
+              <strong>${escapeHtml(socialNote)}</strong>
             </div>
           </div>
           <div class="pick-list">
@@ -552,7 +559,7 @@ function renderParlays() {
           <p>${escapeHtml(seed.note)}</p>
           <div class="parlay-foot">
             <span>${escapeHtml(riskLabels[seed.risk] ?? seed.risk)}</span>
-            <span>实时变化 ${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%</span>
+            <span>方案变化 ${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%</span>
           </div>
         </article>
       `;
@@ -563,6 +570,7 @@ function renderParlays() {
 function renderHitTracker() {
   const history = state.data.history;
   const marketHistory = state.data.marketHistory ?? [];
+  const autoReview = state.data.autoReview;
   const hits = history.filter((item) => item.result === "hit").length;
   const hitRate = history.length ? hits / history.length : 0;
   const finished = state.matches.filter((match) => match.status === "finished").length;
@@ -585,8 +593,11 @@ function renderHitTracker() {
     </div>
     <div class="market-ledger">
       <div class="section-heading">
-        <p>玩法表现</p>
-        <h3>近 30 日命中拆解</h3>
+        <p>自动复盘</p>
+        <h3>近 30 日玩法表现</h3>
+      </div>
+      <div class="auto-review">
+        <strong>${escapeHtml(autoReview?.summary ?? "等待比分完场后自动复盘购买方案命中率。")}</strong>
       </div>
       <div class="ledger-grid">
         ${marketHistory
@@ -616,7 +627,7 @@ function renderHitTracker() {
             </div>
           `,
         )
-        .join("")}
+        .join("") || `<div class="empty-state">等待比分完场后自动复盘购买方案命中率</div>`}
     </div>
   `;
 }
