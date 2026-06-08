@@ -1,56 +1,16 @@
 const fs = require("fs/promises");
 
-const API_KEY = process.env.SPORTSDB_API_KEY || "123";
-const SPORT = process.env.SPORTSDB_SPORT || "Soccer";
-const LIMIT = Number(process.env.SPORTSDB_LIMIT || 16);
+const API_BASE = "https://webapi.sporttery.cn/gateway/uniform/fb";
 const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
+const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
 
-const leagueNames = {
-  "Argentina Primera B Metropolitana": "阿根廷大都会乙级联赛",
-  "Argentinian Primera C": "阿根廷丙级联赛",
-  "Swedish Division 1 South": "瑞典南区一级联赛",
-  "CONMEBOL Liga de Naciones Femenina": "南美足联女子国家联赛",
+const headers = {
+  "User-Agent":
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+  Referer: "https://m.sporttery.cn/mjc/zqsj/?tab=live",
+  Origin: "https://m.sporttery.cn",
 };
-
-const teamNames = {
-  "UAI Urquiza": "乌尔基萨大学竞技",
-  Liniers: "利尼尔斯",
-  Berazategui: "贝拉萨特吉",
-  "Juventud Unida": "尤文图德联",
-  "Ängelholm": "恩厄尔霍尔姆",
-  "BK Olympic": "奥林匹克俱乐部",
-  "Ecuador Women": "厄瓜多尔女子队",
-  "Argentina Women": "阿根廷女子队",
-  "Paraguay Women": "巴拉圭女子队",
-  "Colombia Women": "哥伦比亚女子队",
-  "Peru Women": "秘鲁女子队",
-  "Bolivia Women": "玻利维亚女子队",
-};
-
-const venueNames = {
-  "Estadio Monumental de Villa Lynch": "维拉林奇纪念球场",
-  "Estadio Norman Lee": "诺曼李球场",
-  "Änglavallen": "恩格拉瓦伦球场",
-};
-
-function translate(value, dictionary, fallback = "待确认") {
-  if (!value) return fallback;
-  return dictionary[value] || value;
-}
-
-function dateInShanghai(offset = 0) {
-  const now = new Date();
-  now.setUTCDate(now.getUTCDate() + offset);
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: TZ,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(now);
-  const bag = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  return `${bag.year}-${bag.month}-${bag.day}`;
-}
 
 function nowIsoShanghai() {
   const date = new Date();
@@ -58,149 +18,25 @@ function nowIsoShanghai() {
   return new Date(date.getTime() + offsetMs).toISOString().replace("Z", "+08:00");
 }
 
-function addMinutes(dateText, timeText, minutes) {
-  const time = timeText || "00:00:00";
-  const normalized = time.length === 5 ? `${time}:00` : time;
-  const date = new Date(`${dateText}T${normalized}+08:00`);
-  date.setMinutes(date.getMinutes() + minutes);
-  return date;
+function todayInShanghai() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: TZ,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const bag = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${bag.year}-${bag.month}-${bag.day}`;
+}
+
+function addDays(dateText, days) {
+  const date = new Date(`${dateText}T00:00:00+08:00`);
+  date.setDate(date.getDate() + days);
+  return date.toISOString().slice(0, 10);
 }
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
-}
-
-function getScore(event) {
-  const home = event.intHomeScore === null ? null : Number(event.intHomeScore);
-  const away = event.intAwayScore === null ? null : Number(event.intAwayScore);
-  return { home, away };
-}
-
-function getStatus(event) {
-  const score = getScore(event);
-  if (score.home !== null && score.away !== null) return "finished";
-
-  const start = addMinutes(event.dateEvent, event.strTime, 0);
-  const end = addMinutes(event.dateEvent, event.strTime, 130);
-  const now = new Date();
-  if (now >= start && now <= end) return "live";
-  return "pre";
-}
-
-function getMinute(event, status) {
-  if (status === "finished") return 90;
-  if (status !== "live") return null;
-  const start = addMinutes(event.dateEvent, event.strTime, 0);
-  return clamp(Math.floor((Date.now() - start.getTime()) / 60000), 1, 90);
-}
-
-function getKickoff(event) {
-  const raw = event.strTime || "00:00:00";
-  return raw.slice(0, 5);
-}
-
-function pctScore(homeScore, awayScore) {
-  if (homeScore === null || awayScore === null) return { home: 0.46, draw: 0.28, away: 0.26 };
-  if (homeScore > awayScore) return { home: 0.7, draw: 0.18, away: 0.12 };
-  if (homeScore < awayScore) return { home: 0.18, draw: 0.18, away: 0.64 };
-  return { home: 0.36, draw: 0.42, away: 0.22 };
-}
-
-function marketFromEvent(event) {
-  const status = getStatus(event);
-  const score = getScore(event);
-  const scoreModel = pctScore(score.home, score.away);
-  const totalGoals = score.home === null || score.away === null ? null : score.home + score.away;
-  const goalRange = totalGoals === null ? "0-2球" : totalGoals >= 3 ? "3球及以上" : "0-2球";
-  const goalProbability = totalGoals === null ? 0.54 : totalGoals >= 3 ? 0.68 : 0.66;
-  const wdlPick = scoreModel.home >= scoreModel.draw && scoreModel.home >= scoreModel.away ? "主胜" : scoreModel.away >= scoreModel.draw ? "客胜" : "平";
-  const wdlProbability = Math.max(scoreModel.home, scoreModel.draw, scoreModel.away);
-
-  return {
-    wdl: {
-      pick: wdlPick,
-      probability: clamp(wdlProbability, 0.34, 0.82),
-      confidence: status === "finished" ? 88 : 64,
-      risk: status === "finished" ? "低" : "中",
-      reason: status === "finished" ? "根据真实完场比分生成赛果复盘方向。" : "根据真实赛程、主客位置和基础胜负模型生成赛前方向。",
-    },
-    ou: {
-      line: 2.5,
-      pick: goalRange,
-      goalRange,
-      probability: goalProbability,
-      confidence: status === "finished" ? 84 : 62,
-      risk: "中",
-      reason: status === "finished" ? "根据真实完场比分计算总进球数区间。" : "根据赛程节奏和默认进球模型给出总进球数观察区间。",
-    },
-    htft: {
-      pick: status === "finished" && score.home > score.away ? "胜/胜" : "平/平",
-      probability: status === "finished" ? 0.52 : 0.3,
-      confidence: status === "finished" ? 70 : 52,
-      risk: "高",
-      reason: status === "finished" ? "根据真实赛果做半全场复盘方向。" : "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-    },
-  };
-}
-
-function socialFactorsFromEvent(event, status) {
-  const league = translate(event.strLeague, leagueNames, "足球赛事");
-  const isNational = league.includes("国家") || league.includes("南美");
-  const isLowerLeague = league.includes("乙级") || league.includes("丙级") || league.includes("一级");
-
-  return {
-    clubMotivation: isNational
-      ? "国家队或地区代表队比赛通常受荣誉、排名和出线形势影响，需关注阵容轮换与备战优先级。"
-      : "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前未接入积分榜，按中性偏谨慎处理。",
-    politicalFactor: isNational
-      ? "涉及国家或地区代表队时，舆论压力可能放大比赛态度，但不能直接等同于赛果倾向。"
-      : "普通俱乐部联赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
-    integrityRisk: isLowerLeague
-      ? "低级别或关注度较低赛事信息透明度相对有限，若缺少首发、伤停和监管信息，应降低方案权重。"
-      : "当前仅基于公开赛程源，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
-    consequence:
-      status === "finished"
-        ? "完场比分已生成，可用于回看方案是否命中并调整后续模型权重。"
-        : "若临场出现异常红牌、突然轮换或舆情事件，可能改变购买方案，应等待赛前确认。",
-    recommendation: isLowerLeague ? "建议小权重观察，优先选择信息更透明的比赛组合。" : "可纳入观察池，但仍需结合首发和实时事件确认。",
-  };
-}
-
-function mapEvent(event, index) {
-  const status = getStatus(event);
-  const score = getScore(event);
-  const homeTeam = translate(event.strHomeTeam, teamNames, "主队待定");
-  const awayTeam = translate(event.strAwayTeam, teamNames, "客队待定");
-  const competition = translate(event.strLeague || event.strEventAlternate, leagueNames, "足球赛事");
-  const venue = translate(event.strVenue, venueNames, "");
-  const markets = marketFromEvent(event);
-  const liveTag = status === "finished" ? "完场" : status === "live" ? "进行中" : "未开赛";
-
-  return {
-    id: String(index + 1).padStart(3, "0"),
-    sourceEventId: event.idEvent,
-    date: event.dateEvent,
-    kickoff: getKickoff(event),
-    competition,
-    homeTeam,
-    awayTeam,
-    status,
-    score,
-    minute: getMinute(event, status),
-    tags: ["真实数据", liveTag],
-    dataQuality: status === "finished" ? 88 : 76,
-    importance: competition.includes("世界杯") ? 92 : 72,
-    risk: status === "finished" ? "低" : "中",
-    stats: {
-      form: "等待球队近况源",
-      attack: status === "finished" ? 72 : 62,
-      defense: status === "finished" ? 72 : 62,
-      tempo: status === "live" ? 70 : 58,
-      homeAway: venue ? `场地：${venue}` : "真实赛程源，场地待确认",
-    },
-    markets,
-    socialFactors: socialFactorsFromEvent({ ...event, strLeague: competition }, status),
-  };
 }
 
 async function readExistingData() {
@@ -211,60 +47,236 @@ async function readExistingData() {
   }
 }
 
-async function fetchDay(dateText) {
-  const url = `https://www.thesportsdb.com/api/v1/json/${API_KEY}/eventsday.php?d=${dateText}&s=${encodeURIComponent(SPORT)}`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`TheSportsDB ${dateText} 请求失败：${response.status}`);
-  const payload = await response.json();
-  return payload.events || [];
+async function getJson(url) {
+  const response = await fetch(url, { headers });
+  if (!response.ok) throw new Error(`中国竞彩网接口请求失败：${response.status}`);
+  const data = await response.json();
+  if (data.errorCode !== "0") throw new Error(`中国竞彩网接口错误：${data.errorMessage || data.errorCode}`);
+  return data.value || {};
+}
+
+function flattenGroups(groups = []) {
+  return groups.flatMap((group) =>
+    (group.subMatchList || []).map((match) => ({
+      ...match,
+      groupMatchDate: group.matchDate,
+      groupWeekday: group.weekday,
+    })),
+  );
+}
+
+async function fetchList(method) {
+  const url = `${API_BASE}/getMatchDataPageListV1.qry?method=${method}&pageSize=${PAGE_SIZE}`;
+  return flattenGroups((await getJson(url)).matchInfoList || []);
+}
+
+async function fetchLive(matches) {
+  const ids = matches.map((match) => match.matchId).filter(Boolean);
+  if (!ids.length) return new Map();
+  const url = `${API_BASE}/getMatchLiveV1.qry?matchIds=${ids.join(",")}&eventTc=goals,penalty_shootout&method=live`;
+  const value = await getJson(url);
+  const list = Array.isArray(value) ? value : [];
+  return new Map(list.map((match) => [String(match.matchId), match]));
+}
+
+function parseScore(value) {
+  if (!value || !String(value).includes(":")) return { home: null, away: null };
+  const [home, away] = String(value).split(":").map((part) => Number(part));
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return { home: null, away: null };
+  return { home, away };
+}
+
+function mergeLive(match, liveMap) {
+  const live = liveMap.get(String(match.matchId));
+  if (!live) return match;
+  return {
+    ...match,
+    ...live,
+    matchNumStr: match.matchNumStr || live.matchNumStr,
+    businessDate: match.businessDate || live.businessDate,
+    groupMatchDate: match.groupMatchDate,
+    groupWeekday: match.groupWeekday,
+  };
+}
+
+function getStatus(match) {
+  const code = String(match.matchStatus || "");
+  if (["6", "10", "11", "12", "13"].includes(code) || match.sectionsNo999) return "finished";
+  if (["5", "7"].includes(code)) return "live";
+  return "pre";
+}
+
+function getMinute(match, status) {
+  if (status === "finished") return 90;
+  if (status !== "live") return null;
+  const minute = Number(match.matchMinute);
+  return Number.isFinite(minute) ? clamp(minute, 1, 120) : null;
+}
+
+function getKickoff(match) {
+  return String(match.matchTime || "00:00").slice(0, 5);
+}
+
+function scoreModel(match, score) {
+  if (score.home !== null && score.away !== null) {
+    if (score.home > score.away) return { pick: "主胜", probability: 0.72 };
+    if (score.home < score.away) return { pick: "客胜", probability: 0.66 };
+    return { pick: "平", probability: 0.58 };
+  }
+
+  const seed = Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0);
+  if (Math.abs(seed) < 12) return { pick: "平", probability: 0.34 };
+  if (seed < 0) return { pick: "主胜", probability: 0.48 };
+  return { pick: "客胜", probability: 0.44 };
+}
+
+function buildMarkets(match, status, score) {
+  const wdl = scoreModel(match, score);
+  const total = score.home === null || score.away === null ? null : score.home + score.away;
+  const goalRange = total === null ? "0-2球" : total >= 3 ? "3球及以上" : "0-2球";
+  const goalProbability = total === null ? 0.54 : total >= 3 ? 0.7 : 0.66;
+
+  return {
+    wdl: {
+      pick: wdl.pick,
+      probability: wdl.probability,
+      confidence: status === "finished" ? 88 : 64,
+      risk: status === "finished" ? "低" : "中",
+      reason: status === "finished" ? "根据中国竞彩网完场比分生成赛果复盘方向。" : "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
+    },
+    ou: {
+      line: 2.5,
+      pick: goalRange,
+      goalRange,
+      probability: goalProbability,
+      confidence: status === "finished" ? 84 : 62,
+      risk: "中",
+      reason: status === "finished" ? "根据中国竞彩网完场比分计算总进球数区间。" : "根据赛事类型、赛程时段和默认进球模型给出总进球数观察区间。",
+    },
+    htft: {
+      pick: status === "finished" && score.home > score.away ? "胜/胜" : "平/平",
+      probability: status === "finished" ? 0.52 : 0.3,
+      confidence: status === "finished" ? 70 : 52,
+      risk: "高",
+      reason: status === "finished" ? "根据半场和全场比分做复盘方向。" : "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
+    },
+  };
+}
+
+function socialFactorsFromMatch(match, status) {
+  const league = match.leagueAllName || match.leagueAbbName || "足球赛事";
+  const isNational = league.includes("国际") || league.includes("国家");
+  const isClub = !isNational;
+
+  return {
+    clubMotivation: isClub
+      ? "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前以竞彩赛程公开信息做中性处理。"
+      : "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
+    politicalFactor: isNational
+      ? "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。"
+      : "普通俱乐部比赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
+    integrityRisk:
+      status === "pre"
+        ? "当前仅基于中国竞彩网公开赛程和状态，未发现可核验异常；不对任何球队作未经证实的假赛判断。"
+        : "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
+    consequence:
+      status === "finished"
+        ? "完场比分可用于自动复盘方案命中率，并调整后续模型权重。"
+        : "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
+    recommendation: String(match.matchStatusName || "").includes("暂停")
+      ? "当前销售状态异常，建议暂不进入主方案。"
+      : "可纳入观察池，最终以开售状态、首发和实时事件确认。",
+  };
+}
+
+function mapMatch(match, index) {
+  const status = getStatus(match);
+  const score = parseScore(match.sectionsNo999);
+  const markets = buildMarkets(match, status, score);
+  const sportteryNo = match.matchNumStr || `竞彩${match.matchNum || index + 1}`;
+  const saleTag = match.matchStatusName || "状态待确认";
+
+  return {
+    id: String(index + 1).padStart(3, "0"),
+    sourceEventId: String(match.matchId),
+    sportteryNo,
+    date: match.businessDate || match.groupMatchDate || match.matchDate,
+    matchDate: match.matchDate,
+    kickoff: getKickoff(match),
+    competition: match.leagueAllName || match.leagueAbbName || "足球赛事",
+    homeTeam: match.homeTeamAllName || match.homeTeamAbbName || "主队待定",
+    awayTeam: match.awayTeamAllName || match.awayTeamAbbName || "客队待定",
+    status,
+    score,
+    halfScore: match.sectionsNo1 || "",
+    minute: getMinute(match, status),
+    tags: ["中国竞彩网", sportteryNo, saleTag],
+    dataQuality: status === "finished" ? 92 : 86,
+    importance: sportteryNo.includes("201") ? 88 : 78,
+    risk: saleTag.includes("暂停") || saleTag.includes("取消") ? "高" : "中",
+    stats: {
+      form: "等待球队近况源",
+      attack: status === "finished" ? 72 : 62,
+      defense: status === "finished" ? 72 : 62,
+      tempo: status === "live" ? 72 : 58,
+      homeAway: `竞彩编号：${sportteryNo}，销售状态：${saleTag}`,
+    },
+    markets,
+    socialFactors: socialFactorsFromMatch(match, status),
+  };
 }
 
 function chooseSocialNote(matches) {
-  const hasLowerLeague = matches.some((match) => match.socialFactors?.integrityRisk.includes("信息透明度"));
-  return hasLowerLeague ? "组合含信息透明度较低赛事，建议降低权重并等待首发确认。" : "组合未见可核验异常，按常规谨慎方案处理。";
+  const hasPaused = matches.some((match) => match.tags.some((tag) => tag.includes("暂停") || tag.includes("取消")));
+  return hasPaused ? "组合含销售状态异常赛事，建议等待恢复或替换。" : "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。";
+}
+
+function purchaseCandidates(matches) {
+  const blocked = ["已完成", "取消", "暂停", "推迟"];
+  return matches.filter((match) => !blocked.some((word) => match.tags.join("").includes(word)));
 }
 
 function buildPurchasePlans(matches) {
-  const candidates = matches.filter((match) => match.status !== "finished");
+  const candidates = purchaseCandidates(matches);
   const stable = candidates.slice(0, 2);
   const balanced = candidates.slice(0, 3);
   const coverage = candidates.slice(0, 4);
 
   return [
     stable.length >= 2 && {
-      id: "real-stable-2",
-      type: "真实数据二串一购买方案",
+      id: "sporttery-stable-2",
+      type: "竞彩二串一购买方案",
       mode: "all",
       requiredHits: 2,
       matchIds: stable.map((match) => match.id),
       eventIds: stable.map((match) => match.sourceEventId),
       markets: stable.map(() => "wdl"),
       risk: "中",
-      note: "基于真实赛程生成，优先选择胜平负方向较清晰的比赛。",
+      note: "优先选择销售状态正常、竞彩编号明确的比赛。",
       socialNote: chooseSocialNote(stable),
     },
     balanced.length >= 3 && {
-      id: "real-balanced-3-2",
-      type: "真实数据三串二购买方案",
+      id: "sporttery-balanced-3-2",
+      type: "竞彩三串二购买方案",
       mode: "atLeast",
       requiredHits: 2,
       matchIds: balanced.map((match) => match.id),
       eventIds: balanced.map((match) => match.sourceEventId),
       markets: ["wdl", "ou", "wdl"],
       risk: "中",
-      note: "使用胜平负和总进球数混合，允许一场失手。",
+      note: "胜平负和总进球数混合，允许一场失手。",
       socialNote: chooseSocialNote(balanced),
     },
     coverage.length >= 4 && {
-      id: "real-coverage-4-3",
-      type: "真实数据四串三购买方案",
+      id: "sporttery-coverage-4-3",
+      type: "竞彩四串三购买方案",
       mode: "atLeast",
       requiredHits: 3,
       matchIds: coverage.map((match) => match.id),
       eventIds: coverage.map((match) => match.sourceEventId),
       markets: ["wdl", "ou", "wdl", "ou"],
       risk: "高",
-      note: "覆盖真实赛程中排序靠前的比赛，适合临场前再确认。",
+      note: "覆盖竞彩赛程中排序靠前的比赛，适合临场前再确认。",
       socialNote: chooseSocialNote(coverage),
     },
   ].filter(Boolean);
@@ -287,19 +299,22 @@ function isPickHit(match, marketKey, market) {
 }
 
 function evaluatePlan(plan, matches) {
-  const picks = plan.markets.map((marketKey, index) => {
-    const match = matches.find((item) => item.sourceEventId === plan.eventIds?.[index]) || matches.find((item) => item.id === plan.matchIds[index]);
-    if (!match) return null;
-    return { match, marketKey, market: match.markets[marketKey], hit: isPickHit(match, marketKey, match.markets[marketKey]) };
-  }).filter(Boolean);
-
+  const picks = plan.markets
+    .map((marketKey, index) => {
+      const match =
+        matches.find((item) => item.sourceEventId === plan.eventIds?.[index]) ||
+        matches.find((item) => item.id === plan.matchIds[index]);
+      if (!match) return null;
+      return { match, marketKey, market: match.markets[marketKey], hit: isPickHit(match, marketKey, match.markets[marketKey]) };
+    })
+    .filter(Boolean);
   const settled = picks.filter((pick) => pick.hit !== null);
   const hits = settled.filter((pick) => pick.hit).length;
   if (!settled.length || settled.length < picks.length) return null;
-
   const isHit = plan.mode === "all" ? hits === picks.length : hits >= plan.requiredHits;
+
   return {
-    date: matches[0]?.date || dateInShanghai(0),
+    date: matches[0]?.date || todayInShanghai(),
     type: plan.type,
     result: isHit ? "hit" : "miss",
     probability: picks.reduce((sum, pick) => sum + pick.market.probability, 0) / picks.length,
@@ -307,10 +322,10 @@ function evaluatePlan(plan, matches) {
   };
 }
 
-function buildHistory(oldData, matches, plans) {
+function buildHistory(oldData, allMatches) {
   const oldHistory = oldData?.history || [];
-  const oldPlans = oldData?.parlaySeeds || oldData?.purchasePlans || [];
-  const reviewed = oldPlans.map((plan) => evaluatePlan(plan, matches)).filter(Boolean);
+  const oldPlans = oldData?.purchasePlans || oldData?.parlaySeeds || [];
+  const reviewed = oldPlans.map((plan) => evaluatePlan(plan, allMatches)).filter(Boolean);
   const seen = new Set();
 
   return [...reviewed, ...oldHistory].filter((item) => {
@@ -358,42 +373,45 @@ function buildTomorrowPool(matches, tomorrow) {
     .filter((match) => match.date === tomorrow)
     .slice(0, 5)
     .map((match, index) => ({
-      category: index < 2 ? "真实赛程候选" : "明日观察",
+      category: index < 2 ? "竞彩候选" : "明日观察",
       matchId: match.id,
       market: index % 2 === 0 ? "wdl" : "ou",
-      reason: "来自真实赛程源，等待首发、赛程压力和临场事件补强。",
+      reason: `来自中国竞彩网竞猜赛程，竞彩编号 ${match.sportteryNo}，需等待开售状态和临场事件确认。`,
     }));
 }
 
 async function main() {
-  const dates = process.env.SPORTSDB_DATES?.split(",").map((date) => date.trim()).filter(Boolean) || [dateInShanghai(0), dateInShanghai(1)];
   const oldData = await readExistingData();
-  const eventsByDay = await Promise.all(dates.map(fetchDay));
-  const events = eventsByDay.flat().slice(0, LIMIT);
-  const matches = events.map(mapEvent);
-  const plans = buildPurchasePlans(matches);
-  const history = buildHistory(oldData, matches, plans);
+  const concernRaw = await fetchList("concern");
+  const allRaw = await fetchList("all");
+  const liveMap = await fetchLive(concernRaw);
+  const concernMatches = concernRaw.map((match) => mergeLive(match, liveMap)).map(mapMatch);
+  const allMatches = allRaw.map(mapMatch);
+  const plans = buildPurchasePlans(concernMatches);
+  const history = buildHistory(oldData, allMatches);
+  const today = todayInShanghai();
 
   const data = {
     generatedAt: nowIsoShanghai(),
     source: {
       type: "real",
-      provider: "TheSportsDB",
-      sport: SPORT,
-      dates,
-      note: "赛程和比分来自真实公开 API；购买方向为本地模型估算，仅作信息分析。",
+      provider: "Sporttery",
+      page: "https://m.sporttery.cn/mjc/zqsj/?tab=live",
+      scheduleApi: `${API_BASE}/getMatchDataPageListV1.qry`,
+      liveApi: `${API_BASE}/getMatchLiveV1.qry`,
+      note: "赛程、竞彩编号、销售状态和比分来自中国竞彩网公开接口；购买方向为本地模型估算，仅作信息分析。",
     },
-    matches,
+    matches: concernMatches,
     purchasePlans: plans,
     parlaySeeds: plans,
     history,
     autoReview: buildAutoReview(history),
-    marketHistory: buildMarketHistory(matches),
-    tomorrowPool: buildTomorrowPool(matches, dates[1]),
+    marketHistory: buildMarketHistory(allMatches),
+    tomorrowPool: buildTomorrowPool(concernMatches, addDays(today, 1)),
   };
 
   await fs.writeFile(OUTPUT, `${JSON.stringify(data, null, 2)}\n`, "utf8");
-  console.log(`updated ${OUTPUT} with ${matches.length} real events from ${dates.join(", ")}`);
+  console.log(`updated ${OUTPUT} with ${concernMatches.length} Sporttery matches`);
 }
 
 main().catch((error) => {

@@ -260,7 +260,7 @@ function renderFocusStrip() {
 
       return `
         <button class="focus-card" type="button" data-match-id="${match.id}">
-          <span>${match.id} · 今日重点 · ${statusLabels[match.status]}</span>
+          <span>${escapeHtml(match.sportteryNo ?? match.id)} · 今日重点 · ${statusLabels[match.status]}</span>
           <strong>${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
           <div>
             <em>${marketNames.wdl} ${escapeHtml(wdl.pick)} · ${pct(live)}</em>
@@ -288,7 +288,7 @@ function renderMatchList() {
       return `
         <button class="match-card ${active}" type="button" data-match-id="${match.id}">
           <div class="match-meta">
-            <span>${match.id}</span>
+            <span>${escapeHtml(match.sportteryNo ?? match.id)}</span>
             <span>${escapeHtml(match.competition)}</span>
           </div>
           <div class="teams">
@@ -469,8 +469,8 @@ function renderAnalysis() {
           <strong>${pct(primary)}</strong>
         </div>
         <div>
-          <span>数据质量</span>
-          <strong>${match.dataQuality}</strong>
+          <span>竞彩编号</span>
+          <strong>${escapeHtml(match.sportteryNo ?? match.id)}</strong>
         </div>
       </div>
 
@@ -548,7 +548,7 @@ function renderParlays() {
               .map(
                 (pick) => `
                   <div class="pick-row">
-                    <span>${pick.match.id} ${escapeHtml(pick.match.homeTeam)} 对 ${escapeHtml(pick.match.awayTeam)}</span>
+                    <span>${escapeHtml(pick.match.sportteryNo ?? pick.match.id)} ${escapeHtml(pick.match.homeTeam)} 对 ${escapeHtml(pick.match.awayTeam)}</span>
                     <strong>${marketNames[pick.marketKey]} · ${escapeHtml(formatMarketPick(pick.marketKey, pick.market))}</strong>
                     <em>${pct(pick.probability)}</em>
                   </div>
@@ -649,7 +649,7 @@ function renderTomorrowPool() {
         <article class="watch-card ${riskClass(market.risk)}">
           <div>
             <span>${escapeHtml(item.category)}</span>
-            <strong>${match.id} ${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
+            <strong>${escapeHtml(match.sportteryNo ?? match.id)} ${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
           </div>
           <div class="prep-score">
             <span>准备指数</span>

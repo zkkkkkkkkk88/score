@@ -1,8 +1,8 @@
-# 世界杯赛事雷达
+# 体彩足球赛事雷达
 
-一个静态足球赛事分析面板，用于展示近两日真实赛程、单场预测、每日购买方案、实时概率模拟、命中追踪和明日预选池。
+一个静态足球赛事分析面板，用于展示中国竞彩网近几天竞猜赛程、竞彩编号、单场预测、每日购买方案、实时概率模拟、命中追踪和明日预选池。
 
-当前版本只使用模拟数据。页面中的预测是产品演示和流程测试用的模型估算，不代表确定结果，也不是投注保证。
+当前版本的赛程、竞彩编号、销售状态和比分来自中国竞彩网公开接口。页面中的购买方向是本地模型估算，不代表确定结果，也不是投注保证。
 
 ## 功能模块
 
@@ -31,7 +31,7 @@ http://localhost:4173
 
 ## 更新真实数据
 
-当前项目用 `scripts/update-real-data.js` 从 TheSportsDB 拉取近两天足球赛程和比分，并写入 `data/matches.json`：
+当前项目用 `scripts/update-real-data.js` 从中国竞彩网足球数据接口拉取竞猜赛程和比分，并写入 `data/matches.json`：
 
 ```powershell
 node scripts/update-real-data.js
@@ -40,13 +40,11 @@ node scripts/update-real-data.js
 可选环境变量：
 
 ```powershell
-$env:SPORTSDB_API_KEY="你的 TheSportsDB Key"
-$env:SPORTSDB_DATES="2026-06-08,2026-06-09"
-$env:SPORTSDB_LIMIT="16"
+$env:SPORTTERY_PAGE_SIZE="80"
 node scripts/update-real-data.js
 ```
 
-说明：赛程和比分来自真实 API；页面不展示回报倍率或盘口价格。当前购买方向和概率是基于真实赛程/比分生成的本地模型估算，不代表确定结果。
+说明：页面不展示回报倍率或盘口价格。当前购买方向和概率是基于中国竞彩网赛程、销售状态和比分生成的本地模型估算，不代表确定结果。
 
 ## 视觉素材
 

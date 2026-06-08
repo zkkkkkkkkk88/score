@@ -77,7 +77,9 @@ setTimeout(() => {
   assert(html.includes("趋势变化"), "renders probability trend signal");
   assert(html.includes("准备指数"), "renders tomorrow preparation score");
   assert(html.includes("建议动作"), "renders tomorrow action advice");
-  assert(elements["#refreshTime"].textContent.includes("TheSportsDB"), "renders real data provider");
+  assert(elements["#refreshTime"].textContent.includes("Sporttery"), "renders official Sporttery provider");
+  assert(html.includes("竞彩编号"), "renders sporttery match number");
+  assert(/周[一二三四五六日]\d{3}/.test(html), "renders a sporttery counter number");
 
   console.log("dashboard smoke ok");
 }, 0);
