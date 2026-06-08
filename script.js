@@ -30,6 +30,15 @@ const statusLabels = {
   finished: "完场",
 };
 
+const riskLabels = {
+  Low: "低风险",
+  Medium: "中风险",
+  High: "高风险",
+  低: "低风险",
+  中: "中风险",
+  高: "高风险",
+};
+
 function pct(value) {
   return `${Math.round(value * 100)}%`;
 }
@@ -108,7 +117,11 @@ function scoreText(match) {
 }
 
 function riskClass(risk) {
-  return `risk-${String(risk).toLowerCase()}`;
+  const key = String(risk);
+  if (key === "低" || key === "Low") return "risk-low";
+  if (key === "中" || key === "Medium") return "risk-medium";
+  if (key === "高" || key === "High") return "risk-high";
+  return "risk-medium";
 }
 
 function statusClass(status) {
@@ -189,7 +202,7 @@ function renderMatchList() {
           </div>
           <div class="teams">
             <strong>${escapeHtml(match.homeTeam)}</strong>
-            <em>vs</em>
+            <em>对</em>
             <strong>${escapeHtml(match.awayTeam)}</strong>
           </div>
           <div class="match-foot">
@@ -222,7 +235,7 @@ function renderMarketCard(match, key) {
       ${renderProbabilityBar(probability, marketNames[key])}
       <div class="market-extra">
         <span>信心 ${market.confidence}</span>
-        <span>${escapeHtml(market.risk)} ${deltaText}</span>
+        <span>${escapeHtml(riskLabels[market.risk] ?? market.risk)} ${deltaText}</span>
       </div>
       <p>${escapeHtml(market.reason)}</p>
     </article>
@@ -244,7 +257,7 @@ function renderAnalysis() {
       <div class="analysis-header">
         <div>
           <p class="eyebrow">${escapeHtml(match.competition)} · ${match.date} ${match.kickoff}</p>
-          <h2>${escapeHtml(match.homeTeam)} <span>vs</span> ${escapeHtml(match.awayTeam)}</h2>
+          <h2>${escapeHtml(match.homeTeam)} <span>对</span> ${escapeHtml(match.awayTeam)}</h2>
           <div class="analysis-tags">${renderTags(match.tags)}</div>
         </div>
         <div class="score-board">
@@ -279,11 +292,11 @@ function renderAnalysis() {
           <i style="height:${match.stats.tempo}%"></i>
         </div>
         <div>
-          <p class="eyebrow">Key Factors</p>
+          <p class="eyebrow">关键因素</p>
           <ul class="factor-list">
             <li>近况：${escapeHtml(match.stats.form)}</li>
-            <li>攻防：Attack ${match.stats.attack} / Defense ${match.stats.defense}</li>
-            <li>节奏：Tempo ${match.stats.tempo}</li>
+            <li>攻防：进攻 ${match.stats.attack} / 防守 ${match.stats.defense}</li>
+            <li>节奏：比赛节奏 ${match.stats.tempo}</li>
             <li>场地：${escapeHtml(match.stats.homeAway)}</li>
             <li>赔率：主 ${match.odds.home} / 平 ${match.odds.draw} / 客 ${match.odds.away}</li>
           </ul>
@@ -328,7 +341,7 @@ function renderParlays() {
               .map(
                 (pick) => `
                   <div class="pick-row">
-                    <span>${pick.match.id} ${escapeHtml(pick.match.homeTeam)} vs ${escapeHtml(pick.match.awayTeam)}</span>
+                    <span>${pick.match.id} ${escapeHtml(pick.match.homeTeam)} 对 ${escapeHtml(pick.match.awayTeam)}</span>
                     <strong>${marketNames[pick.marketKey]} · ${escapeHtml(pick.market.pick)}</strong>
                     <em>${pct(pick.probability)}</em>
                   </div>
@@ -338,7 +351,7 @@ function renderParlays() {
           </div>
           <p>${escapeHtml(seed.note)}</p>
           <div class="parlay-foot">
-            <span>风险 ${escapeHtml(seed.risk)}</span>
+            <span>${escapeHtml(riskLabels[seed.risk] ?? seed.risk)}</span>
             <span>实时变化 ${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%</span>
           </div>
         </article>
@@ -396,7 +409,7 @@ function renderTomorrowPool() {
         <article class="watch-card ${riskClass(market.risk)}">
           <div>
             <span>${escapeHtml(item.category)}</span>
-            <strong>${match.id} ${escapeHtml(match.homeTeam)} vs ${escapeHtml(match.awayTeam)}</strong>
+            <strong>${match.id} ${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
           </div>
           <div class="watch-market">
             <span>${marketNames[item.market]}</span>
@@ -425,7 +438,7 @@ function render() {
 
 async function loadData() {
   const response = await fetch("./data/matches.json");
-  if (!response.ok) throw new Error("Unable to load match data");
+  if (!response.ok) throw new Error("无法载入赛事数据");
 
   state.data = await response.json();
   state.matches = state.data.matches;

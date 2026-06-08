@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World Cup Match Radar</title>
+    <title>世界杯赛事雷达</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <header class="top-nav" aria-label="Dashboard navigation">
+      <header class="top-nav" aria-label="仪表盘导航">
         <div class="brand-lockup">
           <span class="brand-mark" aria-hidden="true"></span>
           <div>
-            <p>World Cup Desk</p>
+            <p>世界杯情报台</p>
             <h1>世界杯赛事雷达</h1>
           </div>
         </div>
@@ -20,18 +20,18 @@
         <div class="nav-stats">
           <span id="matchCount">0 场赛事</span>
           <span id="refreshTime">等待数据</span>
-          <span class="live-pill">LIVE</span>
+          <span class="live-pill">实时</span>
         </div>
       </header>
 
-      <section class="dashboard-grid" aria-label="Match radar dashboard">
-        <aside class="match-rail" aria-label="Near two day matches">
+      <section class="dashboard-grid" aria-label="赛事雷达仪表盘">
+        <aside class="match-rail" aria-label="近两日赛事">
           <div class="section-heading">
-            <p>Fixture Board</p>
+            <p>赛程看板</p>
             <h2>近两日赛程</h2>
           </div>
 
-          <div class="filter-tabs" role="tablist" aria-label="Date filter">
+          <div class="filter-tabs" role="tablist" aria-label="日期筛选">
             <button class="tab is-active" type="button" data-filter="all">全部</button>
             <button class="tab" type="button" data-filter="today">今日</button>
             <button class="tab" type="button" data-filter="tomorrow">明日</button>
@@ -40,23 +40,23 @@
           <div id="matchList" class="match-list" aria-live="polite"></div>
         </aside>
 
-        <section class="analysis-panel" aria-label="Selected match analysis">
+        <section class="analysis-panel" aria-label="选中赛事分析">
           <div id="matchAnalysis"></div>
         </section>
 
-        <aside class="parlay-panel" aria-label="Daily parlay strategy center">
+        <aside class="parlay-panel" aria-label="每日串单策略中心">
           <div class="section-heading">
-            <p>Strategy Center</p>
+            <p>策略中心</p>
             <h2>每日串单</h2>
           </div>
           <div id="parlayList" class="parlay-list"></div>
         </aside>
       </section>
 
-      <section class="lower-grid" aria-label="Tracking and tomorrow preparation">
+      <section class="lower-grid" aria-label="命中追踪与明日准备">
         <article class="review-panel">
           <div class="section-heading">
-            <p>Result Tracker</p>
+            <p>结果追踪</p>
             <h2>今日命中追踪</h2>
           </div>
           <div id="hitTracker" class="hit-tracker"></div>
@@ -64,7 +64,7 @@
 
         <article class="tomorrow-panel">
           <div class="section-heading">
-            <p>Next Day Prep</p>
+            <p>明日准备</p>
             <h2>明日预选池</h2>
           </div>
           <div id="tomorrowPool" class="tomorrow-pool"></div>

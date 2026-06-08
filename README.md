@@ -1,23 +1,27 @@
-# World Cup Match Radar
+# 世界杯赛事雷达
 
-A static World Cup styled football match radar for match analysis, daily prediction cards, parlay plans, live probability simulation, and tomorrow preparation.
+一个静态足球赛事分析面板，用于展示近两日赛程、单场预测、每日串单、实时概率模拟、命中追踪和明日预选池。
 
-The first version uses mock data only. Predictions are model-style estimates for product design and workflow testing, not betting guarantees.
+当前版本只使用模拟数据。页面中的预测是产品演示和流程测试用的模型估算，不代表确定结果，也不是投注保证。
 
-## Modules
+## 功能模块
 
-- Near-two-day match board
-- Single-match win/draw/loss, over/under, and half/full-time analysis
-- Daily parlay strategy center
-- Today hit tracker
-- Tomorrow preparation pool
+- 近两日赛程看板
+- 单场胜平负、大小球、半全场分析
+- 每日串单策略中心
+- 今日命中追踪
+- 明日预选池
 
-## Run
+## 本地运行
 
-Open `index.html` through a local static server:
+在项目目录启动静态服务：
 
 ```powershell
 python -m http.server 4173
 ```
 
-Then visit `http://localhost:4173`.
+然后访问：
+
+```text
+http://localhost:4173
+```

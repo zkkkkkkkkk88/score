@@ -1,22 +1,22 @@
 :root {
   color-scheme: dark;
-  --pitch: #071914;
-  --pitch-2: #0c241d;
-  --panel: #10291f;
-  --panel-2: #153327;
-  --panel-3: #0d2119;
-  --ink: #f5f3e8;
-  --soft: #d8d1bd;
-  --muted: #a39c89;
-  --line: rgba(216, 209, 189, 0.2);
-  --line-strong: rgba(216, 209, 189, 0.34);
-  --gold: #c6a15b;
-  --gold-2: #e2c879;
-  --home: #c84545;
-  --away: #3c6fa8;
-  --green: #4ca46d;
-  --warn: #c88d48;
-  --danger: #c65050;
+  --pitch: #2b090b;
+  --pitch-2: #3a0f12;
+  --panel: #4a1216;
+  --panel-2: #5b171b;
+  --panel-3: #351012;
+  --ink: #fff7df;
+  --soft: #f0dfb4;
+  --muted: #c9b68d;
+  --line: rgba(231, 198, 112, 0.25);
+  --line-strong: rgba(231, 198, 112, 0.46);
+  --gold: #d8ad50;
+  --gold-2: #f0cf7a;
+  --home: #a82024;
+  --away: #247a50;
+  --green: #4fab6b;
+  --warn: #d38d3f;
+  --danger: #e05a55;
 }
 
 * {
@@ -31,9 +31,9 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(216, 209, 189, 0.035) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(216, 209, 189, 0.028) 1px, transparent 1px),
-    linear-gradient(180deg, #071914 0%, #0b211a 62%, #091712 100%);
+    linear-gradient(90deg, rgba(240, 207, 122, 0.04) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(240, 207, 122, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, #2b090b 0%, #431115 58%, #220708 100%);
   background-size: 56px 56px, 56px 56px, auto;
   color: var(--ink);
   font-family:
@@ -88,8 +88,8 @@ button {
   border: 1px solid var(--gold);
   border-radius: 4px;
   background:
-    linear-gradient(90deg, transparent 48%, rgba(245, 243, 232, 0.35) 49% 51%, transparent 52%),
-    linear-gradient(0deg, transparent 48%, rgba(245, 243, 232, 0.35) 49% 51%, transparent 52%),
+    linear-gradient(90deg, transparent 48%, rgba(240, 207, 122, 0.42) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(240, 207, 122, 0.42) 49% 51%, transparent 52%),
     var(--pitch-2);
   position: relative;
 }
@@ -192,7 +192,7 @@ h2 {
 .tab:hover,
 .tab:focus-visible {
   border-color: var(--gold);
-  background: #1d3a2b;
+  background: #6b1b20;
   color: var(--ink);
   outline: none;
 }
@@ -225,7 +225,7 @@ h2 {
 .match-card:focus-visible {
   border-color: var(--line-strong);
   border-left-color: var(--gold);
-  background: #18392b;
+  background: #6a1a1e;
   outline: none;
 }
 
@@ -328,7 +328,7 @@ h2 {
   padding: 12px;
   border: 1px solid var(--gold);
   border-radius: 4px;
-  background: #1b3025;
+  background: #3b1012;
   text-align: center;
 }
 
@@ -392,9 +392,9 @@ h2 {
   padding: 12px;
   border-radius: 4px;
   background:
-    linear-gradient(90deg, transparent 49%, rgba(216, 209, 189, 0.24) 50%, transparent 51%),
-    linear-gradient(0deg, rgba(216, 209, 189, 0.12) 1px, transparent 1px),
-    #0b2b1e;
+    linear-gradient(90deg, transparent 49%, rgba(240, 207, 122, 0.26) 50%, transparent 51%),
+    linear-gradient(0deg, rgba(240, 207, 122, 0.13) 1px, transparent 1px),
+    #3a1112;
   background-size: auto, 100% 40px, auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -471,7 +471,7 @@ h2 {
   height: 7px;
   overflow: hidden;
   border-radius: 999px;
-  background: #263b31;
+  background: #2d0c0e;
 }
 
 .probability-bar span {
@@ -513,7 +513,7 @@ h2 {
   gap: 3px;
   padding: 8px;
   border-radius: 4px;
-  background: #0a1a14;
+  background: #2d0c0e;
 }
 
 .pick-row em {
