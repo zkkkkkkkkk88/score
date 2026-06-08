@@ -111,6 +111,24 @@ function atLeastProbability(probabilities, requiredHits) {
   return total;
 }
 
+function combinations(items, size) {
+  const result = [];
+
+  function walk(start, group) {
+    if (group.length === size) {
+      result.push(group);
+      return;
+    }
+
+    for (let index = start; index < items.length; index += 1) {
+      walk(index + 1, [...group, items[index]]);
+    }
+  }
+
+  walk(0, []);
+  return result;
+}
+
 function scoreText(match) {
   if (match.score.home === null || match.score.away === null) return `${match.kickoff}`;
   return `${match.score.home} - ${match.score.away}`;
@@ -145,6 +163,53 @@ function getMarket(match, key) {
 function formatMarketPick(key, market) {
   if (key !== "ou") return market.pick;
   return market.goalRange ?? market.pick;
+}
+
+function getMarketOdds(match, key, market) {
+  if (key === "wdl") {
+    if (market.pick.includes("主")) return match.odds.home;
+    if (market.pick.includes("客")) return match.odds.away;
+    return match.odds.draw;
+  }
+
+  if (key === "ou") {
+    return formatMarketPick(key, market).startsWith("3") ? match.odds.over25 : match.odds.under25;
+  }
+
+  return Number((0.92 / market.probability).toFixed(2));
+}
+
+function getPickLabel(pick) {
+  return `${pick.match.id} ${pick.match.homeTeam} 对 ${pick.match.awayTeam} · ${marketNames[pick.marketKey]} ${formatMarketPick(
+    pick.marketKey,
+    pick.market,
+  )}`;
+}
+
+function getReturnEstimate(seed, picks) {
+  const odds = picks.map((pick) => getMarketOdds(pick.match, pick.marketKey, pick.market));
+
+  if (seed.mode === "all") {
+    return odds.reduce((product, value) => product * value, 1);
+  }
+
+  const groups = combinations(odds, seed.requiredHits);
+  const total = groups.reduce(
+    (sum, group) => sum + group.reduce((product, value) => product * value, 1),
+    0,
+  );
+
+  return groups.length ? total / groups.length : 0;
+}
+
+function getParlayInsight(picks) {
+  return picks.reduce(
+    (insight, pick) => ({
+      banker: pick.probability > insight.banker.probability ? pick : insight.banker,
+      weak: pick.probability < insight.weak.probability ? pick : insight.weak,
+    }),
+    { banker: picks[0], weak: picks[0] },
+  );
 }
 
 function getParlayPicks(seed, useLive = true) {
@@ -330,6 +395,8 @@ function renderParlays() {
       const prematch = getParlayProbability(seed, false);
       const delta = live - prematch;
       const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
+      const returnEstimate = getReturnEstimate(seed, picks);
+      const insight = getParlayInsight(picks);
 
       return `
         <article class="parlay-card ${riskClass(seed.risk)}">
@@ -341,6 +408,20 @@ function renderParlays() {
             <strong>${pct(live)}</strong>
           </div>
           ${renderProbabilityBar(live, seed.type)}
+          <div class="parlay-insights">
+            <div>
+              <span>预计回报</span>
+              <strong>${returnEstimate.toFixed(2)}x</strong>
+            </div>
+            <div>
+              <span>核心胆</span>
+              <strong>${escapeHtml(getPickLabel(insight.banker))}</strong>
+            </div>
+            <div>
+              <span>风险点</span>
+              <strong>${escapeHtml(getPickLabel(insight.weak))}</strong>
+            </div>
+          </div>
           <div class="pick-list">
             ${picks
               .map(
@@ -367,6 +448,7 @@ function renderParlays() {
 
 function renderHitTracker() {
   const history = state.data.history;
+  const marketHistory = state.data.marketHistory ?? [];
   const hits = history.filter((item) => item.result === "hit").length;
   const hitRate = history.length ? hits / history.length : 0;
   const finished = state.matches.filter((match) => match.status === "finished").length;
@@ -385,6 +467,28 @@ function renderHitTracker() {
       <div>
         <span>实时赛事</span>
         <strong>${live}</strong>
+      </div>
+    </div>
+    <div class="market-ledger">
+      <div class="section-heading">
+        <p>玩法表现</p>
+        <h3>近 30 日命中拆解</h3>
+      </div>
+      <div class="ledger-grid">
+        ${marketHistory
+          .map((item) => {
+            const rate = item.total ? item.hits / item.total : 0;
+
+            return `
+              <div class="ledger-card">
+                <span>${escapeHtml(item.name)}命中</span>
+                <strong>${pct(rate)}</strong>
+                ${renderProbabilityBar(rate, item.name)}
+                <em>${item.hits}/${item.total} · ${escapeHtml(item.streak)}</em>
+              </div>
+            `;
+          })
+          .join("")}
       </div>
     </div>
     <div class="history-list">

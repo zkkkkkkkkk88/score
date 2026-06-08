@@ -227,6 +227,11 @@
     { "date": "2026-06-06", "type": "稳健二串一", "result": "hit", "probability": 0.61 },
     { "date": "2026-06-06", "type": "覆盖四串二", "result": "miss", "probability": 0.72 }
   ],
+  "marketHistory": [
+    { "market": "wdl", "name": "胜平负", "hits": 18, "total": 25, "streak": "近 3 天稳定" },
+    { "market": "ou", "name": "总进球数", "hits": 14, "total": 21, "streak": "临场节奏影响大" },
+    { "market": "htft", "name": "半全场", "hits": 7, "total": 18, "streak": "只做观察" }
+  ],
   "tomorrowPool": [
     { "category": "稳胆候选", "matchId": "006", "market": "ou", "reason": "葡萄牙和乌拉圭节奏偏慢，0-2 球方向更清晰。" },
     { "category": "稳胆候选", "matchId": "007", "market": "wdl", "reason": "英格兰定位球优势明显，可进入二串一观察池。" },

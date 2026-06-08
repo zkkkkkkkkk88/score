@@ -534,6 +534,40 @@ h2 {
   gap: 7px;
 }
 
+.parlay-insights,
+.ledger-grid {
+  display: grid;
+  gap: 7px;
+}
+
+.parlay-insights {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.parlay-insights div,
+.ledger-card {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(45, 12, 14, 0.76);
+  display: grid;
+  gap: 4px;
+}
+
+.parlay-insights span,
+.ledger-card span,
+.ledger-card em {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.parlay-insights strong,
+.ledger-card strong {
+  color: var(--gold-2);
+  overflow-wrap: anywhere;
+}
+
 .pick-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -574,6 +608,27 @@ h2 {
 
 .history-row {
   padding: 10px;
+}
+
+.market-ledger {
+  display: grid;
+  gap: 8px;
+}
+
+.market-ledger h3 {
+  font-size: 16px;
+}
+
+.ledger-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ledger-card strong {
+  font-size: 24px;
+}
+
+.ledger-card em {
+  font-style: normal;
 }
 
 .history-row strong {
@@ -641,6 +696,8 @@ h2 {
   .market-grid,
   .radar-strip,
   .tracker-metrics,
+  .parlay-insights,
+  .ledger-grid,
   .parlay-list,
   .tomorrow-pool {
     grid-template-columns: 1fr;
