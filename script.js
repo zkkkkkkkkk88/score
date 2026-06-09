@@ -25,6 +25,7 @@ const els = {
 };
 
 const viewNames = ["overview", "analysis", "plans", "review"];
+const DATA_REFRESH_INTERVAL_MS = 60 * 1000;
 
 const marketNames = {
   wdl: "胜平负",
@@ -762,13 +763,15 @@ function render() {
   renderTomorrowPool();
 }
 
-async function loadData() {
-  const response = await fetch("./data/matches.json");
+async function loadData(options = {}) {
+  const previousSelectedId = state.selectedId;
+  const response = await fetch(`./data/matches.json?ts=${Date.now()}`);
   if (!response.ok) throw new Error("无法载入赛事数据");
 
   state.data = await response.json();
   state.matches = state.data.matches;
-  state.selectedId = getFilteredMatches()[0]?.id ?? state.matches[0]?.id ?? null;
+  const canKeepSelection = options.preserveSelection && state.matches.some((match) => match.id === previousSelectedId);
+  state.selectedId = canKeepSelection ? previousSelectedId : (getFilteredMatches()[0]?.id ?? state.matches[0]?.id ?? null);
   setActiveView(getHashView(), false);
   render();
 }
@@ -817,6 +820,12 @@ setInterval(() => {
   renderAnalysis();
   renderParlays();
 }, 3000);
+
+setInterval(() => {
+  loadData({ preserveSelection: true }).catch((error) => {
+    els.refreshTime.textContent = `刷新失败：${error.message}`;
+  });
+}, DATA_REFRESH_INTERVAL_MS);
 
 loadData().catch((error) => {
   els.matchAnalysis.innerHTML = `<div class="empty-state">${escapeHtml(error.message)}</div>`;

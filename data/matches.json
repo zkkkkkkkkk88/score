@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T23:42:34.869+08:00",
+  "generatedAt": "2026-06-09T10:36:48.321+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -13,64 +13,67 @@
       "id": "001",
       "sourceEventId": "2040145",
       "sportteryNo": "周一201",
-      "date": "2026-06-08",
+      "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
       "matchDate": "2026-06-09",
       "kickoff": "02:45",
       "competition": "国际赛",
       "homeTeam": "荷兰",
       "awayTeam": "乌兹别克斯坦",
-      "status": "pre",
+      "status": "finished",
       "score": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
-      "halfScore": "",
-      "minute": null,
+      "halfScore": "1:0",
+      "minute": 90,
       "tags": [
         "中国竞彩网",
         "周一201",
-        "未开播"
+        "已完成"
       ],
-      "dataQuality": 86,
+      "dataQuality": 92,
       "importance": 88,
       "risk": "中",
       "stats": {
         "form": "等待球队近况源",
-        "attack": 62,
-        "defense": 62,
+        "attack": 72,
+        "defense": 72,
         "tempo": 58,
-        "homeAway": "竞彩编号：周一201，销售状态：未开播"
+        "homeAway": "竞彩编号：周一201，销售状态：已完成"
       },
       "markets": {
         "wdl": {
           "pick": "主胜",
-          "probability": 0.48,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
+          "probability": 0.72,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
         "ou": {
           "line": 2.5,
-          "pick": "0-2球",
-          "goalRange": "0-2球",
-          "probability": 0.54,
-          "confidence": 62,
+          "pick": "3球及以上",
+          "goalRange": "3球及以上",
+          "probability": 0.7,
+          "confidence": 84,
           "risk": "中",
-          "reason": "根据赛事类型、赛程时段和默认进球模型给出总进球数观察区间。"
+          "reason": "根据中国竞彩网完场比分计算总进球数区间。"
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.3,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.52,
+          "confidence": 70,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
+          "reason": "根据半场和全场比分做复盘方向。"
         }
       },
       "socialFactors": {
         "clubMotivation": "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
         "politicalFactor": "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。",
-        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
-        "consequence": "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
+        "consequence": "完场比分可用于自动复盘方案命中率，并调整后续模型权重。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
     },
@@ -78,64 +81,67 @@
       "id": "002",
       "sourceEventId": "2040146",
       "sportteryNo": "周一202",
-      "date": "2026-06-08",
+      "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
       "matchDate": "2026-06-09",
       "kickoff": "03:10",
       "competition": "国际赛",
       "homeTeam": "法国",
       "awayTeam": "北爱尔兰",
-      "status": "pre",
+      "status": "finished",
       "score": {
-        "home": null,
-        "away": null
+        "home": 3,
+        "away": 1
       },
-      "halfScore": "",
-      "minute": null,
+      "halfScore": "1:0",
+      "minute": 90,
       "tags": [
         "中国竞彩网",
         "周一202",
-        "未开播"
+        "已完成"
       ],
-      "dataQuality": 86,
+      "dataQuality": 92,
       "importance": 78,
       "risk": "中",
       "stats": {
         "form": "等待球队近况源",
-        "attack": 62,
-        "defense": 62,
+        "attack": 72,
+        "defense": 72,
         "tempo": 58,
-        "homeAway": "竞彩编号：周一202，销售状态：未开播"
+        "homeAway": "竞彩编号：周一202，销售状态：已完成"
       },
       "markets": {
         "wdl": {
           "pick": "主胜",
-          "probability": 0.48,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
+          "probability": 0.72,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
         "ou": {
           "line": 2.5,
-          "pick": "0-2球",
-          "goalRange": "0-2球",
-          "probability": 0.54,
-          "confidence": 62,
+          "pick": "3球及以上",
+          "goalRange": "3球及以上",
+          "probability": 0.7,
+          "confidence": 84,
           "risk": "中",
-          "reason": "根据赛事类型、赛程时段和默认进球模型给出总进球数观察区间。"
+          "reason": "根据中国竞彩网完场比分计算总进球数区间。"
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.3,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.52,
+          "confidence": 70,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
+          "reason": "根据半场和全场比分做复盘方向。"
         }
       },
       "socialFactors": {
         "clubMotivation": "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
         "politicalFactor": "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。",
-        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
-        "consequence": "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
+        "consequence": "完场比分可用于自动复盘方案命中率，并调整后续模型权重。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
     },
@@ -143,23 +149,26 @@
       "id": "003",
       "sourceEventId": "2040147",
       "sportteryNo": "周一203",
-      "date": "2026-06-08",
+      "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "直播中",
+      "liveStatusName": "直播中",
       "matchDate": "2026-06-09",
       "kickoff": "10:00",
       "competition": "国际赛",
       "homeTeam": "秘鲁",
       "awayTeam": "西班牙",
-      "status": "pre",
+      "status": "live",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 2
       },
       "halfScore": "",
-      "minute": null,
+      "minute": 32,
       "tags": [
         "中国竞彩网",
         "周一203",
-        "未开播"
+        "直播中"
       ],
       "dataQuality": 86,
       "importance": 78,
@@ -168,13 +177,13 @@
         "form": "等待球队近况源",
         "attack": 62,
         "defense": 62,
-        "tempo": 58,
-        "homeAway": "竞彩编号：周一203，销售状态：未开播"
+        "tempo": 72,
+        "homeAway": "竞彩编号：周一203，销售状态：直播中"
       },
       "markets": {
         "wdl": {
           "pick": "客胜",
-          "probability": 0.44,
+          "probability": 0.66,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
@@ -183,7 +192,7 @@
           "line": 2.5,
           "pick": "0-2球",
           "goalRange": "0-2球",
-          "probability": 0.54,
+          "probability": 0.66,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出总进球数观察区间。"
@@ -199,7 +208,7 @@
       "socialFactors": {
         "clubMotivation": "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
         "politicalFactor": "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。",
-        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未发现可核验异常；不对任何球队作未经证实的假赛判断。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
         "consequence": "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
@@ -209,6 +218,9 @@
       "sourceEventId": "2040186",
       "sportteryNo": "周二201",
       "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "待开售",
+      "liveStatusName": "未开播",
       "matchDate": "2026-06-09",
       "kickoff": "19:35",
       "competition": "国际赛",
@@ -224,6 +236,7 @@
       "tags": [
         "中国竞彩网",
         "周二201",
+        "待开售",
         "未开播"
       ],
       "dataQuality": 86,
@@ -234,7 +247,7 @@
         "attack": 62,
         "defense": 62,
         "tempo": 58,
-        "homeAway": "竞彩编号：周二201，销售状态：未开播"
+        "homeAway": "竞彩编号：周二201，销售状态：待开售"
       },
       "markets": {
         "wdl": {
@@ -273,7 +286,10 @@
       "id": "005",
       "sourceEventId": "2040187",
       "sportteryNo": "周二202",
-      "date": "2026-06-09",
+      "date": "2026-06-10",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "待开售",
+      "liveStatusName": "未开播",
       "matchDate": "2026-06-10",
       "kickoff": "01:00",
       "competition": "国际赛",
@@ -289,7 +305,8 @@
       "tags": [
         "中国竞彩网",
         "周二202",
-        "待开售"
+        "待开售",
+        "未开播"
       ],
       "dataQuality": 86,
       "importance": 78,
@@ -338,7 +355,10 @@
       "id": "006",
       "sourceEventId": "2040188",
       "sportteryNo": "周二203",
-      "date": "2026-06-09",
+      "date": "2026-06-10",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "待开售",
+      "liveStatusName": "未开播",
       "matchDate": "2026-06-10",
       "kickoff": "08:30",
       "competition": "国际赛",
@@ -354,7 +374,8 @@
       "tags": [
         "中国竞彩网",
         "周二203",
-        "待开售"
+        "待开售",
+        "未开播"
       ],
       "dataQuality": 86,
       "importance": 78,
@@ -403,7 +424,10 @@
       "id": "007",
       "sourceEventId": "2040189",
       "sportteryNo": "周三201",
-      "date": "2026-06-10",
+      "date": "2026-06-11",
+      "businessDate": "2026-06-10",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
       "matchDate": "2026-06-11",
       "kickoff": "03:45",
       "competition": "国际赛",
@@ -468,7 +492,10 @@
       "id": "008",
       "sourceEventId": "2040190",
       "sportteryNo": "周三202",
-      "date": "2026-06-10",
+      "date": "2026-06-11",
+      "businessDate": "2026-06-10",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
       "matchDate": "2026-06-11",
       "kickoff": "04:00",
       "competition": "国际赛",
@@ -533,7 +560,10 @@
       "id": "009",
       "sourceEventId": "2040162",
       "sportteryNo": "周四001",
-      "date": "2026-06-11",
+      "date": "2026-06-12",
+      "businessDate": "2026-06-11",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-12",
       "kickoff": "03:00",
       "competition": "世界杯",
@@ -598,7 +628,10 @@
       "id": "010",
       "sourceEventId": "2040163",
       "sportteryNo": "周四002",
-      "date": "2026-06-11",
+      "date": "2026-06-12",
+      "businessDate": "2026-06-11",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-12",
       "kickoff": "10:00",
       "competition": "世界杯",
@@ -663,7 +696,10 @@
       "id": "011",
       "sourceEventId": "2040164",
       "sportteryNo": "周五003",
-      "date": "2026-06-12",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-12",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-13",
       "kickoff": "03:00",
       "competition": "世界杯",
@@ -728,7 +764,10 @@
       "id": "012",
       "sourceEventId": "2040165",
       "sportteryNo": "周五004",
-      "date": "2026-06-12",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-12",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-13",
       "kickoff": "09:00",
       "competition": "世界杯",
@@ -793,7 +832,10 @@
       "id": "013",
       "sourceEventId": "2040166",
       "sportteryNo": "周六005",
-      "date": "2026-06-13",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-14",
       "kickoff": "03:00",
       "competition": "世界杯",
@@ -858,7 +900,10 @@
       "id": "014",
       "sourceEventId": "2040167",
       "sportteryNo": "周六006",
-      "date": "2026-06-13",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-14",
       "kickoff": "06:00",
       "competition": "世界杯",
@@ -923,7 +968,10 @@
       "id": "015",
       "sourceEventId": "2040168",
       "sportteryNo": "周六007",
-      "date": "2026-06-13",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-14",
       "kickoff": "09:00",
       "competition": "世界杯",
@@ -988,7 +1036,10 @@
       "id": "016",
       "sourceEventId": "2040169",
       "sportteryNo": "周六008",
-      "date": "2026-06-13",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-14",
       "kickoff": "12:00",
       "competition": "世界杯",
@@ -1053,7 +1104,10 @@
       "id": "017",
       "sourceEventId": "2040170",
       "sportteryNo": "周日009",
-      "date": "2026-06-14",
+      "date": "2026-06-15",
+      "businessDate": "2026-06-14",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-15",
       "kickoff": "01:00",
       "competition": "世界杯",
@@ -1118,7 +1172,10 @@
       "id": "018",
       "sourceEventId": "2040171",
       "sportteryNo": "周日010",
-      "date": "2026-06-14",
+      "date": "2026-06-15",
+      "businessDate": "2026-06-14",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-15",
       "kickoff": "04:00",
       "competition": "世界杯",
@@ -1183,7 +1240,10 @@
       "id": "019",
       "sourceEventId": "2040172",
       "sportteryNo": "周日011",
-      "date": "2026-06-14",
+      "date": "2026-06-15",
+      "businessDate": "2026-06-14",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-15",
       "kickoff": "07:00",
       "competition": "世界杯",
@@ -1248,7 +1308,10 @@
       "id": "020",
       "sourceEventId": "2040173",
       "sportteryNo": "周日012",
-      "date": "2026-06-14",
+      "date": "2026-06-15",
+      "businessDate": "2026-06-14",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-15",
       "kickoff": "10:00",
       "competition": "世界杯",
@@ -1313,7 +1376,10 @@
       "id": "021",
       "sourceEventId": "2040174",
       "sportteryNo": "周一013",
-      "date": "2026-06-15",
+      "date": "2026-06-16",
+      "businessDate": "2026-06-15",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-16",
       "kickoff": "00:00",
       "competition": "世界杯",
@@ -1378,7 +1444,10 @@
       "id": "022",
       "sourceEventId": "2040175",
       "sportteryNo": "周一014",
-      "date": "2026-06-15",
+      "date": "2026-06-16",
+      "businessDate": "2026-06-15",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-16",
       "kickoff": "03:00",
       "competition": "世界杯",
@@ -1443,7 +1512,10 @@
       "id": "023",
       "sourceEventId": "2040176",
       "sportteryNo": "周一015",
-      "date": "2026-06-15",
+      "date": "2026-06-16",
+      "businessDate": "2026-06-15",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-16",
       "kickoff": "06:00",
       "competition": "世界杯",
@@ -1508,7 +1580,10 @@
       "id": "024",
       "sourceEventId": "2040177",
       "sportteryNo": "周一016",
-      "date": "2026-06-15",
+      "date": "2026-06-16",
+      "businessDate": "2026-06-15",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-16",
       "kickoff": "09:00",
       "competition": "世界杯",
@@ -1573,7 +1648,10 @@
       "id": "025",
       "sourceEventId": "2040178",
       "sportteryNo": "周二017",
-      "date": "2026-06-16",
+      "date": "2026-06-17",
+      "businessDate": "2026-06-16",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-17",
       "kickoff": "03:00",
       "competition": "世界杯",
@@ -1638,7 +1716,10 @@
       "id": "026",
       "sourceEventId": "2040179",
       "sportteryNo": "周二018",
-      "date": "2026-06-16",
+      "date": "2026-06-17",
+      "businessDate": "2026-06-16",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-17",
       "kickoff": "06:00",
       "competition": "世界杯",
@@ -1703,7 +1784,10 @@
       "id": "027",
       "sourceEventId": "2040180",
       "sportteryNo": "周二019",
-      "date": "2026-06-16",
+      "date": "2026-06-17",
+      "businessDate": "2026-06-16",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-17",
       "kickoff": "09:00",
       "competition": "世界杯",
@@ -1768,7 +1852,10 @@
       "id": "028",
       "sourceEventId": "2040181",
       "sportteryNo": "周二020",
-      "date": "2026-06-16",
+      "date": "2026-06-17",
+      "businessDate": "2026-06-16",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-17",
       "kickoff": "12:00",
       "competition": "世界杯",
@@ -1833,7 +1920,10 @@
       "id": "029",
       "sourceEventId": "2040182",
       "sportteryNo": "周三021",
-      "date": "2026-06-17",
+      "date": "2026-06-18",
+      "businessDate": "2026-06-17",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-18",
       "kickoff": "01:00",
       "competition": "世界杯",
@@ -1898,7 +1988,10 @@
       "id": "030",
       "sourceEventId": "2040183",
       "sportteryNo": "周三022",
-      "date": "2026-06-17",
+      "date": "2026-06-18",
+      "businessDate": "2026-06-17",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-18",
       "kickoff": "04:00",
       "competition": "世界杯",
@@ -1963,7 +2056,10 @@
       "id": "031",
       "sourceEventId": "2040184",
       "sportteryNo": "周三023",
-      "date": "2026-06-17",
+      "date": "2026-06-18",
+      "businessDate": "2026-06-17",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-18",
       "kickoff": "07:00",
       "competition": "世界杯",
@@ -2028,7 +2124,10 @@
       "id": "032",
       "sourceEventId": "2040185",
       "sportteryNo": "周三024",
-      "date": "2026-06-17",
+      "date": "2026-06-18",
+      "businessDate": "2026-06-17",
+      "saleStatusName": "暂停销售",
+      "liveStatusName": "暂停销售",
       "matchDate": "2026-06-18",
       "kickoff": "10:00",
       "competition": "世界杯",
@@ -2097,12 +2196,12 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "001",
-        "002"
+        "003",
+        "004"
       ],
       "eventIds": [
-        "2040145",
-        "2040146"
+        "2040147",
+        "2040186"
       ],
       "markets": [
         "wdl",
@@ -2118,14 +2217,14 @@
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
-        "001",
-        "002",
-        "003"
+        "003",
+        "004",
+        "005"
       ],
       "eventIds": [
-        "2040145",
-        "2040146",
-        "2040147"
+        "2040147",
+        "2040186",
+        "2040187"
       ],
       "markets": [
         "wdl",
@@ -2142,16 +2241,16 @@
       "mode": "atLeast",
       "requiredHits": 3,
       "matchIds": [
-        "001",
-        "002",
         "003",
-        "004"
+        "004",
+        "005",
+        "006"
       ],
       "eventIds": [
-        "2040145",
-        "2040146",
         "2040147",
-        "2040186"
+        "2040186",
+        "2040187",
+        "2040188"
       ],
       "markets": [
         "wdl",
@@ -2171,12 +2270,12 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "001",
-        "002"
+        "003",
+        "004"
       ],
       "eventIds": [
-        "2040145",
-        "2040146"
+        "2040147",
+        "2040186"
       ],
       "markets": [
         "wdl",
@@ -2192,14 +2291,14 @@
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
-        "001",
-        "002",
-        "003"
+        "003",
+        "004",
+        "005"
       ],
       "eventIds": [
-        "2040145",
-        "2040146",
-        "2040147"
+        "2040147",
+        "2040186",
+        "2040187"
       ],
       "markets": [
         "wdl",
@@ -2216,16 +2315,16 @@
       "mode": "atLeast",
       "requiredHits": 3,
       "matchIds": [
-        "001",
-        "002",
         "003",
-        "004"
+        "004",
+        "005",
+        "006"
       ],
       "eventIds": [
-        "2040145",
-        "2040146",
         "2040147",
-        "2040186"
+        "2040186",
+        "2040187",
+        "2040188"
       ],
       "markets": [
         "wdl",
@@ -2239,6 +2338,20 @@
     }
   ],
   "history": [
+    {
+      "date": "2026-05-28",
+      "type": "竞彩二串一购买方案",
+      "result": "hit",
+      "probability": 0.72,
+      "detail": "2/2 命中"
+    },
+    {
+      "date": "2026-05-28",
+      "type": "竞彩三串二购买方案",
+      "result": "hit",
+      "probability": 0.62,
+      "detail": "2/3 命中"
+    },
     {
       "date": "2026-05-28",
       "type": "真实数据二串一购买方案",
@@ -2263,12 +2376,25 @@
   ],
   "autoReview": {
     "label": "自动复盘",
-    "reviewed": 3,
-    "hits": 3,
+    "reviewed": 5,
+    "hits": 5,
     "hitRate": 1,
-    "summary": "已自动复盘 3 个购买方案，命中 3 个。"
+    "summary": "已自动复盘 5 个购买方案，命中 5 个。"
   },
   "dailyPlanSummaries": [
+    {
+      "date": "2026-06-09",
+      "totalPlans": 3,
+      "reviewedPlans": 0,
+      "hitPlans": 0,
+      "hitRate": 0,
+      "planTypes": [
+        "竞彩二串一购买方案",
+        "竞彩三串二购买方案",
+        "竞彩四串三购买方案"
+      ],
+      "summary": "2026-06-09 已推出 3 个购买方案，等待比赛完场后统计命中率。"
+    },
     {
       "date": "2026-06-08",
       "totalPlans": 3,
@@ -2285,26 +2411,26 @@
     {
       "date": "2026-05-28",
       "totalPlans": 0,
-      "reviewedPlans": 3,
-      "hitPlans": 3,
+      "reviewedPlans": 23,
+      "hitPlans": 23,
       "hitRate": 1,
       "planTypes": [],
-      "summary": "2026-05-28 已复盘 3 个购买方案，命中 3 个，命中率 100%。"
+      "summary": "2026-05-28 已复盘 23 个购买方案，命中 23 个，命中率 100%。"
     }
   ],
   "marketHistory": [
     {
       "market": "wdl",
       "name": "胜平负",
-      "hits": 84,
-      "total": 84,
+      "hits": 82,
+      "total": 82,
       "streak": "等待更多完场数据"
     },
     {
       "market": "ou",
       "name": "总进球数",
-      "hits": 84,
-      "total": 84,
+      "hits": 82,
+      "total": 82,
       "streak": "等待更多完场数据"
     },
     {
@@ -2333,6 +2459,12 @@
       "matchId": "003",
       "market": "wdl",
       "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周一203，需等待开售状态和临场事件确认。"
+    },
+    {
+      "category": "明日观察",
+      "matchId": "004",
+      "market": "ou",
+      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周二201，需等待开售状态和临场事件确认。"
     }
   ]
 }

@@ -72,11 +72,11 @@ async function fetchList(method) {
 
 async function fetchLive(matches) {
   const ids = matches.map((match) => match.matchId).filter(Boolean);
-  if (!ids.length) return new Map();
+  if (!ids.length) return { map: new Map(), list: [] };
   const url = `${API_BASE}/getMatchLiveV1.qry?matchIds=${ids.join(",")}&eventTc=goals,penalty_shootout&method=live`;
   const value = await getJson(url);
   const list = Array.isArray(value) ? value : [];
-  return new Map(list.map((match) => [String(match.matchId), match]));
+  return { map: new Map(list.map((match) => [String(match.matchId), match])), list };
 }
 
 function parseScore(value) {
@@ -84,6 +84,18 @@ function parseScore(value) {
   const [home, away] = String(value).split(":").map((part) => Number(part));
   if (!Number.isFinite(home) || !Number.isFinite(away)) return { home: null, away: null };
   return { home, away };
+}
+
+function formatSportteryNo(match, index) {
+  if (match.matchNumStr) return match.matchNumStr;
+
+  const matchNum = String(match.matchNum || "");
+  if (/^[1-7]\d{3}$/.test(matchNum)) {
+    const weekdays = ["", "周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+    return `${weekdays[Number(matchNum[0])]}${matchNum.slice(1)}`;
+  }
+
+  return `竞彩${match.matchNum || index + 1}`;
 }
 
 function mergeLive(match, liveMap) {
@@ -94,15 +106,32 @@ function mergeLive(match, liveMap) {
     ...live,
     matchNumStr: match.matchNumStr || live.matchNumStr,
     businessDate: match.businessDate || live.businessDate,
+    saleStatusName: match.matchStatusName,
     groupMatchDate: match.groupMatchDate,
     groupWeekday: match.groupWeekday,
   };
 }
 
+function hydrateLiveMatch(match, oldByEventId) {
+  const old = oldByEventId.get(String(match.matchId));
+  return {
+    ...match,
+    matchNumStr: match.matchNumStr || old?.sportteryNo || "",
+    businessDate: old?.businessDate || old?.saleDate || old?.date || match.businessDate,
+    saleStatusName: old?.saleStatusName || old?.tags?.find((tag) => /开售|销售|完成|暂停|取消/.test(tag)),
+  };
+}
+
+function sortRawMatches(a, b) {
+  const aTime = `${a.matchDate || a.businessDate || a.groupMatchDate || ""} ${a.matchTime || ""}`;
+  const bTime = `${b.matchDate || b.businessDate || b.groupMatchDate || ""} ${b.matchTime || ""}`;
+  return aTime.localeCompare(bTime) || String(a.matchId).localeCompare(String(b.matchId));
+}
+
 function getStatus(match) {
   const code = String(match.matchStatus || "");
-  if (["6", "10", "11", "12", "13"].includes(code) || match.sectionsNo999) return "finished";
   if (["5", "7"].includes(code)) return "live";
+  if (["6", "10", "11", "12", "13"].includes(code)) return "finished";
   return "pre";
 }
 
@@ -193,14 +222,18 @@ function mapMatch(match, index) {
   const status = getStatus(match);
   const score = parseScore(match.sectionsNo999);
   const markets = buildMarkets(match, status, score);
-  const sportteryNo = match.matchNumStr || `竞彩${match.matchNum || index + 1}`;
-  const saleTag = match.matchStatusName || "状态待确认";
+  const sportteryNo = formatSportteryNo(match, index);
+  const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
+  const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
 
   return {
     id: String(index + 1).padStart(3, "0"),
     sourceEventId: String(match.matchId),
     sportteryNo,
-    date: match.businessDate || match.groupMatchDate || match.matchDate,
+    date: match.matchDate || match.businessDate || match.groupMatchDate,
+    businessDate: match.businessDate || match.groupMatchDate || match.matchDate,
+    saleStatusName: saleTag,
+    liveStatusName: match.matchStatusName || "",
     matchDate: match.matchDate,
     kickoff: getKickoff(match),
     competition: match.leagueAllName || match.leagueAbbName || "足球赛事",
@@ -210,7 +243,7 @@ function mapMatch(match, index) {
     score,
     halfScore: match.sectionsNo1 || "",
     minute: getMinute(match, status),
-    tags: ["中国竞彩网", sportteryNo, saleTag],
+    tags: ["中国竞彩网", sportteryNo, saleTag, liveStatusTag].filter(Boolean),
     dataQuality: status === "finished" ? 92 : 86,
     importance: sportteryNo.includes("201") ? 88 : 78,
     risk: saleTag.includes("暂停") || saleTag.includes("取消") ? "高" : "中",
@@ -434,9 +467,30 @@ async function main() {
   const oldData = await readExistingData();
   const concernRaw = await fetchList("concern");
   const allRaw = await fetchList("all");
-  const liveMap = await fetchLive(concernRaw);
-  const concernMatches = concernRaw.map((match) => mergeLive(match, liveMap)).map(mapMatch);
-  const allMatches = allRaw.map(mapMatch);
+  const liveData = await fetchLive(concernRaw);
+  const oldByEventId = new Map((oldData?.matches || []).map((match) => [String(match.sourceEventId), match]));
+  const rawByEventId = new Map();
+
+  concernRaw.forEach((match) => {
+    rawByEventId.set(String(match.matchId), mergeLive(match, liveData.map));
+  });
+
+  liveData.list.forEach((match) => {
+    const key = String(match.matchId);
+    if (!rawByEventId.has(key)) rawByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
+  });
+
+  const allByEventId = new Map();
+  allRaw.forEach((match) => {
+    allByEventId.set(String(match.matchId), mergeLive(match, liveData.map));
+  });
+  liveData.list.forEach((match) => {
+    const key = String(match.matchId);
+    if (!allByEventId.has(key)) allByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
+  });
+
+  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map(mapMatch);
+  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map(mapMatch);
   const plans = buildPurchasePlans(concernMatches);
   const history = buildHistory(oldData, allMatches);
   const today = todayInShanghai();

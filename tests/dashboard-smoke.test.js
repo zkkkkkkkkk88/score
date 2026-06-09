@@ -96,6 +96,9 @@ setTimeout(() => {
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
+  if (data.matches.some((match) => match.status === "finished")) assert(html.includes("完场"), "renders finished match status");
+  if (data.matches.some((match) => match.status === "live")) assert(html.includes("进行中"), "renders live match status");
+  assert(fs.readFileSync("script.js", "utf8").includes("matches.json?ts="), "fetches match data without browser cache");
   assert(pageHtml.includes('data-sale-filter="available"') && pageHtml.includes("可购买"), "renders purchasable match filter");
   assert(saleTabs.length === 2, "wires purchasable and all-match filters");
   assert(viewButtons.length === 4 && views.length === 4, "renders page navigation views");

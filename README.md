@@ -20,7 +20,19 @@
 
 ## 本地运行
 
-在项目目录启动静态服务：
+推荐用实时服务启动，它会定时刷新中国竞彩网数据，并让前端每分钟重取最新 `matches.json`：
+
+```powershell
+node scripts/serve-live.js
+```
+
+然后访问：
+
+```text
+http://127.0.0.1:4173
+```
+
+如果只想看静态页面，也可以在项目目录启动普通静态服务：
 
 ```powershell
 python -m http.server 4173
@@ -31,6 +43,8 @@ python -m http.server 4173
 ```text
 http://localhost:4173
 ```
+
+普通静态服务不会自动更新 `data/matches.json`，需要手动运行数据更新脚本。
 
 ## 更新真实数据
 
@@ -45,6 +59,14 @@ node scripts/update-real-data.js
 ```powershell
 $env:SPORTTERY_PAGE_SIZE="80"
 node scripts/update-real-data.js
+```
+
+实时服务可选环境变量：
+
+```powershell
+$env:SCORE_UPDATE_INTERVAL_MS="60000"
+$env:PORT="4173"
+node scripts/serve-live.js
 ```
 
 说明：页面不展示回报倍率或盘口价格。当前购买方向和概率是基于中国竞彩网赛程、销售状态和比分生成的本地模型估算，不代表确定结果。
