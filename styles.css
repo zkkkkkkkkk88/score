@@ -945,19 +945,19 @@ h2 {
 }
 
 .archive-pick.pick-hit {
-  border-color: rgba(76, 164, 109, 0.72);
-}
-
-.archive-pick.pick-hit b {
-  color: #b7e2c4;
-}
-
-.archive-pick.pick-miss {
   border-color: rgba(224, 90, 85, 0.72);
 }
 
-.archive-pick.pick-miss b {
+.archive-pick.pick-hit b {
   color: #e4b0aa;
+}
+
+.archive-pick.pick-miss {
+  border-color: rgba(76, 164, 109, 0.72);
+}
+
+.archive-pick.pick-miss b {
+  color: #b7e2c4;
 }
 
 .archive-pick.pick-pending b {

@@ -105,7 +105,12 @@ setTimeout(() => {
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
-  assert(html.includes("正确") || html.includes("错误") || html.includes("待赛果"), "renders per-pick archive result labels");
+  assert(html.includes("正确") || html.includes("错误") || html.includes("待赛果") || html.includes("进行中") || html.includes("未开赛"), "renders per-pick archive result labels");
+  assert(html.includes("已完赛"), "renders settled pick count in archive summary");
+  assert(!html.includes("已完赛正确"), "does not imply unsettled picks are already correct");
+  if (data.planArchive.some((plan) => plan.picks.some((pick) => pick.status === "live"))) {
+    assert(html.includes("进行中") && html.includes("当前比分"), "renders live archived picks as in progress");
+  }
   assert(!html.includes("2026-05-28"), "does not render old template history");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
   if (data.matches.some((match) => match.status === "finished")) assert(html.includes("完场"), "renders finished match status");

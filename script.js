@@ -692,7 +692,8 @@ function renderPlanHistory() {
     .map((plan) => {
       const statusText = plan.result === "hit" ? "命中" : plan.result === "miss" ? "未中" : "待复盘";
       const required = plan.mode === "all" ? "全中" : `至少 ${plan.requiredHits}/${plan.totalPicks || plan.picks.length}`;
-      const settledText = `${plan.hitPicks || 0}/${plan.settledPicks || 0} 已完赛正确`;
+      const totalPicks = plan.totalPicks || plan.picks.length;
+      const settledText = `已完赛 ${plan.settledPicks || 0}/${totalPicks} · 正确 ${plan.hitPicks || 0}`;
 
       return `
         <article class="archive-card ${plan.result}">
@@ -706,9 +707,18 @@ function renderPlanHistory() {
           <div class="archive-picks">
             ${plan.picks
               .map((pick) => {
-                const pickStatus = pick.hit === true ? "正确" : pick.hit === false ? "错误" : "待赛果";
+                const pickStatus =
+                  pick.hit === true
+                    ? "正确"
+                    : pick.hit === false
+                      ? "错误"
+                      : pick.status === "live"
+                        ? "进行中"
+                        : pick.status === "pre"
+                          ? "未开赛"
+                          : "待赛果";
                 const pickClass = pick.hit === true ? "pick-hit" : pick.hit === false ? "pick-miss" : "pick-pending";
-                const score = pick.score ? `比分 ${escapeHtml(pick.score)}` : "等待完场";
+                const score = pick.score ? `${pick.status === "live" ? "当前比分" : "比分"} ${escapeHtml(pick.score)}` : "等待完场";
 
                 return `
                   <div class="archive-pick ${pickClass}">
