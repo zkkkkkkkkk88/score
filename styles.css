@@ -304,10 +304,18 @@ h2 {
   font-style: normal;
 }
 
-.filter-tabs {
+.filter-tabs,
+.sale-tabs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 6px;
+}
+
+.filter-tabs {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.sale-tabs {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .tab {

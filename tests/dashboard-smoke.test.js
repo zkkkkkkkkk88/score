@@ -3,6 +3,7 @@ const vm = require("vm");
 const assert = require("assert");
 
 const data = JSON.parse(fs.readFileSync("data/matches.json", "utf8"));
+const pageHtml = fs.readFileSync("index.html", "utf8");
 
 function createElement() {
   return {
@@ -19,6 +20,10 @@ const tabs = [
   { dataset: { filter: "all" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { filter: "today" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { filter: "tomorrow" }, classList: { toggle() {} }, addEventListener() {} },
+];
+const saleTabs = [
+  { dataset: { saleFilter: "available" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { saleFilter: "all" }, classList: { toggle() {} }, addEventListener() {} },
 ];
 const viewButtons = [
   { dataset: { viewButton: "overview" }, classList: { toggle() {} }, addEventListener() {} },
@@ -40,6 +45,7 @@ const document = {
   },
   querySelectorAll(selector) {
     if (selector === "[data-filter]") return tabs;
+    if (selector === "[data-sale-filter]") return saleTabs;
     if (selector === "[data-view-button]") return viewButtons;
     if (selector === "[data-view]") return views;
     return [];
@@ -48,7 +54,11 @@ const document = {
 
 const context = {
   document,
-  window: { addEventListener() {} },
+  window: {
+    location: { hash: "#plans" },
+    history: { pushState() {} },
+    addEventListener() {},
+  },
   fetch: async () => ({ ok: true, json: async () => data }),
   setInterval() {},
   Intl,
@@ -86,6 +96,8 @@ setTimeout(() => {
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
+  assert(pageHtml.includes('data-sale-filter="available"') && pageHtml.includes("可购买"), "renders purchasable match filter");
+  assert(saleTabs.length === 2, "wires purchasable and all-match filters");
   assert(viewButtons.length === 4 && views.length === 4, "renders page navigation views");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");

@@ -2,6 +2,8 @@ const state = {
   matches: [],
   selectedId: null,
   filter: "all",
+  saleFilter: "available",
+  activeView: "overview",
   data: null,
   tick: 0,
 };
@@ -17,9 +19,12 @@ const els = {
   tomorrowPool: document.querySelector("#tomorrowPool"),
   dailySummary: document.querySelector("#dailySummary"),
   tabs: [...document.querySelectorAll("[data-filter]")],
+  saleTabs: [...document.querySelectorAll("[data-sale-filter]")],
   viewButtons: [...document.querySelectorAll("[data-view-button]")],
   views: [...document.querySelectorAll("[data-view]")],
 };
+
+const viewNames = ["overview", "analysis", "plans", "review"];
 
 const marketNames = {
   wdl: "胜平负",
@@ -157,14 +162,51 @@ function statusClass(status) {
   return `status-${status}`;
 }
 
+function isPurchasable(match) {
+  const blockedTags = ["暂停", "取消", "推迟", "完场", "待定"];
+  const tags = [match.statusText, ...(match.tags ?? [])].filter(Boolean).join(" ");
+  return !["finished", "cancelled", "postponed"].includes(match.status) && !blockedTags.some((tag) => tags.includes(tag));
+}
+
 function getFilteredMatches() {
-  if (state.filter === "today") return state.matches.filter((match) => match.date === getToday());
-  if (state.filter === "tomorrow") return state.matches.filter((match) => match.date === getTomorrow());
-  return state.matches;
+  let matches = state.matches;
+  if (state.filter === "today") matches = matches.filter((match) => match.date === getToday());
+  if (state.filter === "tomorrow") matches = matches.filter((match) => match.date === getTomorrow());
+  if (state.saleFilter === "available") matches = matches.filter(isPurchasable);
+  return matches;
 }
 
 function getSelectedMatch() {
-  return state.matches.find((match) => match.id === state.selectedId) ?? state.matches[0];
+  return state.matches.find((match) => match.id === state.selectedId) ?? getFilteredMatches()[0] ?? state.matches[0];
+}
+
+function syncSelectedMatchWithFilter() {
+  const matches = getFilteredMatches();
+  if (matches.length && !matches.some((match) => match.id === state.selectedId)) {
+    state.selectedId = matches[0].id;
+  }
+}
+
+function getHashView() {
+  const hash = window.location?.hash?.replace("#", "");
+  return viewNames.includes(hash) ? hash : "overview";
+}
+
+function setActiveView(viewName, updateHash = true) {
+  const nextView = viewNames.includes(viewName) ? viewName : "overview";
+  state.activeView = nextView;
+  els.viewButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.viewButton === nextView));
+  els.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === nextView));
+
+  if (!updateHash || !window.location) return;
+
+  const nextHash = `#${nextView}`;
+  if (window.location.hash === nextHash) return;
+  if (window.history?.pushState) {
+    window.history.pushState(null, "", nextHash);
+  } else {
+    window.location.hash = nextHash;
+  }
 }
 
 function getMatchPriority(match) {
@@ -726,7 +768,8 @@ async function loadData() {
 
   state.data = await response.json();
   state.matches = state.data.matches;
-  state.selectedId = state.matches[0]?.id ?? null;
+  state.selectedId = getFilteredMatches()[0]?.id ?? state.matches[0]?.id ?? null;
+  setActiveView(getHashView(), false);
   render();
 }
 
@@ -734,24 +777,37 @@ els.tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     state.filter = tab.dataset.filter;
     els.tabs.forEach((item) => item.classList.toggle("is-active", item === tab));
+    syncSelectedMatchWithFilter();
     renderMatchList();
+    renderAnalysis();
+  });
+});
+
+els.saleTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    state.saleFilter = tab.dataset.saleFilter;
+    els.saleTabs.forEach((item) => item.classList.toggle("is-active", item === tab));
+    syncSelectedMatchWithFilter();
+    renderMatchList();
+    renderAnalysis();
   });
 });
 
 els.viewButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const viewName = button.dataset.viewButton;
-    els.viewButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-    els.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === viewName));
+    setActiveView(button.dataset.viewButton);
   });
+});
+
+window.addEventListener("hashchange", () => {
+  setActiveView(getHashView(), false);
 });
 
 window.addEventListener("click", (event) => {
   const row = event.target.closest("[data-match-id]");
   if (!row) return;
   state.selectedId = row.dataset.matchId;
-  els.viewButtons.forEach((item) => item.classList.toggle("is-active", item.dataset.viewButton === "analysis"));
-  els.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === "analysis"));
+  setActiveView("analysis");
   render();
 });
 
