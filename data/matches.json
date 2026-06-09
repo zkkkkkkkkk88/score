@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T11:18:44.846+08:00",
+  "generatedAt": "2026-06-09T12:13:11.509+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -149,64 +149,64 @@
       "sportteryNo": "周一203",
       "date": "2026-06-09",
       "businessDate": "2026-06-09",
-      "saleStatusName": "直播中",
-      "liveStatusName": "直播中",
+      "saleStatusName": "直播结束",
+      "liveStatusName": "直播结束",
       "matchDate": "2026-06-09",
       "kickoff": "10:00",
       "competition": "国际赛",
       "homeTeam": "秘鲁",
       "awayTeam": "西班牙",
-      "status": "live",
+      "status": "finished",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 3
       },
       "halfScore": "0:2",
-      "minute": 55,
+      "minute": 90,
       "tags": [
         "中国竞彩网",
         "周一203",
-        "直播中"
+        "直播结束"
       ],
-      "dataQuality": 86,
+      "dataQuality": 92,
       "importance": 78,
       "risk": "中",
       "stats": {
         "form": "等待球队近况源",
-        "attack": 62,
-        "defense": 62,
-        "tempo": 72,
-        "homeAway": "竞彩编号：周一203，销售状态：直播中"
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周一203，销售状态：直播结束"
       },
       "markets": {
         "wdl": {
           "pick": "客胜",
           "probability": 0.66,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
         "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
+          "pick": "4+球",
+          "exactGoals": "4+",
           "probability": 0.78,
-          "confidence": 62,
+          "confidence": 84,
           "risk": "中",
-          "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。"
         },
         "htft": {
           "pick": "平/平",
-          "probability": 0.3,
-          "confidence": 52,
+          "probability": 0.52,
+          "confidence": 70,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。"
+          "reason": "根据半场和全场比分做复盘方向。"
         }
       },
       "socialFactors": {
         "clubMotivation": "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
         "politicalFactor": "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。",
         "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
-        "consequence": "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
+        "consequence": "完场比分可用于自动复盘方案命中率，并调整后续模型权重。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
     },
@@ -355,7 +355,7 @@
       "saleStatusName": "已开售",
       "liveStatusName": "未开播",
       "matchDate": "2026-06-10",
-      "kickoff": "08:30",
+      "kickoff": "09:00",
       "competition": "国际赛",
       "homeTeam": "阿根廷",
       "awayTeam": "冰岛",
@@ -391,8 +391,8 @@
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
         "ou": {
-          "pick": "1球",
-          "exactGoals": "1",
+          "pick": "2球",
+          "exactGoals": "2",
           "probability": 0.34,
           "confidence": 62,
           "risk": "中",
@@ -2331,9 +2331,9 @@
           "marketName": "胜平负",
           "pick": "客胜",
           "probability": 0.66,
-          "status": "live",
-          "hit": null,
-          "score": "0-3"
+          "status": "finished",
+          "hit": true,
+          "score": "1-3"
         },
         {
           "sourceEventId": "2040186",
@@ -2352,12 +2352,12 @@
           "score": ""
         }
       ],
-      "settledPicks": 0,
-      "hitPicks": 0,
+      "settledPicks": 1,
+      "hitPicks": 1,
       "totalPicks": 2,
       "result": "pending",
       "probability": 0.5700000000000001,
-      "detail": "0/2 命中"
+      "detail": "1/2 命中"
     },
     {
       "schemaVersion": "exact-goals-v1",
@@ -2384,9 +2384,9 @@
           "marketName": "胜平负",
           "pick": "客胜",
           "probability": 0.66,
-          "status": "live",
-          "hit": null,
-          "score": "0-3"
+          "status": "finished",
+          "hit": true,
+          "score": "1-3"
         },
         {
           "sourceEventId": "2040186",
@@ -2422,12 +2422,12 @@
           "score": ""
         }
       ],
-      "settledPicks": 0,
-      "hitPicks": 0,
+      "settledPicks": 1,
+      "hitPicks": 1,
       "totalPicks": 3,
       "result": "pending",
       "probability": 0.49333333333333335,
-      "detail": "0/3 命中"
+      "detail": "1/3 命中"
     },
     {
       "schemaVersion": "exact-goals-v1",
@@ -2454,9 +2454,9 @@
           "marketName": "胜平负",
           "pick": "客胜",
           "probability": 0.66,
-          "status": "live",
-          "hit": null,
-          "score": "0-3"
+          "status": "finished",
+          "hit": true,
+          "score": "1-3"
         },
         {
           "sourceEventId": "2040186",
@@ -2509,12 +2509,12 @@
           "score": ""
         }
       ],
-      "settledPicks": 0,
-      "hitPicks": 0,
+      "settledPicks": 1,
+      "hitPicks": 1,
       "totalPicks": 4,
       "result": "pending",
       "probability": 0.455,
-      "detail": "0/4 命中"
+      "detail": "1/4 命中"
     }
   ],
   "history": [],
@@ -2544,15 +2544,15 @@
     {
       "market": "wdl",
       "name": "胜平负",
-      "hits": 82,
-      "total": 82,
+      "hits": 83,
+      "total": 83,
       "streak": "等待更多完场数据"
     },
     {
       "market": "ou",
       "name": "总进球数",
-      "hits": 82,
-      "total": 82,
+      "hits": 83,
+      "total": 83,
       "streak": "等待更多完场数据"
     },
     {

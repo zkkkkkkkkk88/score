@@ -100,6 +100,10 @@ function formatSportteryNo(match, index) {
   return `竞彩${match.matchNum || index + 1}`;
 }
 
+function getSaleStatusName(statusName = "") {
+  return /开售|销售|暂停|取消|推迟|已完成/.test(statusName) ? statusName : "";
+}
+
 function mergeLive(match, liveMap) {
   const live = liveMap.get(String(match.matchId));
   if (!live) return match;
@@ -108,7 +112,7 @@ function mergeLive(match, liveMap) {
     ...live,
     matchNumStr: match.matchNumStr || live.matchNumStr,
     businessDate: match.businessDate || live.businessDate,
-    saleStatusName: match.matchStatusName,
+    saleStatusName: getSaleStatusName(match.matchStatusName),
     groupMatchDate: match.groupMatchDate,
     groupWeekday: match.groupWeekday,
   };
@@ -120,7 +124,7 @@ function hydrateLiveMatch(match, oldByEventId) {
     ...match,
     matchNumStr: match.matchNumStr || old?.sportteryNo || "",
     businessDate: old?.businessDate || old?.saleDate || old?.date || match.businessDate,
-    saleStatusName: old?.saleStatusName || old?.tags?.find((tag) => /开售|销售|完成|暂停|取消/.test(tag)),
+    saleStatusName: getSaleStatusName(old?.saleStatusName) || old?.tags?.find((tag) => /开售|销售|完成|暂停|取消/.test(tag)),
   };
 }
 

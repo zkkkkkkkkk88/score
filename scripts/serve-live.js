@@ -5,7 +5,7 @@ const path = require("path");
 
 const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || "127.0.0.1";
-const UPDATE_INTERVAL_MS = Number(process.env.SCORE_UPDATE_INTERVAL_MS || 5 * 60 * 1000);
+const UPDATE_INTERVAL_MS = Number(process.env.SCORE_UPDATE_INTERVAL_MS || 60 * 1000);
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
