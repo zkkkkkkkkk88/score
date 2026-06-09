@@ -589,8 +589,59 @@ h2 {
 }
 
 .plans-workspace .parlay-list {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   align-items: start;
+}
+
+.parlay-group,
+.archive-date-group,
+.archive-type-group {
+  display: grid;
+  gap: 10px;
+}
+
+.parlay-group,
+.archive-date-group {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(45, 12, 14, 0.56);
+}
+
+.parlay-group-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+
+.group-heading,
+.subgroup-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.group-heading h3 {
+  margin: 0;
+  color: var(--gold-2);
+  font-size: 18px;
+}
+
+.group-heading span,
+.subgroup-heading span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.subgroup-heading {
+  padding: 8px 0 2px;
+  border-top: 1px solid var(--line);
+}
+
+.subgroup-heading strong {
+  color: var(--gold-2);
 }
 
 .review-workspace {
@@ -1017,6 +1068,7 @@ h2 {
 
   .parlay-list,
   .plans-workspace .parlay-list,
+  .parlay-group-list,
   .tomorrow-pool {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1043,6 +1095,7 @@ h2 {
   .ledger-grid,
   .parlay-list,
   .plans-workspace .parlay-list,
+  .parlay-group-list,
   .tomorrow-pool {
     grid-template-columns: 1fr;
   }

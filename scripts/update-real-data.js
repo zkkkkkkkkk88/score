@@ -348,14 +348,17 @@ function combinations(items, size) {
   return result;
 }
 
-function getMarketMix(matches, offset) {
+function marketProducts(matches) {
   const preferred = ["wdl", "hdc", "ou", "score"];
-  return matches.map((match, index) => {
-    const ranked = preferred
-      .filter((key) => match.markets[key])
-      .sort((a, b) => match.markets[b].probability - match.markets[a].probability);
-    return ranked[(index + offset) % Math.min(4, ranked.length)] || "wdl";
-  });
+  return matches.reduce(
+    (groups, match) =>
+      groups.flatMap((group) =>
+        preferred
+          .filter((key) => match.markets[key])
+          .map((market) => [...group, market]),
+      ),
+    [[]],
+  );
 }
 
 function planProbability(matches, markets, mode, requiredHits) {
@@ -376,55 +379,48 @@ function planProbability(matches, markets, mode, requiredHits) {
   return total;
 }
 
-function buildPurchasePlans(matches, targetDate, fallbackDates = []) {
-  const targetDates = [targetDate, ...fallbackDates];
+function buildPurchasePlans(matches, targetDate) {
   const candidates = purchaseCandidates(matches)
-    .filter((match) => targetDates.includes(match.date))
-    .sort((a, b) => {
-      const datePriority = targetDates.indexOf(a.date) - targetDates.indexOf(b.date);
-      if (datePriority !== 0) return datePriority;
-      return b.dataQuality + b.importance - (a.dataQuality + a.importance);
-    });
-  const sizes = [2, 3, 4].filter((size) => candidates.length >= size);
+    .filter((match) => match.date === targetDate)
+    .sort((a, b) => b.dataQuality + b.importance - (a.dataQuality + a.importance));
+  const categories = [
+    { group: "二串一", size: 2, mode: "all", requiredHits: 2 },
+    { group: "三串一", size: 3, mode: "all", requiredHits: 3 },
+    { group: "三串二", size: 3, mode: "atLeast", requiredHits: 2 },
+    { group: "四串一", size: 4, mode: "all", requiredHits: 4 },
+    { group: "四串二", size: 4, mode: "atLeast", requiredHits: 2 },
+  ].filter((category) => candidates.length >= category.size);
   const plans = [];
 
-  sizes.forEach((size) => {
-    combinations(candidates.slice(0, 10), size).forEach((group, groupIndex) => {
-      [0, 1, 2, 3].forEach((offset) => {
-        const markets = getMarketMix(group, offset);
-        const mode = size === 2 ? "all" : "atLeast";
-        const requiredHits = size === 2 ? 2 : size - 1;
-        const probability = planProbability(group, markets, mode, requiredHits);
+  categories.forEach((category) => {
+    const categoryPlans = [];
+    combinations(candidates.slice(0, 8), category.size).forEach((group, groupIndex) => {
+      marketProducts(group).forEach((markets, marketIndex) => {
+        const probability = planProbability(group, markets, category.mode, category.requiredHits);
         const marketLabel = [...new Set(markets.map((market) => marketNamesForArchive()[market]))].join("+");
-        plans.push({
-          id: `advance-${size}-${groupIndex}-${offset}-${markets.join("-")}`,
-          type: `提前${size === 2 ? "二串一" : size === 3 ? "三串二" : "四串三"}购买方案 · ${marketLabel}`,
-          planSize: size,
-          mode,
-          requiredHits,
+        categoryPlans.push({
+          id: `tomorrow-${category.group}-${groupIndex}-${marketIndex}-${markets.join("-")}`,
+          type: `明日${category.group}购买方案 · ${marketLabel}`,
+          planGroup: category.group,
+          planSize: category.size,
+          mode: category.mode,
+          requiredHits: category.requiredHits,
           matchIds: group.map((match) => match.id),
           eventIds: group.map((match) => match.sourceEventId),
           markets,
-          risk: markets.includes("score") || size === 4 ? "高" : "中",
+          risk: markets.includes("score") || category.size === 4 ? "高" : "中",
           planProbability: probability,
           targetDate,
-          note: `提前准备 ${targetDates.join("、")} 的竞彩串单，优先明日赛事，按组合概率排序，临场需再次确认开售状态和首发。`,
+          note: `提前准备 ${targetDate} 同一天的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。`,
           socialNote: chooseSocialNote(group),
         });
       });
     });
+
+    plans.push(...categoryPlans.sort((a, b) => b.planProbability - a.planProbability).slice(0, 5));
   });
 
-  const selectedBySize = plans.reduce((selected, plan) => {
-    selected[plan.planSize] ||= [];
-    selected[plan.planSize].push(plan);
-    return selected;
-  }, {});
-
-  return Object.values(selectedBySize)
-    .flatMap((items) => items.sort((a, b) => b.planProbability - a.planProbability).slice(0, 8))
-    .sort((a, b) => b.planProbability - a.planProbability)
-    .slice(0, 24);
+  return plans;
 }
 
 function actualWdl(match) {
@@ -481,6 +477,7 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
     date: today,
     generatedAt,
     type: plan.type,
+    planGroup: plan.planGroup,
     mode: plan.mode,
     requiredHits: plan.requiredHits,
     risk: plan.risk,
@@ -703,8 +700,7 @@ async function main() {
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
-  const fallbackDates = [addDays(today, 2), addDays(today, 3)];
-  const plans = buildPurchasePlans(concernMatches, targetDate, fallbackDates);
+  const plans = buildPurchasePlans(concernMatches, targetDate);
   const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
   const history = buildHistory(planArchive);
   const dailyPlanSummaries = buildDailyPlanSummaries(planArchive);

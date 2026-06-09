@@ -36,6 +36,8 @@ const marketNames = {
   htft: "半全场",
 };
 
+const planGroupOrder = ["二串一", "三串一", "三串二", "四串一", "四串二"];
+
 const statusLabels = {
   pre: "未开赛",
   live: "进行中",
@@ -562,17 +564,45 @@ function renderParlays() {
     return;
   }
 
-  els.parlayList.innerHTML = state.data.parlaySeeds
-    .map((seed) => {
-      const picks = getParlayPicks(seed);
-      const live = getParlayProbability(seed, true);
-      const prematch = seed.planProbability ?? getParlayProbability(seed, false);
-      const delta = live - prematch;
-      const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
-      const insight = getParlayInsight(picks);
-      const socialNote = seed.socialNote ?? "社会因素未见可核验异常，按常规谨慎方案处理。";
+  const grouped = groupBy(state.data.parlaySeeds, (plan) => plan.planGroup || "其他");
 
-      return `
+  els.parlayList.innerHTML = planGroupOrder
+    .filter((group) => grouped[group]?.length)
+    .map(
+      (group) => `
+        <section class="parlay-group">
+          <div class="group-heading">
+            <h3>${group}</h3>
+            <span>${grouped[group].length} 个购买方案</span>
+          </div>
+          <div class="parlay-group-list">
+            ${grouped[group].map(renderParlayCard).join("")}
+          </div>
+        </section>
+      `,
+    )
+    .join("");
+}
+
+function groupBy(items, keyFn) {
+  return items.reduce((groups, item) => {
+    const key = keyFn(item);
+    groups[key] ||= [];
+    groups[key].push(item);
+    return groups;
+  }, {});
+}
+
+function renderParlayCard(seed) {
+  const picks = getParlayPicks(seed);
+  const live = getParlayProbability(seed, true);
+  const prematch = seed.planProbability ?? getParlayProbability(seed, false);
+  const delta = live - prematch;
+  const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
+  const insight = getParlayInsight(picks);
+  const socialNote = seed.socialNote ?? "社会因素未见可核验异常，按常规谨慎方案处理。";
+
+  return `
         <article class="parlay-card ${riskClass(seed.risk)}">
           <div class="parlay-head">
             <div>
@@ -617,8 +647,6 @@ function renderParlays() {
           </div>
         </article>
       `;
-    })
-    .join("");
 }
 
 function renderHitTracker() {
@@ -694,14 +722,46 @@ function renderPlanHistory() {
     return;
   }
 
-  els.planHistory.innerHTML = archive
-    .map((plan) => {
-      const statusText = plan.result === "hit" ? "命中" : plan.result === "miss" ? "未中" : "待复盘";
-      const required = plan.mode === "all" ? "全中" : `至少 ${plan.requiredHits}/${plan.totalPicks || plan.picks.length}`;
-      const totalPicks = plan.totalPicks || plan.picks.length;
-      const settledText = `已完赛 ${plan.settledPicks || 0}/${totalPicks} · 正确 ${plan.hitPicks || 0}`;
+  const byDate = groupBy(archive, (plan) => plan.date);
+
+  els.planHistory.innerHTML = Object.keys(byDate)
+    .sort((a, b) => b.localeCompare(a))
+    .map((date) => {
+      const byGroup = groupBy(byDate[date], (plan) => plan.planGroup || "其他");
 
       return `
+        <section class="archive-date-group">
+          <div class="group-heading">
+            <h3>${escapeHtml(date)}</h3>
+            <span>${byDate[date].length} 个历史方案</span>
+          </div>
+          ${planGroupOrder
+            .filter((group) => byGroup[group]?.length)
+            .map(
+              (group) => `
+                <div class="archive-type-group">
+                  <div class="subgroup-heading">
+                    <strong>${group}</strong>
+                    <span>${byGroup[group].length} 个</span>
+                  </div>
+                  ${byGroup[group].map(renderArchiveCard).join("")}
+                </div>
+              `,
+            )
+            .join("")}
+        </section>
+      `;
+    })
+    .join("");
+}
+
+function renderArchiveCard(plan) {
+  const statusText = plan.result === "hit" ? "命中" : plan.result === "miss" ? "未中" : "待复盘";
+  const required = plan.mode === "all" ? "全中" : `至少 ${plan.requiredHits}/${plan.totalPicks || plan.picks.length}`;
+  const totalPicks = plan.totalPicks || plan.picks.length;
+  const settledText = `已完赛 ${plan.settledPicks || 0}/${totalPicks} · 正确 ${plan.hitPicks || 0}`;
+
+  return `
         <article class="archive-card ${plan.result}">
           <div class="archive-head">
             <div>
@@ -739,8 +799,6 @@ function renderPlanHistory() {
           <p>${escapeHtml(plan.note || "")}</p>
         </article>
       `;
-    })
-    .join("");
 }
 
 function renderDailySummary() {
