@@ -33,6 +33,7 @@
         <button class="view-tab is-active" type="button" data-view-button="overview">总览</button>
         <button class="view-tab" type="button" data-view-button="analysis">赛事分析</button>
         <button class="view-tab" type="button" data-view-button="plans">购买方案</button>
+        <button class="view-tab" type="button" data-view-button="history">历史方案</button>
         <button class="view-tab" type="button" data-view-button="review">命中复盘</button>
       </nav>
 
@@ -79,8 +80,8 @@
             </div>
 
             <div class="sale-tabs" role="tablist" aria-label="销售状态筛选">
-              <button class="tab is-active" type="button" data-sale-filter="available">可购买</button>
-              <button class="tab" type="button" data-sale-filter="all">全部赛事</button>
+              <button class="tab is-active" type="button" data-sale-filter="all">全部赛事</button>
+              <button class="tab" type="button" data-sale-filter="available">可购买</button>
             </div>
 
             <div id="matchList" class="match-list" aria-live="polite"></div>
@@ -109,6 +110,16 @@
             <h2>今日命中追踪</h2>
           </div>
           <div id="hitTracker" class="hit-tracker"></div>
+        </article>
+      </section>
+
+      <section class="page-view" data-view="history" aria-label="历史购买方案">
+        <article class="review-panel review-workspace">
+          <div class="section-heading">
+            <p>方案档案</p>
+            <h2>历史购买方案</h2>
+          </div>
+          <div id="planHistory" class="plan-history"></div>
         </article>
       </section>
     </main>

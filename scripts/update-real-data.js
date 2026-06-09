@@ -30,8 +30,9 @@ function todayInShanghai() {
 }
 
 function addDays(dateText, days) {
-  const date = new Date(`${dateText}T00:00:00+08:00`);
-  date.setDate(date.getDate() + days);
+  const [year, month, day] = dateText.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() + days);
   return date.toISOString().slice(0, 10);
 }
 
@@ -331,42 +332,131 @@ function isPickHit(match, marketKey, market) {
   return null;
 }
 
-function evaluatePlan(plan, matches) {
-  const picks = plan.markets
-    .map((marketKey, index) => {
-      const match =
-        matches.find((item) => item.sourceEventId === plan.eventIds?.[index]) ||
-        matches.find((item) => item.id === plan.matchIds[index]);
-      if (!match) return null;
-      return { match, marketKey, market: match.markets[marketKey], hit: isPickHit(match, marketKey, match.markets[marketKey]) };
+function createPlanSnapshot(plan, matches, generatedAt, today) {
+  const picks = plan.markets.map((marketKey, index) => {
+    const match =
+      matches.find((item) => item.sourceEventId === plan.eventIds?.[index]) ||
+      matches.find((item) => item.id === plan.matchIds[index]);
+    const market = match?.markets?.[marketKey];
+
+    return {
+      sourceEventId: match?.sourceEventId || plan.eventIds?.[index] || "",
+      sportteryNo: match?.sportteryNo || "",
+      matchDate: match?.date || "",
+      kickoff: match?.kickoff || "",
+      competition: match?.competition || "",
+      homeTeam: match?.homeTeam || "主队待定",
+      awayTeam: match?.awayTeam || "客队待定",
+      marketKey,
+      marketName: marketNamesForArchive()[marketKey] || marketKey,
+      pick: market ? formatArchivePick(marketKey, market) : "",
+      probability: market?.probability || 0,
+    };
+  });
+
+  return {
+    archiveId: `${today}-${plan.id}`,
+    planId: plan.id,
+    date: today,
+    generatedAt,
+    type: plan.type,
+    mode: plan.mode,
+    requiredHits: plan.requiredHits,
+    risk: plan.risk,
+    note: plan.note,
+    socialNote: plan.socialNote,
+    picks,
+  };
+}
+
+function marketNamesForArchive() {
+  return {
+    wdl: "胜平负",
+    ou: "总进球数",
+    htft: "半全场",
+  };
+}
+
+function formatArchivePick(marketKey, market) {
+  return marketKey === "ou" ? market.goalRange || market.pick : market.pick;
+}
+
+function evaluateArchivedPlan(plan, matches) {
+  const picks = plan.picks
+    .map((pick) => {
+      const match = matches.find((item) => item.sourceEventId === pick.sourceEventId);
+      if (!match) return { ...pick, status: "pending", hit: null, score: "" };
+      const score = match.score.home === null || match.score.away === null ? "" : `${match.score.home}-${match.score.away}`;
+      const market = {
+        pick: pick.pick,
+        goalRange: pick.marketKey === "ou" ? pick.pick : undefined,
+      };
+      const hit = isPickHit(match, pick.marketKey, market);
+      return {
+        ...pick,
+        status: match.status,
+        hit,
+        score,
+      };
     })
     .filter(Boolean);
   const settled = picks.filter((pick) => pick.hit !== null);
   const hits = settled.filter((pick) => pick.hit).length;
-  if (!settled.length || settled.length < picks.length) return null;
-  const isHit = plan.mode === "all" ? hits === picks.length : hits >= plan.requiredHits;
+  const isSettled = settled.length === picks.length && picks.length > 0;
+  const isHit = isSettled && (plan.mode === "all" ? hits === picks.length : hits >= plan.requiredHits);
 
   return {
-    date: matches[0]?.date || todayInShanghai(),
-    type: plan.type,
-    result: isHit ? "hit" : "miss",
-    probability: picks.reduce((sum, pick) => sum + pick.market.probability, 0) / picks.length,
+    ...plan,
+    picks,
+    settledPicks: settled.length,
+    hitPicks: hits,
+    totalPicks: picks.length,
+    result: isSettled ? (isHit ? "hit" : "miss") : "pending",
+    probability: picks.length ? picks.reduce((sum, pick) => sum + (pick.probability || 0), 0) / picks.length : 0,
     detail: `${hits}/${picks.length} 命中`,
   };
 }
 
-function buildHistory(oldData, allMatches) {
-  const oldHistory = oldData?.history || [];
-  const oldPlans = oldData?.purchasePlans || oldData?.parlaySeeds || [];
-  const reviewed = oldPlans.map((plan) => evaluatePlan(plan, allMatches)).filter(Boolean);
-  const seen = new Set();
+function buildPlanArchive(oldData, plans, matches, allMatches, generatedAt, today) {
+  const archive = Array.isArray(oldData?.planArchive) ? oldData.planArchive : [];
+  const byId = new Map(archive.map((plan) => [plan.archiveId, plan]));
 
-  return [...reviewed, ...oldHistory].filter((item) => {
-    const key = `${item.date}-${item.type}-${item.detail || ""}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
+  plans.forEach((plan) => {
+    const snapshot = createPlanSnapshot(plan, matches, generatedAt, today);
+    if (!byId.has(snapshot.archiveId)) byId.set(snapshot.archiveId, snapshot);
   });
+
+  return [...byId.values()]
+    .map((plan) => evaluateArchivedPlan(plan, allMatches))
+    .sort((a, b) => b.generatedAt.localeCompare(a.generatedAt))
+    .slice(0, 120);
+}
+
+function buildHistory(planArchive) {
+  return planArchive
+    .filter((plan) => plan.result === "hit" || plan.result === "miss")
+    .map((plan) => ({
+      date: plan.date,
+      type: plan.type,
+      result: plan.result,
+      probability: plan.probability,
+      detail: plan.detail,
+      archiveId: plan.archiveId,
+    }));
+}
+
+function evaluatePlan(plan, matches) {
+  const archived = createPlanSnapshot(plan, matches, nowIsoShanghai(), todayInShanghai());
+  const evaluated = evaluateArchivedPlan(archived, matches);
+  if (evaluated.result === "pending") return null;
+
+  return {
+    date: matches[0]?.date || todayInShanghai(),
+    type: plan.type,
+    result: evaluated.result,
+    probability: evaluated.probability,
+    detail: evaluated.detail,
+  };
 }
 
 function buildMarketHistory(matches) {
@@ -401,27 +491,13 @@ function buildAutoReview(history) {
   };
 }
 
-function buildDailyPlanSummaries(oldData, plans, history, today) {
-  const previous = oldData?.dailyPlanSummaries || [];
-  const byDate = new Map(previous.map((item) => [item.date, { ...item }]));
-  const current = byDate.get(today) || {
-    date: today,
-    totalPlans: 0,
-    reviewedPlans: 0,
-    hitPlans: 0,
-    hitRate: 0,
-    planTypes: [],
-    summary: "",
-  };
+function buildDailyPlanSummaries(planArchive) {
+  const byDate = new Map();
 
-  current.totalPlans = plans.length;
-  current.planTypes = plans.map((plan) => plan.type);
-  byDate.set(today, current);
-
-  history.forEach((item) => {
-    if (!byDate.has(item.date)) {
-      byDate.set(item.date, {
-        date: item.date,
+  planArchive.forEach((plan) => {
+    if (!byDate.has(plan.date)) {
+      byDate.set(plan.date, {
+        date: plan.date,
         totalPlans: 0,
         reviewedPlans: 0,
         hitPlans: 0,
@@ -431,9 +507,13 @@ function buildDailyPlanSummaries(oldData, plans, history, today) {
       });
     }
 
-    const summary = byDate.get(item.date);
-    summary.reviewedPlans += 1;
-    if (item.result === "hit") summary.hitPlans += 1;
+    const summary = byDate.get(plan.date);
+    summary.totalPlans += 1;
+    summary.planTypes.push(plan.type);
+    if (plan.result === "hit" || plan.result === "miss") {
+      summary.reviewedPlans += 1;
+      if (plan.result === "hit") summary.hitPlans += 1;
+    }
   });
 
   return [...byDate.values()]
@@ -441,6 +521,7 @@ function buildDailyPlanSummaries(oldData, plans, history, today) {
       const hitRate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
       return {
         ...item,
+        planTypes: [...new Set(item.planTypes)],
         hitRate,
         summary: item.reviewedPlans
           ? `${item.date} 已复盘 ${item.reviewedPlans} 个购买方案，命中 ${item.hitPlans} 个，命中率 ${Math.round(hitRate * 100)}%。`
@@ -492,12 +573,14 @@ async function main() {
   const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map(mapMatch);
   const allMatches = [...allByEventId.values()].sort(sortRawMatches).map(mapMatch);
   const plans = buildPurchasePlans(concernMatches);
-  const history = buildHistory(oldData, allMatches);
+  const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
-  const dailyPlanSummaries = buildDailyPlanSummaries(oldData, plans, history, today);
+  const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
+  const history = buildHistory(planArchive);
+  const dailyPlanSummaries = buildDailyPlanSummaries(planArchive);
 
   const data = {
-    generatedAt: nowIsoShanghai(),
+    generatedAt,
     source: {
       type: "real",
       provider: "Sporttery",
@@ -509,6 +592,7 @@ async function main() {
     matches: concernMatches,
     purchasePlans: plans,
     parlaySeeds: plans,
+    planArchive,
     history,
     autoReview: buildAutoReview(history),
     dailyPlanSummaries,

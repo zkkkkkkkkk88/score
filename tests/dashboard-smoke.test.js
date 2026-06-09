@@ -22,19 +22,21 @@ const tabs = [
   { dataset: { filter: "tomorrow" }, classList: { toggle() {} }, addEventListener() {} },
 ];
 const saleTabs = [
-  { dataset: { saleFilter: "available" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { saleFilter: "all" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { saleFilter: "available" }, classList: { toggle() {} }, addEventListener() {} },
 ];
 const viewButtons = [
   { dataset: { viewButton: "overview" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { viewButton: "analysis" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { viewButton: "plans" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { viewButton: "history" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { viewButton: "review" }, classList: { toggle() {} }, addEventListener() {} },
 ];
 const views = [
   { dataset: { view: "overview" }, classList: { toggle() {} } },
   { dataset: { view: "analysis" }, classList: { toggle() {} } },
   { dataset: { view: "plans" }, classList: { toggle() {} } },
+  { dataset: { view: "history" }, classList: { toggle() {} } },
   { dataset: { view: "review" }, classList: { toggle() {} } },
 ];
 
@@ -79,6 +81,7 @@ setTimeout(() => {
     elements["#matchAnalysis"].innerHTML,
     elements["#parlayList"].innerHTML,
     elements["#hitTracker"].innerHTML,
+    elements["#planHistory"].innerHTML,
     elements["#dailySummary"].innerHTML,
     elements["#tomorrowPool"].innerHTML,
   ].join("");
@@ -95,13 +98,15 @@ setTimeout(() => {
   assert(html.includes("自动复盘"), "renders automatic hit summary");
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
+  assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
+  assert(!html.includes("2026-05-28"), "does not render old template history");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
   if (data.matches.some((match) => match.status === "finished")) assert(html.includes("完场"), "renders finished match status");
   if (data.matches.some((match) => match.status === "live")) assert(html.includes("进行中"), "renders live match status");
   assert(fs.readFileSync("script.js", "utf8").includes("matches.json?ts="), "fetches match data without browser cache");
   assert(pageHtml.includes('data-sale-filter="available"') && pageHtml.includes("可购买"), "renders purchasable match filter");
   assert(saleTabs.length === 2, "wires purchasable and all-match filters");
-  assert(viewButtons.length === 4 && views.length === 4, "renders page navigation views");
+  assert(viewButtons.length === 5 && views.length === 5, "renders page navigation views");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("社会因素"), "renders social factor analysis");

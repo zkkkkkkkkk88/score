@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T10:36:48.321+08:00",
+  "generatedAt": "2026-06-09T10:55:08.198+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -163,8 +163,8 @@
         "home": 0,
         "away": 2
       },
-      "halfScore": "",
-      "minute": 32,
+      "halfScore": "0:2",
+      "minute": 48,
       "tags": [
         "中国竞彩网",
         "周一203",
@@ -2337,49 +2337,219 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     }
   ],
-  "history": [
+  "planArchive": [
     {
-      "date": "2026-05-28",
+      "archiveId": "2026-06-09-sporttery-stable-2",
+      "planId": "sporttery-stable-2",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T10:53:00.526+08:00",
       "type": "竞彩二串一购买方案",
-      "result": "hit",
-      "probability": 0.72,
-      "detail": "2/2 命中"
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "优先选择销售状态正常、竞彩编号明确的比赛。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "picks": [
+        {
+          "sourceEventId": "2040147",
+          "sportteryNo": "周一203",
+          "matchDate": "2026-06-09",
+          "kickoff": "10:00",
+          "competition": "国际赛",
+          "homeTeam": "秘鲁",
+          "awayTeam": "西班牙",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.66,
+          "status": "live",
+          "hit": null,
+          "score": "0-2"
+        },
+        {
+          "sourceEventId": "2040186",
+          "sportteryNo": "周二201",
+          "matchDate": "2026-06-09",
+          "kickoff": "19:35",
+          "competition": "国际赛",
+          "homeTeam": "中国",
+          "awayTeam": "泰国",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.48,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.5700000000000001,
+      "detail": "0/2 命中"
     },
     {
-      "date": "2026-05-28",
+      "archiveId": "2026-06-09-sporttery-balanced-3-2",
+      "planId": "sporttery-balanced-3-2",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T10:53:00.526+08:00",
       "type": "竞彩三串二购买方案",
-      "result": "hit",
-      "probability": 0.62,
-      "detail": "2/3 命中"
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "胜平负和总进球数混合，允许一场失手。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "picks": [
+        {
+          "sourceEventId": "2040147",
+          "sportteryNo": "周一203",
+          "matchDate": "2026-06-09",
+          "kickoff": "10:00",
+          "competition": "国际赛",
+          "homeTeam": "秘鲁",
+          "awayTeam": "西班牙",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.66,
+          "status": "live",
+          "hit": null,
+          "score": "0-2"
+        },
+        {
+          "sourceEventId": "2040186",
+          "sportteryNo": "周二201",
+          "matchDate": "2026-06-09",
+          "kickoff": "19:35",
+          "competition": "国际赛",
+          "homeTeam": "中国",
+          "awayTeam": "泰国",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "0-2球",
+          "probability": 0.54,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.48,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.56,
+      "detail": "0/3 命中"
     },
     {
-      "date": "2026-05-28",
-      "type": "真实数据二串一购买方案",
-      "result": "hit",
-      "probability": 0.72,
-      "detail": "2/2 命中"
-    },
-    {
-      "date": "2026-05-28",
-      "type": "真实数据三串二购买方案",
-      "result": "hit",
-      "probability": 0.6999999999999998,
-      "detail": "3/3 命中"
-    },
-    {
-      "date": "2026-05-28",
-      "type": "真实数据四串三购买方案",
-      "result": "hit",
-      "probability": 0.7,
-      "detail": "4/4 命中"
+      "archiveId": "2026-06-09-sporttery-coverage-4-3",
+      "planId": "sporttery-coverage-4-3",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T10:53:00.526+08:00",
+      "type": "竞彩四串三购买方案",
+      "mode": "atLeast",
+      "requiredHits": 3,
+      "risk": "高",
+      "note": "覆盖竞彩赛程中排序靠前的比赛，适合临场前再确认。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "picks": [
+        {
+          "sourceEventId": "2040147",
+          "sportteryNo": "周一203",
+          "matchDate": "2026-06-09",
+          "kickoff": "10:00",
+          "competition": "国际赛",
+          "homeTeam": "秘鲁",
+          "awayTeam": "西班牙",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.66,
+          "status": "live",
+          "hit": null,
+          "score": "0-2"
+        },
+        {
+          "sourceEventId": "2040186",
+          "sportteryNo": "周二201",
+          "matchDate": "2026-06-09",
+          "kickoff": "19:35",
+          "competition": "国际赛",
+          "homeTeam": "中国",
+          "awayTeam": "泰国",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "0-2球",
+          "probability": 0.54,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.48,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "08:30",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "0-2球",
+          "probability": 0.54,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 4,
+      "result": "pending",
+      "probability": 0.555,
+      "detail": "0/4 命中"
     }
   ],
+  "history": [],
   "autoReview": {
     "label": "自动复盘",
-    "reviewed": 5,
-    "hits": 5,
-    "hitRate": 1,
-    "summary": "已自动复盘 5 个购买方案，命中 5 个。"
+    "reviewed": 0,
+    "hits": 0,
+    "hitRate": 0,
+    "summary": "等待比分完场后自动复盘购买方案命中率。"
   },
   "dailyPlanSummaries": [
     {
@@ -2394,28 +2564,6 @@
         "竞彩四串三购买方案"
       ],
       "summary": "2026-06-09 已推出 3 个购买方案，等待比赛完场后统计命中率。"
-    },
-    {
-      "date": "2026-06-08",
-      "totalPlans": 3,
-      "reviewedPlans": 0,
-      "hitPlans": 0,
-      "hitRate": 0,
-      "planTypes": [
-        "竞彩二串一购买方案",
-        "竞彩三串二购买方案",
-        "竞彩四串三购买方案"
-      ],
-      "summary": "2026-06-08 已推出 3 个购买方案，等待比赛完场后统计命中率。"
-    },
-    {
-      "date": "2026-05-28",
-      "totalPlans": 0,
-      "reviewedPlans": 23,
-      "hitPlans": 23,
-      "hitRate": 1,
-      "planTypes": [],
-      "summary": "2026-05-28 已复盘 23 个购买方案，命中 23 个，命中率 100%。"
     }
   ],
   "marketHistory": [
@@ -2444,27 +2592,15 @@
   "tomorrowPool": [
     {
       "category": "竞彩候选",
-      "matchId": "001",
+      "matchId": "005",
       "market": "wdl",
-      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周一201，需等待开售状态和临场事件确认。"
+      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周二202，需等待开售状态和临场事件确认。"
     },
     {
       "category": "竞彩候选",
-      "matchId": "002",
+      "matchId": "006",
       "market": "ou",
-      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周一202，需等待开售状态和临场事件确认。"
-    },
-    {
-      "category": "明日观察",
-      "matchId": "003",
-      "market": "wdl",
-      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周一203，需等待开售状态和临场事件确认。"
-    },
-    {
-      "category": "明日观察",
-      "matchId": "004",
-      "market": "ou",
-      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周二201，需等待开售状态和临场事件确认。"
+      "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周二203，需等待开售状态和临场事件确认。"
     }
   ]
 }

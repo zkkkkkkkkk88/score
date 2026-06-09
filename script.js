@@ -2,7 +2,7 @@ const state = {
   matches: [],
   selectedId: null,
   filter: "all",
-  saleFilter: "available",
+  saleFilter: "all",
   activeView: "overview",
   data: null,
   tick: 0,
@@ -16,6 +16,7 @@ const els = {
   matchAnalysis: document.querySelector("#matchAnalysis"),
   parlayList: document.querySelector("#parlayList"),
   hitTracker: document.querySelector("#hitTracker"),
+  planHistory: document.querySelector("#planHistory"),
   tomorrowPool: document.querySelector("#tomorrowPool"),
   dailySummary: document.querySelector("#dailySummary"),
   tabs: [...document.querySelectorAll("[data-filter]")],
@@ -24,7 +25,7 @@ const els = {
   views: [...document.querySelectorAll("[data-view]")],
 };
 
-const viewNames = ["overview", "analysis", "plans", "review"];
+const viewNames = ["overview", "analysis", "plans", "history", "review"];
 const DATA_REFRESH_INTERVAL_MS = 60 * 1000;
 
 const marketNames = {
@@ -76,8 +77,9 @@ function formatDateTime(value) {
 }
 
 function addDays(dateText, days) {
-  const date = new Date(`${dateText}T00:00:00+08:00`);
-  date.setDate(date.getDate() + days);
+  const [year, month, day] = dateText.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() + days);
   return date.toISOString().slice(0, 10);
 }
 
@@ -678,6 +680,51 @@ function renderHitTracker() {
   `;
 }
 
+function renderPlanHistory() {
+  const archive = state.data.planArchive ?? [];
+
+  if (!archive.length) {
+    els.planHistory.innerHTML = `<div class="empty-state">从今天开始保存真实生成的购买方案，等比赛完场后自动判断是否命中</div>`;
+    return;
+  }
+
+  els.planHistory.innerHTML = archive
+    .map((plan) => {
+      const statusText = plan.result === "hit" ? "命中" : plan.result === "miss" ? "未中" : "待复盘";
+      const required = plan.mode === "all" ? "全中" : `至少 ${plan.requiredHits}/${plan.totalPicks || plan.picks.length}`;
+
+      return `
+        <article class="archive-card ${plan.result}">
+          <div class="archive-head">
+            <div>
+              <span>${escapeHtml(plan.date)} · ${required}</span>
+              <strong>${escapeHtml(plan.type)}</strong>
+            </div>
+            <em>${statusText} · ${plan.detail || `0/${plan.picks.length} 命中`}</em>
+          </div>
+          <div class="archive-picks">
+            ${plan.picks
+              .map((pick) => {
+                const pickStatus = pick.hit === true ? "正确" : pick.hit === false ? "错误" : "待赛果";
+                const score = pick.score ? `比分 ${escapeHtml(pick.score)}` : "等待完场";
+
+                return `
+                  <div class="archive-pick">
+                    <span>${escapeHtml(pick.sportteryNo)} ${escapeHtml(pick.homeTeam)} 对 ${escapeHtml(pick.awayTeam)}</span>
+                    <strong>${escapeHtml(pick.marketName)} · ${escapeHtml(pick.pick)}</strong>
+                    <em>${pickStatus} · ${score}</em>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+          <p>${escapeHtml(plan.note || "")}</p>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function renderDailySummary() {
   const summaries = state.data.dailyPlanSummaries ?? [];
 
@@ -759,6 +806,7 @@ function render() {
   renderAnalysis();
   renderParlays();
   renderHitTracker();
+  renderPlanHistory();
   renderDailySummary();
   renderTomorrowPool();
 }

@@ -109,7 +109,7 @@ button {
   background: rgba(53, 16, 18, 0.88);
   backdrop-filter: blur(10px);
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -340,7 +340,8 @@ h2 {
 .parlay-list,
 .tomorrow-pool,
 .history-list,
-.daily-summary {
+.daily-summary,
+.plan-history {
   display: grid;
   gap: 8px;
 }
@@ -878,6 +879,65 @@ h2 {
 
 .miss {
   color: #e4b0aa;
+}
+
+.archive-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(53, 16, 18, 0.78);
+}
+
+.archive-card.hit {
+  border-color: rgba(76, 164, 109, 0.72);
+}
+
+.archive-card.miss {
+  border-color: rgba(224, 90, 85, 0.72);
+}
+
+.archive-head,
+.archive-pick {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.archive-head span,
+.archive-pick span,
+.archive-pick em {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.archive-head strong,
+.archive-pick strong {
+  color: var(--ink);
+}
+
+.archive-head em {
+  color: var(--gold-2);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.archive-picks {
+  display: grid;
+  gap: 6px;
+}
+
+.archive-pick {
+  padding: 8px;
+  border: 1px solid rgba(231, 198, 112, 0.16);
+  border-radius: 4px;
+  background: rgba(39, 9, 11, 0.48);
+}
+
+.archive-pick strong {
+  justify-self: end;
 }
 
 .tomorrow-pool {
