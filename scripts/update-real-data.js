@@ -4,7 +4,7 @@ const API_BASE = "https://webapi.sporttery.cn/gateway/uniform/fb";
 const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
 const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
-const PLAN_SCHEMA_VERSION = "business-date-plans-v1";
+const PLAN_SCHEMA_VERSION = "tomorrow-tab-plans-v1";
 
 const headers = {
   "User-Agent":
@@ -331,8 +331,8 @@ function chooseSocialNote(matches) {
 }
 
 function purchaseCandidates(matches) {
-  const blocked = ["已完成", "取消", "暂停", "推迟"];
-  return matches.filter((match) => !blocked.some((word) => match.tags.join("").includes(word)));
+  const blocked = ["已完成", "取消", "推迟"];
+  return matches.filter((match) => match.status !== "finished" && !blocked.some((word) => match.tags.join("").includes(word)));
 }
 
 function combinations(items, size) {
@@ -379,28 +379,9 @@ function planProbability(matches, markets, mode, requiredHits) {
   return total;
 }
 
-function planDateOf(match) {
-  return match.businessDate || match.saleDate || match.date;
-}
-
-function selectPlanTargetDate(matches, today) {
-  const counts = new Map();
-  purchaseCandidates(matches).forEach((match) => {
-    const date = planDateOf(match);
-    if (!date || date < today) return;
-    counts.set(date, (counts.get(date) || 0) + 1);
-  });
-
-  const target = [...counts.entries()]
-    .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
-    .find(([, count]) => count >= 2);
-
-  return target?.[0] || addDays(today, 1);
-}
-
 function buildPurchasePlans(matches, targetDate) {
   const candidates = purchaseCandidates(matches)
-    .filter((match) => planDateOf(match) === targetDate)
+    .filter((match) => match.date === targetDate)
     .sort((a, b) => b.dataQuality + b.importance - (a.dataQuality + a.importance));
   const categories = [
     { group: "二串一", size: 2, mode: "all", requiredHits: 2 },
@@ -678,7 +659,7 @@ function buildDailyPlanSummaries(planArchive) {
 
 function buildTomorrowPool(matches, targetDate) {
   return matches
-    .filter((match) => planDateOf(match) === targetDate)
+    .filter((match) => match.date === targetDate)
     .slice(0, 5)
     .map((match, index) => ({
       category: index < 2 ? "竞彩候选" : "明日观察",
@@ -718,7 +699,7 @@ async function main() {
   const allMatches = [...allByEventId.values()].sort(sortRawMatches).map(mapMatch);
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
-  const targetDate = selectPlanTargetDate(concernMatches, today);
+  const targetDate = addDays(today, 1);
   const plans = buildPurchasePlans(concernMatches, targetDate);
   const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
   const history = buildHistory(planArchive);
