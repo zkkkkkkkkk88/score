@@ -33,6 +33,8 @@ node scripts/serve-live.js
 http://127.0.0.1:4173
 ```
 
+页面会优先请求 `http://127.0.0.1:4173/api/matches`，该接口发现本地数据过期时会自动运行 `scripts/update-real-data.js` 刷新中国竞彩网数据。
+
 如果只想看静态页面，也可以在项目目录启动普通静态服务：
 
 ```powershell

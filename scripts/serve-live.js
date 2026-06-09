@@ -16,20 +16,55 @@ const mimeTypes = {
 };
 
 let updateRunning = false;
+let updatePromise = null;
 
 function runUpdate(reason = "interval") {
-  if (updateRunning) return;
+  if (updatePromise) return updatePromise;
   updateRunning = true;
 
-  const child = spawn(process.execPath, ["scripts/update-real-data.js"], {
-    cwd: process.cwd(),
-    stdio: "inherit",
-    env: process.env,
+  updatePromise = new Promise((resolve) => {
+    const child = spawn(process.execPath, ["scripts/update-real-data.js"], {
+      cwd: process.cwd(),
+      stdio: "inherit",
+      env: process.env,
+    });
+
+    child.on("exit", (code) => {
+      updateRunning = false;
+      updatePromise = null;
+      if (code !== 0) console.warn(`[score] data update failed during ${reason}`);
+      resolve(code);
+    });
   });
 
-  child.on("exit", (code) => {
-    updateRunning = false;
-    if (code !== 0) console.warn(`[score] data update failed during ${reason}`);
+  return updatePromise;
+}
+
+async function shouldRefreshData() {
+  try {
+    const stat = await fs.promises.stat(path.resolve("data/matches.json"));
+    return Date.now() - stat.mtimeMs > UPDATE_INTERVAL_MS;
+  } catch {
+    return true;
+  }
+}
+
+async function serveLiveData(response) {
+  if (await shouldRefreshData()) await runUpdate("api");
+
+  fs.readFile(path.resolve("data/matches.json"), (error, buffer) => {
+    if (error) {
+      response.writeHead(503, { "Content-Type": "application/json; charset=utf-8" });
+      response.end(JSON.stringify({ error: "无法读取赛事数据" }));
+      return;
+    }
+
+    response.writeHead(200, {
+      "Cache-Control": "no-store",
+      "Content-Type": "application/json; charset=utf-8",
+      "X-Score-Live": "1",
+    });
+    response.end(buffer);
   });
 }
 
@@ -41,6 +76,12 @@ function safePath(urlPath) {
 }
 
 const server = http.createServer((request, response) => {
+  const pathname = new URL(request.url, `http://${HOST}:${PORT}`).pathname;
+  if (pathname === "/api/matches") {
+    serveLiveData(response);
+    return;
+  }
+
   const filePath = safePath(request.url);
   if (!filePath) {
     response.writeHead(403);

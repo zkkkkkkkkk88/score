@@ -889,7 +889,9 @@ function render() {
 
 async function loadData(options = {}) {
   const previousSelectedId = state.selectedId;
-  const response = await fetch(`./data/matches.json?ts=${Date.now()}`);
+  const stamp = Date.now();
+  let response = await fetch(`./api/matches?ts=${stamp}`, { cache: "no-store" });
+  if (!response.ok) response = await fetch(`./data/matches.json?ts=${stamp}`, { cache: "no-store" });
   if (!response.ok) throw new Error("无法载入赛事数据");
 
   state.data = await response.json();
