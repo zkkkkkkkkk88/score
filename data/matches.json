@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-09T12:13:11.509+08:00",
+  "generatedAt": "2026-06-09T12:28:39.042+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -52,6 +52,14 @@
           "risk": "低",
           "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让胜",
+          "probability": 0.7,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和受让1球结果复盘。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -59,6 +67,13 @@
           "confidence": 84,
           "risk": "中",
           "reason": "根据中国竞彩网完场比分计算具体总进球数。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.82,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。"
         },
         "htft": {
           "pick": "胜/胜",
@@ -119,6 +134,14 @@
           "risk": "低",
           "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让胜",
+          "probability": 0.7,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和受让1球结果复盘。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -126,6 +149,13 @@
           "confidence": 84,
           "risk": "中",
           "reason": "根据中国竞彩网完场比分计算具体总进球数。"
+        },
+        "score": {
+          "pick": "3-1",
+          "probability": 0.82,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。"
         },
         "htft": {
           "pick": "胜/胜",
@@ -186,6 +216,14 @@
           "risk": "低",
           "reason": "根据中国竞彩网完场比分生成赛果复盘方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让负",
+          "probability": 0.66,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和受让1球结果复盘。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -193,6 +231,13 @@
           "confidence": 84,
           "risk": "中",
           "reason": "根据中国竞彩网完场比分计算具体总进球数。"
+        },
+        "score": {
+          "pick": "1-3",
+          "probability": 0.82,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。"
         },
         "htft": {
           "pick": "平/平",
@@ -254,6 +299,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -261,6 +314,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "3-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -322,6 +382,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "0球",
           "exactGoals": "0",
@@ -329,6 +397,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -390,6 +465,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
@@ -397,6 +480,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -457,6 +547,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -464,6 +562,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-3",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -524,6 +629,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -531,6 +644,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "3-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -591,6 +711,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "0球",
           "exactGoals": "0",
@@ -598,6 +726,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -658,6 +793,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
@@ -665,6 +808,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -725,6 +875,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
@@ -732,6 +890,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -792,6 +957,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -799,6 +972,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-3",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -859,6 +1039,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -866,6 +1054,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -926,6 +1121,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让负",
+          "probability": 0.38,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -933,6 +1136,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -993,6 +1203,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
@@ -1000,6 +1218,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1060,6 +1285,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -1067,6 +1300,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-3",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1127,6 +1367,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1134,6 +1382,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1194,6 +1449,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1201,6 +1464,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1261,6 +1531,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1268,6 +1546,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1328,6 +1613,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1335,6 +1628,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1395,6 +1695,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "0球",
           "exactGoals": "0",
@@ -1402,6 +1710,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1462,6 +1777,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1469,6 +1792,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1529,6 +1859,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
@@ -1536,6 +1874,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1596,6 +1941,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1603,6 +1956,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1663,6 +2023,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
@@ -1670,6 +2038,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1730,6 +2105,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
@@ -1737,6 +2120,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1797,6 +2187,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
@@ -1804,6 +2202,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1864,6 +2269,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -1871,6 +2284,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1931,6 +2351,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "0球",
           "exactGoals": "0",
@@ -1938,6 +2366,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-0",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -1998,6 +2433,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让胜",
+          "probability": 0.38,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
@@ -2005,6 +2448,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "1-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -2065,6 +2515,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.44,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。"
+        },
         "ou": {
           "pick": "4+球",
           "exactGoals": "4+",
@@ -2072,6 +2530,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "3-1",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -2132,6 +2597,14 @@
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。"
         },
+        "hdc": {
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.42,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算受让1球方向。"
+        },
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
@@ -2139,6 +2612,13 @@
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。"
+        },
+        "score": {
+          "pick": "0-2",
+          "probability": 0.2,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。"
         },
         "htft": {
           "pick": "平/平",
@@ -2159,153 +2639,473 @@
   ],
   "purchasePlans": [
     {
-      "id": "sporttery-stable-2",
-      "type": "竞彩二串一购买方案",
+      "id": "tomorrow-2-0-0-wdl-hdc",
+      "type": "明日二串一购买方案 · 胜平负+让球胜平负",
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
-      ],
-      "eventIds": [
-        "2040147",
-        "2040186"
-      ],
-      "markets": [
-        "wdl",
-        "wdl"
-      ],
-      "risk": "中",
-      "note": "优先选择销售状态正常、竞彩编号明确的比赛。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "sporttery-balanced-3-2",
-      "type": "竞彩三串二购买方案",
-      "mode": "atLeast",
-      "requiredHits": 2,
-      "matchIds": [
-        "003",
-        "004",
-        "005"
-      ],
-      "eventIds": [
-        "2040147",
-        "2040186",
-        "2040187"
-      ],
-      "markets": [
-        "wdl",
-        "ou",
-        "wdl"
-      ],
-      "risk": "中",
-      "note": "胜平负和总进球数混合，允许一场失手。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "sporttery-coverage-4-3",
-      "type": "竞彩四串三购买方案",
-      "mode": "atLeast",
-      "requiredHits": 3,
-      "matchIds": [
-        "003",
-        "004",
         "005",
         "006"
       ],
       "eventIds": [
-        "2040147",
-        "2040186",
         "2040187",
         "2040188"
       ],
       "markets": [
         "wdl",
-        "ou",
-        "wdl",
+        "hdc"
+      ],
+      "risk": "中",
+      "planProbability": 0.20159999999999997,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-1-hdc-ou",
+      "type": "明日二串一购买方案 · 让球胜平负+总进球数",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "hdc",
         "ou"
       ],
+      "risk": "中",
+      "planProbability": 0.1496,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-3-score-wdl",
+      "type": "明日二串一购买方案 · 比分+胜平负",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "score",
+        "wdl"
+      ],
       "risk": "高",
-      "note": "覆盖竞彩赛程中排序靠前的比赛，适合临场前再确认。",
+      "planProbability": 0.08800000000000001,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-2-ou-score",
+      "type": "明日二串一购买方案 · 总进球数+比分",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "ou",
+        "score"
+      ],
+      "risk": "高",
+      "planProbability": 0.068,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     }
   ],
   "parlaySeeds": [
     {
-      "id": "sporttery-stable-2",
-      "type": "竞彩二串一购买方案",
+      "id": "tomorrow-2-0-0-wdl-hdc",
+      "type": "明日二串一购买方案 · 胜平负+让球胜平负",
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
-      ],
-      "eventIds": [
-        "2040147",
-        "2040186"
-      ],
-      "markets": [
-        "wdl",
-        "wdl"
-      ],
-      "risk": "中",
-      "note": "优先选择销售状态正常、竞彩编号明确的比赛。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "sporttery-balanced-3-2",
-      "type": "竞彩三串二购买方案",
-      "mode": "atLeast",
-      "requiredHits": 2,
-      "matchIds": [
-        "003",
-        "004",
-        "005"
-      ],
-      "eventIds": [
-        "2040147",
-        "2040186",
-        "2040187"
-      ],
-      "markets": [
-        "wdl",
-        "ou",
-        "wdl"
-      ],
-      "risk": "中",
-      "note": "胜平负和总进球数混合，允许一场失手。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "sporttery-coverage-4-3",
-      "type": "竞彩四串三购买方案",
-      "mode": "atLeast",
-      "requiredHits": 3,
-      "matchIds": [
-        "003",
-        "004",
         "005",
         "006"
       ],
       "eventIds": [
-        "2040147",
-        "2040186",
         "2040187",
         "2040188"
       ],
       "markets": [
         "wdl",
-        "ou",
-        "wdl",
+        "hdc"
+      ],
+      "risk": "中",
+      "planProbability": 0.20159999999999997,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-1-hdc-ou",
+      "type": "明日二串一购买方案 · 让球胜平负+总进球数",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "hdc",
         "ou"
       ],
+      "risk": "中",
+      "planProbability": 0.1496,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-3-score-wdl",
+      "type": "明日二串一购买方案 · 比分+胜平负",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "score",
+        "wdl"
+      ],
       "risk": "高",
-      "note": "覆盖竞彩赛程中排序靠前的比赛，适合临场前再确认。",
+      "planProbability": 0.08800000000000001,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-2-0-2-ou-score",
+      "type": "明日二串一购买方案 · 总进球数+比分",
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040187",
+        "2040188"
+      ],
+      "markets": [
+        "ou",
+        "score"
+      ],
+      "risk": "高",
+      "planProbability": 0.068,
+      "targetDate": "2026-06-10",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     }
   ],
   "planArchive": [
+    {
+      "schemaVersion": "expanded-markets-v1",
+      "archiveId": "2026-06-09-tomorrow-2-0-3-score-wdl",
+      "planId": "tomorrow-2-0-3-score-wdl",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T12:28:39.042+08:00",
+      "type": "明日二串一购买方案 · 比分+胜平负",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "高",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-10",
+      "planProbability": 0.08800000000000001,
+      "picks": [
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "score",
+          "marketName": "比分",
+          "pick": "0-0",
+          "probability": 0.2,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "09:00",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.44,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.32,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "expanded-markets-v1",
+      "archiveId": "2026-06-09-tomorrow-2-0-2-ou-score",
+      "planId": "tomorrow-2-0-2-ou-score",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T12:28:39.042+08:00",
+      "type": "明日二串一购买方案 · 总进球数+比分",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "高",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-10",
+      "planProbability": 0.068,
+      "picks": [
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "0球",
+          "exactGoals": "0",
+          "probability": 0.34,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "09:00",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "score",
+          "marketName": "比分",
+          "pick": "0-2",
+          "probability": 0.2,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.27,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "expanded-markets-v1",
+      "archiveId": "2026-06-09-tomorrow-2-0-0-wdl-hdc",
+      "planId": "tomorrow-2-0-0-wdl-hdc",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T12:25:23.188+08:00",
+      "type": "明日二串一购买方案 · 胜平负+让球胜平负",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-10",
+      "planProbability": 0.20159999999999997,
+      "picks": [
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.48,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "09:00",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让1球 让平",
+          "handicap": 1,
+          "probability": 0.42,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.44999999999999996,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "expanded-markets-v1",
+      "archiveId": "2026-06-09-tomorrow-2-0-1-hdc-ou",
+      "planId": "tomorrow-2-0-1-hdc-ou",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T12:25:23.188+08:00",
+      "type": "明日二串一购买方案 · 让球胜平负+总进球数",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-10",
+      "planProbability": 0.1496,
+      "picks": [
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "让1球 让平",
+          "handicap": -1,
+          "probability": 0.44,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "09:00",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "2球",
+          "exactGoals": "2",
+          "probability": 0.34,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.39,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "expanded-markets-v1",
+      "archiveId": "2026-06-09-tomorrow-2-0-2-ou-wdl",
+      "planId": "tomorrow-2-0-2-ou-wdl",
+      "date": "2026-06-09",
+      "generatedAt": "2026-06-09T12:25:23.188+08:00",
+      "type": "明日二串一购买方案 · 总进球数+胜平负",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "提前准备 2026-06-10 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-10",
+      "planProbability": 0.1496,
+      "picks": [
+        {
+          "sourceEventId": "2040187",
+          "sportteryNo": "周二202",
+          "matchDate": "2026-06-10",
+          "kickoff": "01:00",
+          "competition": "国际赛",
+          "homeTeam": "匈牙利",
+          "awayTeam": "哈萨克斯坦",
+          "marketKey": "ou",
+          "marketName": "总进球数",
+          "pick": "0球",
+          "exactGoals": "0",
+          "probability": 0.34,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040188",
+          "sportteryNo": "周二203",
+          "matchDate": "2026-06-10",
+          "kickoff": "09:00",
+          "competition": "国际赛",
+          "homeTeam": "阿根廷",
+          "awayTeam": "冰岛",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.44,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.39,
+      "detail": "0/2 命中"
+    },
     {
       "schemaVersion": "exact-goals-v1",
       "archiveId": "2026-06-09-sporttery-stable-2",
@@ -2528,16 +3328,21 @@
   "dailyPlanSummaries": [
     {
       "date": "2026-06-09",
-      "totalPlans": 3,
+      "totalPlans": 8,
       "reviewedPlans": 0,
       "hitPlans": 0,
       "hitRate": 0,
       "planTypes": [
+        "明日二串一购买方案 · 比分+胜平负",
+        "明日二串一购买方案 · 总进球数+比分",
+        "明日二串一购买方案 · 胜平负+让球胜平负",
+        "明日二串一购买方案 · 让球胜平负+总进球数",
+        "明日二串一购买方案 · 总进球数+胜平负",
         "竞彩二串一购买方案",
         "竞彩三串二购买方案",
         "竞彩四串三购买方案"
       ],
-      "summary": "2026-06-09 已推出 3 个购买方案，等待比赛完场后统计命中率。"
+      "summary": "2026-06-09 已推出 8 个购买方案，等待比赛完场后统计命中率。"
     }
   ],
   "marketHistory": [

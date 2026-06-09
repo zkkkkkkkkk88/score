@@ -87,6 +87,8 @@ setTimeout(() => {
   ].join("");
 
   assert(html.includes("总进球数"), "renders concrete total goals market");
+  assert(html.includes("让球胜平负"), "renders handicap win/draw/loss market");
+  assert(html.includes("比分"), "renders score market");
   assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
@@ -98,6 +100,10 @@ setTimeout(() => {
   assert(!html.includes("赔率"), "does not render odds wording");
   assert(!html.includes("预计回报"), "does not render return estimate");
   assert(html.includes("购买方案"), "renders purchase plan section");
+  assert(data.parlaySeeds.every((plan) => plan.targetDate), "generates target-date parlay plans");
+  assert(data.parlaySeeds.some((plan) => plan.markets.includes("hdc")), "includes handicap parlays");
+  assert(data.parlaySeeds.some((plan) => plan.markets.includes("score")), "includes score parlays");
+  assert(data.parlaySeeds.every((plan, index, plans) => index === 0 || plans[index - 1].planProbability >= plan.planProbability), "sorts parlays by probability");
   assert(html.includes("核心胆"), "renders parlay banker pick");
   assert(html.includes("风险点"), "renders parlay weak link");
   assert(html.includes("玩法表现"), "renders market performance history");

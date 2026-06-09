@@ -4,7 +4,7 @@ const API_BASE = "https://webapi.sporttery.cn/gateway/uniform/fb";
 const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
 const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
-const PLAN_SCHEMA_VERSION = "exact-goals-v1";
+const PLAN_SCHEMA_VERSION = "expanded-markets-v1";
 
 const headers = {
   "User-Agent":
@@ -165,6 +165,39 @@ function scoreModel(match, score) {
   return { pick: "客胜", probability: 0.44 };
 }
 
+function getStrengthSeed(match) {
+  return Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0);
+}
+
+function getEstimatedScore(match, wdlPick, exactGoals) {
+  const total = exactGoals === "4+" ? 4 : Number(exactGoals);
+  if (!Number.isFinite(total) || total <= 0) return "0-0";
+  if (wdlPick === "平") {
+    const side = Math.floor(total / 2);
+    return `${side}-${total - side}`;
+  }
+  if (wdlPick === "主胜") {
+    const away = Math.max(0, Math.floor((total - 1) / 2));
+    return `${total - away}-${away}`;
+  }
+  const home = Math.max(0, Math.floor((total - 1) / 2));
+  return `${home}-${total - home}`;
+}
+
+function handicapModel(match, score, wdlPick) {
+  const handicap = getStrengthSeed(match) < 0 ? -1 : 1;
+  if (score.home !== null && score.away !== null) {
+    const adjustedHome = score.home + handicap;
+    if (adjustedHome > score.away) return { handicap, pick: "让胜", probability: 0.7 };
+    if (adjustedHome < score.away) return { handicap, pick: "让负", probability: 0.66 };
+    return { handicap, pick: "让平", probability: 0.58 };
+  }
+
+  if (wdlPick === "平") return { handicap, pick: handicap < 0 ? "让负" : "让胜", probability: 0.38 };
+  if (wdlPick === "主胜") return { handicap, pick: handicap < 0 ? "让平" : "让胜", probability: 0.44 };
+  return { handicap, pick: handicap < 0 ? "让负" : "让平", probability: 0.42 };
+}
+
 function estimateExactGoals(match) {
   const seed = Math.abs(Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0));
   const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
@@ -178,6 +211,8 @@ function buildMarkets(match, status, score) {
   const exactGoals = total === null ? estimateExactGoals(match) : total >= 4 ? "4+" : String(total);
   const exactGoalLabel = `${exactGoals}球`;
   const goalProbability = total === null ? 0.34 : 0.78;
+  const handicap = handicapModel(match, score, wdl.pick);
+  const exactScore = score.home === null || score.away === null ? getEstimatedScore(match, wdl.pick, exactGoals) : `${score.home}-${score.away}`;
 
   return {
     wdl: {
@@ -187,6 +222,17 @@ function buildMarkets(match, status, score) {
       risk: status === "finished" ? "低" : "中",
       reason: status === "finished" ? "根据中国竞彩网完场比分生成赛果复盘方向。" : "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
     },
+    hdc: {
+      handicap: handicap.handicap,
+      pick: handicap.pick,
+      probability: handicap.probability,
+      confidence: status === "finished" ? 84 : 58,
+      risk: "中",
+      reason:
+        status === "finished"
+          ? `根据中国竞彩网完场比分和${handicap.handicap > 0 ? "受让" : "让"}${Math.abs(handicap.handicap)}球结果复盘。`
+          : `按主客队基础强弱估算${handicap.handicap > 0 ? "受让" : "让"}${Math.abs(handicap.handicap)}球方向。`,
+    },
     ou: {
       pick: exactGoalLabel,
       exactGoals,
@@ -194,6 +240,13 @@ function buildMarkets(match, status, score) {
       confidence: status === "finished" ? 84 : 62,
       risk: "中",
       reason: status === "finished" ? "根据中国竞彩网完场比分计算具体总进球数。" : "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。",
+    },
+    score: {
+      pick: exactScore,
+      probability: status === "finished" ? 0.82 : 0.2,
+      confidence: status === "finished" ? 82 : 42,
+      risk: "高",
+      reason: status === "finished" ? "根据中国竞彩网完场比分复盘比分玩法。" : "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
     },
     htft: {
       pick: status === "finished" && score.home > score.away ? "胜/胜" : "平/平",
@@ -282,50 +335,83 @@ function purchaseCandidates(matches) {
   return matches.filter((match) => !blocked.some((word) => match.tags.join("").includes(word)));
 }
 
-function buildPurchasePlans(matches) {
-  const candidates = purchaseCandidates(matches);
-  const stable = candidates.slice(0, 2);
-  const balanced = candidates.slice(0, 3);
-  const coverage = candidates.slice(0, 4);
+function combinations(items, size) {
+  const result = [];
+  function walk(start, group) {
+    if (group.length === size) {
+      result.push(group);
+      return;
+    }
+    for (let index = start; index < items.length; index += 1) walk(index + 1, [...group, items[index]]);
+  }
+  walk(0, []);
+  return result;
+}
 
-  return [
-    stable.length >= 2 && {
-      id: "sporttery-stable-2",
-      type: "竞彩二串一购买方案",
-      mode: "all",
-      requiredHits: 2,
-      matchIds: stable.map((match) => match.id),
-      eventIds: stable.map((match) => match.sourceEventId),
-      markets: stable.map(() => "wdl"),
-      risk: "中",
-      note: "优先选择销售状态正常、竞彩编号明确的比赛。",
-      socialNote: chooseSocialNote(stable),
-    },
-    balanced.length >= 3 && {
-      id: "sporttery-balanced-3-2",
-      type: "竞彩三串二购买方案",
-      mode: "atLeast",
-      requiredHits: 2,
-      matchIds: balanced.map((match) => match.id),
-      eventIds: balanced.map((match) => match.sourceEventId),
-      markets: ["wdl", "ou", "wdl"],
-      risk: "中",
-      note: "胜平负和总进球数混合，允许一场失手。",
-      socialNote: chooseSocialNote(balanced),
-    },
-    coverage.length >= 4 && {
-      id: "sporttery-coverage-4-3",
-      type: "竞彩四串三购买方案",
-      mode: "atLeast",
-      requiredHits: 3,
-      matchIds: coverage.map((match) => match.id),
-      eventIds: coverage.map((match) => match.sourceEventId),
-      markets: ["wdl", "ou", "wdl", "ou"],
-      risk: "高",
-      note: "覆盖竞彩赛程中排序靠前的比赛，适合临场前再确认。",
-      socialNote: chooseSocialNote(coverage),
-    },
-  ].filter(Boolean);
+function getMarketMix(matches, offset) {
+  const preferred = ["wdl", "hdc", "ou", "score"];
+  return matches.map((match, index) => {
+    const ranked = preferred
+      .filter((key) => match.markets[key])
+      .sort((a, b) => match.markets[b].probability - match.markets[a].probability);
+    return ranked[(index + offset) % Math.min(4, ranked.length)] || "wdl";
+  });
+}
+
+function planProbability(matches, markets, mode, requiredHits) {
+  const probabilities = matches.map((match, index) => match.markets[markets[index]].probability);
+  if (mode === "all") return probabilities.reduce((product, probability) => product * probability, 1);
+  let total = 0;
+  const count = 1 << probabilities.length;
+  for (let mask = 0; mask < count; mask += 1) {
+    let hits = 0;
+    let probability = 1;
+    probabilities.forEach((item, index) => {
+      const hit = Boolean(mask & (1 << index));
+      hits += hit ? 1 : 0;
+      probability *= hit ? item : 1 - item;
+    });
+    if (hits >= requiredHits) total += probability;
+  }
+  return total;
+}
+
+function buildPurchasePlans(matches, targetDate) {
+  const candidates = purchaseCandidates(matches)
+    .filter((match) => match.date === targetDate)
+    .sort((a, b) => b.dataQuality + b.importance - (a.dataQuality + a.importance));
+  const sizes = [2, 3, 4].filter((size) => candidates.length >= size);
+  const plans = [];
+
+  sizes.forEach((size) => {
+    combinations(candidates.slice(0, 7), size).forEach((group, groupIndex) => {
+      [0, 1, 2, 3].forEach((offset) => {
+        const markets = getMarketMix(group, offset);
+        const mode = size === 2 ? "all" : "atLeast";
+        const requiredHits = size === 2 ? 2 : size - 1;
+        const probability = planProbability(group, markets, mode, requiredHits);
+        const marketLabel = [...new Set(markets.map((market) => marketNamesForArchive()[market]))].join("+");
+        plans.push({
+          id: `tomorrow-${size}-${groupIndex}-${offset}-${markets.join("-")}`,
+          type: `明日${size === 2 ? "二串一" : size === 3 ? "三串二" : "四串三"}购买方案 · ${marketLabel}`,
+          mode,
+          requiredHits,
+          matchIds: group.map((match) => match.id),
+          eventIds: group.map((match) => match.sourceEventId),
+          markets,
+          risk: markets.includes("score") || size === 4 ? "高" : "中",
+          planProbability: probability,
+          targetDate,
+          note: `提前准备 ${targetDate} 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。`,
+          socialNote: chooseSocialNote(group),
+        });
+      });
+    });
+  });
+
+  return plans
+    .sort((a, b) => b.planProbability - a.planProbability)
+    .slice(0, 12);
 }
 
 function actualWdl(match) {
@@ -337,11 +423,17 @@ function actualWdl(match) {
 function isPickHit(match, marketKey, market) {
   if (match.status !== "finished") return null;
   if (marketKey === "wdl") return market.pick === actualWdl(match);
+  if (marketKey === "hdc") {
+    const adjustedHome = match.score.home + Number(market.handicap || 0);
+    const actual = adjustedHome > match.score.away ? "让胜" : adjustedHome < match.score.away ? "让负" : "让平";
+    return market.pick === actual;
+  }
   if (marketKey === "ou") {
     const total = match.score.home + match.score.away;
     const actual = total >= 4 ? "4+" : String(total);
     return String(market.exactGoals ?? "").replace("球", "") === actual;
   }
+  if (marketKey === "score") return market.pick === `${match.score.home}-${match.score.away}`;
   return null;
 }
 
@@ -364,6 +456,7 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
       marketName: marketNamesForArchive()[marketKey] || marketKey,
       pick: market ? formatArchivePick(marketKey, market) : "",
       exactGoals: marketKey === "ou" ? market?.exactGoals : undefined,
+      handicap: marketKey === "hdc" ? market?.handicap : undefined,
       probability: market?.probability || 0,
     };
   });
@@ -380,6 +473,8 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
     risk: plan.risk,
     note: plan.note,
     socialNote: plan.socialNote,
+    targetDate: plan.targetDate,
+    planProbability: plan.planProbability,
     picks,
   };
 }
@@ -387,12 +482,15 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
 function marketNamesForArchive() {
   return {
     wdl: "胜平负",
+    hdc: "让球胜平负",
     ou: "总进球数",
+    score: "比分",
     htft: "半全场",
   };
 }
 
 function formatArchivePick(marketKey, market) {
+  if (marketKey === "hdc") return `${Number(market.handicap) > 0 ? "受让" : "让"}${Math.abs(Number(market.handicap || 0))}球 ${market.pick}`;
   return marketKey === "ou" ? `${market.exactGoals ?? String(market.pick).replace("球", "")}球` : market.pick;
 }
 
@@ -405,6 +503,7 @@ function evaluateArchivedPlan(plan, matches) {
       const market = {
         pick: pick.pick,
         exactGoals: pick.marketKey === "ou" ? pick.exactGoals ?? String(pick.pick).replace("球", "") : undefined,
+        handicap: pick.marketKey === "hdc" ? pick.handicap : undefined,
       };
       const hit = isPickHit(match, pick.marketKey, market);
       return {
@@ -588,9 +687,10 @@ async function main() {
 
   const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map(mapMatch);
   const allMatches = [...allByEventId.values()].sort(sortRawMatches).map(mapMatch);
-  const plans = buildPurchasePlans(concernMatches);
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
+  const targetDate = addDays(today, 1);
+  const plans = buildPurchasePlans(concernMatches, targetDate);
   const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
   const history = buildHistory(planArchive);
   const dailyPlanSummaries = buildDailyPlanSummaries(planArchive);
@@ -613,7 +713,7 @@ async function main() {
     autoReview: buildAutoReview(history),
     dailyPlanSummaries,
     marketHistory: buildMarketHistory(allMatches),
-    tomorrowPool: buildTomorrowPool(concernMatches, addDays(today, 1)),
+    tomorrowPool: buildTomorrowPool(concernMatches, targetDate),
   };
 
   await fs.writeFile(OUTPUT, `${JSON.stringify(data, null, 2)}\n`, "utf8");

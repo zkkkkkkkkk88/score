@@ -30,7 +30,9 @@ const DATA_REFRESH_INTERVAL_MS = 60 * 1000;
 
 const marketNames = {
   wdl: "胜平负",
+  hdc: "让球胜平负",
   ou: "总进球数",
+  score: "比分",
   htft: "半全场",
 };
 
@@ -223,6 +225,7 @@ function getMarket(match, key) {
 }
 
 function formatMarketPick(key, market) {
+  if (key === "hdc") return `${Number(market.handicap) > 0 ? "受让" : "让"}${Math.abs(Number(market.handicap || 0))}球 ${market.pick}`;
   if (key !== "ou") return market.pick;
   return market.exactGoals ? `${market.exactGoals}球` : market.pick;
 }
@@ -544,7 +547,9 @@ function renderAnalysis() {
 
       <div class="market-grid">
         ${renderMarketCard(match, "wdl")}
+        ${renderMarketCard(match, "hdc")}
         ${renderMarketCard(match, "ou")}
+        ${renderMarketCard(match, "score")}
         ${renderMarketCard(match, "htft")}
       </div>
     </article>
@@ -561,7 +566,7 @@ function renderParlays() {
     .map((seed) => {
       const picks = getParlayPicks(seed);
       const live = getParlayProbability(seed, true);
-      const prematch = getParlayProbability(seed, false);
+      const prematch = seed.planProbability ?? getParlayProbability(seed, false);
       const delta = live - prematch;
       const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
       const insight = getParlayInsight(picks);
@@ -573,6 +578,7 @@ function renderParlays() {
             <div>
               <span>${required}</span>
               <h3>${escapeHtml(seed.type)}</h3>
+              ${seed.targetDate ? `<span>目标日期 ${escapeHtml(seed.targetDate)}</span>` : ""}
             </div>
             <strong>${pct(live)}</strong>
           </div>

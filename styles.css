@@ -575,7 +575,7 @@ h2 {
 
 .market-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 7px;
 }
 
@@ -941,26 +941,38 @@ h2 {
 }
 
 .archive-pick b {
+  display: inline-block;
+  min-width: 48px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-align: center;
   font-weight: 900;
 }
 
 .archive-pick.pick-hit {
-  border-color: rgba(224, 90, 85, 0.72);
+  border-color: rgba(255, 80, 76, 0.95);
+  background: linear-gradient(90deg, rgba(140, 24, 26, 0.72), rgba(53, 16, 18, 0.88));
+  box-shadow: inset 4px 0 0 rgba(255, 80, 76, 0.96);
 }
 
 .archive-pick.pick-hit b {
-  color: #e4b0aa;
+  background: #d53835;
+  color: #fff7df;
 }
 
 .archive-pick.pick-miss {
-  border-color: rgba(76, 164, 109, 0.72);
+  border-color: rgba(85, 205, 126, 0.95);
+  background: linear-gradient(90deg, rgba(24, 96, 54, 0.7), rgba(53, 16, 18, 0.88));
+  box-shadow: inset 4px 0 0 rgba(85, 205, 126, 0.96);
 }
 
 .archive-pick.pick-miss b {
-  color: #b7e2c4;
+  background: #2c9f58;
+  color: #fff7df;
 }
 
 .archive-pick.pick-pending b {
+  background: rgba(216, 173, 80, 0.18);
   color: var(--gold-2);
 }
 
