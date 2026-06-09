@@ -284,17 +284,24 @@ function socialFactorsFromMatch(match, status) {
   };
 }
 
-function mapMatch(match, index) {
+function mapMatch(match, index, oldByEventId = new Map()) {
   const status = getStatus(match);
   const score = parseScore(match.sectionsNo999);
-  const markets = buildMarkets(match, status, score);
+  const sourceEventId = String(match.matchId);
+  const oldMatch = oldByEventId.get(sourceEventId);
+  const preScore = { home: null, away: null };
+  const markets =
+    status === "finished" && oldMatch?.status !== "finished" && oldMatch?.markets
+      ? oldMatch.markets
+      : buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score);
+  const actualMarkets = status === "finished" ? buildMarkets(match, status, score) : null;
   const sportteryNo = formatSportteryNo(match, index);
   const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
   const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
 
   return {
     id: String(index + 1).padStart(3, "0"),
-    sourceEventId: String(match.matchId),
+    sourceEventId,
     sportteryNo,
     date: match.matchDate || match.businessDate || match.groupMatchDate,
     businessDate: match.businessDate || match.groupMatchDate || match.matchDate,
@@ -321,6 +328,7 @@ function mapMatch(match, index) {
       homeAway: `竞彩编号：${sportteryNo}，销售状态：${saleTag}`,
     },
     markets,
+    actualMarkets,
     socialFactors: socialFactorsFromMatch(match, status),
   };
 }
@@ -695,8 +703,8 @@ async function main() {
     if (!allByEventId.has(key)) allByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
   });
 
-  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map(mapMatch);
-  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map(mapMatch);
+  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId));
+  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId));
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);

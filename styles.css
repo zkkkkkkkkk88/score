@@ -656,6 +656,7 @@ h2 {
 
 .market-title,
 .market-score,
+.market-result,
 .parlay-head {
   display: flex;
   justify-content: space-between;
@@ -674,6 +675,47 @@ h2 {
   color: var(--gold-2);
   font-size: 22px;
   font-variant-numeric: tabular-nums;
+}
+
+.market-result {
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(45, 12, 14, 0.72);
+}
+
+.market-result strong {
+  color: var(--paper);
+  overflow-wrap: anywhere;
+}
+
+.market-result em {
+  min-width: 64px;
+  font-style: normal;
+  font-weight: 900;
+  text-align: right;
+}
+
+.market-result.is-hit {
+  border-color: rgba(205, 49, 43, 0.9);
+  background: rgba(128, 24, 27, 0.72);
+}
+
+.market-result.is-hit em {
+  color: #ffd9c7;
+}
+
+.market-result.is-miss {
+  border-color: rgba(53, 137, 78, 0.9);
+  background: rgba(26, 86, 48, 0.72);
+}
+
+.market-result.is-miss em {
+  color: #d5ffd7;
+}
+
+.market-result.is-pending em {
+  color: var(--gold-2);
 }
 
 .probability-bar {

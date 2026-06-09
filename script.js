@@ -232,6 +232,27 @@ function formatMarketPick(key, market) {
   return market.exactGoals ? `${market.exactGoals}球` : market.pick;
 }
 
+function getActualMarket(match, key) {
+  return match.actualMarkets?.[key] ?? null;
+}
+
+function getMarketResultState(match, key, predicted, actual) {
+  if (match.status !== "finished" || !actual) {
+    return {
+      className: "is-pending",
+      label: "等待完赛",
+      value: "赛后自动写入",
+    };
+  }
+
+  const hit = predicted?.pick === actual.pick;
+  return {
+    className: hit ? "is-hit" : "is-miss",
+    label: hit ? "正确" : "错误",
+    value: formatMarketPick(key, actual),
+  };
+}
+
 function getPickLabel(pick) {
   return `${pick.match.sportteryNo ?? pick.match.id} ${pick.match.homeTeam} 对 ${pick.match.awayTeam} · ${marketNames[pick.marketKey]} ${formatMarketPick(
     pick.marketKey,
@@ -362,6 +383,8 @@ function renderMatchList() {
 
 function renderMarketCard(match, key) {
   const market = getMarket(match, key);
+  const actual = getActualMarket(match, key);
+  const result = getMarketResultState(match, key, market, actual);
   const probability = liveProbability(market.probability, match);
   const delta = probability - market.probability;
   const deltaText = `${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%`;
@@ -370,10 +393,15 @@ function renderMarketCard(match, key) {
     <article class="market-card ${riskClass(market.risk)}">
       <div class="market-title">
         <span>${marketNames[key]}</span>
-        <strong>${escapeHtml(formatMarketPick(key, market))}</strong>
+        <strong>赛前预测 · ${escapeHtml(formatMarketPick(key, market))}</strong>
+      </div>
+      <div class="market-result ${result.className}">
+        <span>${match.status === "finished" ? "完赛真实" : "赛后真实"}</span>
+        <strong>${escapeHtml(result.value)}</strong>
+        <em>${escapeHtml(result.label)}</em>
       </div>
       <div class="market-score">
-        <span>实时概率</span>
+        <span>${match.status === "finished" ? "赛前概率" : "实时概率"}</span>
         <strong>${pct(probability)}</strong>
       </div>
       ${renderProbabilityBar(probability, marketNames[key])}

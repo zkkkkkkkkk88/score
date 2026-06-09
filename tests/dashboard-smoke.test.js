@@ -89,6 +89,8 @@ setTimeout(() => {
   assert(html.includes("总进球数"), "renders concrete total goals market");
   assert(html.includes("让球胜平负"), "renders handicap win/draw/loss market");
   assert(html.includes("比分"), "renders score market");
+  assert(html.includes("赛前预测"), "renders predicted market row");
+  assert(html.includes("完赛真实") || html.includes("等待完赛"), "renders actual market row");
   assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
