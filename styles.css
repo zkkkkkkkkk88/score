@@ -940,6 +940,30 @@ h2 {
   justify-self: end;
 }
 
+.archive-pick b {
+  font-weight: 900;
+}
+
+.archive-pick.pick-hit {
+  border-color: rgba(76, 164, 109, 0.72);
+}
+
+.archive-pick.pick-hit b {
+  color: #b7e2c4;
+}
+
+.archive-pick.pick-miss {
+  border-color: rgba(224, 90, 85, 0.72);
+}
+
+.archive-pick.pick-miss b {
+  color: #e4b0aa;
+}
+
+.archive-pick.pick-pending b {
+  color: var(--gold-2);
+}
+
 .tomorrow-pool {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }

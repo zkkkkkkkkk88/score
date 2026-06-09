@@ -4,6 +4,7 @@ const API_BASE = "https://webapi.sporttery.cn/gateway/uniform/fb";
 const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
 const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
+const PLAN_SCHEMA_VERSION = "exact-goals-v1";
 
 const headers = {
   "User-Agent":
@@ -160,11 +161,19 @@ function scoreModel(match, score) {
   return { pick: "客胜", probability: 0.44 };
 }
 
+function estimateExactGoals(match) {
+  const seed = Math.abs(Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0));
+  const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
+  const value = (seed + kickoffHour) % 5;
+  return value >= 4 ? "4+" : String(value);
+}
+
 function buildMarkets(match, status, score) {
   const wdl = scoreModel(match, score);
   const total = score.home === null || score.away === null ? null : score.home + score.away;
-  const goalRange = total === null ? "0-2球" : total >= 3 ? "3球及以上" : "0-2球";
-  const goalProbability = total === null ? 0.54 : total >= 3 ? 0.7 : 0.66;
+  const exactGoals = total === null ? estimateExactGoals(match) : total >= 4 ? "4+" : String(total);
+  const exactGoalLabel = `${exactGoals}球`;
+  const goalProbability = total === null ? 0.34 : 0.78;
 
   return {
     wdl: {
@@ -175,13 +184,12 @@ function buildMarkets(match, status, score) {
       reason: status === "finished" ? "根据中国竞彩网完场比分生成赛果复盘方向。" : "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
     },
     ou: {
-      line: 2.5,
-      pick: goalRange,
-      goalRange,
+      pick: exactGoalLabel,
+      exactGoals,
       probability: goalProbability,
       confidence: status === "finished" ? 84 : 62,
       risk: "中",
-      reason: status === "finished" ? "根据中国竞彩网完场比分计算总进球数区间。" : "根据赛事类型、赛程时段和默认进球模型给出总进球数观察区间。",
+      reason: status === "finished" ? "根据中国竞彩网完场比分计算具体总进球数。" : "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。",
     },
     htft: {
       pick: status === "finished" && score.home > score.away ? "胜/胜" : "平/平",
@@ -327,7 +335,8 @@ function isPickHit(match, marketKey, market) {
   if (marketKey === "wdl") return market.pick === actualWdl(match);
   if (marketKey === "ou") {
     const total = match.score.home + match.score.away;
-    return market.goalRange === (total >= 3 ? "3球及以上" : "0-2球");
+    const actual = total >= 4 ? "4+" : String(total);
+    return String(market.exactGoals ?? "").replace("球", "") === actual;
   }
   return null;
 }
@@ -350,11 +359,13 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
       marketKey,
       marketName: marketNamesForArchive()[marketKey] || marketKey,
       pick: market ? formatArchivePick(marketKey, market) : "",
+      exactGoals: marketKey === "ou" ? market?.exactGoals : undefined,
       probability: market?.probability || 0,
     };
   });
 
   return {
+    schemaVersion: PLAN_SCHEMA_VERSION,
     archiveId: `${today}-${plan.id}`,
     planId: plan.id,
     date: today,
@@ -378,7 +389,7 @@ function marketNamesForArchive() {
 }
 
 function formatArchivePick(marketKey, market) {
-  return marketKey === "ou" ? market.goalRange || market.pick : market.pick;
+  return marketKey === "ou" ? `${market.exactGoals ?? String(market.pick).replace("球", "")}球` : market.pick;
 }
 
 function evaluateArchivedPlan(plan, matches) {
@@ -389,7 +400,7 @@ function evaluateArchivedPlan(plan, matches) {
       const score = match.score.home === null || match.score.away === null ? "" : `${match.score.home}-${match.score.away}`;
       const market = {
         pick: pick.pick,
-        goalRange: pick.marketKey === "ou" ? pick.pick : undefined,
+        exactGoals: pick.marketKey === "ou" ? pick.exactGoals ?? String(pick.pick).replace("球", "") : undefined,
       };
       const hit = isPickHit(match, pick.marketKey, market);
       return {
@@ -423,7 +434,8 @@ function buildPlanArchive(oldData, plans, matches, allMatches, generatedAt, toda
 
   plans.forEach((plan) => {
     const snapshot = createPlanSnapshot(plan, matches, generatedAt, today);
-    if (!byId.has(snapshot.archiveId)) byId.set(snapshot.archiveId, snapshot);
+    const existing = byId.get(snapshot.archiveId);
+    if (!existing || existing.schemaVersion !== PLAN_SCHEMA_VERSION) byId.set(snapshot.archiveId, snapshot);
   });
 
   return [...byId.values()]

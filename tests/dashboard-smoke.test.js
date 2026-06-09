@@ -87,7 +87,13 @@ setTimeout(() => {
   ].join("");
 
   assert(html.includes("总进球数"), "renders concrete total goals market");
-  assert(html.includes("3球及以上") || html.includes("0-2球"), "renders a concrete goal range");
+  assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
+  assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
+  assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
+  assert(
+    data.planArchive.every((plan) => plan.picks.every((pick) => pick.status !== "finished" || typeof pick.hit === "boolean")),
+    "marks finished archived picks as correct or wrong",
+  );
   assert(!html.includes("大小球"), "does not render old over-under label");
   assert(!html.includes("赔率"), "does not render odds wording");
   assert(!html.includes("预计回报"), "does not render return estimate");
@@ -99,6 +105,7 @@ setTimeout(() => {
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
+  assert(html.includes("正确") || html.includes("错误") || html.includes("待赛果"), "renders per-pick archive result labels");
   assert(!html.includes("2026-05-28"), "does not render old template history");
   assert(html.includes("总进球数命中"), "renders goal market hit tracking");
   if (data.matches.some((match) => match.status === "finished")) assert(html.includes("完场"), "renders finished match status");

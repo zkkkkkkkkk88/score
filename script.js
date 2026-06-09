@@ -224,7 +224,7 @@ function getMarket(match, key) {
 
 function formatMarketPick(key, market) {
   if (key !== "ou") return market.pick;
-  return market.goalRange ?? market.pick;
+  return market.exactGoals ? `${market.exactGoals}球` : market.pick;
 }
 
 function getPickLabel(pick) {
@@ -692,6 +692,7 @@ function renderPlanHistory() {
     .map((plan) => {
       const statusText = plan.result === "hit" ? "命中" : plan.result === "miss" ? "未中" : "待复盘";
       const required = plan.mode === "all" ? "全中" : `至少 ${plan.requiredHits}/${plan.totalPicks || plan.picks.length}`;
+      const settledText = `${plan.hitPicks || 0}/${plan.settledPicks || 0} 已完赛正确`;
 
       return `
         <article class="archive-card ${plan.result}">
@@ -700,19 +701,20 @@ function renderPlanHistory() {
               <span>${escapeHtml(plan.date)} · ${required}</span>
               <strong>${escapeHtml(plan.type)}</strong>
             </div>
-            <em>${statusText} · ${plan.detail || `0/${plan.picks.length} 命中`}</em>
+            <em>${statusText} · ${settledText}</em>
           </div>
           <div class="archive-picks">
             ${plan.picks
               .map((pick) => {
                 const pickStatus = pick.hit === true ? "正确" : pick.hit === false ? "错误" : "待赛果";
+                const pickClass = pick.hit === true ? "pick-hit" : pick.hit === false ? "pick-miss" : "pick-pending";
                 const score = pick.score ? `比分 ${escapeHtml(pick.score)}` : "等待完场";
 
                 return `
-                  <div class="archive-pick">
+                  <div class="archive-pick ${pickClass}">
                     <span>${escapeHtml(pick.sportteryNo)} ${escapeHtml(pick.homeTeam)} 对 ${escapeHtml(pick.awayTeam)}</span>
                     <strong>${escapeHtml(pick.marketName)} · ${escapeHtml(pick.pick)}</strong>
-                    <em>${pickStatus} · ${score}</em>
+                    <em><b>${pickStatus}</b> · ${score}</em>
                   </div>
                 `;
               })
