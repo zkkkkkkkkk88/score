@@ -376,15 +376,20 @@ function planProbability(matches, markets, mode, requiredHits) {
   return total;
 }
 
-function buildPurchasePlans(matches, targetDate) {
+function buildPurchasePlans(matches, targetDate, fallbackDates = []) {
+  const targetDates = [targetDate, ...fallbackDates];
   const candidates = purchaseCandidates(matches)
-    .filter((match) => match.date === targetDate)
-    .sort((a, b) => b.dataQuality + b.importance - (a.dataQuality + a.importance));
+    .filter((match) => targetDates.includes(match.date))
+    .sort((a, b) => {
+      const datePriority = targetDates.indexOf(a.date) - targetDates.indexOf(b.date);
+      if (datePriority !== 0) return datePriority;
+      return b.dataQuality + b.importance - (a.dataQuality + a.importance);
+    });
   const sizes = [2, 3, 4].filter((size) => candidates.length >= size);
   const plans = [];
 
   sizes.forEach((size) => {
-    combinations(candidates.slice(0, 7), size).forEach((group, groupIndex) => {
+    combinations(candidates.slice(0, 10), size).forEach((group, groupIndex) => {
       [0, 1, 2, 3].forEach((offset) => {
         const markets = getMarketMix(group, offset);
         const mode = size === 2 ? "all" : "atLeast";
@@ -392,8 +397,9 @@ function buildPurchasePlans(matches, targetDate) {
         const probability = planProbability(group, markets, mode, requiredHits);
         const marketLabel = [...new Set(markets.map((market) => marketNamesForArchive()[market]))].join("+");
         plans.push({
-          id: `tomorrow-${size}-${groupIndex}-${offset}-${markets.join("-")}`,
-          type: `明日${size === 2 ? "二串一" : size === 3 ? "三串二" : "四串三"}购买方案 · ${marketLabel}`,
+          id: `advance-${size}-${groupIndex}-${offset}-${markets.join("-")}`,
+          type: `提前${size === 2 ? "二串一" : size === 3 ? "三串二" : "四串三"}购买方案 · ${marketLabel}`,
+          planSize: size,
           mode,
           requiredHits,
           matchIds: group.map((match) => match.id),
@@ -402,16 +408,23 @@ function buildPurchasePlans(matches, targetDate) {
           risk: markets.includes("score") || size === 4 ? "高" : "中",
           planProbability: probability,
           targetDate,
-          note: `提前准备 ${targetDate} 的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。`,
+          note: `提前准备 ${targetDates.join("、")} 的竞彩串单，优先明日赛事，按组合概率排序，临场需再次确认开售状态和首发。`,
           socialNote: chooseSocialNote(group),
         });
       });
     });
   });
 
-  return plans
+  const selectedBySize = plans.reduce((selected, plan) => {
+    selected[plan.planSize] ||= [];
+    selected[plan.planSize].push(plan);
+    return selected;
+  }, {});
+
+  return Object.values(selectedBySize)
+    .flatMap((items) => items.sort((a, b) => b.planProbability - a.planProbability).slice(0, 8))
     .sort((a, b) => b.planProbability - a.planProbability)
-    .slice(0, 12);
+    .slice(0, 24);
 }
 
 function actualWdl(match) {
@@ -690,7 +703,8 @@ async function main() {
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
-  const plans = buildPurchasePlans(concernMatches, targetDate);
+  const fallbackDates = [addDays(today, 2), addDays(today, 3)];
+  const plans = buildPurchasePlans(concernMatches, targetDate, fallbackDates);
   const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
   const history = buildHistory(planArchive);
   const dailyPlanSummaries = buildDailyPlanSummaries(planArchive);

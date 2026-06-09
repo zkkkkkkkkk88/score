@@ -101,6 +101,10 @@ setTimeout(() => {
   assert(!html.includes("预计回报"), "does not render return estimate");
   assert(html.includes("购买方案"), "renders purchase plan section");
   assert(data.parlaySeeds.every((plan) => plan.targetDate), "generates target-date parlay plans");
+  assert(data.parlaySeeds.length >= 12, "generates a larger parlay pool");
+  assert(data.parlaySeeds.some((plan) => plan.planSize === 2), "includes two-leg parlays");
+  assert(data.parlaySeeds.some((plan) => plan.planSize === 3), "includes three-leg parlays");
+  assert(data.parlaySeeds.some((plan) => plan.planSize === 4), "includes four-leg parlays");
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("hdc")), "includes handicap parlays");
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("score")), "includes score parlays");
   assert(data.parlaySeeds.every((plan, index, plans) => index === 0 || plans[index - 1].planProbability >= plan.planProbability), "sorts parlays by probability");
