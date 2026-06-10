@@ -136,6 +136,13 @@ setTimeout(() => {
   assert(html.includes("自动复盘"), "renders automatic hit summary");
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
+  assert(
+    data.dailyPlanSummaries.every((item) => {
+      if (!item.reviewedPlans || item.reviewedPlans === item.totalPlans) return true;
+      return !elements["#dailySummary"].innerHTML.includes(`${item.totalPlans} 个购买方案`);
+    }),
+    "does not present archived total as reviewed daily hit count",
+  );
   assert(!elements["#dailySummary"].innerHTML.includes("summary-details"), "keeps overview daily summary compact");
   assert(elements["#hitTracker"].innerHTML.includes("review-date-group"), "groups hit review rows by date");
   assert(elements["#hitTracker"].innerHTML.includes("每日命中率"), "shows daily hit rate in review groups");

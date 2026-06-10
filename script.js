@@ -922,16 +922,20 @@ function renderDailySummary() {
     .map((item, index) => {
       const rate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
       const label = index === 0 ? "今日方案" : "历史方案";
+      const pendingPlans = item.pendingPlans ?? Math.max(0, item.totalPlans - item.reviewedPlans);
+      const headlineCount = item.reviewedPlans || pendingPlans || item.totalPlans;
+      const headlineLabel = item.reviewedPlans ? "个已复盘方案" : "个待复盘方案";
 
       return `
         <article class="summary-card">
           <div>
             <span>每日方案汇总 · ${label} · ${escapeHtml(item.date)}</span>
-            <strong>${item.totalPlans} 个购买方案</strong>
+            <strong>${headlineCount} ${headlineLabel}</strong>
           </div>
           <div class="summary-metrics">
             <span>已复盘 ${item.reviewedPlans}</span>
             <span>命中 ${item.hitPlans}</span>
+            <span>待复盘 ${pendingPlans}</span>
             <span>命中率 ${pct(rate)}</span>
           </div>
           ${renderProbabilityBar(rate, `${item.date} 命中率`)}

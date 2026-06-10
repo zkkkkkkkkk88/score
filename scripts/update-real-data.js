@@ -758,6 +758,7 @@ function buildDailyPlanSummaries(planArchive) {
         date: plan.date,
         totalPlans: 0,
         reviewedPlans: 0,
+        pendingPlans: 0,
         hitPlans: 0,
         hitRate: 0,
         planTypes: [],
@@ -771,6 +772,8 @@ function buildDailyPlanSummaries(planArchive) {
     if (plan.result === "hit" || plan.result === "miss") {
       summary.reviewedPlans += 1;
       if (plan.result === "hit") summary.hitPlans += 1;
+    } else {
+      summary.pendingPlans += 1;
     }
   });
 
@@ -782,7 +785,7 @@ function buildDailyPlanSummaries(planArchive) {
         planTypes: [...new Set(item.planTypes)],
         hitRate,
         summary: item.reviewedPlans
-          ? `${item.date} 已复盘 ${item.reviewedPlans} 个购买方案，命中 ${item.hitPlans} 个，命中率 ${Math.round(hitRate * 100)}%。`
+          ? `${item.date} 已复盘 ${item.reviewedPlans} 个购买方案，命中 ${item.hitPlans} 个，命中率 ${Math.round(hitRate * 100)}%。${item.pendingPlans ? `另有 ${item.pendingPlans} 个方案等待完赛。` : ""}`
           : `${item.date} 已推出 ${item.totalPlans} 个购买方案，等待比赛完场后统计命中率。`,
       };
     })

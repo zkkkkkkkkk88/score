@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-10T20:10:02.544+08:00",
+  "generatedAt": "2026-06-10T20:30:02.449+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -6936,6 +6936,7 @@
       "date": "2026-06-10",
       "totalPlans": 10,
       "reviewedPlans": 0,
+      "pendingPlans": 10,
       "hitPlans": 0,
       "hitRate": 0,
       "planTypes": [
@@ -6954,6 +6955,7 @@
       "date": "2026-06-09",
       "totalPlans": 54,
       "reviewedPlans": 14,
+      "pendingPlans": 40,
       "hitPlans": 1,
       "hitRate": 0.07142857142857142,
       "planTypes": [
@@ -6977,7 +6979,7 @@
         "竞彩三串二购买方案",
         "竞彩四串三购买方案"
       ],
-      "summary": "2026-06-09 已复盘 14 个购买方案，命中 1 个，命中率 7%。"
+      "summary": "2026-06-09 已复盘 14 个购买方案，命中 1 个，命中率 7%。另有 40 个方案等待完赛。"
     }
   ],
   "marketHistory": [
