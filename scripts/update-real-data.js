@@ -13,6 +13,64 @@ const headers = {
   Origin: "https://m.sporttery.cn",
 };
 
+const TEAM_POWER = {
+  阿根廷: 94,
+  巴西: 92,
+  法国: 91,
+  葡萄牙: 90,
+  英格兰: 90,
+  西班牙: 89,
+  荷兰: 87,
+  德国: 86,
+  比利时: 85,
+  乌拉圭: 84,
+  克罗地亚: 83,
+  丹麦: 82,
+  摩洛哥: 82,
+  瑞士: 81,
+  哥伦比亚: 81,
+  墨西哥: 81,
+  挪威: 81,
+  日本: 80,
+  奥地利: 80,
+  瑞典: 80,
+  美国: 80,
+  匈牙利: 79,
+  塞内加尔: 79,
+  塞尔维亚: 79,
+  澳大利亚: 76,
+  尼日利亚: 76,
+  巴拉圭: 76,
+  埃及: 76,
+  韩国: 78,
+  土耳其: 78,
+  科特迪瓦: 78,
+  厄瓜多尔: 78,
+  伊朗: 78,
+  阿尔及利亚: 77,
+  捷克: 77,
+  苏格兰: 77,
+  波黑: 75,
+  突尼斯: 74,
+  乌兹别克斯坦: 73,
+  佛得角: 73,
+  "刚果(金)": 72,
+  哥斯达黎加: 72,
+  沙特阿拉伯: 72,
+  南非: 70,
+  新西兰: 70,
+  卡塔尔: 70,
+  伊拉克: 70,
+  巴拿马: 70,
+  泰国: 69,
+  约旦: 68,
+  冰岛: 68,
+  中国: 67,
+  库拉索: 66,
+  海地: 64,
+  哈萨克斯坦: 63,
+};
+
 function nowIsoShanghai() {
   const date = new Date();
   const offsetMs = 8 * 60 * 60 * 1000;
@@ -152,6 +210,21 @@ function getKickoff(match) {
   return String(match.matchTime || "00:00").slice(0, 5);
 }
 
+function teamPower(name, fallback) {
+  const text = String(name || "");
+  const key = Object.keys(TEAM_POWER).find((item) => text.includes(item));
+  if (key) return TEAM_POWER[key];
+  return fallback;
+}
+
+function getStrengthEdge(match) {
+  const homeFallback = 72 + (Number(match.homeTeamId || 0) % 17);
+  const awayFallback = 72 + (Number(match.awayTeamId || 0) % 17);
+  const home = teamPower(match.homeTeamAllName || match.homeTeamAbbName, homeFallback);
+  const away = teamPower(match.awayTeamAllName || match.awayTeamAbbName, awayFallback);
+  return home - away;
+}
+
 function scoreModel(match, score) {
   if (score.home !== null && score.away !== null) {
     if (score.home > score.away) return { pick: "主胜", probability: 0.72 };
@@ -159,19 +232,23 @@ function scoreModel(match, score) {
     return { pick: "平", probability: 0.58 };
   }
 
-  const seed = Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0);
-  if (Math.abs(seed) < 12) return { pick: "平", probability: 0.34 };
-  if (seed < 0) return { pick: "主胜", probability: 0.48 };
-  return { pick: "客胜", probability: 0.44 };
+  const edge = getStrengthEdge(match);
+  const absEdge = Math.abs(edge);
+  if (absEdge <= 4) return { pick: "平", probability: 0.36 };
+  const probability = clamp(0.42 + absEdge / 100, 0.43, 0.68);
+  return { pick: edge > 0 ? "主胜" : "客胜", probability };
 }
 
 function getStrengthSeed(match) {
-  return Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0);
+  return getStrengthEdge(match);
 }
 
 function getEstimatedScore(match, wdlPick, exactGoals) {
   const total = exactGoals === "4+" ? 4 : Number(exactGoals);
   if (!Number.isFinite(total) || total <= 0) return "0-0";
+  const edge = getStrengthEdge(match);
+  if (Math.abs(edge) >= 20 && total >= 3) return edge > 0 ? "3-0" : "0-3";
+  if (Math.abs(edge) >= 12 && total >= 2) return edge > 0 ? "2-0" : "0-2";
   if (wdlPick === "平") {
     const side = Math.floor(total / 2);
     return `${side}-${total - side}`;
@@ -199,10 +276,12 @@ function handicapModel(match, score, wdlPick) {
 }
 
 function estimateExactGoals(match) {
-  const seed = Math.abs(Number(match.homeTeamId || 0) - Number(match.awayTeamId || 0));
+  const seed = Math.abs(getStrengthEdge(match));
   const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
-  const value = (seed + kickoffHour) % 5;
-  return value >= 4 ? "4+" : String(value);
+  if (seed >= 20) return "3";
+  if (seed >= 12) return kickoffHour >= 6 ? "3" : "2";
+  if (seed <= 4) return kickoffHour >= 20 || kickoffHour <= 4 ? "2" : "1";
+  return "2";
 }
 
 function buildMarkets(match, status, score) {

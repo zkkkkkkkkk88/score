@@ -94,6 +94,11 @@ setTimeout(() => {
   assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
+  const argentinaMatch = data.matches.find((match) => match.homeTeam.includes("阿根廷") && match.awayTeam.includes("冰岛"));
+  if (argentinaMatch) {
+    assert(argentinaMatch.markets.wdl.pick === "主胜", "uses team-strength model for clear favorite win/draw/loss");
+    assert(argentinaMatch.markets.score.pick === "3-0", "uses team-strength model for clear favorite scoreline");
+  }
   assert(
     data.planArchive.every((plan) => plan.picks.every((pick) => pick.status !== "finished" || typeof pick.hit === "boolean")),
     "marks finished archived picks as correct or wrong",
