@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-10T22:24:03.147+08:00",
+  "generatedAt": "2026-06-10T23:25:03.565+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -79,12 +79,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -200,12 +200,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -310,12 +310,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -430,12 +430,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/平",
+          "probability": 0.173,
+          "confidence": 46,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.24,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -550,12 +550,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -670,12 +670,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -790,12 +790,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
+          "pick": "平/负",
+          "probability": 0.202,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -900,12 +900,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -1020,12 +1020,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
+          "pick": "平/负",
+          "probability": 0.202,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -1144,7 +1144,7 @@
           "probability": 0.216,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
           "baseProbability": 0.3,
           "modelWeight": 0.72,
           "sampleSize": 0
@@ -1260,12 +1260,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -1370,12 +1370,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -1494,7 +1494,7 @@
           "probability": 0.216,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
           "baseProbability": 0.3,
           "modelWeight": 0.72,
           "sampleSize": 0
@@ -1610,12 +1610,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -1730,12 +1730,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -1840,12 +1840,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -1960,12 +1960,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
+          "pick": "平/负",
+          "probability": 0.202,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2080,12 +2080,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2200,12 +2200,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2320,12 +2320,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
+          "pick": "平/负",
+          "probability": 0.202,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -2430,12 +2430,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2550,12 +2550,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2670,12 +2670,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2790,12 +2790,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -2910,12 +2910,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
-          "confidence": 52,
+          "pick": "胜/胜",
+          "probability": 0.245,
+          "confidence": 58,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.34,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -3030,12 +3030,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/平",
-          "probability": 0.216,
+          "pick": "平/负",
+          "probability": 0.202,
           "confidence": 52,
           "risk": "高",
-          "reason": "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
-          "baseProbability": 0.3,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -4950,7 +4950,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-10T22:24:03.147+08:00",
+    "generatedAt": "2026-06-10T23:25:03.565+08:00",
     "marketWeights": {
       "wdl": 1.078,
       "hdc": 0.758,

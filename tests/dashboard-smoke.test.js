@@ -131,6 +131,7 @@ setTimeout(() => {
     ),
     "keeps base and calibrated probabilities on each market",
   );
+  assert(new Set(data.matches.map((match) => match.markets.htft?.pick).filter(Boolean)).size > 1, "does not collapse every half/full-time pick to draw/draw");
   assert(html.includes("购买方案"), "renders purchase plan section");
   assert(data.parlaySeeds.every((plan) => plan.targetDate), "generates target-date parlay plans");
   assert(data.parlaySeeds.length > 0, "generates purchasable parlay plans");

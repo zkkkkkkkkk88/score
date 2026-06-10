@@ -430,6 +430,64 @@ function handicapModel(match, score, wdlPick) {
   return { handicap, pick: handicap < 0 ? "让负" : "让平", probability: 0.42 };
 }
 
+function scoreResult(score) {
+  if (score.home > score.away) return "胜";
+  if (score.home < score.away) return "负";
+  return "平";
+}
+
+function htftModel(match, status, score, wdlPick, exactGoals) {
+  if (status === "finished" && score.home !== null && score.away !== null) {
+    const halfScore = parseScore(match.sectionsNo1);
+    const half = halfScore.home !== null && halfScore.away !== null ? scoreResult(halfScore) : "平";
+    const full = scoreResult(score);
+    return {
+      pick: `${half}/${full}`,
+      probability: 0.52,
+      confidence: 70,
+      risk: "高",
+      reason: "根据半场和全场比分做复盘方向。",
+    };
+  }
+
+  const profile = getModelProfile(match);
+  const edge = profile.strengthEdge;
+  const absEdge = Math.abs(edge);
+  const goals = exactGoals === "4+" ? 4 : Number(exactGoals);
+  const lowGoalDraw = Number.isFinite(goals) && goals <= 1;
+
+  if (wdlPick === "主胜") {
+    const earlyControl = absEdge >= 18 && profile.attackEdge >= 8 && !lowGoalDraw;
+    return {
+      pick: earlyControl ? "胜/胜" : "平/胜",
+      probability: earlyControl ? 0.34 : 0.29,
+      confidence: earlyControl ? 58 : 54,
+      risk: "高",
+      reason: earlyControl ? "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。" : "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+    };
+  }
+
+  if (wdlPick === "客胜") {
+    const earlyControl = absEdge >= 18 && profile.awayAttackEdge >= 6 && !lowGoalDraw;
+    return {
+      pick: earlyControl ? "负/负" : "平/负",
+      probability: earlyControl ? 0.32 : 0.28,
+      confidence: earlyControl ? 56 : 52,
+      risk: "高",
+      reason: earlyControl ? "客队强度和客队进攻倾向占优，倾向客队半场领先并保持。" : "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+    };
+  }
+
+  const drawPath = profile.goalBias <= 0 || lowGoalDraw ? "平/平" : edge >= 0 ? "胜/平" : "负/平";
+  return {
+    pick: drawPath,
+    probability: drawPath === "平/平" ? 0.3 : 0.24,
+    confidence: drawPath === "平/平" ? 52 : 46,
+    risk: "高",
+    reason: "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+  };
+}
+
 function estimateExactGoals(match, wdlPick) {
   const profile = getModelProfile(match);
   const seed = Math.abs(profile.strengthEdge);
@@ -452,6 +510,7 @@ function buildMarkets(match, status, score, options = {}) {
   const goalProbability = total === null ? 0.34 : 0.78;
   const handicap = handicapModel(match, score, wdl.pick);
   const exactScore = score.home === null || score.away === null ? getEstimatedScore(match, wdl.pick, exactGoals) : `${score.home}-${score.away}`;
+  const htft = htftModel(match, status, score, wdl.pick, exactGoals);
 
   const markets = {
     hdc: {
@@ -481,11 +540,11 @@ function buildMarkets(match, status, score, options = {}) {
       reason: status === "finished" ? "根据中国竞彩网完场比分复盘比分玩法。" : "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
     },
     htft: {
-      pick: status === "finished" && score.home > score.away ? "胜/胜" : "平/平",
-      probability: status === "finished" ? 0.52 : 0.3,
-      confidence: status === "finished" ? 70 : 52,
-      risk: "高",
-      reason: status === "finished" ? "根据半场和全场比分做复盘方向。" : "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
+      pick: htft.pick,
+      probability: htft.probability,
+      confidence: htft.confidence,
+      risk: htft.risk,
+      reason: htft.reason,
     },
   };
 
