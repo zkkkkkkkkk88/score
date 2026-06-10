@@ -5,6 +5,13 @@ const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
 const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
 const PLAN_SCHEMA_VERSION = "tomorrow-tab-plans-v1";
+const DEFAULT_MARKET_WEIGHTS = {
+  wdl: 1,
+  hdc: 0.96,
+  ou: 0.88,
+  score: 0.64,
+  htft: 0.72,
+};
 
 const headers = {
   "User-Agent":
@@ -69,6 +76,29 @@ const TEAM_POWER = {
   库拉索: 66,
   海地: 64,
   哈萨克斯坦: 63,
+};
+
+const TEAM_STYLE = {
+  阿根廷: { attack: 88, defense: 84, stability: 86 },
+  巴西: { attack: 89, defense: 82, stability: 83 },
+  法国: { attack: 86, defense: 85, stability: 85 },
+  葡萄牙: { attack: 86, defense: 80, stability: 82 },
+  英格兰: { attack: 85, defense: 83, stability: 82 },
+  西班牙: { attack: 84, defense: 82, stability: 83 },
+  荷兰: { attack: 82, defense: 80, stability: 80 },
+  德国: { attack: 84, defense: 78, stability: 78 },
+  比利时: { attack: 82, defense: 77, stability: 76 },
+  乌拉圭: { attack: 78, defense: 82, stability: 80 },
+  克罗地亚: { attack: 76, defense: 80, stability: 81 },
+  摩洛哥: { attack: 76, defense: 82, stability: 80 },
+  瑞士: { attack: 74, defense: 80, stability: 80 },
+  日本: { attack: 77, defense: 76, stability: 78 },
+  韩国: { attack: 75, defense: 74, stability: 74 },
+  墨西哥: { attack: 76, defense: 76, stability: 77 },
+  美国: { attack: 76, defense: 74, stability: 74 },
+  哥斯达黎加: { attack: 68, defense: 72, stability: 70 },
+  南非: { attack: 67, defense: 68, stability: 68 },
+  中国: { attack: 65, defense: 66, stability: 65 },
 };
 
 function nowIsoShanghai() {
@@ -217,12 +247,112 @@ function teamPower(name, fallback) {
   return fallback;
 }
 
+function teamProfile(name, fallback) {
+  const text = String(name || "");
+  const key = Object.keys(TEAM_POWER).find((item) => text.includes(item));
+  const power = key ? TEAM_POWER[key] : fallback;
+  const style = key ? TEAM_STYLE[key] : null;
+  return {
+    name: key || text || "未知球队",
+    power,
+    attack: style?.attack ?? clamp(power - 2, 58, 88),
+    defense: style?.defense ?? clamp(power - 3, 56, 86),
+    stability: style?.stability ?? clamp(power - 4, 55, 86),
+  };
+}
+
 function getStrengthEdge(match) {
   const homeFallback = 72 + (Number(match.homeTeamId || 0) % 17);
   const awayFallback = 72 + (Number(match.awayTeamId || 0) % 17);
-  const home = teamPower(match.homeTeamAllName || match.homeTeamAbbName, homeFallback);
-  const away = teamPower(match.awayTeamAllName || match.awayTeamAbbName, awayFallback);
-  return home - away;
+  const home = teamProfile(match.homeTeamAllName || match.homeTeamAbbName, homeFallback);
+  const away = teamProfile(match.awayTeamAllName || match.awayTeamAbbName, awayFallback);
+  return home.power - away.power + 2;
+}
+
+function getModelProfile(match) {
+  const homeFallback = 72 + (Number(match.homeTeamId || 0) % 17);
+  const awayFallback = 72 + (Number(match.awayTeamId || 0) % 17);
+  const home = teamProfile(match.homeTeamAllName || match.homeTeamAbbName, homeFallback);
+  const away = teamProfile(match.awayTeamAllName || match.awayTeamAbbName, awayFallback);
+  const strengthEdge = home.power - away.power + 2;
+  const attackEdge = home.attack - away.defense;
+  const awayAttackEdge = away.attack - home.defense;
+  const goalBias = clamp(Math.round((home.attack + away.attack - home.defense - away.defense) / 4), -8, 8);
+  const stability = Math.round((home.stability + away.stability) / 2);
+
+  return {
+    home,
+    away,
+    strengthEdge,
+    attackEdge,
+    awayAttackEdge,
+    goalBias,
+    stability,
+    summary: `强弱差 ${strengthEdge >= 0 ? "+" : ""}${strengthEdge}，进球倾向 ${goalBias >= 0 ? "+" : ""}${goalBias}，稳定度 ${stability}`,
+  };
+}
+
+function buildMarketCalibration(oldData) {
+  const buckets = Object.fromEntries(
+    Object.keys(DEFAULT_MARKET_WEIGHTS).map((market) => [
+      market,
+      {
+        hits: 0,
+        total: 0,
+        weight: DEFAULT_MARKET_WEIGHTS[market],
+      },
+    ]),
+  );
+
+  (oldData?.planArchive || []).forEach((plan) => {
+    (plan.picks || []).forEach((pick) => {
+      if (pick.hit !== true && pick.hit !== false) return;
+      const bucket = buckets[pick.marketKey];
+      if (!bucket) return;
+      bucket.total += 1;
+      if (pick.hit) bucket.hits += 1;
+    });
+  });
+
+  Object.entries(buckets).forEach(([market, bucket]) => {
+    if (bucket.total >= 4) {
+      const hitRate = bucket.hits / bucket.total;
+      const baseline = market === "score" ? 0.22 : market === "ou" ? 0.34 : market === "htft" ? 0.3 : 0.48;
+      bucket.weight = clamp(DEFAULT_MARKET_WEIGHTS[market] + (hitRate - baseline) * 0.42, 0.52, 1.18);
+    }
+  });
+
+  return {
+    marketWeights: Object.fromEntries(Object.entries(buckets).map(([market, bucket]) => [market, Number(bucket.weight.toFixed(3))])),
+    marketSamples: Object.fromEntries(
+      Object.entries(buckets).map(([market, bucket]) => [
+        market,
+        {
+          hits: bucket.hits,
+          total: bucket.total,
+          hitRate: bucket.total ? Number((bucket.hits / bucket.total).toFixed(3)) : 0,
+        },
+      ]),
+    ),
+  };
+}
+
+function calibratedProbability(baseProbability, marketKey, calibration) {
+  const weight = calibration?.marketWeights?.[marketKey] ?? DEFAULT_MARKET_WEIGHTS[marketKey] ?? 1;
+  const floor = marketKey === "score" ? 0.08 : marketKey === "htft" ? 0.12 : 0.16;
+  const ceiling = marketKey === "score" ? 0.42 : marketKey === "ou" ? 0.62 : 0.76;
+  return clamp(baseProbability * weight, floor, ceiling);
+}
+
+function applyMarketCalibration(markets, calibration) {
+  Object.entries(markets).forEach(([marketKey, market]) => {
+    const baseProbability = market.probability;
+    market.baseProbability = Number(baseProbability.toFixed(3));
+    market.probability = Number(calibratedProbability(baseProbability, marketKey, calibration).toFixed(3));
+    market.modelWeight = calibration?.marketWeights?.[marketKey] ?? DEFAULT_MARKET_WEIGHTS[marketKey] ?? 1;
+    market.sampleSize = calibration?.marketSamples?.[marketKey]?.total ?? 0;
+  });
+  return markets;
 }
 
 function stableIndex(match, size) {
@@ -239,10 +369,12 @@ function scoreModel(match, score) {
     return { pick: "平", probability: 0.58 };
   }
 
-  const edge = getStrengthEdge(match);
+  const profile = getModelProfile(match);
+  const edge = profile.strengthEdge;
   const absEdge = Math.abs(edge);
   if (absEdge <= 4) return { pick: "平", probability: 0.36 };
-  const probability = clamp(0.42 + absEdge / 100, 0.43, 0.68);
+  const stabilityBoost = (profile.stability - 70) / 300;
+  const probability = clamp(0.42 + absEdge / 100 + stabilityBoost, 0.43, 0.7);
   return { pick: edge > 0 ? "主胜" : "客胜", probability };
 }
 
@@ -299,12 +431,13 @@ function handicapModel(match, score, wdlPick) {
 }
 
 function estimateExactGoals(match, wdlPick) {
-  const seed = Math.abs(getStrengthEdge(match));
+  const profile = getModelProfile(match);
+  const seed = Math.abs(profile.strengthEdge);
   const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
   const lateOrEarly = kickoffHour >= 20 || kickoffHour <= 4;
   let goals;
-  if (seed >= 24) goals = stableIndex(match, 4) === 0 ? "4+" : "3";
-  else if (seed >= 16) goals = lateOrEarly ? "3" : ["2", "3"][stableIndex(match, 2)];
+  if (seed >= 24 || profile.goalBias >= 5) goals = stableIndex(match, 4) === 0 ? "4+" : "3";
+  else if (seed >= 16 || profile.goalBias >= 3) goals = lateOrEarly ? "3" : ["2", "3"][stableIndex(match, 2)];
   else if (seed <= 4) goals = lateOrEarly ? ["1", "2"][stableIndex(match, 2)] : ["0", "1", "2"][stableIndex(match, 3)];
   else goals = ["1", "2", "3"][stableIndex(match, 3)];
   if (wdlPick === "平" && goals !== "4+" && Number(goals) % 2 === 1) return Number(goals) <= 1 ? "0" : "2";
@@ -366,7 +499,7 @@ function buildMarkets(match, status, score, options = {}) {
     };
   }
 
-  return markets;
+  return applyMarketCalibration(markets, options.calibration);
 }
 
 function socialFactorsFromMatch(match, status) {
@@ -395,19 +528,25 @@ function socialFactorsFromMatch(match, status) {
   };
 }
 
-function mapMatch(match, index, oldByEventId = new Map()) {
+function mapMatch(match, index, oldByEventId = new Map(), calibration = null) {
   const status = getStatus(match);
   const score = parseScore(match.sectionsNo999);
   const sourceEventId = String(match.matchId);
   const oldMatch = oldByEventId.get(sourceEventId);
   const preScore = { home: null, away: null };
   const standardWdl = hasStandardWdl(match);
-  const generatedMarkets = buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score, { standardWdl });
-  const markets =
+  const modelProfile = getModelProfile(match);
+  const generatedMarkets = buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score, {
+    standardWdl,
+    calibration,
+  });
+  const preservedMarkets =
     status === "finished" && oldMatch?.status !== "finished" && oldMatch?.markets
-      ? Object.fromEntries(Object.entries(oldMatch.markets).filter(([key]) => key !== "wdl" || standardWdl))
-      : generatedMarkets;
-  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl }) : null;
+      ? applyMarketCalibration(Object.fromEntries(Object.entries(oldMatch.markets).filter(([key]) => key !== "wdl" || standardWdl)), calibration)
+      : null;
+  const markets =
+    preservedMarkets ?? generatedMarkets;
+  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl, calibration }) : null;
   const sportteryNo = formatSportteryNo(match, index);
   const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
   const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
@@ -442,6 +581,7 @@ function mapMatch(match, index, oldByEventId = new Map()) {
     },
     markets,
     actualMarkets,
+    modelProfile,
     socialFactors: socialFactorsFromMatch(match, status),
   };
 }
@@ -511,6 +651,15 @@ function planProbability(matches, markets, mode, requiredHits) {
   return total;
 }
 
+function averageMarketWeight(matches, markets) {
+  const weights = matches.map((match, index) => match.markets[markets[index]].modelWeight ?? 1);
+  return weights.reduce((sum, item) => sum + item, 0) / weights.length;
+}
+
+function totalMarketSamples(matches, markets) {
+  return markets.reduce((sum, market, index) => sum + (matches[index].markets[market].sampleSize ?? 0), 0);
+}
+
 function buildPurchasePlans(matches, targetDate) {
   const candidates = purchaseCandidates(matches)
     .filter((match) => match.date === targetDate)
@@ -530,6 +679,8 @@ function buildPurchasePlans(matches, targetDate) {
       marketProducts(group).forEach((markets, marketIndex) => {
         const probability = planProbability(group, markets, category.mode, category.requiredHits);
         const marketLabel = [...new Set(markets.map((market) => marketNamesForArchive()[market]))].join("+");
+        const modelWeight = averageMarketWeight(group, markets);
+        const modelSamples = totalMarketSamples(group, markets);
         categoryPlans.push({
           id: `tomorrow-${category.group}-${groupIndex}-${marketIndex}-${markets.join("-")}`,
           type: `明日${category.group}购买方案 · ${marketLabel}`,
@@ -542,8 +693,10 @@ function buildPurchasePlans(matches, targetDate) {
           markets,
           risk: markets.includes("score") || category.size === 4 ? "高" : "中",
           planProbability: probability,
+          modelWeight: Number(modelWeight.toFixed(3)),
+          modelSamples,
           targetDate,
-          note: `提前准备 ${targetDate} 同一天的竞彩串单，按组合概率排序，临场需再次确认开售状态和首发。`,
+          note: `提前准备 ${targetDate} 同一天的竞彩串单，按校准概率排序；玩法权重 ${modelWeight.toFixed(2)}，复盘样本 ${modelSamples}，临场需再次确认开售状态和首发。`,
           socialNote: chooseSocialNote(group),
         });
       });
@@ -815,6 +968,7 @@ async function main() {
   const concernRaw = await fetchList("concern");
   const allRaw = await fetchList("all");
   const liveData = await fetchLive(concernRaw);
+  const calibration = buildMarketCalibration(oldData);
   const oldByEventId = new Map((oldData?.matches || []).map((match) => [String(match.sourceEventId), match]));
   const rawByEventId = new Map();
 
@@ -836,8 +990,8 @@ async function main() {
     if (!allByEventId.has(key)) allByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
   });
 
-  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId));
-  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId));
+  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration));
+  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration));
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
@@ -864,6 +1018,12 @@ async function main() {
     autoReview: buildAutoReview(history),
     dailyPlanSummaries,
     marketHistory: buildMarketHistory(allMatches),
+    modelProfile: {
+      generatedAt,
+      marketWeights: calibration.marketWeights,
+      marketSamples: calibration.marketSamples,
+      note: "球队画像结合历史复盘对玩法概率做轻量校准；样本不足时使用保守默认权重。",
+    },
     tomorrowPool: buildTomorrowPool(concernMatches, targetDate),
   };
 

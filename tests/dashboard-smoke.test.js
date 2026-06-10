@@ -120,6 +120,17 @@ setTimeout(() => {
   assert(!html.includes("大小球"), "does not render old over-under label");
   assert(!html.includes("赔率"), "does not render odds wording");
   assert(!html.includes("预计回报"), "does not render return estimate");
+  assert(data.modelProfile?.marketWeights?.hdc, "builds market calibration weights from reviewed plans");
+  assert(
+    data.matches.every((match) => match.modelProfile && typeof match.modelProfile.strengthEdge === "number"),
+    "adds team-strength model profile to each match",
+  );
+  assert(
+    data.matches.every((match) =>
+      Object.values(match.markets).every((market) => typeof market.baseProbability === "number" && typeof market.probability === "number"),
+    ),
+    "keeps base and calibrated probabilities on each market",
+  );
   assert(html.includes("购买方案"), "renders purchase plan section");
   assert(data.parlaySeeds.every((plan) => plan.targetDate), "generates target-date parlay plans");
   assert(data.parlaySeeds.length > 0, "generates purchasable parlay plans");
@@ -181,6 +192,7 @@ setTimeout(() => {
   );
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("赛程环境"), "renders schedule context analysis");
+  assert(html.includes("模型修正"), "renders model calibration context");
   assert(html.includes("任务与轮换"), "renders motivation and rotation analysis");
   assert(html.includes("外部环境"), "renders external context analysis");
   assert(html.includes("复盘权重"), "renders review weighting analysis");

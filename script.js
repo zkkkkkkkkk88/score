@@ -522,6 +522,45 @@ function renderSocialFactors(match) {
   `;
 }
 
+function renderModelProfile(match) {
+  const profile = match.modelProfile;
+  const weights = state.data.modelProfile?.marketWeights ?? {};
+  const samples = state.data.modelProfile?.marketSamples ?? {};
+  if (!profile) return "";
+
+  const primary = primaryMarket(match);
+  const primaryWeight = primary.market.modelWeight ?? weights[primary.key] ?? 1;
+  const primarySamples = primary.market.sampleSize ?? samples[primary.key]?.total ?? 0;
+  const goalWeight = match.markets.ou?.modelWeight ?? weights.ou ?? 1;
+
+  return `
+    <div class="social-panel model-panel">
+      <div class="section-heading">
+        <p>模型修正</p>
+        <h3>球队强度与复盘权重</h3>
+      </div>
+      <div class="social-grid">
+        <div>
+          <span>球队强度</span>
+          <strong>${escapeHtml(profile.summary)}</strong>
+        </div>
+        <div>
+          <span>主玩法权重</span>
+          <strong>${escapeHtml(marketNames[primary.key])} × ${primaryWeight.toFixed(2)}，样本 ${primarySamples}</strong>
+        </div>
+        <div>
+          <span>进球权重</span>
+          <strong>总进球数 × ${goalWeight.toFixed(2)}，按复盘表现校准</strong>
+        </div>
+        <div>
+          <span>概率口径</span>
+          <strong>先算基础概率，再按玩法历史命中率做保守修正。</strong>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderAnalysis() {
   const match = getSelectedMatch();
   if (!match) {
@@ -585,6 +624,7 @@ function renderAnalysis() {
 
       ${renderLiveSignals(match)}
       ${renderSocialFactors(match)}
+      ${renderModelProfile(match)}
 
       <div class="market-grid">
         ${renderMarketCard(match, "wdl")}
@@ -682,6 +722,7 @@ function renderParlayCard(seed) {
           <p>${escapeHtml(seed.note)}</p>
           <div class="parlay-foot">
             <span>${escapeHtml(riskLabels[seed.risk] ?? seed.risk)}</span>
+            <span>模型权重 ${(seed.modelWeight ?? 1).toFixed(2)} · 样本 ${seed.modelSamples ?? 0}</span>
             <span>方案变化 ${delta >= 0 ? "+" : ""}${Math.round(delta * 100)}%</span>
           </div>
         </article>
