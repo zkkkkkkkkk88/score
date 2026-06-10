@@ -674,7 +674,12 @@ function evaluateArchivedPlan(plan, matches) {
 }
 
 function buildPlanArchive(oldData, plans, matches, allMatches, generatedAt, today) {
-  const archive = Array.isArray(oldData?.planArchive) ? oldData.planArchive : [];
+  const archive = (Array.isArray(oldData?.planArchive) ? oldData.planArchive : []).filter((plan) => {
+    const isSettled = plan.result === "hit" || plan.result === "miss";
+    const isCurrentSchema = plan.schemaVersion === PLAN_SCHEMA_VERSION;
+    const isTodayPending = plan.date === today && !isSettled;
+    return isSettled || isCurrentSchema || isTodayPending;
+  });
   const byId = new Map(archive.map((plan) => [plan.archiveId, plan]));
 
   plans.forEach((plan) => {

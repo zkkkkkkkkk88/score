@@ -130,6 +130,12 @@ setTimeout(() => {
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("hdc")), "includes handicap parlays");
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("score")), "includes at least one score parlay");
   assert(data.parlaySeeds.every((plan, index, plans) => index === 0 || plan.planGroup !== plans[index - 1].planGroup || plans[index - 1].planProbability >= plan.planProbability), "sorts each parlay group by probability");
+  assert(
+    data.planArchive.every(
+      (plan) => plan.schemaVersion === "tomorrow-tab-plans-v1" || plan.result === "hit" || plan.result === "miss",
+    ),
+    "drops unresolved legacy plan snapshots from the archive",
+  );
   assert(html.includes("核心胆"), "renders parlay banker pick");
   assert(html.includes("风险点"), "renders parlay weak link");
   assert(html.includes("玩法表现"), "renders market performance history");
@@ -168,7 +174,11 @@ setTimeout(() => {
   assert(styleCss.includes(".analysis-layout") && styleCss.includes("calc(100vh") && styleCss.includes("overflow-y: auto"), "keeps analysis columns fixed with internal scrolling");
   assert(styleCss.includes("repeat(auto-fit, minmax(220px, 1fr))"), "uses wider responsive market cards");
   assert(styleCss.includes("repeat(auto-fit, minmax(300px, 1fr))"), "uses wider responsive parlay cards");
-  assert(html.includes("今日重点"), "renders focus match strip");
+  const today = data.generatedAt.slice(0, 10);
+  assert(
+    html.includes(data.matches.some((match) => match.date === today) ? "今日重点" : "今日暂无真实赛事"),
+    "renders focus match strip or empty focus state",
+  );
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("赛程环境"), "renders schedule context analysis");
   assert(html.includes("任务与轮换"), "renders motivation and rotation analysis");
