@@ -4,6 +4,7 @@ const assert = require("assert");
 
 const data = JSON.parse(fs.readFileSync("data/matches.json", "utf8"));
 const pageHtml = fs.readFileSync("index.html", "utf8");
+const styleCss = fs.readFileSync("styles.css", "utf8");
 
 function createElement() {
   return {
@@ -140,6 +141,7 @@ setTimeout(() => {
   assert(pageHtml.includes('data-sale-filter="available"') && pageHtml.includes("可购买"), "renders purchasable match filter");
   assert(saleTabs.length === 2, "wires purchasable and all-match filters");
   assert(viewButtons.length === 5 && views.length === 5, "renders page navigation views");
+  assert(styleCss.includes(".analysis-layout") && styleCss.includes("calc(100vh") && styleCss.includes("overflow-y: auto"), "keeps analysis columns fixed with internal scrolling");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("社会因素"), "renders social factor analysis");

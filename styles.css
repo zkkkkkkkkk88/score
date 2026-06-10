@@ -225,10 +225,13 @@ h2 {
 }
 
 .analysis-layout {
+  height: calc(100vh - 176px);
+  min-height: 560px;
   display: grid;
   grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
   gap: 12px;
-  align-items: start;
+  align-items: stretch;
+  overflow: hidden;
 }
 
 .overview-grid {
@@ -246,6 +249,39 @@ h2 {
   padding: 14px;
   display: grid;
   gap: 12px;
+}
+
+.match-rail {
+  min-height: 0;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.match-list {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+
+.match-list::-webkit-scrollbar,
+.analysis-panel::-webkit-scrollbar,
+#matchAnalysis::-webkit-scrollbar {
+  width: 8px;
+}
+
+.match-list::-webkit-scrollbar-track,
+.analysis-panel::-webkit-scrollbar-track,
+#matchAnalysis::-webkit-scrollbar-track {
+  background: rgba(45, 12, 14, 0.52);
+  border-radius: 999px;
+}
+
+.match-list::-webkit-scrollbar-thumb,
+.analysis-panel::-webkit-scrollbar-thumb,
+#matchAnalysis::-webkit-scrollbar-thumb {
+  background: rgba(216, 173, 80, 0.72);
+  border-radius: 999px;
 }
 
 .focus-strip-panel {
@@ -437,6 +473,17 @@ h2 {
 
 .analysis-panel {
   min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#matchAnalysis {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
 }
 
 .analysis-card {
@@ -1190,6 +1237,19 @@ h2 {
 @media (max-width: 820px) {
   .app-shell {
     padding: 12px;
+  }
+
+  .analysis-layout {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .match-rail,
+  .analysis-panel,
+  #matchAnalysis {
+    height: auto;
+    overflow: visible;
   }
 
   .top-nav,
