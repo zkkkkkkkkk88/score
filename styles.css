@@ -665,8 +665,8 @@ h2 {
 
 .parlay-group-list {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
   align-items: start;
 }
 
@@ -823,7 +823,7 @@ h2 {
 }
 
 .parlay-insights {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .parlay-insights div,
@@ -1019,6 +1019,45 @@ h2 {
   align-items: start;
 }
 
+.review-date-group {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(45, 12, 14, 0.64);
+}
+
+.review-date-group > summary {
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.review-date-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.review-date-group > summary strong {
+  color: var(--gold-2);
+}
+
+.review-date-group > summary span,
+.review-date-group > summary em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.review-date-list {
+  padding: 0 10px 10px;
+  display: grid;
+  gap: 8px;
+}
+
 .history-row.review-plan-details {
   display: block;
   padding: 0;
@@ -1027,7 +1066,7 @@ h2 {
 .history-row summary {
   padding: 10px 12px;
   display: grid;
-  grid-template-columns: minmax(120px, 0.2fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(110px, 0.18fr) minmax(0, 1fr) auto auto;
   gap: 10px;
   align-items: center;
   cursor: pointer;
@@ -1038,15 +1077,13 @@ h2 {
   display: none;
 }
 
-.history-row summary::after {
-  content: "查看";
+.review-open-label {
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   color: var(--gold-2);
   font-size: 12px;
   font-weight: 900;
-}
-
-.history-row[open] summary::after {
-  content: "收起";
 }
 
 .history-row strong,

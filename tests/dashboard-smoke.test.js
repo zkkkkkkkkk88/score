@@ -130,6 +130,8 @@ setTimeout(() => {
   assert(html.includes("自动复盘"), "renders automatic hit summary");
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
+  assert(!elements["#dailySummary"].innerHTML.includes("summary-details"), "keeps overview daily summary compact");
+  assert(elements["#hitTracker"].innerHTML.includes("review-date-group"), "groups hit review rows by date");
   assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
   assert(html.includes("已完赛方案") && html.includes("未完赛方案"), "groups historical plans by settlement status");
   assert(html.includes("history-split"), "renders finished and unfinished history columns");
@@ -151,6 +153,7 @@ setTimeout(() => {
   assert(viewButtons.length === 5 && views.length === 5, "renders page navigation views");
   assert(styleCss.includes(".analysis-layout") && styleCss.includes("calc(100vh") && styleCss.includes("overflow-y: auto"), "keeps analysis columns fixed with internal scrolling");
   assert(styleCss.includes("repeat(auto-fit, minmax(220px, 1fr))"), "uses wider responsive market cards");
+  assert(styleCss.includes("repeat(auto-fit, minmax(300px, 1fr))"), "uses wider responsive parlay cards");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");
   assert(html.includes("赛程环境"), "renders schedule context analysis");

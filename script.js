@@ -727,11 +727,36 @@ function renderHitTracker() {
       </div>
     </div>
       <div class="history-list">
-        ${history
-        .map((item) => renderReviewHistoryRow(item))
-        .join("") || `<div class="empty-state">等待比分完场后自动复盘购买方案命中率</div>`}
+        ${renderReviewHistoryGroups(history)}
     </div>
   `;
+}
+
+function renderReviewHistoryGroups(history) {
+  if (!history.length) return `<div class="empty-state">等待比分完场后自动复盘购买方案命中率</div>`;
+  const byDate = groupBy(history, (item) => item.date);
+
+  return Object.keys(byDate)
+    .sort((a, b) => b.localeCompare(a))
+    .map((date) => {
+      const items = byDate[date];
+      const hits = items.filter((item) => item.result === "hit").length;
+      const rate = items.length ? hits / items.length : 0;
+
+      return `
+        <details class="review-date-group" ${date === Object.keys(byDate).sort((a, b) => b.localeCompare(a))[0] ? "open" : ""}>
+          <summary>
+            <strong>${escapeHtml(date)}</strong>
+            <span>${items.length} 个方案</span>
+            <em>命中率 ${pct(rate)}</em>
+          </summary>
+          <div class="review-date-list">
+            ${items.map((item) => renderReviewHistoryRow(item)).join("")}
+          </div>
+        </details>
+      `;
+    })
+    .join("");
 }
 
 function renderReviewHistoryRow(item) {
@@ -744,6 +769,7 @@ function renderReviewHistoryRow(item) {
         <span>${escapeHtml(item.date)}</span>
         <strong>${escapeHtml(item.type)}</strong>
         <em class="${item.result === "hit" ? "hit" : "miss"}">${item.result === "hit" ? "命中" : "未中"} · ${pct(item.probability)}</em>
+        <span class="review-open-label">查看具体方案</span>
       </summary>
       <div class="review-plan-body">
         ${plan ? renderArchiveCard(plan) : `<div class="empty-state">暂无该方案明细</div>`}
@@ -875,7 +901,6 @@ function renderArchiveCard(plan) {
 
 function renderDailySummary() {
   const summaries = state.data.dailyPlanSummaries ?? [];
-  const archive = state.data.planArchive ?? [];
 
   if (!summaries.length) {
     els.dailySummary.innerHTML = `<div class="empty-state">今日方案生成后开始累计每日命中率</div>`;
@@ -886,7 +911,6 @@ function renderDailySummary() {
     .map((item, index) => {
       const rate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
       const label = index === 0 ? "今日方案" : "历史方案";
-      const plans = archive.filter((plan) => plan.date === item.date);
 
       return `
         <article class="summary-card">
@@ -901,12 +925,6 @@ function renderDailySummary() {
           </div>
           ${renderProbabilityBar(rate, `${item.date} 命中率`)}
           <p>${escapeHtml(item.summary)}</p>
-          <details class="summary-details">
-            <summary>查看具体方案</summary>
-            <div class="summary-plan-list">
-              ${plans.length ? plans.map(renderArchiveCard).join("") : `<div class="empty-state">当天暂无具体方案记录</div>`}
-            </div>
-          </details>
         </article>
       `;
     })
