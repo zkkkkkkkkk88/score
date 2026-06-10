@@ -726,19 +726,29 @@ function renderHitTracker() {
           .join("")}
       </div>
     </div>
-    <div class="history-list">
-      ${history
-        .map(
-          (item) => `
-            <div class="history-row">
-              <span>${escapeHtml(item.date)}</span>
-              <strong>${escapeHtml(item.type)}</strong>
-              <em class="${item.result === "hit" ? "hit" : "miss"}">${item.result === "hit" ? "命中" : "未中"} · ${pct(item.probability)}</em>
-            </div>
-          `,
-        )
+      <div class="history-list">
+        ${history
+        .map((item) => renderReviewHistoryRow(item))
         .join("") || `<div class="empty-state">等待比分完场后自动复盘购买方案命中率</div>`}
     </div>
+  `;
+}
+
+function renderReviewHistoryRow(item) {
+  const archive = state.data.planArchive ?? [];
+  const plan = archive.find((candidate) => candidate.archiveId === item.archiveId);
+
+  return `
+    <details class="history-row review-plan-details ${item.result}">
+      <summary>
+        <span>${escapeHtml(item.date)}</span>
+        <strong>${escapeHtml(item.type)}</strong>
+        <em class="${item.result === "hit" ? "hit" : "miss"}">${item.result === "hit" ? "命中" : "未中"} · ${pct(item.probability)}</em>
+      </summary>
+      <div class="review-plan-body">
+        ${plan ? renderArchiveCard(plan) : `<div class="empty-state">暂无该方案明细</div>`}
+      </div>
+    </details>
   `;
 }
 
@@ -753,10 +763,12 @@ function renderPlanHistory() {
   const settled = archive.filter((plan) => plan.result === "hit" || plan.result === "miss");
   const pending = archive.filter((plan) => plan.result !== "hit" && plan.result !== "miss");
 
-  els.planHistory.innerHTML = [
-    renderArchiveStatusGroup("已完赛方案", settled),
-    renderArchiveStatusGroup("未完赛方案", pending),
-  ].join("");
+  els.planHistory.innerHTML = `
+    <div class="history-split">
+      ${renderArchiveStatusGroup("已完赛方案", settled)}
+      ${renderArchiveStatusGroup("未完赛方案", pending)}
+    </div>
+  `;
 }
 
 function renderArchiveStatusGroup(title, plans) {

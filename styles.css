@@ -705,21 +705,21 @@ h2 {
 }
 
 .market-result.is-hit {
+  border-color: rgba(85, 205, 126, 0.9);
+  background: rgba(24, 96, 54, 0.72);
+}
+
+.market-result.is-hit em {
+  color: #d5ffd7;
+}
+
+.market-result.is-miss {
   border-color: rgba(205, 49, 43, 0.9);
   background: rgba(128, 24, 27, 0.72);
 }
 
-.market-result.is-hit em {
-  color: #ffd9c7;
-}
-
-.market-result.is-miss {
-  border-color: rgba(53, 137, 78, 0.9);
-  background: rgba(26, 86, 48, 0.72);
-}
-
 .market-result.is-miss em {
-  color: #d5ffd7;
+  color: #ffd9c7;
 }
 
 .market-result.is-pending em {
@@ -965,13 +965,56 @@ h2 {
   font-style: normal;
 }
 
-.history-row strong {
+.history-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.history-row.review-plan-details {
+  display: block;
+  padding: 0;
+}
+
+.history-row summary {
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: minmax(120px, 0.2fr) minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.history-row summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-row summary::after {
+  content: "查看";
+  color: var(--gold-2);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.history-row[open] summary::after {
+  content: "收起";
+}
+
+.history-row strong,
+.history-row summary strong {
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-.history-row em {
+.history-row em,
+.history-row summary em {
   font-style: normal;
+}
+
+.review-plan-body {
+  padding: 0 12px 12px;
 }
 
 .summary-details {
@@ -999,7 +1042,7 @@ h2 {
 }
 
 .miss {
-  color: #e4b0aa;
+  color: #ffb8ad;
 }
 
 .archive-card {
@@ -1071,24 +1114,24 @@ h2 {
 }
 
 .archive-pick.pick-hit {
-  border-color: rgba(255, 80, 76, 0.95);
-  background: linear-gradient(90deg, rgba(140, 24, 26, 0.72), rgba(53, 16, 18, 0.88));
-  box-shadow: inset 4px 0 0 rgba(255, 80, 76, 0.96);
-}
-
-.archive-pick.pick-hit b {
-  background: #d53835;
-  color: #fff7df;
-}
-
-.archive-pick.pick-miss {
   border-color: rgba(85, 205, 126, 0.95);
   background: linear-gradient(90deg, rgba(24, 96, 54, 0.7), rgba(53, 16, 18, 0.88));
   box-shadow: inset 4px 0 0 rgba(85, 205, 126, 0.96);
 }
 
-.archive-pick.pick-miss b {
+.archive-pick.pick-hit b {
   background: #2c9f58;
+  color: #fff7df;
+}
+
+.archive-pick.pick-miss {
+  border-color: rgba(255, 80, 76, 0.95);
+  background: linear-gradient(90deg, rgba(140, 24, 26, 0.72), rgba(53, 16, 18, 0.88));
+  box-shadow: inset 4px 0 0 rgba(255, 80, 76, 0.96);
+}
+
+.archive-pick.pick-miss b {
+  background: #d53835;
   color: #fff7df;
 }
 
@@ -1166,6 +1209,7 @@ h2 {
   .parlay-list,
   .plans-workspace .parlay-list,
   .parlay-group-list,
+  .history-split,
   .tomorrow-pool {
     grid-template-columns: 1fr;
   }
