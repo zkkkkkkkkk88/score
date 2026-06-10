@@ -750,37 +750,69 @@ function renderPlanHistory() {
     return;
   }
 
-  const byDate = groupBy(archive, (plan) => plan.date);
+  const settled = archive.filter((plan) => plan.result === "hit" || plan.result === "miss");
+  const pending = archive.filter((plan) => plan.result !== "hit" && plan.result !== "miss");
 
-  els.planHistory.innerHTML = Object.keys(byDate)
-    .sort((a, b) => b.localeCompare(a))
-    .map((date) => {
-      const byGroup = groupBy(byDate[date], (plan) => plan.planGroup || "其他");
+  els.planHistory.innerHTML = [
+    renderArchiveStatusGroup("已完赛方案", settled),
+    renderArchiveStatusGroup("未完赛方案", pending),
+  ].join("");
+}
 
-      return `
-        <section class="archive-date-group">
-          <div class="group-heading">
-            <h3>${escapeHtml(date)}</h3>
-            <span>${byDate[date].length} 个历史方案</span>
-          </div>
-          ${planGroupOrder
-            .filter((group) => byGroup[group]?.length)
-            .map(
-              (group) => `
-                <div class="archive-type-group">
-                  <div class="subgroup-heading">
-                    <strong>${group}</strong>
-                    <span>${byGroup[group].length} 个</span>
-                  </div>
-                  ${byGroup[group].map(renderArchiveCard).join("")}
-                </div>
-              `,
-            )
-            .join("")}
-        </section>
-      `;
-    })
-    .join("");
+function renderArchiveStatusGroup(title, plans) {
+  if (!plans.length) {
+    return `
+      <section class="archive-status-group">
+        <div class="group-heading">
+          <h3>${title}</h3>
+          <span>0 个方案</span>
+        </div>
+        <div class="empty-state">暂无${title}</div>
+      </section>
+    `;
+  }
+
+  const byDate = groupBy(plans, (plan) => plan.date);
+
+  return `
+    <section class="archive-status-group">
+      <div class="group-heading">
+        <h3>${title}</h3>
+        <span>${plans.length} 个方案</span>
+      </div>
+      ${Object.keys(byDate)
+        .sort((a, b) => b.localeCompare(a))
+        .map((date) => renderArchiveDateGroup(date, byDate[date]))
+        .join("")}
+    </section>
+  `;
+}
+
+function renderArchiveDateGroup(date, plans) {
+  const byGroup = groupBy(plans, (plan) => plan.planGroup || "其他");
+
+  return `
+    <section class="archive-date-group">
+      <div class="subgroup-heading">
+        <strong>${escapeHtml(date)}</strong>
+        <span>${plans.length} 个历史方案</span>
+      </div>
+      ${planGroupOrder
+        .filter((group) => byGroup[group]?.length)
+        .map(
+          (group) => `
+            <div class="archive-type-group">
+              <div class="subgroup-heading">
+                <strong>${group}</strong>
+                <span>${byGroup[group].length} 个</span>
+              </div>
+              ${byGroup[group].map(renderArchiveCard).join("")}
+            </div>
+          `,
+        )
+        .join("")}
+    </section>
+  `;
 }
 
 function renderArchiveCard(plan) {
@@ -831,6 +863,7 @@ function renderArchiveCard(plan) {
 
 function renderDailySummary() {
   const summaries = state.data.dailyPlanSummaries ?? [];
+  const archive = state.data.planArchive ?? [];
 
   if (!summaries.length) {
     els.dailySummary.innerHTML = `<div class="empty-state">今日方案生成后开始累计每日命中率</div>`;
@@ -841,6 +874,7 @@ function renderDailySummary() {
     .map((item, index) => {
       const rate = item.reviewedPlans ? item.hitPlans / item.reviewedPlans : 0;
       const label = index === 0 ? "今日方案" : "历史方案";
+      const plans = archive.filter((plan) => plan.date === item.date);
 
       return `
         <article class="summary-card">
@@ -855,6 +889,12 @@ function renderDailySummary() {
           </div>
           ${renderProbabilityBar(rate, `${item.date} 命中率`)}
           <p>${escapeHtml(item.summary)}</p>
+          <details class="summary-details">
+            <summary>查看具体方案</summary>
+            <div class="summary-plan-list">
+              ${plans.length ? plans.map(renderArchiveCard).join("") : `<div class="empty-state">当天暂无具体方案记录</div>`}
+            </div>
+          </details>
         </article>
       `;
     })

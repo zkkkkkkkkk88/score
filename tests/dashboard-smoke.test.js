@@ -122,6 +122,8 @@ setTimeout(() => {
   assert(html.includes("每日方案汇总"), "renders daily plan summary");
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
+  assert(html.includes("已完赛方案") && html.includes("未完赛方案"), "groups historical plans by settlement status");
+  assert(html.includes("查看具体方案"), "renders expandable daily review plan details");
   assert(html.includes("正确") || html.includes("错误") || html.includes("待赛果") || html.includes("进行中") || html.includes("未开赛"), "renders per-pick archive result labels");
   assert(html.includes("已完赛"), "renders settled pick count in archive summary");
   assert(!html.includes("已完赛正确"), "does not imply unsettled picks are already correct");

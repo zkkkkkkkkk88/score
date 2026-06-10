@@ -595,17 +595,25 @@ h2 {
 
 .parlay-group,
 .archive-date-group,
-.archive-type-group {
+.archive-type-group,
+.archive-status-group,
+.summary-plan-list {
   display: grid;
   gap: 10px;
 }
 
 .parlay-group,
-.archive-date-group {
+.archive-date-group,
+.archive-status-group {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: rgba(45, 12, 14, 0.56);
+}
+
+.archive-status-group {
+  border-color: rgba(231, 198, 112, 0.22);
+  background: rgba(45, 12, 14, 0.68);
 }
 
 .parlay-group-list {
@@ -964,6 +972,26 @@ h2 {
 
 .history-row em {
   font-style: normal;
+}
+
+.summary-details {
+  display: grid;
+  gap: 10px;
+}
+
+.summary-details summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--gold-2);
+  font-weight: 900;
+}
+
+.summary-details[open] summary {
+  margin-bottom: 10px;
+}
+
+.summary-plan-list .archive-card {
+  background: rgba(39, 9, 11, 0.58);
 }
 
 .hit {
