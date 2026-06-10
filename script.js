@@ -477,8 +477,8 @@ function renderLiveSignals(match) {
 function renderSocialFactors(match) {
   const factors = match.socialFactors ?? {
     clubMotivation: "球队动机数据待接入，当前按中性处理。",
-    politicalFactor: "未接入地区舆情数据，暂按常规比赛处理。",
-    integrityRisk: "未发现可核验异常信息，避免作未经证实的假赛判断。",
+    politicalFactor: "外部环境数据待接入，暂按常规比赛处理。",
+    integrityRisk: "未发现可核验异常信号，临场变化以官方状态和比赛事件为准。",
     consequence: "若赛果偏离模型，需要在完场后进入复盘。",
     recommendation: "谨慎观察，不做激进方案。",
   };
@@ -486,24 +486,24 @@ function renderSocialFactors(match) {
   return `
     <div class="social-panel">
       <div class="section-heading">
-        <p>社会因素</p>
-        <h3>非技术面研判</h3>
+        <p>赛程环境</p>
+        <h3>临场变量观察</h3>
       </div>
       <div class="social-grid">
         <div>
-          <span>俱乐部动机</span>
+          <span>任务与轮换</span>
           <strong>${escapeHtml(factors.clubMotivation)}</strong>
         </div>
         <div>
-          <span>政治及地区因素</span>
+          <span>外部环境</span>
           <strong>${escapeHtml(factors.politicalFactor)}</strong>
         </div>
         <div>
-          <span>异常风险</span>
+          <span>异常信号</span>
           <strong>${escapeHtml(factors.integrityRisk)}</strong>
         </div>
         <div>
-          <span>潜在后果</span>
+          <span>复盘权重</span>
           <strong>${escapeHtml(factors.consequence)}</strong>
         </div>
       </div>

@@ -622,17 +622,17 @@ h2 {
 
 .market-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 7px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
 }
 
 .market-card,
 .parlay-card,
 .watch-card,
 .summary-card {
-  padding: 10px;
+  padding: 12px;
   display: grid;
-  gap: 7px;
+  gap: 9px;
 }
 
 .plans-workspace .parlay-list {

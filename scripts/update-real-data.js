@@ -225,6 +225,13 @@ function getStrengthEdge(match) {
   return home - away;
 }
 
+function stableIndex(match, size) {
+  const text = `${match.homeTeamAllName || match.homeTeamAbbName}-${match.awayTeamAllName || match.awayTeamAbbName}-${match.matchTime || ""}`;
+  let hash = 0;
+  for (const char of text) hash = (hash * 31 + char.charCodeAt(0)) % 9973;
+  return hash % size;
+}
+
 function scoreModel(match, score) {
   if (score.home !== null && score.away !== null) {
     if (score.home > score.away) return { pick: "主胜", probability: 0.72 };
@@ -247,18 +254,30 @@ function getEstimatedScore(match, wdlPick, exactGoals) {
   const total = exactGoals === "4+" ? 4 : Number(exactGoals);
   if (!Number.isFinite(total) || total <= 0) return "0-0";
   const edge = getStrengthEdge(match);
-  if (Math.abs(edge) >= 20 && total >= 3) return edge > 0 ? "3-0" : "0-3";
-  if (Math.abs(edge) >= 12 && total >= 2) return edge > 0 ? "2-0" : "0-2";
-  if (wdlPick === "平") {
-    const side = Math.floor(total / 2);
-    return `${side}-${total - side}`;
+  const absEdge = Math.abs(edge);
+
+  const candidates = [];
+  for (let home = 0; home <= total; home += 1) {
+    const away = total - home;
+    if (wdlPick === "平" && home === away) candidates.push(`${home}-${away}`);
+    if (wdlPick === "主胜" && home > away) candidates.push(`${home}-${away}`);
+    if (wdlPick === "客胜" && home < away) candidates.push(`${home}-${away}`);
   }
-  if (wdlPick === "主胜") {
-    const away = Math.max(0, Math.floor((total - 1) / 2));
-    return `${total - away}-${away}`;
-  }
-  const home = Math.max(0, Math.floor((total - 1) / 2));
-  return `${home}-${total - home}`;
+
+  const fallback = wdlPick === "平" ? ["0-0", "1-1", "2-2"] : wdlPick === "主胜" ? ["1-0", "2-1", "3-1"] : ["0-1", "1-2", "1-3"];
+  const pool = candidates.length ? candidates : fallback;
+
+  const ranked = pool.sort((a, b) => {
+    const [aHome, aAway] = a.split("-").map(Number);
+    const [bHome, bAway] = b.split("-").map(Number);
+    const aMargin = Math.abs(aHome - aAway);
+    const bMargin = Math.abs(bHome - bAway);
+    const preferredMargin = absEdge >= 24 ? 3 : absEdge >= 16 ? 2 : 1;
+    return Math.abs(aMargin - preferredMargin) - Math.abs(bMargin - preferredMargin);
+  });
+
+  const top = ranked.slice(0, Math.min(3, ranked.length));
+  return top[stableIndex(match, top.length)];
 }
 
 function handicapModel(match, score, wdlPick) {
@@ -275,19 +294,23 @@ function handicapModel(match, score, wdlPick) {
   return { handicap, pick: handicap < 0 ? "让负" : "让平", probability: 0.42 };
 }
 
-function estimateExactGoals(match) {
+function estimateExactGoals(match, wdlPick) {
   const seed = Math.abs(getStrengthEdge(match));
   const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
-  if (seed >= 20) return "3";
-  if (seed >= 12) return kickoffHour >= 6 ? "3" : "2";
-  if (seed <= 4) return kickoffHour >= 20 || kickoffHour <= 4 ? "2" : "1";
-  return "2";
+  const lateOrEarly = kickoffHour >= 20 || kickoffHour <= 4;
+  let goals;
+  if (seed >= 24) goals = stableIndex(match, 4) === 0 ? "4+" : "3";
+  else if (seed >= 16) goals = lateOrEarly ? "3" : ["2", "3"][stableIndex(match, 2)];
+  else if (seed <= 4) goals = lateOrEarly ? ["1", "2"][stableIndex(match, 2)] : ["0", "1", "2"][stableIndex(match, 3)];
+  else goals = ["1", "2", "3"][stableIndex(match, 3)];
+  if (wdlPick === "平" && goals !== "4+" && Number(goals) % 2 === 1) return Number(goals) <= 1 ? "0" : "2";
+  return goals;
 }
 
 function buildMarkets(match, status, score) {
   const wdl = scoreModel(match, score);
   const total = score.home === null || score.away === null ? null : score.home + score.away;
-  const exactGoals = total === null ? estimateExactGoals(match) : total >= 4 ? "4+" : String(total);
+  const exactGoals = total === null ? estimateExactGoals(match, wdl.pick) : total >= 4 ? "4+" : String(total);
   const exactGoalLabel = `${exactGoals}球`;
   const goalProbability = total === null ? 0.34 : 0.78;
   const handicap = handicapModel(match, score, wdl.pick);
@@ -344,19 +367,19 @@ function socialFactorsFromMatch(match, status) {
 
   return {
     clubMotivation: isClub
-      ? "俱乐部赛事需关注保级、升级、轮换和赛程密度；当前以竞彩赛程公开信息做中性处理。"
-      : "国家队或国际赛通常受荣誉、排名和备战任务影响，需关注阵容轮换和战意差异。",
+      ? "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。"
+      : "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
     politicalFactor: isNational
-      ? "国际赛可能受到地区舆论和国家队压力影响，但不能直接等同于赛果倾向。"
-      : "普通俱乐部比赛政治因素通常较弱，主要观察地方舆情、德比属性和管理层压力。",
+      ? "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。"
+      : "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
     integrityRisk:
       status === "pre"
-        ? "当前仅基于中国竞彩网公开赛程和状态，未发现可核验异常；不对任何球队作未经证实的假赛判断。"
-        : "比分已进入复盘阶段，若结果明显偏离方案，需要回看红牌、阵容和临场事件。",
+        ? "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。"
+        : "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
     consequence:
       status === "finished"
-        ? "完场比分可用于自动复盘方案命中率，并调整后续模型权重。"
-        : "若临场出现暂停销售、推迟、取消、红牌或突然轮换，应降低购买方案权重。",
+        ? "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。"
+        : "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
     recommendation: String(match.matchStatusName || "").includes("暂停")
       ? "当前销售状态异常，建议暂不进入主方案。"
       : "可纳入观察池，最终以开售状态、首发和实时事件确认。",

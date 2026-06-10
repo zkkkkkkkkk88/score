@@ -95,10 +95,18 @@ setTimeout(() => {
   assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
+  assert(
+    data.matches.every((match) => {
+      const [home, away] = match.markets.score.pick.split("-").map(Number);
+      const goals = match.markets.ou.exactGoals;
+      return goals === "4+" || String(home + away) === String(goals);
+    }),
+    "keeps predicted scoreline consistent with exact goals market",
+  );
   const argentinaMatch = data.matches.find((match) => match.homeTeam.includes("阿根廷") && match.awayTeam.includes("冰岛"));
   if (argentinaMatch) {
     assert(argentinaMatch.markets.wdl.pick === "主胜", "uses team-strength model for clear favorite win/draw/loss");
-    assert(argentinaMatch.markets.score.pick === "3-0", "uses team-strength model for clear favorite scoreline");
+    assert(!["2-0", "0-2", "1-0", "0-1"].includes(argentinaMatch.markets.score.pick), "does not collapse clear favorite scoreline to a mechanical template");
   }
   assert(
     data.planArchive.every((plan) => plan.picks.every((pick) => pick.status !== "finished" || typeof pick.hit === "boolean")),
@@ -142,12 +150,14 @@ setTimeout(() => {
   assert(saleTabs.length === 2, "wires purchasable and all-match filters");
   assert(viewButtons.length === 5 && views.length === 5, "renders page navigation views");
   assert(styleCss.includes(".analysis-layout") && styleCss.includes("calc(100vh") && styleCss.includes("overflow-y: auto"), "keeps analysis columns fixed with internal scrolling");
+  assert(styleCss.includes("repeat(auto-fit, minmax(220px, 1fr))"), "uses wider responsive market cards");
   assert(html.includes("今日重点"), "renders focus match strip");
   assert(html.includes("临场信号"), "renders live tactical signals");
-  assert(html.includes("社会因素"), "renders social factor analysis");
-  assert(html.includes("俱乐部动机"), "renders club motivation analysis");
-  assert(html.includes("政治及地区因素"), "renders political and regional analysis");
-  assert(html.includes("潜在后果"), "renders consequence analysis");
+  assert(html.includes("赛程环境"), "renders schedule context analysis");
+  assert(html.includes("任务与轮换"), "renders motivation and rotation analysis");
+  assert(html.includes("外部环境"), "renders external context analysis");
+  assert(html.includes("复盘权重"), "renders review weighting analysis");
+  assert(!html.includes("假赛"), "does not render unverified match-fixing wording");
   assert(html.includes("趋势变化"), "renders probability trend signal");
   assert(html.includes("准备指数"), "renders tomorrow preparation score");
   assert(html.includes("建议动作"), "renders tomorrow action advice");
