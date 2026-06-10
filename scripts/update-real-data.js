@@ -246,6 +246,10 @@ function scoreModel(match, score) {
   return { pick: edge > 0 ? "主胜" : "客胜", probability };
 }
 
+function hasStandardWdl(match) {
+  return ["h", "d", "a"].every((key) => String(match[key] ?? "").trim() !== "");
+}
+
 function getStrengthSeed(match) {
   return getStrengthEdge(match);
 }
@@ -307,7 +311,7 @@ function estimateExactGoals(match, wdlPick) {
   return goals;
 }
 
-function buildMarkets(match, status, score) {
+function buildMarkets(match, status, score, options = {}) {
   const wdl = scoreModel(match, score);
   const total = score.home === null || score.away === null ? null : score.home + score.away;
   const exactGoals = total === null ? estimateExactGoals(match, wdl.pick) : total >= 4 ? "4+" : String(total);
@@ -316,14 +320,7 @@ function buildMarkets(match, status, score) {
   const handicap = handicapModel(match, score, wdl.pick);
   const exactScore = score.home === null || score.away === null ? getEstimatedScore(match, wdl.pick, exactGoals) : `${score.home}-${score.away}`;
 
-  return {
-    wdl: {
-      pick: wdl.pick,
-      probability: wdl.probability,
-      confidence: status === "finished" ? 88 : 64,
-      risk: status === "finished" ? "低" : "中",
-      reason: status === "finished" ? "根据中国竞彩网完场比分生成赛果复盘方向。" : "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-    },
+  const markets = {
     hdc: {
       handicap: handicap.handicap,
       pick: handicap.pick,
@@ -341,7 +338,7 @@ function buildMarkets(match, status, score) {
       probability: goalProbability,
       confidence: status === "finished" ? 84 : 62,
       risk: "中",
-      reason: status === "finished" ? "根据中国竞彩网完场比分计算具体总进球数。" : "根据赛事类型、赛程时段和默认进球模型给出具体总进球数观察值。",
+      reason: status === "finished" ? "根据中国竞彩网完场比分计算具体总进球数。" : "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
     },
     score: {
       pick: exactScore,
@@ -358,6 +355,18 @@ function buildMarkets(match, status, score) {
       reason: status === "finished" ? "根据半场和全场比分做复盘方向。" : "半全场受首发、战术和早段事件影响较大，当前仅做观察。",
     },
   };
+
+  if (options.standardWdl) {
+    markets.wdl = {
+      pick: wdl.pick,
+      probability: wdl.probability,
+      confidence: status === "finished" ? 88 : 64,
+      risk: status === "finished" ? "低" : "中",
+      reason: status === "finished" ? "根据中国竞彩网完场比分生成赛果复盘方向。" : "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
+    };
+  }
+
+  return markets;
 }
 
 function socialFactorsFromMatch(match, status) {
@@ -392,11 +401,13 @@ function mapMatch(match, index, oldByEventId = new Map()) {
   const sourceEventId = String(match.matchId);
   const oldMatch = oldByEventId.get(sourceEventId);
   const preScore = { home: null, away: null };
+  const standardWdl = hasStandardWdl(match);
+  const generatedMarkets = buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score, { standardWdl });
   const markets =
     status === "finished" && oldMatch?.status !== "finished" && oldMatch?.markets
-      ? oldMatch.markets
-      : buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score);
-  const actualMarkets = status === "finished" ? buildMarkets(match, status, score) : null;
+      ? Object.fromEntries(Object.entries(oldMatch.markets).filter(([key]) => key !== "wdl" || standardWdl))
+      : generatedMarkets;
+  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl }) : null;
   const sportteryNo = formatSportteryNo(match, index);
   const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
   const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
@@ -471,6 +482,17 @@ function marketProducts(matches) {
   );
 }
 
+function selectCategoryPlans(categoryPlans) {
+  const sorted = categoryPlans.sort((a, b) => b.planProbability - a.planProbability);
+  const selected = sorted.slice(0, 5);
+  const scorePlan = sorted.find((plan) => plan.markets.includes("score"));
+  if (scorePlan && !selected.some((plan) => plan.id === scorePlan.id)) {
+    selected[selected.length - 1] = scorePlan;
+    selected.sort((a, b) => b.planProbability - a.planProbability);
+  }
+  return selected;
+}
+
 function planProbability(matches, markets, mode, requiredHits) {
   const probabilities = matches.map((match, index) => match.markets[markets[index]].probability);
   if (mode === "all") return probabilities.reduce((product, probability) => product * probability, 1);
@@ -527,7 +549,7 @@ function buildPurchasePlans(matches, targetDate) {
       });
     });
 
-    plans.push(...categoryPlans.sort((a, b) => b.planProbability - a.planProbability).slice(0, 5));
+    plans.push(...selectCategoryPlans(categoryPlans));
   });
 
   return plans;
@@ -704,6 +726,7 @@ function buildMarketHistory(matches) {
   matches.forEach((match) => {
     buckets.forEach((bucket) => {
       const market = match.markets[bucket.market];
+      if (!market) return;
       const hit = isPickHit(match, bucket.market, market);
       if (hit === null) return;
       bucket.total += 1;
@@ -774,7 +797,7 @@ function buildTomorrowPool(matches, targetDate) {
     .map((match, index) => ({
       category: index < 2 ? "竞彩候选" : "明日观察",
       matchId: match.id,
-      market: index % 2 === 0 ? "wdl" : "ou",
+      market: index % 2 === 0 && match.markets.wdl ? "wdl" : index % 2 === 0 ? "hdc" : "ou",
       reason: `来自中国竞彩网竞猜赛程，竞彩编号 ${match.sportteryNo}，需等待开售状态和临场事件确认。`,
     }));
 }

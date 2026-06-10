@@ -105,8 +105,13 @@ setTimeout(() => {
   );
   const argentinaMatch = data.matches.find((match) => match.homeTeam.includes("阿根廷") && match.awayTeam.includes("冰岛"));
   if (argentinaMatch) {
-    assert(argentinaMatch.markets.wdl.pick === "主胜", "uses team-strength model for clear favorite win/draw/loss");
+    if (argentinaMatch.markets.wdl) assert(argentinaMatch.markets.wdl.pick === "主胜", "uses team-strength model for clear favorite win/draw/loss");
     assert(!["2-0", "0-2", "1-0", "0-1"].includes(argentinaMatch.markets.score.pick), "does not collapse clear favorite scoreline to a mechanical template");
+  }
+  const englandMatch = data.matches.find((match) => match.homeTeam.includes("英格兰") && match.awayTeam.includes("哥斯达"));
+  if (englandMatch) {
+    assert(!englandMatch.markets.wdl, "does not create win/draw/loss market when Sporttery does not offer it");
+    assert(englandMatch.markets.hdc, "keeps handicap market when standard win/draw/loss is unavailable");
   }
   assert(
     data.planArchive.every((plan) => plan.picks.every((pick) => pick.status !== "finished" || typeof pick.hit === "boolean")),
@@ -123,6 +128,7 @@ setTimeout(() => {
   assert(data.parlaySeeds.every((plan) => plan.matchIds.every((id) => data.matches.find((match) => match.id === id)?.date === plan.targetDate)), "uses tomorrow-tab matches for every parlay");
   assert(data.parlaySeeds.some((plan) => plan.planSize === 2), "includes two-leg parlays when enough matches exist");
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("hdc")), "includes handicap parlays");
+  assert(data.parlaySeeds.some((plan) => plan.markets.includes("score")), "includes at least one score parlay");
   assert(data.parlaySeeds.every((plan, index, plans) => index === 0 || plan.planGroup !== plans[index - 1].planGroup || plans[index - 1].planProbability >= plan.planProbability), "sorts each parlay group by probability");
   assert(html.includes("核心胆"), "renders parlay banker pick");
   assert(html.includes("风险点"), "renders parlay weak link");
@@ -132,6 +138,7 @@ setTimeout(() => {
   assert(html.includes("今日方案"), "renders today's plan summary");
   assert(!elements["#dailySummary"].innerHTML.includes("summary-details"), "keeps overview daily summary compact");
   assert(elements["#hitTracker"].innerHTML.includes("review-date-group"), "groups hit review rows by date");
+  assert(elements["#hitTracker"].innerHTML.includes("每日命中率"), "shows daily hit rate in review groups");
   assert(html.includes("历史购买方案") || html.includes("待复盘"), "renders historical purchase plans");
   assert(html.includes("已完赛方案") && html.includes("未完赛方案"), "groups historical plans by settlement status");
   assert(html.includes("history-split"), "renders finished and unfinished history columns");

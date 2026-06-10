@@ -103,6 +103,15 @@ function liveProbability(base, match) {
   return clamp(base + finishedBoost, 0.08, 0.92);
 }
 
+function primaryMarketKey(match) {
+  return match.markets.wdl ? "wdl" : "hdc";
+}
+
+function primaryMarket(match) {
+  const key = primaryMarketKey(match);
+  return { key, market: match.markets[key] };
+}
+
 function allHitProbability(picks) {
   return picks.reduce((product, pick) => product * pick.probability, 1);
 }
@@ -219,7 +228,7 @@ function setActiveView(viewName, updateHash = true) {
 function getMatchPriority(match) {
   const liveBonus = match.status === "live" ? 16 : 0;
   const finishedPenalty = match.status === "finished" ? 18 : 0;
-  return match.importance + match.dataQuality * 0.35 + match.markets.wdl.probability * 24 + liveBonus - riskPenalty(match.risk) - finishedPenalty;
+  return match.importance + match.dataQuality * 0.35 + primaryMarket(match).market.probability * 24 + liveBonus - riskPenalty(match.risk) - finishedPenalty;
 }
 
 function getMarket(match, key) {
@@ -328,19 +337,19 @@ function renderFocusStrip() {
 
   els.focusStrip.innerHTML = matches
     .map((match) => {
-      const wdl = match.markets.wdl;
+      const primary = primaryMarket(match);
       const goals = match.markets.ou;
-      const live = liveProbability(wdl.probability, match);
+      const live = liveProbability(primary.market.probability, match);
 
       return `
         <button class="focus-card" type="button" data-match-id="${match.id}">
           <span>${escapeHtml(match.sportteryNo ?? match.id)} · 今日重点 · ${statusLabels[match.status]}</span>
           <strong>${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
           <div>
-            <em>${marketNames.wdl} ${escapeHtml(wdl.pick)} · ${pct(live)}</em>
+            <em>${marketNames[primary.key]} ${escapeHtml(formatMarketPick(primary.key, primary.market))} · ${pct(live)}</em>
             <em>${marketNames.ou} ${escapeHtml(formatMarketPick("ou", goals))}</em>
           </div>
-          <small>趋势变化 ${getTrendText(wdl.probability, live)}</small>
+          <small>趋势变化 ${getTrendText(primary.market.probability, live)}</small>
         </button>
       `;
     })
@@ -383,6 +392,7 @@ function renderMatchList() {
 
 function renderMarketCard(match, key) {
   const market = getMarket(match, key);
+  if (!market) return "";
   const actual = getActualMarket(match, key);
   const result = getMarketResultState(match, key, market, actual);
   const probability = liveProbability(market.probability, match);
@@ -415,22 +425,22 @@ function renderMarketCard(match, key) {
 }
 
 function getLiveSignals(match) {
-  const wdl = match.markets.wdl;
+  const primary = primaryMarket(match);
   const goals = match.markets.ou;
-  const primary = liveProbability(wdl.probability, match);
+  const primaryProbability = liveProbability(primary.market.probability, match);
   const goalProbability = liveProbability(goals.probability, match);
   const action =
-    primary >= 0.68
+    primaryProbability >= 0.68
       ? "可进入主推"
-      : primary >= 0.58
+      : primaryProbability >= 0.58
         ? "等待临场确认"
         : "只做观察";
 
   return [
     {
       title: "趋势变化",
-      value: getTrendText(wdl.probability, primary),
-      detail: `${wdl.pick} 实时概率 ${pct(primary)}`,
+      value: getTrendText(primary.market.probability, primaryProbability),
+      detail: `${formatMarketPick(primary.key, primary.market)} 实时概率 ${pct(primaryProbability)}`,
     },
     {
       title: "总进球数",
@@ -519,7 +529,8 @@ function renderAnalysis() {
     return;
   }
 
-  const primary = liveProbability(match.markets.wdl.probability, match);
+  const primary = primaryMarket(match);
+  const primaryProbability = liveProbability(primary.market.probability, match);
   const statusText = match.status === "live" ? `${match.minute}' ${statusLabels[match.status]}` : statusLabels[match.status];
 
   els.matchAnalysis.innerHTML = `
@@ -539,15 +550,15 @@ function renderAnalysis() {
       <div class="radar-strip">
         <div>
           <span>主方向</span>
-          <strong>${escapeHtml(match.markets.wdl.pick)}</strong>
+          <strong>${escapeHtml(formatMarketPick(primary.key, primary.market))}</strong>
         </div>
         <div>
           <span>模型信心</span>
-          <strong>${match.markets.wdl.confidence}</strong>
+          <strong>${primary.market.confidence}</strong>
         </div>
         <div>
           <span>实时概率</span>
-          <strong>${pct(primary)}</strong>
+          <strong>${pct(primaryProbability)}</strong>
         </div>
         <div>
           <span>竞彩编号</span>
@@ -748,7 +759,7 @@ function renderReviewHistoryGroups(history) {
           <summary>
             <strong>${escapeHtml(date)}</strong>
             <span>${items.length} 个方案</span>
-            <em>命中率 ${pct(rate)}</em>
+            <em>每日命中率 ${pct(rate)}</em>
           </summary>
           <div class="review-date-list">
             ${items.map((item) => renderReviewHistoryRow(item)).join("")}
