@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T13:02:50.838+08:00",
+  "generatedAt": "2026-06-11T14:00:48.922+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -6656,27 +6656,41 @@
     {
       "market": "wdl",
       "name": "胜平负",
-      "hits": 33,
-      "total": 71,
-      "streak": "等待更多完场数据"
+      "hits": 16,
+      "total": 23,
+      "streak": "只统计购买方案"
+    },
+    {
+      "market": "hdc",
+      "name": "让球胜平负",
+      "hits": 5,
+      "total": 15,
+      "streak": "只统计购买方案"
     },
     {
       "market": "ou",
       "name": "总进球数",
-      "hits": 14,
-      "total": 82,
-      "streak": "等待更多完场数据"
+      "hits": 2,
+      "total": 10,
+      "streak": "只统计购买方案"
+    },
+    {
+      "market": "score",
+      "name": "比分",
+      "hits": 0,
+      "total": 3,
+      "streak": "高风险观察"
     },
     {
       "market": "htft",
       "name": "半全场",
       "hits": 0,
       "total": 0,
-      "streak": "只做观察"
+      "streak": "只统计购买方案"
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-11T13:02:50.838+08:00",
+    "generatedAt": "2026-06-11T14:00:48.922+08:00",
     "marketWeights": {
       "wdl": 1.091,
       "hdc": 0.898,

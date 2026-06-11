@@ -1111,21 +1111,24 @@ function evaluatePlan(plan, matches) {
   };
 }
 
-function buildMarketHistory(matches) {
+function buildMarketHistory(planArchive) {
   const buckets = [
-    { market: "wdl", name: "胜平负", hits: 0, total: 0, streak: "等待更多完场数据" },
-    { market: "ou", name: "总进球数", hits: 0, total: 0, streak: "等待更多完场数据" },
-    { market: "htft", name: "半全场", hits: 0, total: 0, streak: "只做观察" },
+    { market: "wdl", name: "胜平负", hits: 0, total: 0, streak: "只统计购买方案" },
+    { market: "hdc", name: "让球胜平负", hits: 0, total: 0, streak: "只统计购买方案" },
+    { market: "ou", name: "总进球数", hits: 0, total: 0, streak: "只统计购买方案" },
+    { market: "score", name: "比分", hits: 0, total: 0, streak: "高风险观察" },
+    { market: "htft", name: "半全场", hits: 0, total: 0, streak: "只统计购买方案" },
   ];
+  const byMarket = new Map(buckets.map((bucket) => [bucket.market, bucket]));
 
-  matches.forEach((match) => {
-    buckets.forEach((bucket) => {
-      const market = match.markets[bucket.market];
-      if (!market) return;
-      const hit = isPickHit(match, bucket.market, market);
-      if (hit === null) return;
+  planArchive.forEach((plan) => {
+    if (plan.result !== "hit" && plan.result !== "miss") return;
+    (plan.picks || []).forEach((pick) => {
+      if (pick.hit !== true && pick.hit !== false) return;
+      const bucket = byMarket.get(pick.marketKey);
+      if (!bucket) return;
       bucket.total += 1;
-      if (hit) bucket.hits += 1;
+      if (pick.hit) bucket.hits += 1;
     });
   });
 
@@ -1256,7 +1259,7 @@ async function main() {
     history,
     autoReview: buildAutoReview(history),
     dailyPlanSummaries,
-    marketHistory: buildMarketHistory(allMatches),
+    marketHistory: buildMarketHistory(planArchive),
     modelProfile: {
       generatedAt,
       marketWeights: calibration.marketWeights,
