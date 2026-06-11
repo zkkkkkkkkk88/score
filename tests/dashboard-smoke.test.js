@@ -114,6 +114,26 @@ setTimeout(() => {
     assert(englandMatch.markets.hdc, "keeps handicap market when standard win/draw/loss is unavailable");
   }
   assert(
+    data.matches.every((match) => !match.availablePools?.includes("HAD") || match.markets.wdl),
+    "creates win/draw/loss market when Sporttery offers HAD",
+  );
+  assert(
+    data.matches.every((match) => match.availablePools?.includes("HAD") || !match.markets.wdl),
+    "does not create win/draw/loss market when Sporttery does not offer HAD",
+  );
+  assert(
+    data.matches.some((match) => Math.abs(Number(match.markets.hdc?.handicap || 0)) === 2),
+    "supports official or estimated two-goal handicap lines",
+  );
+  data.planArchive.forEach((plan) => {
+    plan.picks.forEach((pick) => {
+      if (pick.status !== "finished" || pick.marketKey !== "hdc") return;
+      const match = data.matches.find((item) => item.sourceEventId === pick.sourceEventId);
+      if (!match?.actualMarkets?.hdc) return;
+      assert(Number(pick.handicap) === Number(match.actualMarkets.hdc.handicap), "uses official handicap line when reviewing archived handicap picks");
+    });
+  });
+  assert(
     data.planArchive.every((plan) => plan.picks.every((pick) => pick.status !== "finished" || typeof pick.hit === "boolean")),
     "marks finished archived picks as correct or wrong",
   );

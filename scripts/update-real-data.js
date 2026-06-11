@@ -169,6 +169,27 @@ async function fetchLive(matches) {
   return { map: new Map(list.map((match) => [String(match.matchId), match])), list };
 }
 
+async function fetchMatchDetail(match) {
+  if (!match?.matchId) return null;
+  try {
+    const url = `${API_BASE}/getMatchGeneral.qry?matchId=${match.matchId}&matchStatus=${match.matchStatus || ""}`;
+    return await getJson(url);
+  } catch {
+    return null;
+  }
+}
+
+async function fetchMatchDetails(matches) {
+  const details = new Map();
+  for (const match of matches) {
+    const key = String(match.matchId || "");
+    if (!key || details.has(key)) continue;
+    const detail = await fetchMatchDetail(match);
+    if (detail) details.set(key, detail);
+  }
+  return details;
+}
+
 function parseScore(value) {
   if (!value || !String(value).includes(":")) return { home: null, away: null };
   const [home, away] = String(value).split(":").map((part) => Number(part));
@@ -378,12 +399,86 @@ function scoreModel(match, score) {
   return { pick: edge > 0 ? "主胜" : "客胜", probability };
 }
 
-function hasStandardWdl(match) {
-  return ["h", "d", "a"].every((key) => String(match[key] ?? "").trim() !== "");
+function detailPools(detail) {
+  const sellingPools = Array.isArray(detail?.poolList) ? detail.poolList.map((pool) => pool.poolCode).filter(Boolean) : [];
+  const resultPools = Array.isArray(detail?.matchResultList)
+    ? detail.matchResultList.map((result) => result.poolCode).filter(Boolean)
+    : [];
+  return [...new Set([...sellingPools, ...resultPools])];
+}
+
+function availablePoolsForMatch(match, detail) {
+  const pools = detailPools(detail);
+  if (["h", "d", "a"].every((key) => String(match[key] ?? "").trim() !== "")) pools.push("HAD");
+  if (!pools.includes("HHAD")) pools.push("HHAD");
+  return [...new Set(pools)];
+}
+
+function poolFromDetail(detail, poolCode) {
+  return Array.isArray(detail?.poolList) ? detail.poolList.find((pool) => pool.poolCode === poolCode) : null;
+}
+
+function resultFromDetail(detail, poolCode) {
+  return Array.isArray(detail?.matchResultList) ? detail.matchResultList.find((result) => result.poolCode === poolCode) : null;
+}
+
+function isPoolAvailable(match, detail, poolCode) {
+  const pool = poolFromDetail(detail, poolCode);
+  if (pool) return Number(pool.value) === 1 && !/Paused|暂停/.test(String(pool.poolStatus || ""));
+  if (resultFromDetail(detail, poolCode)) return true;
+  if (poolCode === "HAD") return ["h", "d", "a"].every((key) => String(match[key] ?? "").trim() !== "");
+  if (poolCode === "HHAD") return true;
+  return false;
+}
+
+function hasStandardWdl(match, detail) {
+  return isPoolAvailable(match, detail, "HAD");
+}
+
+function officialHandicap(detail) {
+  const result = resultFromDetail(detail, "HHAD");
+  const found = String(result?.combinationDesc || "").match(/\(([+-]\d+)\)/);
+  return found ? Number(found[1]) : null;
+}
+
+function officialHdcPick(detail) {
+  const result = resultFromDetail(detail, "HHAD");
+  if (!result) return null;
+  if (result.combination === "H" || String(result.combinationDesc || "").endsWith("胜")) return "让胜";
+  if (result.combination === "D" || String(result.combinationDesc || "").endsWith("平")) return "让平";
+  if (result.combination === "A" || String(result.combinationDesc || "").endsWith("负")) return "让负";
+  return null;
+}
+
+function normalizeHdcPick(pick = "") {
+  if (String(pick).includes("让胜")) return "让胜";
+  if (String(pick).includes("让平")) return "让平";
+  if (String(pick).includes("让负")) return "让负";
+  return pick;
 }
 
 function getStrengthSeed(match) {
   return getStrengthEdge(match);
+}
+
+function estimateHandicapLine(match) {
+  const edge = getStrengthSeed(match);
+  const homeOdds = Number(match.h);
+  const awayOdds = Number(match.a);
+
+  if (Number.isFinite(homeOdds)) {
+    if (homeOdds <= 1.36) return -2;
+    if (homeOdds <= 1.76) return -1;
+  }
+  if (Number.isFinite(awayOdds)) {
+    if (awayOdds <= 1.36) return 2;
+    if (awayOdds <= 1.76) return 1;
+  }
+  if (edge >= 22) return -2;
+  if (edge >= 8) return -1;
+  if (edge <= -22) return 2;
+  if (edge <= -8) return 1;
+  return edge >= 0 ? -1 : 1;
 }
 
 function getEstimatedScore(match, wdlPick, exactGoals) {
@@ -416,18 +511,30 @@ function getEstimatedScore(match, wdlPick, exactGoals) {
   return top[stableIndex(match, top.length)];
 }
 
-function handicapModel(match, score, wdlPick) {
-  const handicap = getStrengthSeed(match) < 0 ? -1 : 1;
+function handicapPickFromScore(score, handicap) {
+  const adjustedHome = score.home + handicap;
+  if (adjustedHome > score.away) return "让胜";
+  if (adjustedHome < score.away) return "让负";
+  return "让平";
+}
+
+function handicapModel(match, score, wdlPick, detail) {
+  const officialLine = officialHandicap(detail);
+  const handicap = Number.isFinite(officialLine) ? officialLine : estimateHandicapLine(match);
   if (score.home !== null && score.away !== null) {
-    const adjustedHome = score.home + handicap;
-    if (adjustedHome > score.away) return { handicap, pick: "让胜", probability: 0.7 };
-    if (adjustedHome < score.away) return { handicap, pick: "让负", probability: 0.66 };
-    return { handicap, pick: "让平", probability: 0.58 };
+    return {
+      handicap,
+      pick: officialHdcPick(detail) || handicapPickFromScore(score, handicap),
+      probability: 0.7,
+    };
   }
 
-  if (wdlPick === "平") return { handicap, pick: handicap < 0 ? "让负" : "让胜", probability: 0.38 };
-  if (wdlPick === "主胜") return { handicap, pick: handicap < 0 ? "让平" : "让胜", probability: 0.44 };
-  return { handicap, pick: handicap < 0 ? "让负" : "让平", probability: 0.42 };
+  const edge = getStrengthSeed(match);
+  const expectedHomeMargin = Math.round(edge / 10);
+  const adjustedMargin = expectedHomeMargin + handicap;
+  const pick = adjustedMargin > 0 ? "让胜" : adjustedMargin < 0 ? "让负" : "让平";
+  const probability = wdlPick === "平" ? 0.38 : Math.abs(adjustedMargin) >= 2 ? 0.46 : 0.42;
+  return { handicap, pick, probability };
 }
 
 function scoreResult(score) {
@@ -508,7 +615,7 @@ function buildMarkets(match, status, score, options = {}) {
   const exactGoals = total === null ? estimateExactGoals(match, wdl.pick) : total >= 4 ? "4+" : String(total);
   const exactGoalLabel = `${exactGoals}球`;
   const goalProbability = total === null ? 0.34 : 0.78;
-  const handicap = handicapModel(match, score, wdl.pick);
+  const handicap = handicapModel(match, score, wdl.pick, options.detail);
   const exactScore = score.home === null || score.away === null ? getEstimatedScore(match, wdl.pick, exactGoals) : `${score.home}-${score.away}`;
   const htft = htftModel(match, status, score, wdl.pick, exactGoals);
 
@@ -561,6 +668,26 @@ function buildMarkets(match, status, score, options = {}) {
   return applyMarketCalibration(markets, options.calibration);
 }
 
+function normalizePreservedMarkets(preserved, generated, score, detail, standardWdl, calibration) {
+  const markets = Object.fromEntries(Object.entries(preserved).filter(([key]) => key !== "wdl" || standardWdl));
+  if (standardWdl && generated.wdl && !markets.wdl) markets.wdl = generated.wdl;
+
+  const officialLine = officialHandicap(detail);
+  if (markets.hdc && Number.isFinite(officialLine)) {
+    markets.hdc = {
+      ...markets.hdc,
+      handicap: officialLine,
+      pick: normalizeHdcPick(markets.hdc.pick),
+      reason:
+        score.home !== null && score.away !== null
+          ? `根据中国竞彩网官方让球线${officialLine > 0 ? "受让" : "让"}${Math.abs(officialLine)}球校准复盘。`
+          : markets.hdc.reason,
+    };
+  }
+
+  return applyMarketCalibration(markets, calibration);
+}
+
 function socialFactorsFromMatch(match, status) {
   const league = match.leagueAllName || match.leagueAbbName || "足球赛事";
   const isNational = league.includes("国际") || league.includes("国家");
@@ -587,25 +714,28 @@ function socialFactorsFromMatch(match, status) {
   };
 }
 
-function mapMatch(match, index, oldByEventId = new Map(), calibration = null) {
+function mapMatch(match, index, oldByEventId = new Map(), calibration = null, detailMap = new Map()) {
   const status = getStatus(match);
   const score = parseScore(match.sectionsNo999);
   const sourceEventId = String(match.matchId);
+  const detail = detailMap.get(sourceEventId) || null;
   const oldMatch = oldByEventId.get(sourceEventId);
   const preScore = { home: null, away: null };
-  const standardWdl = hasStandardWdl(match);
+  const standardWdl = hasStandardWdl(match, detail);
   const modelProfile = getModelProfile(match);
   const generatedMarkets = buildMarkets(match, status === "finished" ? "pre" : status, status === "finished" ? preScore : score, {
     standardWdl,
     calibration,
+    detail,
   });
   const preservedMarkets =
     status === "finished" && oldMatch?.status !== "finished" && oldMatch?.markets
-      ? applyMarketCalibration(Object.fromEntries(Object.entries(oldMatch.markets).filter(([key]) => key !== "wdl" || standardWdl)), calibration)
+      ? normalizePreservedMarkets(oldMatch.markets, generatedMarkets, score, detail, standardWdl, calibration)
       : null;
   const markets =
     preservedMarkets ?? generatedMarkets;
-  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl, calibration }) : null;
+  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl, calibration, detail }) : null;
+  const availablePools = availablePoolsForMatch(match, detail);
   const sportteryNo = formatSportteryNo(match, index);
   const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
   const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
@@ -628,6 +758,7 @@ function mapMatch(match, index, oldByEventId = new Map(), calibration = null) {
     halfScore: match.sectionsNo1 || "",
     minute: getMinute(match, status),
     tags: ["中国竞彩网", sportteryNo, saleTag, liveStatusTag].filter(Boolean),
+    availablePools,
     dataQuality: status === "finished" ? 92 : 86,
     importance: sportteryNo.includes("201") ? 88 : 78,
     risk: saleTag.includes("暂停") || saleTag.includes("取消") ? "高" : "中",
@@ -775,11 +906,10 @@ function actualWdl(match) {
 
 function isPickHit(match, marketKey, market) {
   if (match.status !== "finished") return null;
-  if (marketKey === "wdl") return market.pick === actualWdl(match);
+  if (marketKey === "wdl") return market.pick === (match.actualMarkets?.wdl?.pick || actualWdl(match));
   if (marketKey === "hdc") {
-    const adjustedHome = match.score.home + Number(market.handicap || 0);
-    const actual = adjustedHome > match.score.away ? "让胜" : adjustedHome < match.score.away ? "让负" : "让平";
-    return market.pick === actual;
+    const actual = match.actualMarkets?.hdc?.pick || handicapPickFromScore(match.score, Number(market.handicap || 0));
+    return normalizeHdcPick(market.pick) === actual;
   }
   if (marketKey === "ou") {
     const total = match.score.home + match.score.away;
@@ -854,14 +984,17 @@ function evaluateArchivedPlan(plan, matches) {
       const match = matches.find((item) => item.sourceEventId === pick.sourceEventId);
       if (!match) return { ...pick, status: "pending", hit: null, score: "" };
       const score = match.score.home === null || match.score.away === null ? "" : `${match.score.home}-${match.score.away}`;
+      const officialHdcLine = pick.marketKey === "hdc" ? match.actualMarkets?.hdc?.handicap ?? match.markets?.hdc?.handicap : undefined;
       const market = {
-        pick: pick.pick,
+        pick: pick.marketKey === "hdc" ? normalizeHdcPick(pick.pick) : pick.pick,
         exactGoals: pick.marketKey === "ou" ? pick.exactGoals ?? String(pick.pick).replace("球", "") : undefined,
-        handicap: pick.marketKey === "hdc" ? pick.handicap : undefined,
+        handicap: pick.marketKey === "hdc" ? officialHdcLine ?? pick.handicap : undefined,
       };
       const hit = isPickHit(match, pick.marketKey, market);
       return {
         ...pick,
+        pick: pick.marketKey === "hdc" && Number.isFinite(Number(market.handicap)) ? formatArchivePick("hdc", market) : pick.pick,
+        handicap: pick.marketKey === "hdc" ? market.handicap : pick.handicap,
         status: match.status,
         hit,
         score,
@@ -1049,8 +1182,9 @@ async function main() {
     if (!allByEventId.has(key)) allByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
   });
 
-  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration));
-  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration));
+  const detailMap = await fetchMatchDetails([...allByEventId.values()]);
+  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
+  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
@@ -1067,6 +1201,7 @@ async function main() {
       page: "https://m.sporttery.cn/mjc/zqsj/?tab=live",
       scheduleApi: `${API_BASE}/getMatchDataPageListV1.qry`,
       liveApi: `${API_BASE}/getMatchLiveV1.qry`,
+      detailApi: `${API_BASE}/getMatchGeneral.qry`,
       note: "赛程、竞彩编号、销售状态和比分来自中国竞彩网公开接口；购买方向为本地模型估算，仅作信息分析。",
     },
     matches: concernMatches,
