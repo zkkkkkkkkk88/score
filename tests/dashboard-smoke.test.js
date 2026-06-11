@@ -122,8 +122,8 @@ setTimeout(() => {
     "does not create win/draw/loss market when Sporttery does not offer HAD",
   );
   assert(
-    data.matches.some((match) => Math.abs(Number(match.markets.hdc?.handicap || 0)) === 2),
-    "supports official or estimated two-goal handicap lines",
+    data.matches.some((match) => Math.abs(Number(match.actualMarkets?.hdc?.handicap || 0)) === 2),
+    "supports official two-goal handicap lines on reviewed matches",
   );
   data.planArchive.forEach((plan) => {
     plan.picks.forEach((pick) => {

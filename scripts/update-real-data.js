@@ -509,17 +509,9 @@ function estimateHandicapLine(match) {
   const homeOdds = Number(match.h);
   const awayOdds = Number(match.a);
 
-  if (Number.isFinite(homeOdds)) {
-    if (homeOdds <= 1.36) return -2;
-    if (homeOdds <= 1.76) return -1;
-  }
-  if (Number.isFinite(awayOdds)) {
-    if (awayOdds <= 1.36) return 2;
-    if (awayOdds <= 1.76) return 1;
-  }
-  if (edge >= 22) return -2;
+  if (Number.isFinite(homeOdds) && homeOdds <= 1.76) return -1;
+  if (Number.isFinite(awayOdds) && awayOdds <= 1.76) return 1;
   if (edge >= 8) return -1;
-  if (edge <= -22) return 2;
   if (edge <= -8) return 1;
   return edge >= 0 ? -1 : 1;
 }
