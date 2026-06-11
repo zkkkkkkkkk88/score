@@ -158,9 +158,22 @@ setTimeout(() => {
   assert(data.parlaySeeds.length <= 25, "caps grouped parlay plans");
   assert(Object.values(data.parlaySeeds.reduce((groups, plan) => ((groups[plan.planGroup] = (groups[plan.planGroup] || 0) + 1), groups), {})).every((count) => count <= 5), "caps each parlay group at five plans");
   assert(data.parlaySeeds.every((plan) => plan.matchIds.every((id) => data.matches.find((match) => match.id === id)?.date === plan.targetDate)), "uses tomorrow-tab matches for every parlay");
+  assert(
+    data.parlaySeeds.every((plan) =>
+      plan.markets.every((marketKey, index) => {
+        const match = data.matches.find((item) => item.id === plan.matchIds[index]);
+        return match?.betOptions?.[marketKey]?.allUp !== false;
+      }),
+    ),
+    "uses only Sporttery all-up eligible markets in parlay plans",
+  );
   assert(data.parlaySeeds.some((plan) => plan.planSize === 2), "includes two-leg parlays when enough matches exist");
   assert(data.parlaySeeds.some((plan) => plan.markets.includes("hdc")), "includes handicap parlays");
-  assert(data.parlaySeeds.some((plan) => plan.markets.includes("score")), "includes at least one score parlay");
+  assert(
+    !data.matches.some((match) => match.date === data.parlaySeeds[0]?.targetDate && match.betOptions?.score?.allUp !== false) ||
+      data.parlaySeeds.some((plan) => plan.markets.includes("score")),
+    "includes a score parlay when Sporttery allows score all-up on the target date",
+  );
   assert(data.parlaySeeds.every((plan, index, plans) => index === 0 || plan.planGroup !== plans[index - 1].planGroup || plans[index - 1].planProbability >= plan.planProbability), "sorts each parlay group by probability");
   assert(
     data.planArchive.every(

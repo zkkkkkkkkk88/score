@@ -12,6 +12,13 @@ const DEFAULT_MARKET_WEIGHTS = {
   score: 0.64,
   htft: 0.72,
 };
+const MARKET_POOL_CODES = {
+  wdl: "HAD",
+  hdc: "HHAD",
+  ou: "TTG",
+  score: "CRS",
+  htft: "HAFU",
+};
 
 const headers = {
   "User-Agent":
@@ -129,6 +136,10 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function readExistingData() {
   try {
     return JSON.parse(await fs.readFile(OUTPUT, "utf8"));
@@ -184,8 +195,13 @@ async function fetchMatchDetails(matches) {
   for (const match of matches) {
     const key = String(match.matchId || "");
     if (!key || details.has(key)) continue;
-    const detail = await fetchMatchDetail(match);
+    let detail = await fetchMatchDetail(match);
+    if (detail && !Array.isArray(detail.poolList) && !Array.isArray(detail.matchResultList)) {
+      await sleep(180);
+      detail = await fetchMatchDetail(match);
+    }
     if (detail) details.set(key, detail);
+    await sleep(80);
   }
   return details;
 }
@@ -416,6 +432,33 @@ function availablePoolsForMatch(match, detail) {
 
 function poolFromDetail(detail, poolCode) {
   return Array.isArray(detail?.poolList) ? detail.poolList.find((pool) => pool.poolCode === poolCode) : null;
+}
+
+function poolBetOption(match, detail, poolCode) {
+  const pool = poolFromDetail(detail, poolCode);
+  if (pool) {
+    return {
+      poolCode,
+      single: Number(pool.single) === 1,
+      allUp: Number(pool.allUp) === 1,
+      selling: Number(pool.value) === 1 && !/Paused|暂停/.test(String(pool.poolStatus || "")),
+      poolStatus: pool.poolStatus || "",
+    };
+  }
+
+  if (poolCode === "HAD" && ["h", "d", "a"].every((key) => String(match[key] ?? "").trim() !== "")) {
+    return { poolCode, single: true, allUp: true, selling: true, poolStatus: "Selling" };
+  }
+  if (poolCode === "HHAD") {
+    return { poolCode, single: false, allUp: true, selling: true, poolStatus: "Selling" };
+  }
+  return { poolCode, single: null, allUp: null, selling: false, poolStatus: "" };
+}
+
+function marketBetOptions(match, detail) {
+  return Object.fromEntries(
+    Object.entries(MARKET_POOL_CODES).map(([marketKey, poolCode]) => [marketKey, poolBetOption(match, detail, poolCode)]),
+  );
 }
 
 function resultFromDetail(detail, poolCode) {
@@ -736,6 +779,7 @@ function mapMatch(match, index, oldByEventId = new Map(), calibration = null, de
     preservedMarkets ?? generatedMarkets;
   const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl, calibration, detail }) : null;
   const availablePools = availablePoolsForMatch(match, detail);
+  const betOptions = marketBetOptions(match, detail);
   const sportteryNo = formatSportteryNo(match, index);
   const saleTag = match.saleStatusName || match.matchStatusName || "状态待确认";
   const liveStatusTag = match.matchStatusName && match.matchStatusName !== saleTag ? match.matchStatusName : "";
@@ -759,6 +803,7 @@ function mapMatch(match, index, oldByEventId = new Map(), calibration = null, de
     minute: getMinute(match, status),
     tags: ["中国竞彩网", sportteryNo, saleTag, liveStatusTag].filter(Boolean),
     availablePools,
+    betOptions,
     dataQuality: status === "finished" ? 92 : 86,
     importance: sportteryNo.includes("201") ? 88 : 78,
     risk: saleTag.includes("暂停") || saleTag.includes("取消") ? "高" : "中",
@@ -805,7 +850,7 @@ function marketProducts(matches) {
     (groups, match) =>
       groups.flatMap((group) =>
         preferred
-          .filter((key) => match.markets[key])
+          .filter((key) => match.markets[key] && match.betOptions?.[key]?.allUp !== false)
           .map((market) => [...group, market]),
       ),
     [[]],
@@ -1182,7 +1227,7 @@ async function main() {
     if (!allByEventId.has(key)) allByEventId.set(key, hydrateLiveMatch(match, oldByEventId));
   });
 
-  const detailMap = await fetchMatchDetails([...allByEventId.values()]);
+  const detailMap = await fetchMatchDetails([...rawByEventId.values(), ...allByEventId.values()]);
   const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
   const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
   const generatedAt = nowIsoShanghai();

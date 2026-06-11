@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T12:35:38.081+08:00",
+  "generatedAt": "2026-06-11T13:02:50.838+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -43,6 +43,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
       "dataQuality": 92,
       "importance": 88,
       "risk": "高",
@@ -223,6 +260,43 @@
         "CRS",
         "TTG"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
       "dataQuality": 92,
       "importance": 78,
       "risk": "高",
@@ -381,6 +455,43 @@
         "HAD",
         "HHAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -506,6 +617,43 @@
         "HAD",
         "HHAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -633,6 +781,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -760,6 +945,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -886,6 +1108,43 @@
         "CRS",
         "TTG"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1003,6 +1262,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1130,6 +1426,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1257,6 +1590,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1382,6 +1752,43 @@
         "CRS",
         "TTG"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1499,6 +1906,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1626,6 +2070,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1753,6 +2234,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1879,6 +2397,43 @@
         "CRS",
         "TTG"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -1996,6 +2551,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2123,6 +2715,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2250,6 +2879,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2377,6 +3043,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2503,6 +3206,43 @@
         "CRS",
         "TTG"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2620,6 +3360,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2747,6 +3524,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -2874,6 +3688,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -3001,6 +3852,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -3128,6 +4016,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -3255,6 +4180,43 @@
         "TTG",
         "HAD"
       ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        }
+      },
       "dataQuality": 86,
       "importance": 78,
       "risk": "中",
@@ -3626,6 +4588,121 @@
     }
   ],
   "planArchive": [
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-11-tomorrow-二串一-0-2-hdc-wdl",
+      "planId": "tomorrow-二串一-0-2-hdc-wdl",
+      "date": "2026-06-11",
+      "generatedAt": "2026-06-11T12:52:40.064+08:00",
+      "type": "明日二串一购买方案 · 让球胜平负+胜平负",
+      "planGroup": "二串一",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "提前准备 2026-06-12 同一天的竞彩串单，按校准概率排序；玩法权重 0.99，复盘样本 38，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-12",
+      "planProbability": 0.14816100000000001,
+      "picks": [
+        {
+          "sourceEventId": "2040162",
+          "sportteryNo": "周四001",
+          "matchDate": "2026-06-12",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "墨西哥",
+          "awayTeam": "南非",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "让2球 让负",
+          "handicap": -2,
+          "probability": 0.377,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040163",
+          "sportteryNo": "周四002",
+          "matchDate": "2026-06-12",
+          "kickoff": "10:00",
+          "competition": "世界杯",
+          "homeTeam": "韩国",
+          "awayTeam": "捷克",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.393,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.385,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-11-tomorrow-二串一-0-3-hdc-hdc",
+      "planId": "tomorrow-二串一-0-3-hdc-hdc",
+      "date": "2026-06-11",
+      "generatedAt": "2026-06-11T12:52:40.064+08:00",
+      "type": "明日二串一购买方案 · 让球胜平负",
+      "planGroup": "二串一",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "note": "提前准备 2026-06-12 同一天的竞彩串单，按校准概率排序；玩法权重 0.90，复盘样本 30，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-12",
+      "planProbability": 0.128557,
+      "picks": [
+        {
+          "sourceEventId": "2040162",
+          "sportteryNo": "周四001",
+          "matchDate": "2026-06-12",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "墨西哥",
+          "awayTeam": "南非",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "让2球 让负",
+          "handicap": -2,
+          "probability": 0.377,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040163",
+          "sportteryNo": "周四002",
+          "matchDate": "2026-06-12",
+          "kickoff": "10:00",
+          "competition": "世界杯",
+          "homeTeam": "韩国",
+          "awayTeam": "捷克",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "让1球 让负",
+          "handicap": -1,
+          "probability": 0.341,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.359,
+      "detail": "0/2 命中"
+    },
     {
       "schemaVersion": "tomorrow-tab-plans-v1",
       "archiveId": "2026-06-11-tomorrow-二串一-0-0-wdl-wdl",
@@ -5516,19 +6593,20 @@
   "dailyPlanSummaries": [
     {
       "date": "2026-06-11",
-      "totalPlans": 5,
+      "totalPlans": 7,
       "reviewedPlans": 0,
-      "pendingPlans": 5,
+      "pendingPlans": 7,
       "hitPlans": 0,
       "hitRate": 0,
       "planTypes": [
+        "明日二串一购买方案 · 让球胜平负+胜平负",
+        "明日二串一购买方案 · 让球胜平负",
         "明日二串一购买方案 · 胜平负",
         "明日二串一购买方案 · 胜平负+让球胜平负",
         "明日二串一购买方案 · 胜平负+总进球数",
-        "明日二串一购买方案 · 让球胜平负+胜平负",
         "明日二串一购买方案 · 胜平负+比分"
       ],
-      "summary": "2026-06-11 已推出 5 个购买方案，等待比赛完场后统计命中率。"
+      "summary": "2026-06-11 已推出 7 个购买方案，等待比赛完场后统计命中率。"
     },
     {
       "date": "2026-06-10",
@@ -5598,7 +6676,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-11T12:35:38.081+08:00",
+    "generatedAt": "2026-06-11T13:02:50.838+08:00",
     "marketWeights": {
       "wdl": 1.091,
       "hdc": 0.898,
