@@ -5,7 +5,9 @@ const path = require("path");
 
 const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || "127.0.0.1";
-const UPDATE_INTERVAL_MS = Number(process.env.SCORE_UPDATE_INTERVAL_MS || 60 * 1000);
+const UPDATE_INTERVAL_MS = Number(process.env.SCORE_UPDATE_INTERVAL_MS || 10 * 60 * 1000);
+const DATA_MAX_AGE_MS = Number(process.env.SCORE_DATA_MAX_AGE_MS || UPDATE_INTERVAL_MS);
+const MAX_BACKOFF_MS = Number(process.env.SCORE_UPDATE_MAX_BACKOFF_MS || 30 * 60 * 1000);
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -17,9 +19,17 @@ const mimeTypes = {
 
 let updateRunning = false;
 let updatePromise = null;
+let updateFailures = 0;
+let nextAllowedUpdateAt = 0;
 
 function runUpdate(reason = "interval") {
   if (updatePromise) return updatePromise;
+  const now = Date.now();
+  if (now < nextAllowedUpdateAt) {
+    const waitSeconds = Math.ceil((nextAllowedUpdateAt - now) / 1000);
+    console.warn(`[score] skipping Sporttery update during ${reason}; retry in ${waitSeconds}s`);
+    return Promise.resolve(0);
+  }
   updateRunning = true;
 
   updatePromise = new Promise((resolve) => {
@@ -32,7 +42,15 @@ function runUpdate(reason = "interval") {
     child.on("exit", (code) => {
       updateRunning = false;
       updatePromise = null;
-      if (code !== 0) console.warn(`[score] data update failed during ${reason}`);
+      if (code !== 0) {
+        updateFailures += 1;
+        const backoff = Math.min(MAX_BACKOFF_MS, UPDATE_INTERVAL_MS * 2 ** Math.min(updateFailures - 1, 4));
+        nextAllowedUpdateAt = Date.now() + backoff;
+        console.warn(`[score] data update failed during ${reason}; using cached data, retry in ${Math.round(backoff / 1000)}s`);
+      } else {
+        updateFailures = 0;
+        nextAllowedUpdateAt = 0;
+      }
       resolve(code);
     });
   });
@@ -43,7 +61,7 @@ function runUpdate(reason = "interval") {
 async function shouldRefreshData() {
   try {
     const stat = await fs.promises.stat(path.resolve("data/matches.json"));
-    return Date.now() - stat.mtimeMs > UPDATE_INTERVAL_MS;
+    return Date.now() - stat.mtimeMs > DATA_MAX_AGE_MS;
   } catch {
     return true;
   }
@@ -107,6 +125,9 @@ const server = http.createServer((request, response) => {
 server.listen(PORT, HOST, () => {
   console.log(`[score] live dashboard: http://${HOST}:${PORT}`);
   console.log(`[score] updating Sporttery data every ${Math.round(UPDATE_INTERVAL_MS / 1000)} seconds`);
-  runUpdate("startup");
-  setInterval(runUpdate, UPDATE_INTERVAL_MS);
+  shouldRefreshData().then((needsRefresh) => {
+    if (needsRefresh) runUpdate("startup");
+    else console.log("[score] using cached Sporttery data during startup");
+  });
+  setInterval(() => runUpdate("interval"), UPDATE_INTERVAL_MS);
 });

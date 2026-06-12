@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T14:00:48.922+08:00",
+  "generatedAt": "2026-06-11T21:22:57.537+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -12,421 +12,6 @@
   "matches": [
     {
       "id": "001",
-      "sourceEventId": "2040189",
-      "sportteryNo": "周三201",
-      "date": "2026-06-11",
-      "businessDate": "2026-06-10",
-      "saleStatusName": "暂停销售",
-      "liveStatusName": "已完成",
-      "matchDate": "2026-06-11",
-      "kickoff": "03:45",
-      "competition": "国际赛",
-      "homeTeam": "葡萄牙",
-      "awayTeam": "尼日利亚",
-      "status": "finished",
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "halfScore": "1:1",
-      "minute": 90,
-      "tags": [
-        "中国竞彩网",
-        "周三201",
-        "暂停销售",
-        "已完成"
-      ],
-      "availablePools": [
-        "HHAD",
-        "HAFU",
-        "CRS",
-        "TTG",
-        "HAD"
-      ],
-      "betOptions": {
-        "wdl": {
-          "poolCode": "HAD",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "hdc": {
-          "poolCode": "HHAD",
-          "single": false,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
-        },
-        "ou": {
-          "poolCode": "TTG",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "score": {
-          "poolCode": "CRS",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "htft": {
-          "poolCode": "HAFU",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        }
-      },
-      "dataQuality": 92,
-      "importance": 88,
-      "risk": "高",
-      "stats": {
-        "form": "等待球队近况源",
-        "attack": 72,
-        "defense": 72,
-        "tempo": 58,
-        "homeAway": "竞彩编号：周三201，销售状态：暂停销售"
-      },
-      "markets": {
-        "hdc": {
-          "handicap": -2,
-          "pick": "让平",
-          "probability": 0.377,
-          "confidence": 58,
-          "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
-          "baseProbability": 0.42,
-          "modelWeight": 0.898,
-          "sampleSize": 15
-        },
-        "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
-          "probability": 0.279,
-          "confidence": 62,
-          "risk": "中",
-          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
-          "modelWeight": 0.821,
-          "sampleSize": 10
-        },
-        "score": {
-          "pick": "2-1",
-          "probability": 0.128,
-          "confidence": 42,
-          "risk": "高",
-          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
-          "modelWeight": 0.64,
-          "sampleSize": 3
-        },
-        "htft": {
-          "pick": "平/胜",
-          "probability": 0.209,
-          "confidence": 54,
-          "risk": "高",
-          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
-          "modelWeight": 0.72,
-          "sampleSize": 0
-        },
-        "wdl": {
-          "pick": "主胜",
-          "probability": 0.658,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.603,
-          "modelWeight": 1.091,
-          "sampleSize": 23
-        }
-      },
-      "actualMarkets": {
-        "hdc": {
-          "handicap": -2,
-          "pick": "让负",
-          "probability": 0.629,
-          "confidence": 84,
-          "risk": "中",
-          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
-          "baseProbability": 0.7,
-          "modelWeight": 0.898,
-          "sampleSize": 15
-        },
-        "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
-          "probability": 0.62,
-          "confidence": 84,
-          "risk": "中",
-          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
-          "baseProbability": 0.78,
-          "modelWeight": 0.821,
-          "sampleSize": 10
-        },
-        "score": {
-          "pick": "2-1",
-          "probability": 0.42,
-          "confidence": 82,
-          "risk": "高",
-          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
-          "baseProbability": 0.82,
-          "modelWeight": 0.64,
-          "sampleSize": 3
-        },
-        "htft": {
-          "pick": "平/胜",
-          "probability": 0.374,
-          "confidence": 70,
-          "risk": "高",
-          "reason": "根据半场和全场比分做复盘方向。",
-          "baseProbability": 0.52,
-          "modelWeight": 0.72,
-          "sampleSize": 0
-        },
-        "wdl": {
-          "pick": "主胜",
-          "probability": 0.76,
-          "confidence": 88,
-          "risk": "低",
-          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
-          "baseProbability": 0.72,
-          "modelWeight": 1.091,
-          "sampleSize": 23
-        }
-      },
-      "modelProfile": {
-        "home": {
-          "name": "葡萄牙",
-          "power": 90,
-          "attack": 86,
-          "defense": 80,
-          "stability": 82
-        },
-        "away": {
-          "name": "尼日利亚",
-          "power": 76,
-          "attack": 74,
-          "defense": 73,
-          "stability": 72
-        },
-        "strengthEdge": 16,
-        "attackEdge": 13,
-        "awayAttackEdge": -6,
-        "goalBias": 2,
-        "stability": 77,
-        "summary": "强弱差 +16，进球倾向 +2，稳定度 77"
-      },
-      "socialFactors": {
-        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
-        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
-        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
-        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
-        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
-      }
-    },
-    {
-      "id": "002",
-      "sourceEventId": "2040190",
-      "sportteryNo": "周三202",
-      "date": "2026-06-11",
-      "businessDate": "2026-06-10",
-      "saleStatusName": "暂停销售",
-      "liveStatusName": "已完成",
-      "matchDate": "2026-06-11",
-      "kickoff": "04:00",
-      "competition": "国际赛",
-      "homeTeam": "英格兰",
-      "awayTeam": "哥斯达黎加",
-      "status": "finished",
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "halfScore": "1:0",
-      "minute": 90,
-      "tags": [
-        "中国竞彩网",
-        "周三202",
-        "暂停销售",
-        "已完成"
-      ],
-      "availablePools": [
-        "HHAD",
-        "HAFU",
-        "CRS",
-        "TTG"
-      ],
-      "betOptions": {
-        "wdl": {
-          "poolCode": "HAD",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "hdc": {
-          "poolCode": "HHAD",
-          "single": false,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
-        },
-        "ou": {
-          "poolCode": "TTG",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "score": {
-          "poolCode": "CRS",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        },
-        "htft": {
-          "poolCode": "HAFU",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
-        }
-      },
-      "dataQuality": 92,
-      "importance": 78,
-      "risk": "高",
-      "stats": {
-        "form": "等待球队近况源",
-        "attack": 72,
-        "defense": 72,
-        "tempo": 58,
-        "homeAway": "竞彩编号：周三202，销售状态：暂停销售"
-      },
-      "markets": {
-        "hdc": {
-          "handicap": -2,
-          "pick": "让平",
-          "probability": 0.377,
-          "confidence": 58,
-          "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
-          "baseProbability": 0.42,
-          "modelWeight": 0.898,
-          "sampleSize": 15
-        },
-        "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
-          "probability": 0.279,
-          "confidence": 62,
-          "risk": "中",
-          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
-          "modelWeight": 0.821,
-          "sampleSize": 10
-        },
-        "score": {
-          "pick": "2-1",
-          "probability": 0.128,
-          "confidence": 42,
-          "risk": "高",
-          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
-          "modelWeight": 0.64,
-          "sampleSize": 3
-        },
-        "htft": {
-          "pick": "胜/胜",
-          "probability": 0.245,
-          "confidence": 58,
-          "risk": "高",
-          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
-          "baseProbability": 0.34,
-          "modelWeight": 0.72,
-          "sampleSize": 0
-        }
-      },
-      "actualMarkets": {
-        "hdc": {
-          "handicap": -2,
-          "pick": "让胜",
-          "probability": 0.629,
-          "confidence": 84,
-          "risk": "中",
-          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
-          "baseProbability": 0.7,
-          "modelWeight": 0.898,
-          "sampleSize": 15
-        },
-        "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
-          "probability": 0.62,
-          "confidence": 84,
-          "risk": "中",
-          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
-          "baseProbability": 0.78,
-          "modelWeight": 0.821,
-          "sampleSize": 10
-        },
-        "score": {
-          "pick": "3-0",
-          "probability": 0.42,
-          "confidence": 82,
-          "risk": "高",
-          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
-          "baseProbability": 0.82,
-          "modelWeight": 0.64,
-          "sampleSize": 3
-        },
-        "htft": {
-          "pick": "胜/胜",
-          "probability": 0.374,
-          "confidence": 70,
-          "risk": "高",
-          "reason": "根据半场和全场比分做复盘方向。",
-          "baseProbability": 0.52,
-          "modelWeight": 0.72,
-          "sampleSize": 0
-        }
-      },
-      "modelProfile": {
-        "home": {
-          "name": "英格兰",
-          "power": 90,
-          "attack": 85,
-          "defense": 83,
-          "stability": 82
-        },
-        "away": {
-          "name": "哥斯达黎加",
-          "power": 72,
-          "attack": 68,
-          "defense": 72,
-          "stability": 70
-        },
-        "strengthEdge": 20,
-        "attackEdge": 13,
-        "awayAttackEdge": -15,
-        "goalBias": 0,
-        "stability": 76,
-        "summary": "强弱差 +20，进球倾向 +0，稳定度 76"
-      },
-      "socialFactors": {
-        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
-        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
-        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
-        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
-        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
-      }
-    },
-    {
-      "id": "003",
       "sourceEventId": "2040162",
       "sportteryNo": "周四001",
       "date": "2026-06-12",
@@ -505,7 +90,7 @@
       "markets": {
         "hdc": {
           "handicap": -1,
-          "pick": "让胜",
+          "pick": "让平",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
@@ -588,7 +173,7 @@
       }
     },
     {
-      "id": "004",
+      "id": "002",
       "sourceEventId": "2040163",
       "sportteryNo": "周四002",
       "date": "2026-06-12",
@@ -750,7 +335,7 @@
       }
     },
     {
-      "id": "005",
+      "id": "003",
       "sourceEventId": "2040164",
       "sportteryNo": "周五003",
       "date": "2026-06-13",
@@ -914,7 +499,7 @@
       }
     },
     {
-      "id": "006",
+      "id": "004",
       "sourceEventId": "2040165",
       "sportteryNo": "周五004",
       "date": "2026-06-13",
@@ -1078,7 +663,907 @@
       }
     },
     {
+      "id": "005",
+      "sourceEventId": "2040210",
+      "sportteryNo": "周六201",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-13",
+      "kickoff": "20:00",
+      "competition": "芬超",
+      "homeTeam": "坦佩雷山猫",
+      "awayTeam": "TPS图尔库",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六201",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 88,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六201，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.377,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.42,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "1球",
+          "exactGoals": "1",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "1-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
+          "risk": "高",
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "坦佩雷山猫",
+          "power": 88,
+          "attack": 86,
+          "defense": 85,
+          "stability": 84
+        },
+        "away": {
+          "name": "TPS图尔库",
+          "power": 85,
+          "attack": 83,
+          "defense": 82,
+          "stability": 81
+        },
+        "strengthEdge": 5,
+        "attackEdge": 4,
+        "awayAttackEdge": -2,
+        "goalBias": 1,
+        "stability": 83,
+        "summary": "强弱差 +5，进球倾向 +1，稳定度 83"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "006",
+      "sourceEventId": "2040211",
+      "sportteryNo": "周六202",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-13",
+      "kickoff": "20:00",
+      "competition": "芬超",
+      "homeTeam": "国际图尔库",
+      "awayTeam": "AC奥卢",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六202",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六202，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让负",
+          "probability": 0.341,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.38,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "2球",
+          "exactGoals": "2",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "1-1",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "负/平",
+          "probability": 0.173,
+          "confidence": 46,
+          "risk": "高",
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.24,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "国际图尔库",
+          "power": 82,
+          "attack": 80,
+          "defense": 79,
+          "stability": 78
+        },
+        "away": {
+          "name": "AC奥卢",
+          "power": 86,
+          "attack": 84,
+          "defense": 83,
+          "stability": 82
+        },
+        "strengthEdge": -2,
+        "attackEdge": -3,
+        "awayAttackEdge": 5,
+        "goalBias": 1,
+        "stability": 80,
+        "summary": "强弱差 -2，进球倾向 +1，稳定度 80"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
       "id": "007",
+      "sourceEventId": "2040212",
+      "sportteryNo": "周六203",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-13",
+      "kickoff": "22:00",
+      "competition": "芬超",
+      "homeTeam": "雅罗",
+      "awayTeam": "赫尔辛基",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六203",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六203，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让负",
+          "probability": 0.341,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.38,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "2球",
+          "exactGoals": "2",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "1-1",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "负/平",
+          "probability": 0.173,
+          "confidence": 46,
+          "risk": "高",
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.24,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "雅罗",
+          "power": 74,
+          "attack": 72,
+          "defense": 71,
+          "stability": 70
+        },
+        "away": {
+          "name": "赫尔辛基",
+          "power": 80,
+          "attack": 78,
+          "defense": 77,
+          "stability": 76
+        },
+        "strengthEdge": -4,
+        "attackEdge": -5,
+        "awayAttackEdge": 7,
+        "goalBias": 1,
+        "stability": 73,
+        "summary": "强弱差 -4，进球倾向 +1，稳定度 73"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "008",
+      "sourceEventId": "2040213",
+      "sportteryNo": "周六204",
+      "date": "2026-06-13",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-13",
+      "kickoff": "22:00",
+      "competition": "芬超",
+      "homeTeam": "瓦萨",
+      "awayTeam": "库奥皮奥",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六204",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六204，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让负",
+          "probability": 0.341,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.38,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "0球",
+          "exactGoals": "0",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "0-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/平",
+          "probability": 0.216,
+          "confidence": 52,
+          "risk": "高",
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.3,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "瓦萨",
+          "power": 74,
+          "attack": 72,
+          "defense": 71,
+          "stability": 70
+        },
+        "away": {
+          "name": "库奥皮奥",
+          "power": 80,
+          "attack": 78,
+          "defense": 77,
+          "stability": 76
+        },
+        "strengthEdge": -4,
+        "attackEdge": -5,
+        "awayAttackEdge": 7,
+        "goalBias": 1,
+        "stability": 73,
+        "summary": "强弱差 -4，进球倾向 +1，稳定度 73"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "009",
+      "sourceEventId": "2040214",
+      "sportteryNo": "周六205",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-14",
+      "kickoff": "00:00",
+      "competition": "芬超",
+      "homeTeam": "玛丽港",
+      "awayTeam": "赫尔辛基火花",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六205",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六205，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.377,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.42,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "1球",
+          "exactGoals": "1",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "1-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
+          "risk": "高",
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "玛丽港",
+          "power": 88,
+          "attack": 86,
+          "defense": 85,
+          "stability": 84
+        },
+        "away": {
+          "name": "赫尔辛基火花",
+          "power": 84,
+          "attack": 82,
+          "defense": 81,
+          "stability": 80
+        },
+        "strengthEdge": 6,
+        "attackEdge": 5,
+        "awayAttackEdge": -3,
+        "goalBias": 1,
+        "stability": 82,
+        "summary": "强弱差 +6，进球倾向 +1，稳定度 82"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "010",
+      "sourceEventId": "2040215",
+      "sportteryNo": "周六206",
+      "date": "2026-06-14",
+      "businessDate": "2026-06-13",
+      "saleStatusName": "待开售",
+      "liveStatusName": "待开售",
+      "matchDate": "2026-06-14",
+      "kickoff": "00:00",
+      "competition": "芬超",
+      "homeTeam": "拉赫蒂",
+      "awayTeam": "塞伊奈约基",
+      "status": "pre",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "halfScore": "",
+      "minute": null,
+      "tags": [
+        "中国竞彩网",
+        "周六206",
+        "待开售"
+      ],
+      "availablePools": [
+        "HHAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": false,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
+        }
+      },
+      "dataQuality": 86,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "等待球队近况源",
+        "attack": 62,
+        "defense": 62,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周六206，销售状态：待开售"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -1,
+          "pick": "让平",
+          "probability": 0.377,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.42,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "2球",
+          "exactGoals": "2",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "2-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.209,
+          "confidence": 54,
+          "risk": "高",
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.29,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": null,
+      "modelProfile": {
+        "home": {
+          "name": "拉赫蒂",
+          "power": 86,
+          "attack": 84,
+          "defense": 83,
+          "stability": 82
+        },
+        "away": {
+          "name": "塞伊奈约基",
+          "power": 74,
+          "attack": 72,
+          "defense": 71,
+          "stability": 70
+        },
+        "strengthEdge": 14,
+        "attackEdge": 13,
+        "awayAttackEdge": -11,
+        "goalBias": 1,
+        "stability": 76,
+        "summary": "强弱差 +14，进球倾向 +1，稳定度 76"
+      },
+      "socialFactors": {
+        "clubMotivation": "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。",
+        "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+        "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
+        "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "011",
       "sourceEventId": "2040166",
       "sportteryNo": "周六005",
       "date": "2026-06-14",
@@ -1157,12 +1642,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
+          "handicap": -1,
           "pick": "让负",
           "probability": 0.413,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.46,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -1231,7 +1716,7 @@
       }
     },
     {
-      "id": "008",
+      "id": "012",
       "sourceEventId": "2040167",
       "sportteryNo": "周六006",
       "date": "2026-06-14",
@@ -1395,7 +1880,7 @@
       }
     },
     {
-      "id": "009",
+      "id": "013",
       "sourceEventId": "2040168",
       "sportteryNo": "周六007",
       "date": "2026-06-14",
@@ -1475,12 +1960,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": 2,
-          "pick": "让胜",
+          "handicap": 1,
+          "pick": "让平",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算受让2球方向。",
+          "reason": "按主客队基础强弱估算受让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -1559,7 +2044,7 @@
       }
     },
     {
-      "id": "010",
+      "id": "014",
       "sourceEventId": "2040169",
       "sportteryNo": "周六008",
       "date": "2026-06-14",
@@ -1723,7 +2208,7 @@
       }
     },
     {
-      "id": "011",
+      "id": "015",
       "sourceEventId": "2040170",
       "sportteryNo": "周日009",
       "date": "2026-06-15",
@@ -1801,12 +2286,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
-          "pick": "让平",
+          "handicap": -1,
+          "pick": "让胜",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -1875,7 +2360,7 @@
       }
     },
     {
-      "id": "012",
+      "id": "016",
       "sourceEventId": "2040171",
       "sportteryNo": "周日010",
       "date": "2026-06-15",
@@ -2039,7 +2524,7 @@
       }
     },
     {
-      "id": "013",
+      "id": "017",
       "sourceEventId": "2040172",
       "sportteryNo": "周日011",
       "date": "2026-06-15",
@@ -2203,7 +2688,7 @@
       }
     },
     {
-      "id": "014",
+      "id": "018",
       "sourceEventId": "2040173",
       "sportteryNo": "周日012",
       "date": "2026-06-15",
@@ -2367,7 +2852,7 @@
       }
     },
     {
-      "id": "015",
+      "id": "019",
       "sourceEventId": "2040174",
       "sportteryNo": "周一013",
       "date": "2026-06-16",
@@ -2446,12 +2931,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
-          "pick": "让平",
+          "handicap": -1,
+          "pick": "让胜",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -2520,7 +3005,7 @@
       }
     },
     {
-      "id": "016",
+      "id": "020",
       "sourceEventId": "2040175",
       "sportteryNo": "周一014",
       "date": "2026-06-16",
@@ -2684,7 +3169,7 @@
       }
     },
     {
-      "id": "017",
+      "id": "021",
       "sourceEventId": "2040176",
       "sportteryNo": "周一015",
       "date": "2026-06-16",
@@ -2764,12 +3249,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": 2,
-          "pick": "让胜",
+          "handicap": 1,
+          "pick": "让平",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算受让2球方向。",
+          "reason": "按主客队基础强弱估算受让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -2848,7 +3333,7 @@
       }
     },
     {
-      "id": "018",
+      "id": "022",
       "sourceEventId": "2040177",
       "sportteryNo": "周一016",
       "date": "2026-06-16",
@@ -3012,7 +3497,7 @@
       }
     },
     {
-      "id": "019",
+      "id": "023",
       "sourceEventId": "2040178",
       "sportteryNo": "周二017",
       "date": "2026-06-17",
@@ -3176,7 +3661,7 @@
       }
     },
     {
-      "id": "020",
+      "id": "024",
       "sourceEventId": "2040179",
       "sportteryNo": "周二018",
       "date": "2026-06-17",
@@ -3255,12 +3740,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
+          "handicap": -1,
           "pick": "让负",
           "probability": 0.413,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.46,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -3329,7 +3814,7 @@
       }
     },
     {
-      "id": "021",
+      "id": "025",
       "sourceEventId": "2040180",
       "sportteryNo": "周二019",
       "date": "2026-06-17",
@@ -3409,12 +3894,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
-          "pick": "让平",
+          "handicap": -1,
+          "pick": "让胜",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -3493,7 +3978,7 @@
       }
     },
     {
-      "id": "022",
+      "id": "026",
       "sourceEventId": "2040181",
       "sportteryNo": "周二020",
       "date": "2026-06-17",
@@ -3573,12 +4058,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
-          "pick": "让负",
+          "handicap": -1,
+          "pick": "让平",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -3657,7 +4142,7 @@
       }
     },
     {
-      "id": "023",
+      "id": "027",
       "sourceEventId": "2040182",
       "sportteryNo": "周三021",
       "date": "2026-06-18",
@@ -3737,12 +4222,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -2,
-          "pick": "让平",
+          "handicap": -1,
+          "pick": "让胜",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让2球方向。",
+          "reason": "按主客队基础强弱估算让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -3821,7 +4306,7 @@
       }
     },
     {
-      "id": "024",
+      "id": "028",
       "sourceEventId": "2040183",
       "sportteryNo": "周三022",
       "date": "2026-06-18",
@@ -3985,7 +4470,7 @@
       }
     },
     {
-      "id": "025",
+      "id": "029",
       "sourceEventId": "2040184",
       "sportteryNo": "周三023",
       "date": "2026-06-18",
@@ -4149,7 +4634,7 @@
       }
     },
     {
-      "id": "026",
+      "id": "030",
       "sourceEventId": "2040185",
       "sportteryNo": "周三024",
       "date": "2026-06-18",
@@ -4229,12 +4714,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": 2,
-          "pick": "让胜",
+          "handicap": 1,
+          "pick": "让平",
           "probability": 0.377,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算受让2球方向。",
+          "reason": "按主客队基础强弱估算受让1球方向。",
           "baseProbability": 0.42,
           "modelWeight": 0.898,
           "sampleSize": 15
@@ -4322,8 +4807,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4349,8 +4834,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4376,8 +4861,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4403,8 +4888,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4430,8 +4915,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4459,8 +4944,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4486,8 +4971,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4513,8 +4998,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4540,8 +5025,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -4567,8 +5052,8 @@
       "mode": "all",
       "requiredHits": 2,
       "matchIds": [
-        "003",
-        "004"
+        "001",
+        "002"
       ],
       "eventIds": [
         "2040162",
@@ -6690,7 +7175,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-11T14:00:48.922+08:00",
+    "generatedAt": "2026-06-11T21:22:57.537+08:00",
     "marketWeights": {
       "wdl": 1.091,
       "hdc": 0.898,
@@ -6730,13 +7215,13 @@
   "tomorrowPool": [
     {
       "category": "竞彩候选",
-      "matchId": "003",
+      "matchId": "001",
       "market": "wdl",
       "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周四001，需等待开售状态和临场事件确认。"
     },
     {
       "category": "竞彩候选",
-      "matchId": "004",
+      "matchId": "002",
       "market": "ou",
       "reason": "来自中国竞彩网竞猜赛程，竞彩编号 周四002，需等待开售状态和临场事件确认。"
     }
