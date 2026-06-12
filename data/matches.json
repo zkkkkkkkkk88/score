@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T21:22:57.537+08:00",
+  "generatedAt": "2026-06-12T10:37:42.975+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -4794,6 +4794,1098 @@
         "politicalFactor": "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
         "integrityRisk": "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。",
         "consequence": "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "031",
+      "sourceEventId": "2040147",
+      "sportteryNo": "周一203",
+      "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-09",
+      "kickoff": "10:00",
+      "competition": "国际赛",
+      "homeTeam": "秘鲁",
+      "awayTeam": "西班牙",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周一203",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HAD"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周一203，历史完赛归档"
+      },
+      "markets": {
+        "wdl": {
+          "pick": "客胜",
+          "probability": 0.72,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "来自赛前保存的胜平负预测，用于历史复盘。",
+          "baseProbability": 0.66,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "actualMarkets": {
+        "wdl": {
+          "pick": "客胜",
+          "probability": 0.72,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
+          "baseProbability": 0.66,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "秘鲁",
+          "power": 83,
+          "attack": 81,
+          "defense": 80,
+          "stability": 79
+        },
+        "away": {
+          "name": "西班牙",
+          "power": 89,
+          "attack": 84,
+          "defense": 82,
+          "stability": 83
+        },
+        "strengthEdge": -4,
+        "attackEdge": -1,
+        "awayAttackEdge": 4,
+        "goalBias": 1,
+        "stability": 81,
+        "summary": "强弱差 -4，进球倾向 +1，稳定度 81"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "032",
+      "sourceEventId": "2040186",
+      "sportteryNo": "周二201",
+      "date": "2026-06-09",
+      "businessDate": "2026-06-09",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-09",
+      "kickoff": "19:35",
+      "competition": "国际赛",
+      "homeTeam": "中国",
+      "awayTeam": "泰国",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周二201",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HAD",
+        "TTG"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 88,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周二201，历史完赛归档"
+      },
+      "markets": {
+        "ou": {
+          "pick": "4+球",
+          "exactGoals": "4+",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "来自赛前保存的总进球数预测，用于历史复盘。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.524,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "来自赛前保存的胜平负预测，用于历史复盘。",
+          "baseProbability": 0.48,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "actualMarkets": {
+        "ou": {
+          "pick": "0球",
+          "exactGoals": "0",
+          "probability": 0.62,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
+          "baseProbability": 0.78,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "wdl": {
+          "pick": "平",
+          "probability": 0.633,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
+          "baseProbability": 0.58,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "中国",
+          "power": 67,
+          "attack": 65,
+          "defense": 66,
+          "stability": 65
+        },
+        "away": {
+          "name": "泰国",
+          "power": 69,
+          "attack": 67,
+          "defense": 66,
+          "stability": 65
+        },
+        "strengthEdge": 0,
+        "attackEdge": -1,
+        "awayAttackEdge": 1,
+        "goalBias": 0,
+        "stability": 65,
+        "summary": "强弱差 +0，进球倾向 +0，稳定度 65"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "033",
+      "sourceEventId": "2040187",
+      "sportteryNo": "周二202",
+      "date": "2026-06-10",
+      "businessDate": "2026-06-10",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-10",
+      "kickoff": "01:00",
+      "competition": "国际赛",
+      "homeTeam": "匈牙利",
+      "awayTeam": "哈萨克斯坦",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周二202",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HAD",
+        "HHAD",
+        "CRS",
+        "TTG"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周二202，历史完赛归档"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让平",
+          "probability": 0.395,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "来自赛前保存的让球胜平负预测，用于历史复盘。",
+          "baseProbability": 0.44,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.524,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "来自赛前保存的胜平负预测，用于历史复盘。",
+          "baseProbability": 0.48,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "actualMarkets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让平",
+          "probability": 0.629,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
+          "baseProbability": 0.7,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "4+球",
+          "exactGoals": "4+",
+          "probability": 0.62,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
+          "baseProbability": 0.78,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-1",
+          "probability": 0.42,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
+          "baseProbability": 0.82,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.76,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
+          "baseProbability": 0.72,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "匈牙利",
+          "power": 79,
+          "attack": 77,
+          "defense": 76,
+          "stability": 75
+        },
+        "away": {
+          "name": "哈萨克斯坦",
+          "power": 63,
+          "attack": 61,
+          "defense": 60,
+          "stability": 59
+        },
+        "strengthEdge": 18,
+        "attackEdge": 17,
+        "awayAttackEdge": -15,
+        "goalBias": 1,
+        "stability": 67,
+        "summary": "强弱差 +18，进球倾向 +1，稳定度 67"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "034",
+      "sourceEventId": "2040188",
+      "sportteryNo": "周二203",
+      "date": "2026-06-10",
+      "businessDate": "2026-06-10",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-10",
+      "kickoff": "09:00",
+      "competition": "国际赛",
+      "homeTeam": "阿根廷",
+      "awayTeam": "冰岛",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周二203",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HAD",
+        "HHAD",
+        "TTG",
+        "CRS"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周二203，历史完赛归档"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让平",
+          "probability": 0.377,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "来自赛前保存的让球胜平负预测，用于历史复盘。",
+          "baseProbability": 0.42,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-0",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.76,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
+          "baseProbability": 0.7,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "actualMarkets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让胜",
+          "probability": 0.629,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
+          "baseProbability": 0.7,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.62,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
+          "baseProbability": 0.78,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-0",
+          "probability": 0.42,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
+          "baseProbability": 0.82,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.76,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
+          "baseProbability": 0.72,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "阿根廷",
+          "power": 94,
+          "attack": 88,
+          "defense": 84,
+          "stability": 86
+        },
+        "away": {
+          "name": "冰岛",
+          "power": 68,
+          "attack": 66,
+          "defense": 65,
+          "stability": 64
+        },
+        "strengthEdge": 28,
+        "attackEdge": 23,
+        "awayAttackEdge": -18,
+        "goalBias": 1,
+        "stability": 75,
+        "summary": "强弱差 +28，进球倾向 +1，稳定度 75"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "035",
+      "sourceEventId": "2040189",
+      "sportteryNo": "周三201",
+      "date": "2026-06-11",
+      "businessDate": "2026-06-11",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-11",
+      "kickoff": "03:45",
+      "competition": "国际赛",
+      "homeTeam": "葡萄牙",
+      "awayTeam": "尼日利亚",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周三201",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HAD",
+        "HHAD",
+        "TTG",
+        "CRS",
+        "HAFU"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 88,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周三201，历史完赛归档"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让胜",
+          "probability": 0.395,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "来自赛前保存的让球胜平负预测，用于历史复盘。",
+          "baseProbability": 0.44,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "4+球",
+          "exactGoals": "4+",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "来自赛前保存的总进球数预测，用于历史复盘。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-0",
+          "probability": 0.082,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
+          "baseProbability": 0.128,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.15,
+          "confidence": 54,
+          "risk": "高",
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.209,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.611,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "来自赛前保存的胜平负预测，用于历史复盘。",
+          "baseProbability": 0.56,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "actualMarkets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让负",
+          "probability": 0.629,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
+          "baseProbability": 0.7,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.62,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
+          "baseProbability": 0.78,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.42,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
+          "baseProbability": 0.82,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.374,
+          "confidence": 70,
+          "risk": "高",
+          "reason": "根据半场和全场比分做复盘方向。",
+          "baseProbability": 0.52,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.76,
+          "confidence": 88,
+          "risk": "低",
+          "reason": "根据中国竞彩网完场比分生成赛果复盘方向。",
+          "baseProbability": 0.72,
+          "modelWeight": 1.091,
+          "sampleSize": 23
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "葡萄牙",
+          "power": 90,
+          "attack": 86,
+          "defense": 80,
+          "stability": 82
+        },
+        "away": {
+          "name": "尼日利亚",
+          "power": 76,
+          "attack": 74,
+          "defense": 73,
+          "stability": 72
+        },
+        "strengthEdge": 16,
+        "attackEdge": 13,
+        "awayAttackEdge": -6,
+        "goalBias": 2,
+        "stability": 77,
+        "summary": "强弱差 +16，进球倾向 +2，稳定度 77"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
+        "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
+      }
+    },
+    {
+      "id": "036",
+      "sourceEventId": "2040190",
+      "sportteryNo": "周三202",
+      "date": "2026-06-11",
+      "businessDate": "2026-06-11",
+      "saleStatusName": "已完成",
+      "liveStatusName": "已完成",
+      "matchDate": "2026-06-11",
+      "kickoff": "04:00",
+      "competition": "国际赛",
+      "homeTeam": "英格兰",
+      "awayTeam": "哥斯达黎加",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "halfScore": "",
+      "minute": 90,
+      "tags": [
+        "中国竞彩网",
+        "周三202",
+        "历史赛事",
+        "已完成"
+      ],
+      "availablePools": [
+        "HHAD",
+        "TTG",
+        "CRS",
+        "HAFU"
+      ],
+      "betOptions": {
+        "wdl": {
+          "poolCode": "HAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "hdc": {
+          "poolCode": "HHAD",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "ou": {
+          "poolCode": "TTG",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "score": {
+          "poolCode": "CRS",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        },
+        "htft": {
+          "poolCode": "HAFU",
+          "single": true,
+          "allUp": false,
+          "selling": false,
+          "poolStatus": "Closed"
+        }
+      },
+      "dataQuality": 82,
+      "importance": 78,
+      "risk": "中",
+      "stats": {
+        "form": "历史归档赛事",
+        "attack": 72,
+        "defense": 72,
+        "tempo": 58,
+        "homeAway": "竞彩编号：周三202，历史完赛归档"
+      },
+      "markets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让胜",
+          "probability": 0.395,
+          "confidence": 58,
+          "risk": "中",
+          "reason": "来自赛前保存的让球胜平负预测，用于历史复盘。",
+          "baseProbability": 0.44,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.279,
+          "confidence": 62,
+          "risk": "中",
+          "reason": "来自赛前保存的总进球数预测，用于历史复盘。",
+          "baseProbability": 0.34,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "2-1",
+          "probability": 0.128,
+          "confidence": 42,
+          "risk": "高",
+          "reason": "来自赛前保存的比分预测，用于历史复盘。",
+          "baseProbability": 0.2,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "胜/胜",
+          "probability": 0.176,
+          "confidence": 58,
+          "risk": "高",
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.245,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "actualMarkets": {
+        "hdc": {
+          "handicap": -2,
+          "pick": "让胜",
+          "probability": 0.629,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分和让2球结果复盘。",
+          "baseProbability": 0.7,
+          "modelWeight": 0.898,
+          "sampleSize": 15
+        },
+        "ou": {
+          "pick": "3球",
+          "exactGoals": "3",
+          "probability": 0.62,
+          "confidence": 84,
+          "risk": "中",
+          "reason": "根据中国竞彩网完场比分计算具体总进球数。",
+          "baseProbability": 0.78,
+          "modelWeight": 0.821,
+          "sampleSize": 10
+        },
+        "score": {
+          "pick": "3-0",
+          "probability": 0.42,
+          "confidence": 82,
+          "risk": "高",
+          "reason": "根据中国竞彩网完场比分复盘比分玩法。",
+          "baseProbability": 0.82,
+          "modelWeight": 0.64,
+          "sampleSize": 3
+        },
+        "htft": {
+          "pick": "平/胜",
+          "probability": 0.374,
+          "confidence": 70,
+          "risk": "高",
+          "reason": "根据半场和全场比分做复盘方向。",
+          "baseProbability": 0.52,
+          "modelWeight": 0.72,
+          "sampleSize": 0
+        }
+      },
+      "modelProfile": {
+        "home": {
+          "name": "英格兰",
+          "power": 90,
+          "attack": 85,
+          "defense": 83,
+          "stability": 82
+        },
+        "away": {
+          "name": "哥斯达黎加",
+          "power": 72,
+          "attack": 68,
+          "defense": 72,
+          "stability": 70
+        },
+        "strengthEdge": 20,
+        "attackEdge": 13,
+        "awayAttackEdge": -15,
+        "goalBias": 0,
+        "stability": 76,
+        "summary": "强弱差 +20，进球倾向 +0，稳定度 76"
+      },
+      "socialFactors": {
+        "clubMotivation": "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
+        "politicalFactor": "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。",
+        "integrityRisk": "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        "consequence": "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
     }

@@ -5,6 +5,7 @@ const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
 const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
 const PLAN_SCHEMA_VERSION = "tomorrow-tab-plans-v1";
+const HISTORY_WINDOW_DAYS = Number(process.env.SCORE_HISTORY_WINDOW_DAYS || 7);
 const DEFAULT_MARKET_WEIGHTS = {
   wdl: 1,
   hdc: 0.96,
@@ -19,6 +20,11 @@ const MARKET_POOL_CODES = {
   score: "CRS",
   htft: "HAFU",
 };
+const HISTORICAL_POOL_OVERRIDES = {
+  2040189: ["HAD", "HHAD", "TTG", "CRS", "HAFU"],
+  2040190: ["HHAD", "TTG", "CRS", "HAFU"],
+};
+const PRESERVE_ARCHIVE_PREDICTION_IDS = new Set(["2040189", "2040190"]);
 
 const headers = {
   "User-Agent":
@@ -1195,8 +1201,260 @@ function buildTomorrowPool(matches, targetDate) {
     }));
 }
 
+function isWithinHistoryWindow(dateText, today) {
+  if (!dateText) return false;
+  const start = addDays(today, -(HISTORY_WINDOW_DAYS - 1));
+  return dateText >= start && dateText <= today;
+}
+
+function parseArchiveScore(value) {
+  if (!value || !String(value).includes("-")) return { home: null, away: null };
+  const [home, away] = String(value).split("-").map((part) => Number(part));
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return { home: null, away: null };
+  return { home, away };
+}
+
+function archivePoolsForEvent(eventId, marketKeys) {
+  const override = HISTORICAL_POOL_OVERRIDES[String(eventId)];
+  if (override) return override;
+  return [...new Set(marketKeys.map((marketKey) => MARKET_POOL_CODES[marketKey]).filter(Boolean))];
+}
+
+function archiveMarketFromPick(pick) {
+  const probability = Number(pick.probability || 0);
+  if (pick.marketKey === "wdl") {
+    return {
+      pick: pick.pick,
+      probability,
+      confidence: 64,
+      risk: "中",
+      reason: "来自赛前保存的胜平负预测，用于历史复盘。",
+    };
+  }
+  if (pick.marketKey === "hdc") {
+    const handicap = Number.isFinite(Number(pick.handicap)) ? Number(pick.handicap) : Number(String(pick.pick).match(/(\d+)/)?.[1] || 0) * -1;
+    return {
+      handicap,
+      pick: normalizeHdcPick(pick.pick),
+      probability,
+      confidence: 58,
+      risk: "中",
+      reason: "来自赛前保存的让球胜平负预测，用于历史复盘。",
+    };
+  }
+  if (pick.marketKey === "ou") {
+    const exactGoals = pick.exactGoals ?? String(pick.pick || "").replace("球", "");
+    return {
+      pick: `${exactGoals}球`,
+      exactGoals,
+      probability,
+      confidence: 62,
+      risk: "中",
+      reason: "来自赛前保存的总进球数预测，用于历史复盘。",
+    };
+  }
+  if (pick.marketKey === "score") {
+    return {
+      pick: pick.pick,
+      probability,
+      confidence: 42,
+      risk: "高",
+      reason: "来自赛前保存的比分预测，用于历史复盘。",
+    };
+  }
+  if (pick.marketKey === "htft") {
+    return {
+      pick: pick.pick,
+      probability,
+      confidence: 52,
+      risk: "高",
+      reason: "来自赛前保存的半全场预测，用于历史复盘。",
+    };
+  }
+  return null;
+}
+
+function chooseArchiveMarket(existing, candidate) {
+  if (!existing) return candidate;
+  if ((candidate.probability || 0) > (existing.probability || 0)) return candidate;
+  return existing;
+}
+
+function scorePickResult(scorePick) {
+  const [home, away] = String(scorePick || "").split("-").map(Number);
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return "";
+  if (home > away) return "主胜";
+  if (home < away) return "客胜";
+  return "平";
+}
+
+function buildArchivedHistoricalMatches(oldData, existingMatches, today, calibration) {
+  const existingIds = new Set(existingMatches.map((match) => String(match.sourceEventId)));
+  const grouped = new Map();
+
+  (oldData?.planArchive || []).forEach((plan) => {
+    (plan.picks || []).forEach((pick) => {
+      const eventId = String(pick.sourceEventId || "");
+      if (!eventId || existingIds.has(eventId) || !isWithinHistoryWindow(pick.matchDate, today)) return;
+      if (!grouped.has(eventId)) {
+        grouped.set(eventId, {
+          sourceEventId: eventId,
+          sportteryNo: pick.sportteryNo,
+          date: pick.matchDate,
+          businessDate: pick.matchDate,
+          matchDate: pick.matchDate,
+          kickoff: pick.kickoff,
+          competition: pick.competition,
+          homeTeam: pick.homeTeam,
+          awayTeam: pick.awayTeam,
+          score: parseArchiveScore(pick.score),
+          markets: {},
+          marketKeys: new Set(),
+        });
+      }
+
+      const item = grouped.get(eventId);
+      const market = archiveMarketFromPick(pick);
+      if (!market) return;
+      item.marketKeys.add(pick.marketKey);
+      item.markets[pick.marketKey] = chooseArchiveMarket(item.markets[pick.marketKey], market);
+      if (pick.score) item.score = parseArchiveScore(pick.score);
+    });
+  });
+
+  return [...grouped.values()].map((item, index) => {
+    const pools = archivePoolsForEvent(item.sourceEventId, [...item.marketKeys]);
+    const standardWdl = pools.includes(MARKET_POOL_CODES.wdl);
+    if (!standardWdl) delete item.markets.wdl;
+    const allowedMarketKeys = new Set(Object.entries(MARKET_POOL_CODES).filter(([, poolCode]) => pools.includes(poolCode)).map(([marketKey]) => marketKey));
+
+    const raw = {
+      matchId: item.sourceEventId,
+      matchNumStr: item.sportteryNo,
+      matchDate: item.date,
+      businessDate: item.businessDate,
+      groupMatchDate: item.date,
+      matchTime: item.kickoff,
+      matchStatus: "6",
+      matchStatusName: "已完成",
+      saleStatusName: "已完成",
+      sectionsNo999: item.score.home === null || item.score.away === null ? "" : `${item.score.home}:${item.score.away}`,
+      leagueAllName: item.competition,
+      homeTeamAllName: item.homeTeam,
+      awayTeamAllName: item.awayTeam,
+      homeTeamId: 9000 + index,
+      awayTeamId: 9100 + index,
+    };
+    const generated = buildMarkets(raw, "pre", { home: null, away: null }, { standardWdl, calibration, detail: null });
+    const markets = applyMarketCalibration({ ...generated, ...item.markets }, calibration);
+    Object.keys(markets).forEach((marketKey) => {
+      if (!allowedMarketKeys.has(marketKey)) delete markets[marketKey];
+    });
+    if (
+      markets.wdl &&
+      generated.wdl &&
+      generated.wdl.pick !== markets.wdl.pick &&
+      generated.wdl.probability >= (markets.wdl.probability || 0) + 0.08
+    ) {
+      markets.wdl = generated.wdl;
+    }
+    if (!PRESERVE_ARCHIVE_PREDICTION_IDS.has(String(item.sourceEventId)) && markets.wdl && markets.score && scorePickResult(markets.score.pick) !== markets.wdl.pick) {
+      markets.score = generated.score;
+      if (markets.ou) markets.ou = generated.ou;
+    }
+    const hdcLine = Number.isFinite(Number(markets.hdc?.handicap)) ? Number(markets.hdc.handicap) : Number(generated.hdc?.handicap || 0);
+    const actualMarkets = buildMarkets(raw, "finished", item.score, { standardWdl, calibration, detail: null });
+    Object.keys(actualMarkets).forEach((marketKey) => {
+      if (!allowedMarketKeys.has(marketKey)) delete actualMarkets[marketKey];
+    });
+    if (actualMarkets.hdc) {
+      actualMarkets.hdc = {
+        ...actualMarkets.hdc,
+        handicap: hdcLine,
+        pick: handicapPickFromScore(item.score, hdcLine),
+        reason: `根据中国竞彩网完场比分和${hdcLine > 0 ? "受让" : "让"}${Math.abs(hdcLine)}球结果复盘。`,
+      };
+    }
+
+    return {
+      id: `H${String(index + 1).padStart(3, "0")}`,
+      sourceEventId: item.sourceEventId,
+      sportteryNo: item.sportteryNo,
+      date: item.date,
+      businessDate: item.businessDate,
+      saleStatusName: "已完成",
+      liveStatusName: "已完成",
+      matchDate: item.matchDate,
+      kickoff: item.kickoff,
+      competition: item.competition || "足球赛事",
+      homeTeam: item.homeTeam || "主队待定",
+      awayTeam: item.awayTeam || "客队待定",
+      status: "finished",
+      score: item.score,
+      halfScore: "",
+      minute: 90,
+      tags: ["中国竞彩网", item.sportteryNo, "历史赛事", "已完成"].filter(Boolean),
+      availablePools: pools,
+      betOptions: Object.fromEntries(Object.entries(MARKET_POOL_CODES).map(([key, poolCode]) => [key, { poolCode, single: true, allUp: false, selling: false, poolStatus: "Closed" }])),
+      dataQuality: 82,
+      importance: String(item.sportteryNo || "").includes("201") ? 88 : 78,
+      risk: "中",
+      stats: {
+        form: "历史归档赛事",
+        attack: 72,
+        defense: 72,
+        tempo: 58,
+        homeAway: `竞彩编号：${item.sportteryNo}，历史完赛归档`,
+      },
+      markets,
+      actualMarkets,
+      modelProfile: getModelProfile(raw),
+      socialFactors: socialFactorsFromMatch(raw, "finished"),
+    };
+  });
+}
+
+function mergeDisplayMatches(currentMatches, archiveMatches, today) {
+  const byId = new Map();
+  [...currentMatches, ...archiveMatches].forEach((match) => {
+    if (!isWithinHistoryWindow(match.date, today) && match.status === "finished") return;
+    byId.set(String(match.sourceEventId), match);
+  });
+  return [...byId.values()]
+    .sort((a, b) => {
+      if (a.status === "finished" && b.status !== "finished") return 1;
+      if (a.status !== "finished" && b.status === "finished") return -1;
+      return `${a.date} ${a.kickoff || ""}`.localeCompare(`${b.date} ${b.kickoff || ""}`) || String(a.sourceEventId).localeCompare(String(b.sourceEventId));
+    })
+    .map((match, index) => ({ ...match, id: String(index + 1).padStart(3, "0") }));
+}
+
 async function main() {
   const oldData = await readExistingData();
+  if (process.env.SCORE_REPAIR_HISTORY_ONLY === "1") {
+    if (!oldData) throw new Error("没有可修复的本地数据缓存");
+    const generatedAt = nowIsoShanghai();
+    const today = todayInShanghai();
+    const calibration = buildMarketCalibration(oldData);
+    const currentMatches = Array.isArray(oldData.matches) ? oldData.matches.filter((match) => !(match.tags || []).includes("历史赛事")) : [];
+    const archivedMatches = buildArchivedHistoricalMatches(oldData, currentMatches, today, calibration);
+    const matches = mergeDisplayMatches(currentMatches, archivedMatches, today);
+    const planArchive = buildPlanArchive(oldData, [], matches, matches, generatedAt, today);
+    const history = buildHistory(planArchive);
+    const data = {
+      ...oldData,
+      generatedAt,
+      matches,
+      planArchive,
+      history,
+      autoReview: buildAutoReview(history),
+      dailyPlanSummaries: buildDailyPlanSummaries(planArchive),
+      marketHistory: buildMarketHistory(planArchive),
+    };
+    await fs.writeFile(OUTPUT, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+    console.log(`repaired ${OUTPUT} with ${matches.length} matches including ${archivedMatches.length} archived history matches`);
+    return;
+  }
   const concernRaw = await fetchList("concern");
   const allRaw = await fetchList("all");
   const liveData = await fetchLive(concernRaw);
@@ -1229,7 +1487,10 @@ async function main() {
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
   const plans = buildPurchasePlans(concernMatches, targetDate);
-  const planArchive = buildPlanArchive(oldData, plans, concernMatches, allMatches, generatedAt, today);
+  const archivedMatches = buildArchivedHistoricalMatches(oldData, concernMatches, today, calibration);
+  const displayMatches = mergeDisplayMatches(concernMatches, archivedMatches, today);
+  const reviewMatches = mergeDisplayMatches(allMatches, archivedMatches, today);
+  const planArchive = buildPlanArchive(oldData, plans, displayMatches, reviewMatches, generatedAt, today);
   const history = buildHistory(planArchive);
   const dailyPlanSummaries = buildDailyPlanSummaries(planArchive);
 
@@ -1244,7 +1505,7 @@ async function main() {
       detailApi: `${API_BASE}/getMatchGeneral.qry`,
       note: "赛程、竞彩编号、销售状态和比分来自中国竞彩网公开接口；购买方向为本地模型估算，仅作信息分析。",
     },
-    matches: concernMatches,
+    matches: displayMatches,
     purchasePlans: plans,
     parlaySeeds: plans,
     planArchive,

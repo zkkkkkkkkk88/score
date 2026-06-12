@@ -21,6 +21,7 @@ const tabs = [
   { dataset: { filter: "all" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { filter: "today" }, classList: { toggle() {} }, addEventListener() {} },
   { dataset: { filter: "tomorrow" }, classList: { toggle() {} }, addEventListener() {} },
+  { dataset: { filter: "history7" }, classList: { toggle() {} }, addEventListener() {} },
 ];
 const saleTabs = [
   { dataset: { saleFilter: "all" }, classList: { toggle() {} }, addEventListener() {} },
@@ -96,7 +97,7 @@ setTimeout(() => {
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
   assert(
-    data.matches.every((match) => {
+    data.matches.filter((match) => match.markets.score).every((match) => {
       const [home, away] = match.markets.score.pick.split("-").map(Number);
       const goals = match.markets.ou.exactGoals;
       return goals === "4+" || String(home + away) === String(goals);
@@ -113,6 +114,12 @@ setTimeout(() => {
     assert(!englandMatch.markets.wdl, "does not create win/draw/loss market when Sporttery does not offer it");
     assert(englandMatch.markets.hdc, "keeps handicap market when standard win/draw/loss is unavailable");
   }
+  const portugalHistorical = data.matches.find((match) => String(match.sourceEventId) === "2040189");
+  assert(portugalHistorical?.markets?.wdl, "restores Portugal historical win/draw/loss prediction");
+  assert(portugalHistorical?.status === "finished" && portugalHistorical?.actualMarkets, "restores Portugal finished result for review");
+  const englandHistorical = data.matches.find((match) => String(match.sourceEventId) === "2040190");
+  assert(englandHistorical && !englandHistorical.markets.wdl, "keeps England historical match without unavailable win/draw/loss market");
+  assert(Number(englandHistorical.actualMarkets?.hdc?.handicap) === -2, "restores England historical two-goal handicap result");
   assert(
     data.matches.every((match) => !match.availablePools?.includes("HAD") || match.markets.wdl),
     "creates win/draw/loss market when Sporttery offers HAD",
@@ -214,6 +221,7 @@ setTimeout(() => {
   if (data.matches.some((match) => match.status === "live")) assert(html.includes("进行中"), "renders live match status");
   assert(fs.readFileSync("script.js", "utf8").includes("matches.json?ts="), "fetches match data without browser cache");
   assert(pageHtml.includes('data-sale-filter="available"') && pageHtml.includes("可购买"), "renders purchasable match filter");
+  assert(pageHtml.includes('data-filter="history7"') && pageHtml.includes("近7天"), "renders seven-day historical match filter");
   assert(saleTabs.length === 2, "wires purchasable and all-match filters");
   assert(viewButtons.length === 5 && views.length === 5, "renders page navigation views");
   assert(styleCss.includes(".analysis-layout") && styleCss.includes("calc(100vh") && styleCss.includes("overflow-y: auto"), "keeps analysis columns fixed with internal scrolling");

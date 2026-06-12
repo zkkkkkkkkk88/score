@@ -95,6 +95,10 @@ function getTomorrow() {
   return addDays(getToday(), 1);
 }
 
+function getHistoryStart() {
+  return addDays(getToday(), -6);
+}
+
 function liveProbability(base, match) {
   const numericId = Number(match.id);
   const liveWave = match.status === "live" ? Math.sin(state.tick / 2 + numericId) * 0.035 : 0;
@@ -188,6 +192,7 @@ function getFilteredMatches() {
   let matches = state.matches;
   if (state.filter === "today") matches = matches.filter((match) => match.date === getToday());
   if (state.filter === "tomorrow") matches = matches.filter((match) => match.date === getTomorrow());
+  if (state.filter === "history7") matches = matches.filter((match) => match.date >= getHistoryStart() && match.date <= getToday());
   if (state.saleFilter === "available") matches = matches.filter(isPurchasable);
   return matches;
 }
