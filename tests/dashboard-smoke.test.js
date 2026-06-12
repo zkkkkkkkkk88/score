@@ -252,6 +252,9 @@ setTimeout(() => {
   assert(html.includes("任务与轮换"), "renders motivation and rotation analysis");
   assert(html.includes("外部环境"), "renders external context analysis");
   assert(html.includes("复盘权重"), "renders review weighting analysis");
+  assert(new Set(data.matches.map((match) => match.socialFactors?.clubMotivation).filter(Boolean)).size > 1, "varies match motivation analysis by fixture");
+  assert(new Set(data.matches.map((match) => match.socialFactors?.politicalFactor).filter(Boolean)).size > 1, "varies external context analysis by fixture");
+  assert(new Set(data.matches.map((match) => match.socialFactors?.integrityRisk).filter(Boolean)).size > 1, "varies integrity signal analysis by fixture");
   assert(!html.includes("假赛"), "does not render unverified match-fixing wording");
   assert(html.includes("趋势变化"), "renders probability trend signal");
   assert(html.includes("准备指数"), "renders tomorrow preparation score");

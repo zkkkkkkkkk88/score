@@ -1010,26 +1010,72 @@ function normalizePreservedMarkets(preserved, generated, score, detail, standard
   return applyMarketCalibration(markets, calibration);
 }
 
+function rawTeamName(match, side) {
+  return side === "home"
+    ? match.homeTeamAllName || match.homeTeamAbbName || match.homeTeam || "主队"
+    : match.awayTeamAllName || match.awayTeamAbbName || match.awayTeam || "客队";
+}
+
+function kickoffBucket(match) {
+  const hour = Number(String(match.matchTime || match.kickoff || "00:00").slice(0, 2));
+  if (!Number.isFinite(hour)) return "常规时段";
+  if (hour <= 4) return "凌晨场";
+  if (hour < 12) return "上午场";
+  if (hour < 18) return "下午场";
+  return "晚间场";
+}
+
 function socialFactorsFromMatch(match, status) {
   const league = match.leagueAllName || match.leagueAbbName || "足球赛事";
-  const isNational = league.includes("国际") || league.includes("国家");
+  const isNational = league.includes("国际") || league.includes("国家") || league.includes("世界杯");
   const isClub = !isNational;
+  const home = rawTeamName(match, "home");
+  const away = rawTeamName(match, "away");
+  const sportteryNo = match.matchNumStr || match.sportteryNo || "待编号";
+  const saleStatus = match.saleStatusName || match.matchStatusName || "状态待确认";
+  const profile = getModelProfile(match);
+  const handicap = confirmedHandicapLine(match) ?? estimateHandicapLine(match);
+  const absEdge = Math.abs(profile.strengthEdge);
+  const favorite = profile.strengthEdge >= 0 ? home : away;
+  const underdog = profile.strengthEdge >= 0 ? away : home;
+  const gameTime = kickoffBucket(match);
+  const taskText =
+    absEdge >= 20
+      ? `${favorite}纸面优势明显，${underdog}更可能优先压低节奏；轮换风险主要影响让球和比分深度。`
+      : absEdge >= 8
+        ? `${favorite}略占基础面，${underdog}仍有守平或反击空间；首发强度比单纯名气更关键。`
+        : `${home}与${away}强弱差不大，任务目标更偏向拿分稳定性；临场阵容会明显影响胜平负方向。`;
+  const externalText = isNational
+    ? `${league}背景下，${home}对${away}更看重积分、净胜球和小组排序；${gameTime}需要额外观察旅途恢复与首发连续性。`
+    : `${league}比赛外部变量权重较低，${home}对${away}重点看赛程密度、主客连续性和管理层压力。`;
+  const integrityText =
+    status === "finished"
+      ? `${sportteryNo}已完赛，复盘重点回看进球时间、红牌伤退和临场阵容是否改变赛前判断。`
+      : String(saleStatus).includes("暂停")
+        ? `${sportteryNo}当前销售状态为${saleStatus}，应先移出主方案，等待恢复销售和官方状态确认。`
+        : `${sportteryNo}当前状态为${saleStatus}，未见可核验异常；临场若出现停销、延期、红牌或首发大轮换再降权。`;
+  const consequenceText =
+    Math.abs(handicap) >= 3
+      ? `盘口为${handicap > 0 ? "受让" : "让"}${Math.abs(handicap)}球，复盘时让球胜平负和比分权重高于普通胜平负。`
+      : Math.abs(handicap) === 2
+        ? `盘口为${handicap > 0 ? "受让" : "让"}2球，优先复盘让球结果与第二比分候选是否覆盖。`
+        : `盘口为${handicap > 0 ? "受让" : "让"}${Math.abs(handicap)}球，复盘时同步看胜平负、总进球和比分候选。`;
 
   return {
-    clubMotivation: isClub
+    clubMotivation: taskText || (isClub
       ? "俱乐部赛事主要看赛程密度、轮换压力、排名目标和主客场连续性；当前仅使用公开赛程信息做中性评估。"
-      : "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。",
-    politicalFactor: isNational
+      : "国家队或国际赛主要看备战任务、排名压力、阵容轮换和旅途消耗；赛前方向需结合首发再确认。"),
+    politicalFactor: externalText || (isNational
       ? "外部环境只作为情绪和压力变量观察，不直接推导赛果；重点仍放在阵容、节奏和比赛任务。"
-      : "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。",
+      : "普通俱乐部比赛外部环境权重较低，主要观察德比属性、管理层压力和临场阵容变化。"),
     integrityRisk:
-      status === "pre"
+      integrityText || (status === "pre"
         ? "当前仅基于中国竞彩网公开赛程和状态，未见可核验异常信号；任何异常判断都以临场停销、延期、红牌和首发变化为准。"
-        : "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。",
+        : "比分已进入复盘阶段，若结果明显偏离方案，应回看红牌、伤退、阵容轮换和临场节奏变化。"),
     consequence:
-      status === "finished"
+      consequenceText || (status === "finished"
         ? "完场比分用于复盘命中率，并调整后续模型对强弱差、进球数和比分玩法的权重。"
-        : "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。",
+        : "若临场出现暂停销售、延期、取消、红牌、伤退或大幅轮换，应降低该场在串单中的权重。"),
     recommendation: String(match.matchStatusName || "").includes("暂停")
       ? "当前销售状态异常，建议暂不进入主方案。"
       : "可纳入观察池，最终以开售状态、首发和实时事件确认。",
