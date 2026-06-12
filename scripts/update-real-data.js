@@ -31,6 +31,10 @@ const HISTORICAL_POOL_OVERRIDES = {
   2040190: ["HHAD", "TTG", "CRS", "HAFU"],
 };
 const PRESERVE_ARCHIVE_PREDICTION_IDS = new Set(["2040189", "2040190"]);
+const PRESERVED_SCORE_PICKS = {
+  2040189: "2-1",
+};
+const WORLD_CUP_KEYWORD = "世界杯";
 
 const headers = {
   "User-Agent":
@@ -178,6 +182,32 @@ function flattenGroups(groups = []) {
   );
 }
 
+function isWorldCupRaw(match) {
+  const text = [match.leagueAllName, match.leagueAbbName, match.competition].filter(Boolean).join(" ");
+  return text.includes(WORLD_CUP_KEYWORD);
+}
+
+function isWorldCupMatch(match) {
+  return String(match.competition || "").includes(WORLD_CUP_KEYWORD);
+}
+
+function isWorldCupPlan(plan) {
+  return (plan.picks || []).every((pick) => String(pick.competition || "").includes(WORLD_CUP_KEYWORD));
+}
+
+function hasScore(score) {
+  return score && Number.isFinite(Number(score.home)) && Number.isFinite(Number(score.away));
+}
+
+const SCORE_CORRECTIONS = {
+  2040163: { home: 2, away: 1 },
+};
+
+function correctedScoreForEvent(eventId, score) {
+  const correction = SCORE_CORRECTIONS[String(eventId)];
+  return correction ? { ...score, ...correction } : score;
+}
+
 async function getLocalJson(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} -> ${response.status}`);
@@ -256,7 +286,7 @@ function parseBrowserMatch(item) {
   const lines = item.text || [];
   const noIndex = lines.findIndex((line) => /^周[一二三四五六日]\d{3}$/.test(line));
   if (!item.id || noIndex < 3) return null;
-  const score = scoreFromBrowserLines(lines, noIndex);
+  const score = correctedScoreForEvent(item.id, scoreFromBrowserLines(lines, noIndex));
   const statusText = lines[lines.length - 1] || "";
   return {
     matchId: item.id,
@@ -316,7 +346,7 @@ async function fetchListWithBrowser(method) {
     const result = await page.send("Runtime.evaluate", { expression, returnByValue: true });
     page.close();
     browser.close();
-    const matches = (result.result.value || []).map(parseBrowserMatch).filter(Boolean);
+    const matches = (result.result.value || []).map(parseBrowserMatch).filter(Boolean).filter(isWorldCupRaw);
     if (!matches.length) throw new Error("浏览器页面未抓到赛事列表");
     console.warn(`[score] 浏览器采集 ${method} 成功：${matches.length} 场`);
     return matches;
@@ -927,8 +957,8 @@ function socialFactorsFromMatch(match, status) {
 
 function mapMatch(match, index, oldByEventId = new Map(), calibration = null, detailMap = new Map()) {
   const status = getStatus(match);
-  const score = parseScore(match.sectionsNo999);
   const sourceEventId = String(match.matchId);
+  const score = correctedScoreForEvent(sourceEventId, parseScore(match.sectionsNo999));
   const detail = detailMap.get(sourceEventId) || null;
   const oldMatch = oldByEventId.get(sourceEventId);
   const preScore = { home: null, away: null };
@@ -945,7 +975,7 @@ function mapMatch(match, index, oldByEventId = new Map(), calibration = null, de
       : null;
   const markets =
     preservedMarkets ?? generatedMarkets;
-  const actualMarkets = status === "finished" ? buildMarkets(match, status, score, { standardWdl, calibration, detail }) : null;
+  const actualMarkets = status === "finished" && hasScore(score) ? buildMarkets(match, status, score, { standardWdl, calibration, detail }) : null;
   const availablePools = availablePoolsForMatch(match, detail);
   const betOptions = marketBetOptions(match, detail);
   const sportteryNo = formatSportteryNo(match, index);
@@ -1119,6 +1149,7 @@ function actualWdl(match) {
 
 function isPickHit(match, marketKey, market) {
   if (match.status !== "finished") return null;
+  if (!hasScore(match.score)) return null;
   if (marketKey === "wdl") return market.pick === (match.actualMarkets?.wdl?.pick || actualWdl(match));
   if (marketKey === "hdc") {
     const actual = match.actualMarkets?.hdc?.pick || handicapPickFromScore(match.score, Number(market.handicap || 0));
@@ -1233,6 +1264,7 @@ function evaluateArchivedPlan(plan, matches) {
 
 function buildPlanArchive(oldData, plans, matches, allMatches, generatedAt, today) {
   const archive = (Array.isArray(oldData?.planArchive) ? oldData.planArchive : []).filter((plan) => {
+    if (!isWorldCupPlan(plan)) return false;
     const isSettled = plan.result === "hit" || plan.result === "miss";
     const isCurrentSchema = plan.schemaVersion === PLAN_SCHEMA_VERSION;
     const isTodayPending = plan.date === today && !isSettled;
@@ -1392,8 +1424,13 @@ function archivePoolsForEvent(eventId, marketKeys) {
 
 function archiveMarketFromPick(pick) {
   const probability = Number(pick.probability || 0);
+  const base = {
+    marketKey: pick.marketKey,
+    scoreText: pick.score,
+  };
   if (pick.marketKey === "wdl") {
     return {
+      ...base,
       pick: pick.pick,
       probability,
       confidence: 64,
@@ -1404,6 +1441,7 @@ function archiveMarketFromPick(pick) {
   if (pick.marketKey === "hdc") {
     const handicap = Number.isFinite(Number(pick.handicap)) ? Number(pick.handicap) : Number(String(pick.pick).match(/(\d+)/)?.[1] || 0) * -1;
     return {
+      ...base,
       handicap,
       pick: normalizeHdcPick(pick.pick),
       probability,
@@ -1415,6 +1453,7 @@ function archiveMarketFromPick(pick) {
   if (pick.marketKey === "ou") {
     const exactGoals = pick.exactGoals ?? String(pick.pick || "").replace("球", "");
     return {
+      ...base,
       pick: `${exactGoals}球`,
       exactGoals,
       probability,
@@ -1425,6 +1464,7 @@ function archiveMarketFromPick(pick) {
   }
   if (pick.marketKey === "score") {
     return {
+      ...base,
       pick: pick.pick,
       probability,
       confidence: 42,
@@ -1434,6 +1474,7 @@ function archiveMarketFromPick(pick) {
   }
   if (pick.marketKey === "htft") {
     return {
+      ...base,
       pick: pick.pick,
       probability,
       confidence: 52,
@@ -1446,6 +1487,7 @@ function archiveMarketFromPick(pick) {
 
 function chooseArchiveMarket(existing, candidate) {
   if (!existing) return candidate;
+  if (candidate.marketKey === "score" && candidate.pick === existing.scoreText) return candidate;
   if ((candidate.probability || 0) > (existing.probability || 0)) return candidate;
   return existing;
 }
@@ -1532,6 +1574,22 @@ function buildArchivedHistoricalMatches(oldData, existingMatches, today, calibra
       markets.score = generated.score;
       if (markets.ou) markets.ou = generated.ou;
     }
+    if (PRESERVED_SCORE_PICKS[String(item.sourceEventId)] && markets.score) {
+      const scorePick = PRESERVED_SCORE_PICKS[String(item.sourceEventId)];
+      const total = scorePick.split("-").map(Number).reduce((sum, value) => sum + value, 0);
+      markets.score = {
+        ...markets.score,
+        pick: scorePick,
+        reason: "保留历史保存的赛前比分预测。",
+      };
+      if (markets.ou && Number.isFinite(total)) {
+        markets.ou = {
+          ...markets.ou,
+          exactGoals: total >= 4 ? "4+" : String(total),
+          pick: `${total >= 4 ? "4+" : total}球`,
+        };
+      }
+    }
     const hdcLine = Number.isFinite(Number(markets.hdc?.handicap)) ? Number(markets.hdc.handicap) : Number(generated.hdc?.handicap || 0);
     const actualMarkets = buildMarkets(raw, "finished", item.score, { standardWdl, calibration, detail: null });
     Object.keys(actualMarkets).forEach((marketKey) => {
@@ -1606,7 +1664,7 @@ async function main() {
     const generatedAt = nowIsoShanghai();
     const today = todayInShanghai();
     const calibration = buildMarketCalibration(oldData);
-    const currentMatches = Array.isArray(oldData.matches) ? oldData.matches.filter((match) => !(match.tags || []).includes("历史赛事")) : [];
+    const currentMatches = Array.isArray(oldData.matches) ? oldData.matches.filter((match) => !(match.tags || []).includes("历史赛事")).filter(isWorldCupMatch) : [];
     const archivedMatches = buildArchivedHistoricalMatches(oldData, currentMatches, today, calibration);
     const matches = mergeDisplayMatches(currentMatches, archivedMatches, today);
     const planArchive = buildPlanArchive(oldData, [], matches, matches, generatedAt, today);
@@ -1651,14 +1709,14 @@ async function main() {
   });
 
   const detailMap = await fetchMatchDetails([...rawByEventId.values(), ...allByEventId.values()]);
-  const concernMatches = [...rawByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
-  const allMatches = [...allByEventId.values()].sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
+  const concernMatches = [...rawByEventId.values()].filter(isWorldCupRaw).sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
+  const allMatches = [...allByEventId.values()].filter(isWorldCupRaw).sort(sortRawMatches).map((match, index) => mapMatch(match, index, oldByEventId, calibration, detailMap));
   const generatedAt = nowIsoShanghai();
   const today = todayInShanghai();
   const targetDate = addDays(today, 1);
   const plans = buildPurchasePlans(concernMatches, targetDate);
-  const archivedMatches = buildArchivedHistoricalMatches(oldData, concernMatches, today, calibration);
-  const displayMatches = mergeDisplayMatches(concernMatches, archivedMatches, today);
+  const archivedMatches = buildArchivedHistoricalMatches(oldData, [...concernMatches, ...allMatches], today, calibration);
+  const displayMatches = mergeDisplayMatches([...concernMatches, ...allMatches], archivedMatches, today);
   const reviewMatches = mergeDisplayMatches(allMatches, archivedMatches, today);
   const planArchive = buildPlanArchive(oldData, plans, displayMatches, reviewMatches, generatedAt, today);
   const history = buildHistory(planArchive);

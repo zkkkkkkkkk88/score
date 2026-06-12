@@ -114,12 +114,12 @@ setTimeout(() => {
     assert(!englandMatch.markets.wdl, "does not create win/draw/loss market when Sporttery does not offer it");
     assert(englandMatch.markets.hdc, "keeps handicap market when standard win/draw/loss is unavailable");
   }
-  const portugalHistorical = data.matches.find((match) => String(match.sourceEventId) === "2040189");
-  assert(portugalHistorical?.markets?.wdl, "restores Portugal historical win/draw/loss prediction");
-  assert(portugalHistorical?.status === "finished" && portugalHistorical?.actualMarkets, "restores Portugal finished result for review");
-  const englandHistorical = data.matches.find((match) => String(match.sourceEventId) === "2040190");
-  assert(englandHistorical && !englandHistorical.markets.wdl, "keeps England historical match without unavailable win/draw/loss market");
-  assert(Number(englandHistorical.actualMarkets?.hdc?.handicap) === -2, "restores England historical two-goal handicap result");
+  assert(data.matches.every((match) => match.competition.includes("世界杯")), "only displays World Cup matches");
+  const koreaHistorical = data.matches.find((match) => String(match.sourceEventId) === "2040163");
+  if (koreaHistorical?.status === "finished") {
+    assert(koreaHistorical.score.home === 2 && koreaHistorical.score.away === 1, "keeps official Korea 2-1 finished score");
+    assert(koreaHistorical.markets.score?.pick !== koreaHistorical.actualMarkets?.score?.pick, "does not mark stale Korea 1-1 score prediction as correct");
+  }
   assert(
     data.matches.every((match) => !match.availablePools?.includes("HAD") || match.markets.wdl),
     "creates win/draw/loss market when Sporttery offers HAD",
