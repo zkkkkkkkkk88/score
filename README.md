@@ -37,6 +37,7 @@ http://127.0.0.1:4173
 - 提供 `/api/matches` 给前端读取最新数据。
 - 数据过期时自动运行 `scripts/update-real-data.js`。
 - 如果中国竞彩网返回 403，服务会进入退避等待，并继续展示最近一次成功缓存的数据。
+- 当后台接口被 WAF 拦截时，数据脚本会自动启动本机 Chrome，在官方页面环境里采集赛事列表并合并到本地缓存。
 
 ## 手动刷新数据
 
@@ -58,6 +59,7 @@ $env:SPORTTERY_PAGE_SIZE="80"
 $env:SCORE_UPDATE_INTERVAL_MS="600000"
 $env:SCORE_DATA_MAX_AGE_MS="600000"
 $env:SCORE_HISTORY_WINDOW_DAYS="7"
+$env:SCORE_BROWSER_FALLBACK="1"
 $env:PORT="4173"
 node scripts/serve-live.js
 ```

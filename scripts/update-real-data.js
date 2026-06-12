@@ -1,4 +1,7 @@
 const fs = require("fs/promises");
+const fsSync = require("fs");
+const { spawn } = require("child_process");
+const path = require("path");
 
 const API_BASE = "https://webapi.sporttery.cn/gateway/uniform/fb";
 const OUTPUT = process.env.SCORE_DATA_OUTPUT || "data/matches.json";
@@ -6,6 +9,9 @@ const PAGE_SIZE = Number(process.env.SPORTTERY_PAGE_SIZE || 80);
 const TZ = "Asia/Shanghai";
 const PLAN_SCHEMA_VERSION = "tomorrow-tab-plans-v1";
 const HISTORY_WINDOW_DAYS = Number(process.env.SCORE_HISTORY_WINDOW_DAYS || 7);
+const BROWSER_FALLBACK_ENABLED = process.env.SCORE_BROWSER_FALLBACK !== "0";
+const BROWSER_DEBUG_PORT = Number(process.env.SCORE_BROWSER_DEBUG_PORT || 9223);
+const CHROME_PATH = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const DEFAULT_MARKET_WEIGHTS = {
   wdl: 1,
   hdc: 0.96,
@@ -172,16 +178,180 @@ function flattenGroups(groups = []) {
   );
 }
 
+async function getLocalJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url} -> ${response.status}`);
+  return response.json();
+}
+
+async function waitForBrowserDevtools(port) {
+  const versionUrl = `http://127.0.0.1:${port}/json/version`;
+  for (let i = 0; i < 60; i += 1) {
+    try {
+      return await getLocalJson(versionUrl);
+    } catch {
+      await sleep(250);
+    }
+  }
+  throw new Error("Chrome DevTools 未启动");
+}
+
+async function openCdp(wsUrl) {
+  const socket = new WebSocket(wsUrl);
+  await new Promise((resolve, reject) => {
+    socket.addEventListener("open", resolve, { once: true });
+    socket.addEventListener("error", reject, { once: true });
+  });
+  let id = 0;
+  const pending = new Map();
+  socket.addEventListener("message", (event) => {
+    const data = JSON.parse(event.data);
+    if (!data.id || !pending.has(data.id)) return;
+    const { resolve, reject } = pending.get(data.id);
+    pending.delete(data.id);
+    if (data.error) reject(new Error(data.error.message));
+    else resolve(data.result);
+  });
+  return {
+    send(method, params = {}) {
+      id += 1;
+      socket.send(JSON.stringify({ id, method, params }));
+      return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
+    },
+    close() {
+      socket.close();
+    },
+  };
+}
+
+function scoreFromBrowserLines(lines, noIndex) {
+  const vsIndex = lines.indexOf("VS", noIndex);
+  if (vsIndex > -1) return { home: null, away: null, homeIndex: noIndex + 1, awayIndex: vsIndex + 1 };
+  const home = Number(lines[noIndex + 2]);
+  const away = Number(lines[noIndex + 4]);
+  if (Number.isFinite(home) && Number.isFinite(away) && lines[noIndex + 3] === ":") {
+    return { home, away, homeIndex: noIndex + 1, awayIndex: noIndex + 5 };
+  }
+  return { home: null, away: null, homeIndex: noIndex + 1, awayIndex: noIndex + 3 };
+}
+
+function matchDateFromBrowserLine(groupDate, monthDay) {
+  if (!groupDate || !/^\d{2}-\d{2}$/.test(monthDay || "")) return groupDate;
+  return `${groupDate.slice(0, 4)}-${monthDay}`;
+}
+
+function browserStatusCode(text = "") {
+  if (text.includes("完成") || text.includes("完场") || text.includes("直播结束") || text.includes("已开奖")) return "11";
+  if (text.includes("直播") || text.includes("上半场") || text.includes("下半场") || text.includes("中场")) return "5";
+  if (text.includes("推迟")) return "8";
+  if (text.includes("取消")) return "9";
+  if (text.includes("暂停")) return "7";
+  if (text.includes("待开奖")) return "10";
+  if (text.includes("未开播")) return "4";
+  if (text.includes("未开售")) return "1";
+  return "2";
+}
+
+function parseBrowserMatch(item) {
+  const lines = item.text || [];
+  const noIndex = lines.findIndex((line) => /^周[一二三四五六日]\d{3}$/.test(line));
+  if (!item.id || noIndex < 3) return null;
+  const score = scoreFromBrowserLines(lines, noIndex);
+  const statusText = lines[lines.length - 1] || "";
+  return {
+    matchId: item.id,
+    matchNumStr: lines[noIndex],
+    matchDate: matchDateFromBrowserLine(item.groupDate, lines[noIndex - 2]),
+    businessDate: item.groupDate,
+    groupMatchDate: item.groupDate,
+    groupWeekday: item.groupWeekday,
+    matchTime: lines[noIndex - 1],
+    matchStatus: browserStatusCode(statusText),
+    matchStatusName: statusText,
+    saleStatusName: statusText,
+    sectionsNo999: score.home === null || score.away === null ? "" : `${score.home}:${score.away}`,
+    leagueAllName: lines[noIndex - 3] || "足球赛事",
+    leagueAbbName: lines[noIndex - 3] || "足球赛事",
+    homeTeamAllName: lines[score.homeIndex] || "主队待定",
+    homeTeamAbbName: lines[score.homeIndex] || "主队待定",
+    awayTeamAllName: lines[score.awayIndex] || "客队待定",
+    awayTeamAbbName: lines[score.awayIndex] || "客队待定",
+  };
+}
+
+async function fetchListWithBrowser(method) {
+  if (!fsSync.existsSync(CHROME_PATH)) throw new Error(`找不到 Chrome：${CHROME_PATH}`);
+  const profileDir = path.resolve(".tmp", "sporttery-chrome-profile");
+  fsSync.mkdirSync(profileDir, { recursive: true });
+  const pageUrl = `https://m.sporttery.cn/mjc/zqsj/?tab=${encodeURIComponent(method)}`;
+  const chrome = spawn(CHROME_PATH, [
+    `--remote-debugging-port=${BROWSER_DEBUG_PORT}`,
+    `--user-data-dir=${profileDir}`,
+    "--no-first-run",
+    "--no-default-browser-check",
+    pageUrl,
+  ], { stdio: "ignore", detached: true });
+
+  try {
+    const version = await waitForBrowserDevtools(BROWSER_DEBUG_PORT);
+    const browser = await openCdp(version.webSocketDebuggerUrl);
+    const tabs = await getLocalJson(`http://127.0.0.1:${BROWSER_DEBUG_PORT}/json`);
+    const tab = tabs.find((item) => item.url.includes("sporttery.cn")) || tabs[0];
+    const page = await openCdp(tab.webSocketDebuggerUrl);
+    await page.send("Runtime.enable");
+    await sleep(3500);
+    const expression = `
+      [...document.querySelectorAll('.m-card')].flatMap((card) => {
+        const groupText = card.querySelector('.m-cardTime')?.innerText || '';
+        const groupDate = groupText.match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || '';
+        const groupWeekday = groupText.match(/^周[一二三四五六日]/)?.[0] || '';
+        return [...card.querySelectorAll('.m-cardList')].map((item) => ({
+          id: (item.id || '').replace('#', ''),
+          groupDate,
+          groupWeekday,
+          text: item.innerText.split('\\n').map((line) => line.trim()).filter(Boolean),
+        }));
+      })
+    `;
+    const result = await page.send("Runtime.evaluate", { expression, returnByValue: true });
+    page.close();
+    browser.close();
+    const matches = (result.result.value || []).map(parseBrowserMatch).filter(Boolean);
+    if (!matches.length) throw new Error("浏览器页面未抓到赛事列表");
+    console.warn(`[score] 浏览器采集 ${method} 成功：${matches.length} 场`);
+    return matches;
+  } finally {
+    try {
+      process.kill(-chrome.pid);
+    } catch {
+      try {
+        chrome.kill();
+      } catch {}
+    }
+  }
+}
+
 async function fetchList(method) {
   const url = `${API_BASE}/getMatchDataPageListV1.qry?method=${method}&pageSize=${PAGE_SIZE}`;
-  return flattenGroups((await getJson(url)).matchInfoList || []);
+  try {
+    return flattenGroups((await getJson(url)).matchInfoList || []);
+  } catch (error) {
+    if (!BROWSER_FALLBACK_ENABLED) throw error;
+    console.warn(`[score] 官方接口直连失败，尝试浏览器采集 ${method}：${error.message}`);
+    return fetchListWithBrowser(method);
+  }
 }
 
 async function fetchLive(matches) {
   const ids = matches.map((match) => match.matchId).filter(Boolean);
   if (!ids.length) return { map: new Map(), list: [] };
   const url = `${API_BASE}/getMatchLiveV1.qry?matchIds=${ids.join(",")}&eventTc=goals,penalty_shootout&method=live`;
-  const value = await getJson(url);
+  let value = [];
+  try {
+    value = await getJson(url);
+  } catch (error) {
+    console.warn(`[score] 实时比分接口直连失败，使用浏览器列表中的比分状态：${error.message}`);
+  }
   const list = Array.isArray(value) ? value : [];
   return { map: new Map(list.map((match) => [String(match.matchId), match])), list };
 }

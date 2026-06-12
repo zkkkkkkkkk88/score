@@ -241,6 +241,7 @@ function getMarket(match, key) {
 }
 
 function formatMarketPick(key, market) {
+  if (!market) return "未开放";
   if (key === "hdc") return `${Number(market.handicap) > 0 ? "受让" : "让"}${Math.abs(Number(market.handicap || 0))}球 ${market.pick}`;
   if (key !== "ou") return market.pick;
   return market.exactGoals ? `${market.exactGoals}球` : market.pick;
@@ -248,6 +249,11 @@ function formatMarketPick(key, market) {
 
 function getActualMarket(match, key) {
   return match.actualMarkets?.[key] ?? null;
+}
+
+function supportingMarket(match) {
+  const key = ["ou", "score", "htft", "hdc", "wdl"].find((candidate) => match.markets[candidate]);
+  return key ? { key, market: match.markets[key] } : primaryMarket(match);
 }
 
 function getMarketResultState(match, key, predicted, actual) {
@@ -343,7 +349,7 @@ function renderFocusStrip() {
   els.focusStrip.innerHTML = matches
     .map((match) => {
       const primary = primaryMarket(match);
-      const goals = match.markets.ou;
+      const secondary = supportingMarket(match);
       const live = liveProbability(primary.market.probability, match);
 
       return `
@@ -352,7 +358,7 @@ function renderFocusStrip() {
           <strong>${escapeHtml(match.homeTeam)} 对 ${escapeHtml(match.awayTeam)}</strong>
           <div>
             <em>${marketNames[primary.key]} ${escapeHtml(formatMarketPick(primary.key, primary.market))} · ${pct(live)}</em>
-            <em>${marketNames.ou} ${escapeHtml(formatMarketPick("ou", goals))}</em>
+            <em>${marketNames[secondary.key]} ${escapeHtml(formatMarketPick(secondary.key, secondary.market))}</em>
           </div>
           <small>趋势变化 ${getTrendText(primary.market.probability, live)}</small>
         </button>
@@ -431,9 +437,33 @@ function renderMarketCard(match, key) {
 
 function getLiveSignals(match) {
   const primary = primaryMarket(match);
-  const goals = match.markets.ou;
+  const secondary = supportingMarket(match);
   const primaryProbability = liveProbability(primary.market.probability, match);
-  const goalProbability = liveProbability(goals.probability, match);
+  const secondaryProbability = liveProbability(secondary.market.probability, match);
+  const safeAction = primaryProbability >= 0.68 ? "可进入主推" : primaryProbability >= 0.58 ? "等待临场确认" : "只做观察";
+
+  return [
+    {
+      title: "趋势变化",
+      value: getTrendText(primary.market.probability, primaryProbability),
+      detail: `${formatMarketPick(primary.key, primary.market)} 实时概率 ${pct(primaryProbability)}`,
+    },
+    {
+      title: marketNames[secondary.key],
+      value: formatMarketPick(secondary.key, secondary.market),
+      detail: `当前路径概率 ${pct(secondaryProbability)}`,
+    },
+    {
+      title: "风险温度",
+      value: riskLabels[match.risk] ?? match.risk,
+      detail: `数据质量 ${match.dataQuality} / 节奏 ${match.stats.tempo}`,
+    },
+    {
+      title: "建议动作",
+      value: safeAction,
+      detail: match.status === "finished" ? "完场复盘" : "结合首发、赛程和临场事件再确认",
+    },
+  ];
   const action =
     primaryProbability >= 0.68
       ? "可进入主推"
