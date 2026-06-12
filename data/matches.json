@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T14:55:55.124+08:00",
+  "generatedAt": "2026-06-12T15:05:55.608+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -92,7 +92,7 @@
       "markets": {
         "hdc": {
           "handicap": 1,
-          "pick": "让胜",
+          "pick": "让平",
           "probability": 0.384,
           "confidence": 58,
           "risk": "中",
@@ -102,11 +102,11 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "1球",
-          "exactGoals": "1",
+          "pick": "2球",
+          "exactGoals": "2",
           "exactGoalOptions": [
-            "1",
-            "2"
+            "2",
+            "3"
           ],
           "probability": 0.37,
           "confidence": 62,
@@ -120,7 +120,7 @@
           "pick": "1-1",
           "scoreOptions": [
             "1-1",
-            "2-2"
+            "2-1"
           ],
           "probability": 0.173,
           "confidence": 42,
@@ -131,7 +131,7 @@
           "sampleSize": 1
         },
         "htft": {
-          "pick": "平/平",
+          "pick": "平/胜",
           "probability": 0.216,
           "confidence": 52,
           "risk": "高",
@@ -141,7 +141,7 @@
           "sampleSize": 0
         },
         "wdl": {
-          "pick": "平",
+          "pick": "胜",
           "probability": 0.374,
           "confidence": 64,
           "risk": "中",
@@ -178,7 +178,7 @@
         "clubMotivation": "加拿大与波黑强弱差不大，任务目标更偏向拿分稳定性；临场阵容会明显影响胜平负方向。",
         "politicalFactor": "世界杯背景下，加拿大对波黑更看重积分、净胜球和小组排序；凌晨场需要额外观察旅途恢复与首发连续性。",
         "integrityRisk": "周五003当前状态为已开售，未见可核验异常；临场若出现停销、延期、红牌或首发大轮换再降权。",
-        "consequence": "盘口为受让1球，复盘时同步看胜平负、总进球和比分候选。",
+        "consequence": "盘口为让1球，复盘时同步看胜平负、总进球和比分候选。",
         "recommendation": "可纳入观察池，最终以开售状态、首发和实时事件确认。"
       }
     },
@@ -274,11 +274,11 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
+          "pick": "2球",
+          "exactGoals": "2",
           "exactGoalOptions": [
-            "3",
-            "4+"
+            "2",
+            "3"
           ],
           "probability": 0.37,
           "confidence": 62,
@@ -289,10 +289,10 @@
           "sampleSize": 1
         },
         "score": {
-          "pick": "3-0",
+          "pick": "2-0",
           "scoreOptions": [
-            "3-0",
-            "4-0"
+            "2-0",
+            "2-1"
           ],
           "probability": 0.173,
           "confidence": 42,
@@ -303,7 +303,7 @@
           "sampleSize": 1
         },
         "htft": {
-          "pick": "平/胜",
+          "pick": "胜/胜",
           "probability": 0.209,
           "confidence": 54,
           "risk": "高",
@@ -3431,19 +3431,15 @@
         "已开售"
       ],
       "availablePools": [
-        "HHAD",
-        "HAFU",
-        "CRS",
-        "TTG",
-        "HAD"
+        "HHAD"
       ],
       "betOptions": {
         "wdl": {
           "poolCode": "HAD",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "hdc": {
           "poolCode": "HHAD",
@@ -3454,24 +3450,24 @@
         },
         "ou": {
           "poolCode": "TTG",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "score": {
           "poolCode": "CRS",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "htft": {
           "poolCode": "HAFU",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         }
       },
       "dataQuality": 86,
@@ -3534,16 +3530,6 @@
           "baseProbability": 0.3,
           "modelWeight": 0.72,
           "sampleSize": 0
-        },
-        "wdl": {
-          "pick": "平",
-          "probability": 0.374,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.36,
-          "modelWeight": 1.038,
-          "sampleSize": 7
         }
       },
       "actualMarkets": null,
@@ -3603,19 +3589,15 @@
         "已开售"
       ],
       "availablePools": [
-        "HHAD",
-        "HAFU",
-        "CRS",
-        "TTG",
-        "HAD"
+        "HHAD"
       ],
       "betOptions": {
         "wdl": {
           "poolCode": "HAD",
-          "single": false,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "hdc": {
           "poolCode": "HHAD",
@@ -3626,24 +3608,24 @@
         },
         "ou": {
           "poolCode": "TTG",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "score": {
           "poolCode": "CRS",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         },
         "htft": {
           "poolCode": "HAFU",
-          "single": true,
-          "allUp": true,
-          "selling": true,
-          "poolStatus": "Selling"
+          "single": null,
+          "allUp": null,
+          "selling": false,
+          "poolStatus": ""
         }
       },
       "dataQuality": 86,
@@ -3706,16 +3688,6 @@
           "baseProbability": 0.28,
           "modelWeight": 0.72,
           "sampleSize": 0
-        },
-        "wdl": {
-          "pick": "客胜",
-          "probability": 0.519,
-          "confidence": 64,
-          "risk": "中",
-          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.5,
-          "modelWeight": 1.038,
-          "sampleSize": 7
         }
       },
       "actualMarkets": null,
@@ -5479,7 +5451,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-12T14:55:55.124+08:00",
+    "generatedAt": "2026-06-12T15:05:55.608+08:00",
     "marketWeights": {
       "wdl": 1.038,
       "hdc": 1.01,
