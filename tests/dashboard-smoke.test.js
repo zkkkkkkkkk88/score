@@ -98,9 +98,13 @@ setTimeout(() => {
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
   assert(
     data.matches.filter((match) => match.markets.score).every((match) => {
-      const [home, away] = match.markets.score.pick.split("-").map(Number);
-      const goals = match.markets.ou.exactGoals;
-      return goals === "4+" || String(home + away) === String(goals);
+      const scores = match.markets.score.scoreOptions || [match.markets.score.pick];
+      const goals = match.markets.ou.exactGoalOptions || [match.markets.ou.exactGoals];
+      return scores.some((score) => {
+        const [home, away] = score.split("-").map(Number);
+        const total = home + away;
+        return goals.includes("4+") ? total >= 4 || goals.includes(String(total)) : goals.includes(String(total));
+      });
     }),
     "keeps predicted scoreline consistent with exact goals market",
   );
@@ -128,10 +132,20 @@ setTimeout(() => {
     data.matches.every((match) => match.availablePools?.includes("HAD") || !match.markets.wdl),
     "does not create win/draw/loss market when Sporttery does not offer HAD",
   );
+  const confirmedHandicaps = { 2040162: -1, 2040166: 2, 2040170: -3 };
   assert(
-    data.matches.every((match) => match.status === "finished" || Math.abs(Number(match.markets.hdc?.handicap || 0)) <= 1),
-    "keeps pre-match handicap estimates conservative when official line is unavailable",
+    data.matches.every((match) => {
+      const confirmed = confirmedHandicaps[String(match.sourceEventId)];
+      if (Number.isFinite(confirmed)) return Number(match.markets.hdc?.handicap) === confirmed;
+      return match.status === "finished" || Math.abs(Number(match.markets.hdc?.handicap || 0)) <= 1;
+    }),
+    "uses confirmed Sporttery handicap lines before conservative estimates",
   );
+  const mexico = data.matches.find((match) => String(match.sourceEventId) === "2040162");
+  if (mexico) {
+    assert(mexico.markets.score.scoreOptions?.includes("2-0"), "keeps Mexico 2-0 as an alternate score pick");
+    assert(mexico.markets.ou.exactGoalOptions?.includes("2"), "keeps Mexico 2 goals as an alternate total-goals pick");
+  }
   data.planArchive.forEach((plan) => {
     plan.picks.forEach((pick) => {
       if (pick.status !== "finished" || pick.marketKey !== "hdc") return;

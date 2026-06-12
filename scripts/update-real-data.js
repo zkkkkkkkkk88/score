@@ -34,6 +34,17 @@ const PRESERVE_ARCHIVE_PREDICTION_IDS = new Set(["2040189", "2040190"]);
 const PRESERVED_SCORE_PICKS = {
   2040189: "2-1",
 };
+const CONFIRMED_HANDICAP_LINES = {
+  2040162: -1,
+  2040166: 2,
+  2040170: -3,
+};
+const SCORE_OPTION_OVERRIDES = {
+  2040162: ["1-0", "2-0"],
+};
+const GOAL_OPTION_OVERRIDES = {
+  2040162: ["1", "2"],
+};
 const WORLD_CUP_KEYWORD = "世界杯";
 
 const headers = {
@@ -690,6 +701,11 @@ function officialHandicap(detail) {
   return found ? Number(found[1]) : null;
 }
 
+function confirmedHandicapLine(match) {
+  const line = CONFIRMED_HANDICAP_LINES[String(match?.matchId ?? match?.sourceEventId ?? "")];
+  return Number.isFinite(Number(line)) ? Number(line) : null;
+}
+
 function officialHdcPick(detail) {
   const result = resultFromDetail(detail, "HHAD");
   if (!result) return null;
@@ -752,6 +768,63 @@ function getEstimatedScore(match, wdlPick, exactGoals) {
   return top[stableIndex(match, top.length)];
 }
 
+function uniqueOptions(items, size = 2) {
+  return items.map((item) => String(item)).filter(Boolean).filter((item, index, all) => all.indexOf(item) === index).slice(0, size);
+}
+
+function scoreTotal(scoreText) {
+  const [home, away] = String(scoreText || "").split("-").map(Number);
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return null;
+  return home + away;
+}
+
+function goalLabelFromTotal(total) {
+  return Number(total) >= 4 ? "4+" : String(total);
+}
+
+function getEstimatedScoreOptions(match, wdlPick, exactGoals, score) {
+  if (score.home !== null && score.away !== null) return [`${score.home}-${score.away}`];
+
+  const override = SCORE_OPTION_OVERRIDES[String(match.matchId)];
+  if (override) return uniqueOptions(override, 2);
+
+  const handicap = confirmedHandicapLine(match);
+  if (Number.isFinite(handicap)) {
+    if (handicap <= -3) return ["3-0", "4-0"];
+    if (handicap === -2) return ["2-0", "3-0"];
+    if (handicap >= 3) return ["0-3", "0-4"];
+    if (handicap === 2) return ["0-2", "1-2"];
+  }
+
+  const primary = getEstimatedScore(match, wdlPick, exactGoals);
+  const [home, away] = primary.split("-").map(Number);
+  if (!Number.isFinite(home) || !Number.isFinite(away)) return uniqueOptions([primary, "1-1"], 2);
+
+  const variants = [primary];
+  if (home > away) {
+    variants.push(`${Math.max(home + 1, 2)}-${away}`, `${home}-${away + 1}`);
+  } else if (home < away) {
+    variants.push(`${home}-${Math.max(away + 1, 2)}`, `${home + 1}-${away}`);
+  } else {
+    variants.push(home === 0 ? "1-1" : `${home + 1}-${away + 1}`, "0-0");
+  }
+
+  return uniqueOptions(variants, 2);
+}
+
+function getExactGoalOptions(match, exactGoals, scoreOptions, score) {
+  if (score.home !== null && score.away !== null) return [goalLabelFromTotal(score.home + score.away)];
+
+  const override = GOAL_OPTION_OVERRIDES[String(match.matchId)];
+  if (override) return uniqueOptions(override, 2);
+
+  const fromScores = scoreOptions.map(scoreTotal).filter((total) => total !== null).map(goalLabelFromTotal);
+  const base = exactGoals === "0" ? "1" : exactGoals;
+  const numeric = Number(base);
+  const adjacent = Number.isFinite(numeric) ? goalLabelFromTotal(numeric + 1) : "3";
+  return uniqueOptions([base, ...fromScores, adjacent], 2);
+}
+
 function handicapPickFromScore(score, handicap) {
   const adjustedHome = score.home + handicap;
   if (adjustedHome > score.away) return "让胜";
@@ -761,7 +834,8 @@ function handicapPickFromScore(score, handicap) {
 
 function handicapModel(match, score, wdlPick, detail) {
   const officialLine = officialHandicap(detail);
-  const handicap = Number.isFinite(officialLine) ? officialLine : estimateHandicapLine(match);
+  const confirmedLine = confirmedHandicapLine(match);
+  const handicap = Number.isFinite(officialLine) ? officialLine : Number.isFinite(confirmedLine) ? confirmedLine : estimateHandicapLine(match);
   if (score.home !== null && score.away !== null) {
     return {
       handicap,
@@ -844,7 +918,7 @@ function estimateExactGoals(match, wdlPick) {
   let goals;
   if (seed >= 24 || profile.goalBias >= 5) goals = stableIndex(match, 4) === 0 ? "4+" : "3";
   else if (seed >= 16 || profile.goalBias >= 3) goals = lateOrEarly ? "3" : ["2", "3"][stableIndex(match, 2)];
-  else if (seed <= 4) goals = lateOrEarly ? ["1", "2"][stableIndex(match, 2)] : ["0", "1", "2"][stableIndex(match, 3)];
+  else if (seed <= 4) goals = lateOrEarly ? ["1", "2"][stableIndex(match, 2)] : ["1", "2"][stableIndex(match, 2)];
   else goals = ["1", "2", "3"][stableIndex(match, 3)];
   if (wdlPick === "平" && goals !== "4+" && Number(goals) % 2 === 1) return Number(goals) <= 1 ? "0" : "2";
   return goals;
@@ -853,11 +927,16 @@ function estimateExactGoals(match, wdlPick) {
 function buildMarkets(match, status, score, options = {}) {
   const wdl = scoreModel(match, score);
   const total = score.home === null || score.away === null ? null : score.home + score.away;
-  const exactGoals = total === null ? estimateExactGoals(match, wdl.pick) : total >= 4 ? "4+" : String(total);
+  let exactGoals = total === null ? estimateExactGoals(match, wdl.pick) : total >= 4 ? "4+" : String(total);
+  if (total === null && exactGoals === "0") exactGoals = "1";
+  const scoreOptions = getEstimatedScoreOptions(match, wdl.pick, exactGoals, score);
+  const exactGoalOptions = getExactGoalOptions(match, exactGoals, scoreOptions, score);
+  exactGoals = exactGoalOptions[0] || exactGoals;
   const exactGoalLabel = `${exactGoals}球`;
-  const goalProbability = total === null ? 0.34 : 0.78;
+  const goalProbability = total === null ? (exactGoalOptions.length > 1 ? 0.42 : 0.34) : 0.78;
   const handicap = handicapModel(match, score, wdl.pick, options.detail);
-  const exactScore = score.home === null || score.away === null ? getEstimatedScore(match, wdl.pick, exactGoals) : `${score.home}-${score.away}`;
+  const exactScore = scoreOptions[0];
+  const scoreProbability = total === null ? (scoreOptions.length > 1 ? 0.27 : 0.2) : 0.82;
   const htft = htftModel(match, status, score, wdl.pick, exactGoals);
 
   const markets = {
@@ -875,6 +954,7 @@ function buildMarkets(match, status, score, options = {}) {
     ou: {
       pick: exactGoalLabel,
       exactGoals,
+      exactGoalOptions,
       probability: goalProbability,
       confidence: status === "finished" ? 84 : 62,
       risk: "中",
@@ -882,7 +962,8 @@ function buildMarkets(match, status, score, options = {}) {
     },
     score: {
       pick: exactScore,
-      probability: status === "finished" ? 0.82 : 0.2,
+      scoreOptions,
+      probability: scoreProbability,
       confidence: status === "finished" ? 82 : 42,
       risk: "高",
       reason: status === "finished" ? "根据中国竞彩网完场比分复盘比分玩法。" : "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
@@ -1158,9 +1239,15 @@ function isPickHit(match, marketKey, market) {
   if (marketKey === "ou") {
     const total = match.score.home + match.score.away;
     const actual = total >= 4 ? "4+" : String(total);
-    return String(market.exactGoals ?? "").replace("球", "") === actual;
+    const fallback = String(market.pick || "").match(/4\+|\d+/)?.[0] || "";
+    const options = uniqueOptions([...(market.exactGoalOptions || []), market.exactGoals, fallback], 4);
+    return options.includes(actual);
   }
-  if (marketKey === "score") return market.pick === `${match.score.home}-${match.score.away}`;
+  if (marketKey === "score") {
+    const actual = `${match.score.home}-${match.score.away}`;
+    const options = uniqueOptions([...(market.scoreOptions || []), market.pick], 4);
+    return options.includes(actual);
+  }
   return null;
 }
 
@@ -1183,6 +1270,8 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
       marketName: marketNamesForArchive()[marketKey] || marketKey,
       pick: market ? formatArchivePick(marketKey, market) : "",
       exactGoals: marketKey === "ou" ? market?.exactGoals : undefined,
+      exactGoalOptions: marketKey === "ou" ? market?.exactGoalOptions : undefined,
+      scoreOptions: marketKey === "score" ? market?.scoreOptions : undefined,
       handicap: marketKey === "hdc" ? market?.handicap : undefined,
       probability: market?.probability || 0,
     };
@@ -1218,6 +1307,8 @@ function marketNamesForArchive() {
 }
 
 function formatArchivePick(marketKey, market) {
+  if (marketKey === "score" && Array.isArray(market.scoreOptions) && market.scoreOptions.length > 1) return market.scoreOptions.join(" / ");
+  if (marketKey === "ou" && Array.isArray(market.exactGoalOptions) && market.exactGoalOptions.length > 1) return `${market.exactGoalOptions.join(" / ")}球`;
   if (marketKey === "hdc") return `${Number(market.handicap) > 0 ? "受让" : "让"}${Math.abs(Number(market.handicap || 0))}球 ${market.pick}`;
   return marketKey === "ou" ? `${market.exactGoals ?? String(market.pick).replace("球", "")}球` : market.pick;
 }
@@ -1232,6 +1323,8 @@ function evaluateArchivedPlan(plan, matches) {
       const market = {
         pick: pick.marketKey === "hdc" ? normalizeHdcPick(pick.pick) : pick.pick,
         exactGoals: pick.marketKey === "ou" ? pick.exactGoals ?? String(pick.pick).replace("球", "") : undefined,
+        exactGoalOptions: pick.marketKey === "ou" ? pick.exactGoalOptions : undefined,
+        scoreOptions: pick.marketKey === "score" ? pick.scoreOptions : undefined,
         handicap: pick.marketKey === "hdc" ? officialHdcLine ?? pick.handicap : undefined,
       };
       const hit = isPickHit(match, pick.marketKey, market);
@@ -1451,11 +1544,13 @@ function archiveMarketFromPick(pick) {
     };
   }
   if (pick.marketKey === "ou") {
+    const exactGoalOptions = pick.exactGoalOptions || [];
     const exactGoals = pick.exactGoals ?? String(pick.pick || "").replace("球", "");
     return {
       ...base,
       pick: `${exactGoals}球`,
       exactGoals,
+      exactGoalOptions: exactGoalOptions.length ? exactGoalOptions : [exactGoals],
       probability,
       confidence: 62,
       risk: "中",
@@ -1463,9 +1558,11 @@ function archiveMarketFromPick(pick) {
     };
   }
   if (pick.marketKey === "score") {
+    const scoreOptions = pick.scoreOptions || uniqueOptions(String(pick.pick || "").split("/").map((item) => item.trim()), 2);
     return {
       ...base,
-      pick: pick.pick,
+      pick: scoreOptions[0] || pick.pick,
+      scoreOptions,
       probability,
       confidence: 42,
       risk: "高",

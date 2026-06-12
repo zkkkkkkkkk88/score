@@ -241,6 +241,8 @@ function getMarket(match, key) {
 }
 
 function formatMarketPick(key, market) {
+  if (key === "score" && Array.isArray(market?.scoreOptions) && market.scoreOptions.length > 1) return market.scoreOptions.join(" / ");
+  if (key === "ou" && Array.isArray(market?.exactGoalOptions) && market.exactGoalOptions.length > 1) return `${market.exactGoalOptions.join(" / ")}球`;
   if (!market) return "未开放";
   if (key === "hdc") return `${Number(market.handicap) > 0 ? "受让" : "让"}${Math.abs(Number(market.handicap || 0))}球 ${market.pick}`;
   if (key !== "ou") return market.pick;
@@ -256,6 +258,16 @@ function supportingMarket(match) {
   return key ? { key, market: match.markets[key] } : primaryMarket(match);
 }
 
+function marketPickHit(key, predicted, actual) {
+  if (!predicted || !actual) return false;
+  if (key === "score") return [...(predicted.scoreOptions || []), predicted.pick].includes(actual.pick);
+  if (key === "ou") {
+    const actualGoal = actual.exactGoals ?? String(actual.pick || "").match(/4\+|\d+/)?.[0];
+    return [...(predicted.exactGoalOptions || []), predicted.exactGoals].map(String).includes(String(actualGoal));
+  }
+  return predicted.pick === actual.pick;
+}
+
 function getMarketResultState(match, key, predicted, actual) {
   if (match.status !== "finished" || !actual) {
     return {
@@ -265,7 +277,7 @@ function getMarketResultState(match, key, predicted, actual) {
     };
   }
 
-  const hit = predicted?.pick === actual.pick;
+  const hit = marketPickHit(key, predicted, actual);
   return {
     className: hit ? "is-hit" : "is-miss",
     label: hit ? "正确" : "错误",

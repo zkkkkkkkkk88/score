@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T13:21:59.184+08:00",
+  "generatedAt": "2026-06-12T14:15:54.445+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -102,23 +102,31 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "0球",
-          "exactGoals": "0",
-          "probability": 0.299,
+          "pick": "1球",
+          "exactGoals": "1",
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
-          "pick": "0-0",
-          "probability": 0.128,
+          "pick": "1-1",
+          "scoreOptions": [
+            "1-1",
+            "2-2"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -268,21 +276,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "3-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "3-0",
+            "4-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -418,12 +434,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": 1,
-          "pick": "让平",
+          "handicap": 2,
+          "pick": "让胜",
           "probability": 0.424,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算受让1球方向。",
+          "reason": "按主客队基础强弱估算受让2球方向。",
           "baseProbability": 0.42,
           "modelWeight": 1.01,
           "sampleSize": 5
@@ -431,21 +447,29 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-2",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-2",
+            "1-2"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -585,21 +609,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "3-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "3-0",
+            "4-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -749,21 +781,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-3",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-3",
+            "0-4"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -911,23 +951,31 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "0球",
-          "exactGoals": "0",
-          "probability": 0.299,
+          "pick": "1球",
+          "exactGoals": "1",
+          "exactGoalOptions": [
+            "1",
+            "0"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-0",
+            "1-1"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1062,12 +1110,12 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -1,
-          "pick": "让胜",
+          "handicap": -3,
+          "pick": "让负",
           "probability": 0.424,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让1球方向。",
+          "reason": "按主客队基础强弱估算让3球方向。",
           "baseProbability": 0.42,
           "modelWeight": 1.01,
           "sampleSize": 5
@@ -1075,21 +1123,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
-          "pick": "2-1",
-          "probability": 0.128,
+          "pick": "3-0",
+          "scoreOptions": [
+            "3-0",
+            "4-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1229,21 +1285,29 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "2-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "2-0",
+            "3-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1391,23 +1455,31 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "0球",
-          "exactGoals": "0",
-          "probability": 0.299,
+          "pick": "1球",
+          "exactGoals": "1",
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
-          "pick": "0-0",
-          "probability": 0.128,
+          "pick": "1-1",
+          "scoreOptions": [
+            "1-1",
+            "2-2"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1557,21 +1629,29 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "2-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "2-0",
+            "3-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1720,21 +1800,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "3-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "3-0",
+            "4-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -1874,21 +1962,29 @@
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "1-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "1-0",
+            "2-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2038,21 +2134,29 @@
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-1",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-1",
+            "0-2"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2202,21 +2306,29 @@
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "1-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "1-0",
+            "2-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2366,21 +2478,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "3-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "3-0",
+            "4-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2529,21 +2649,29 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-2",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-2",
+            "0-3"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2683,21 +2811,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "2-1",
-          "probability": 0.128,
+          "scoreOptions": [
+            "2-1",
+            "3-1"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2779,15 +2915,19 @@
         "已开售"
       ],
       "availablePools": [
-        "HHAD"
+        "HHAD",
+        "HAFU",
+        "CRS",
+        "TTG",
+        "HAD"
       ],
       "betOptions": {
         "wdl": {
           "poolCode": "HAD",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
         },
         "hdc": {
           "poolCode": "HHAD",
@@ -2798,24 +2938,24 @@
         },
         "ou": {
           "poolCode": "TTG",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
         },
         "score": {
           "poolCode": "CRS",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
         },
         "htft": {
           "poolCode": "HAFU",
-          "single": null,
-          "allUp": null,
-          "selling": false,
-          "poolStatus": ""
+          "single": true,
+          "allUp": true,
+          "selling": true,
+          "poolStatus": "Selling"
         }
       },
       "dataQuality": 86,
@@ -2843,21 +2983,29 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "2-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "2-0",
+            "3-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -2870,6 +3018,16 @@
           "baseProbability": 0.29,
           "modelWeight": 0.72,
           "sampleSize": 0
+        },
+        "wdl": {
+          "pick": "主胜",
+          "probability": 0.581,
+          "confidence": 64,
+          "risk": "中",
+          "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
+          "baseProbability": 0.56,
+          "modelWeight": 1.038,
+          "sampleSize": 7
         }
       },
       "actualMarkets": null,
@@ -2997,21 +3155,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "2-1",
-          "probability": 0.128,
+          "scoreOptions": [
+            "2-1",
+            "3-1"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -3161,21 +3327,29 @@
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "1-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "1-0",
+            "2-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -3323,33 +3497,41 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
-          "probability": 0.299,
+          "pick": "1球",
+          "exactGoals": "1",
+          "exactGoalOptions": [
+            "1",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
-          "pick": "1-1",
-          "probability": 0.128,
+          "pick": "2-2",
+          "scoreOptions": [
+            "2-2",
+            "3-3"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.173,
-          "confidence": 46,
+          "pick": "平/平",
+          "probability": 0.216,
+          "confidence": 52,
           "risk": "高",
           "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
-          "baseProbability": 0.24,
+          "baseProbability": 0.3,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -3489,21 +3671,29 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "3",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "0-3",
-          "probability": 0.128,
+          "scoreOptions": [
+            "0-3",
+            "0-4"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -3653,21 +3843,29 @@
         "ou": {
           "pick": "1球",
           "exactGoals": "1",
-          "probability": 0.299,
+          "exactGoalOptions": [
+            "1",
+            "2"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
           "pick": "1-0",
-          "probability": 0.128,
+          "scoreOptions": [
+            "1-0",
+            "2-0"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
@@ -3707,6 +3905,9 @@
         "ou": {
           "pick": "2球",
           "exactGoals": "2",
+          "exactGoalOptions": [
+            "2"
+          ],
           "probability": 0.62,
           "confidence": 84,
           "risk": "中",
@@ -3717,6 +3918,9 @@
         },
         "score": {
           "pick": "2-0",
+          "scoreOptions": [
+            "2-0"
+          ],
           "probability": 0.42,
           "confidence": 82,
           "risk": "高",
@@ -3868,33 +4072,41 @@
           "sampleSize": 5
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
-          "probability": 0.299,
+          "pick": "1球",
+          "exactGoals": "1",
+          "exactGoalOptions": [
+            "1",
+            "4+"
+          ],
+          "probability": 0.37,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.34,
+          "baseProbability": 0.42,
           "modelWeight": 0.88,
           "sampleSize": 1
         },
         "score": {
-          "pick": "1-1",
-          "probability": 0.128,
+          "pick": "2-2",
+          "scoreOptions": [
+            "2-2",
+            "3-3"
+          ],
+          "probability": 0.173,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.2,
+          "baseProbability": 0.27,
           "modelWeight": 0.64,
           "sampleSize": 1
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.173,
-          "confidence": 46,
+          "pick": "平/平",
+          "probability": 0.216,
+          "confidence": 52,
           "risk": "高",
           "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
-          "baseProbability": 0.24,
+          "baseProbability": 0.3,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -3924,6 +4136,9 @@
         "ou": {
           "pick": "3球",
           "exactGoals": "3",
+          "exactGoalOptions": [
+            "3"
+          ],
           "probability": 0.62,
           "confidence": 84,
           "risk": "中",
@@ -3934,6 +4149,9 @@
         },
         "score": {
           "pick": "2-1",
+          "scoreOptions": [
+            "2-1"
+          ],
           "probability": 0.42,
           "confidence": 82,
           "risk": "高",
@@ -4050,6 +4268,33 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
+      "id": "tomorrow-二串一-0-8-ou-wdl",
+      "type": "明日二串一购买方案 · 总进球数+胜平负",
+      "planGroup": "二串一",
+      "planSize": 2,
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "001",
+        "002"
+      ],
+      "eventIds": [
+        "2040164",
+        "2040165"
+      ],
+      "markets": [
+        "ou",
+        "wdl"
+      ],
+      "risk": "中",
+      "planProbability": 0.18833,
+      "modelWeight": 0.959,
+      "modelSamples": 8,
+      "targetDate": "2026-06-13",
+      "note": "提前准备 2026-06-13 同一天的竞彩串单，按校准概率排序；玩法权重 0.96，复盘样本 8，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
       "id": "tomorrow-二串一-0-5-hdc-hdc",
       "type": "明日二串一购买方案 · 让球胜平负",
       "planGroup": "二串一",
@@ -4077,33 +4322,6 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-二串一-0-1-wdl-hdc",
-      "type": "明日二串一购买方案 · 胜平负+让球胜平负",
-      "planGroup": "二串一",
-      "planSize": 2,
-      "mode": "all",
-      "requiredHits": 2,
-      "matchIds": [
-        "001",
-        "002"
-      ],
-      "eventIds": [
-        "2040164",
-        "2040165"
-      ],
-      "markets": [
-        "wdl",
-        "hdc"
-      ],
-      "risk": "中",
-      "planProbability": 0.158576,
-      "modelWeight": 1.024,
-      "modelSamples": 12,
-      "targetDate": "2026-06-13",
-      "note": "提前准备 2026-06-13 同一天的竞彩串单，按校准概率排序；玩法权重 1.02，复盘样本 12，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
       "id": "tomorrow-二串一-0-12-score-wdl",
       "type": "明日二串一购买方案 · 比分+胜平负",
       "planGroup": "二串一",
@@ -4123,7 +4341,7 @@
         "wdl"
       ],
       "risk": "高",
-      "planProbability": 0.065152,
+      "planProbability": 0.088057,
       "modelWeight": 0.839,
       "modelSamples": 8,
       "targetDate": "2026-06-13",
@@ -4187,6 +4405,33 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
+      "id": "tomorrow-二串一-0-8-ou-wdl",
+      "type": "明日二串一购买方案 · 总进球数+胜平负",
+      "planGroup": "二串一",
+      "planSize": 2,
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "001",
+        "002"
+      ],
+      "eventIds": [
+        "2040164",
+        "2040165"
+      ],
+      "markets": [
+        "ou",
+        "wdl"
+      ],
+      "risk": "中",
+      "planProbability": 0.18833,
+      "modelWeight": 0.959,
+      "modelSamples": 8,
+      "targetDate": "2026-06-13",
+      "note": "提前准备 2026-06-13 同一天的竞彩串单，按校准概率排序；玩法权重 0.96，复盘样本 8，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
       "id": "tomorrow-二串一-0-5-hdc-hdc",
       "type": "明日二串一购买方案 · 让球胜平负",
       "planGroup": "二串一",
@@ -4214,33 +4459,6 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-二串一-0-1-wdl-hdc",
-      "type": "明日二串一购买方案 · 胜平负+让球胜平负",
-      "planGroup": "二串一",
-      "planSize": 2,
-      "mode": "all",
-      "requiredHits": 2,
-      "matchIds": [
-        "001",
-        "002"
-      ],
-      "eventIds": [
-        "2040164",
-        "2040165"
-      ],
-      "markets": [
-        "wdl",
-        "hdc"
-      ],
-      "risk": "中",
-      "planProbability": 0.158576,
-      "modelWeight": 1.024,
-      "modelSamples": 12,
-      "targetDate": "2026-06-13",
-      "note": "提前准备 2026-06-13 同一天的竞彩串单，按校准概率排序；玩法权重 1.02，复盘样本 12，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
       "id": "tomorrow-二串一-0-12-score-wdl",
       "type": "明日二串一购买方案 · 比分+胜平负",
       "planGroup": "二串一",
@@ -4260,7 +4478,7 @@
         "wdl"
       ],
       "risk": "高",
-      "planProbability": 0.065152,
+      "planProbability": 0.088057,
       "modelWeight": 0.839,
       "modelSamples": 8,
       "targetDate": "2026-06-13",
@@ -5261,7 +5479,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-12T13:21:59.184+08:00",
+    "generatedAt": "2026-06-12T14:15:54.445+08:00",
     "marketWeights": {
       "wdl": 1.038,
       "hdc": 1.01,
