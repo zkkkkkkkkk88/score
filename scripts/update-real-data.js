@@ -34,6 +34,17 @@ const PRESERVE_ARCHIVE_PREDICTION_IDS = new Set(["2040189", "2040190"]);
 const PRESERVED_SCORE_PICKS = {
   2040189: "2-1",
 };
+const FIXED_PREDICTION_OVERRIDES = {
+  2040164: {
+    scoreOptions: ["1-1", "2-1"],
+    goalOptions: ["2", "3"],
+    htft: "平/胜",
+  },
+  2040165: {
+    scoreOptions: ["2-0", "2-1"],
+    htft: "胜/胜",
+  },
+};
 const CONFIRMED_HANDICAP_LINES = {
   2040162: -1,
   2040166: 2,
@@ -783,6 +794,9 @@ function goalLabelFromTotal(total) {
 }
 
 function getEstimatedScoreOptions(match, wdlPick, exactGoals, score) {
+  const fixed = FIXED_PREDICTION_OVERRIDES[String(match.matchId)];
+  if (fixed?.scoreOptions) return uniqueOptions(fixed.scoreOptions, 2);
+
   if (score.home !== null && score.away !== null) return [`${score.home}-${score.away}`];
 
   const override = SCORE_OPTION_OVERRIDES[String(match.matchId)];
@@ -813,6 +827,9 @@ function getEstimatedScoreOptions(match, wdlPick, exactGoals, score) {
 }
 
 function getExactGoalOptions(match, exactGoals, scoreOptions, score) {
+  const fixed = FIXED_PREDICTION_OVERRIDES[String(match.matchId)];
+  if (fixed?.goalOptions) return uniqueOptions(fixed.goalOptions, 2);
+
   if (score.home !== null && score.away !== null) return [goalLabelFromTotal(score.home + score.away)];
 
   const override = GOAL_OPTION_OVERRIDES[String(match.matchId)];
@@ -911,6 +928,17 @@ function htftModel(match, status, score, wdlPick, exactGoals) {
 }
 
 function htftModelV2(match, status, score, wdlPick, exactGoals) {
+  const fixed = FIXED_PREDICTION_OVERRIDES[String(match.matchId)];
+  if (fixed?.htft) {
+    return {
+      pick: fixed.htft,
+      probability: 0.52,
+      confidence: 54,
+      risk: "高",
+      reason: "保留赛前固定半全场预测，用于历史复盘。",
+    };
+  }
+
   if (status === "finished" && score.home !== null && score.away !== null) {
     const halfScore = parseScore(match.sectionsNo1);
     const half = halfScore.home !== null && halfScore.away !== null ? scoreResult(halfScore) : "平";
@@ -1168,7 +1196,7 @@ function mapMatch(match, index, oldByEventId = new Map(), calibration = null, de
     detail,
   });
   const preservedMarkets =
-    status === "finished" && oldMatch?.status !== "finished" && oldMatch?.markets
+    oldMatch?.status !== "finished" && oldMatch?.markets
       ? normalizePreservedMarkets(oldMatch.markets, generatedMarkets, score, detail, standardWdl, calibration)
       : null;
   const markets =

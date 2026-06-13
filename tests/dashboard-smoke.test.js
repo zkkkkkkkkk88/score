@@ -191,6 +191,20 @@ setTimeout(() => {
     "uses tomorrow-tab matches for every parlay",
   );
   assert(
+    data.parlaySeeds.every(
+      (plan) =>
+        plan.eventIds?.length === plan.planSize &&
+        plan.matchIds?.length === plan.planSize &&
+        plan.markets?.length === plan.planSize &&
+        new Set(plan.eventIds.map(String)).size === plan.planSize,
+    ),
+    "keeps every parlay leg complete and tied to a unique event",
+  );
+  assert(
+    data.parlaySeeds.every((plan) => context.getParlayPicks(plan).length === plan.planSize),
+    "resolves parlay legs by stable event id instead of drifting match id",
+  );
+  assert(
     data.parlaySeeds.every((plan) =>
       plan.markets.every((marketKey, index) => {
         const match = data.matches.find((item) => item.sourceEventId === plan.eventIds?.[index] || item.id === plan.matchIds[index]);

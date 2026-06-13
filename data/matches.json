@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-13T12:25:23.596+08:00",
+  "generatedAt": "2026-06-13T13:35:23.931+08:00",
   "source": {
     "type": "real",
     "provider": "Sporttery",
@@ -90,26 +90,26 @@
         "hdc": {
           "handicap": 2,
           "pick": "让胜",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算受让2球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
+          "pick": "2球",
+          "exactGoals": "2",
           "exactGoalOptions": [
-            "3",
-            "2"
+            "2",
+            "3"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -119,21 +119,21 @@
             "0-2",
             "1-2"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "负/平",
-          "probability": 0.238,
-          "confidence": 58,
+          "pick": "平/负",
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "客队强度或反击效率占优，半场路径允许客队先建立优势。",
-          "baseProbability": 0.33,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -250,60 +250,60 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "3球",
+          "exactGoals": "3",
           "exactGoalOptions": [
-            "2",
-            "3"
+            "3",
+            "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "2-0",
+          "pick": "3-0",
           "scoreOptions": [
-            "2-0",
-            "3-0"
+            "3-0",
+            "4-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.252,
-          "confidence": 60,
+          "probability": 0.12,
+          "confidence": 54,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.661,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.58,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -420,60 +420,60 @@
         "hdc": {
           "handicap": 1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算受让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "1球",
-          "exactGoals": "1",
+          "pick": "3球",
+          "exactGoals": "3",
           "exactGoalOptions": [
-            "1",
-            "2"
+            "3",
+            "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "0-1",
+          "pick": "0-3",
           "scoreOptions": [
-            "0-1",
-            "0-2"
+            "0-3",
+            "0-4"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/负",
-          "probability": 0.202,
+          "probability": 0.12,
           "confidence": 52,
           "risk": "高",
-          "reason": "客队方向占优但早段仍偏谨慎，倾向下半场拉开。",
-          "baseProbability": 0.28,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "客胜",
-          "probability": 0.593,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.52,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -588,62 +588,62 @@
       },
       "markets": {
         "hdc": {
-          "handicap": 1,
-          "pick": "让胜",
-          "probability": 0.336,
+          "handicap": -1,
+          "pick": "让负",
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算受让1球方向。",
-          "baseProbability": 0.38,
+          "reason": "按主客队基础强弱估算让1球方向。",
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "1球",
+          "exactGoals": "1",
           "exactGoalOptions": [
-            "2",
-            "4+"
+            "1",
+            "0"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "1-1",
+          "pick": "0-0",
           "scoreOptions": [
-            "1-1",
-            "2-2"
+            "0-0",
+            "1-1"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "负/平",
-          "probability": 0.18,
-          "confidence": 48,
+          "pick": "平/平",
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "平局方向下半场波动较大，结合强弱差和进球倾向给出更分散的半全场路径。",
-          "baseProbability": 0.25,
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "平",
-          "probability": 0.41,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.36,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -760,11 +760,11 @@
         "hdc": {
           "handicap": -3,
           "pick": "让负",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让3球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -775,11 +775,11 @@
             "3",
             "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -789,21 +789,21 @@
             "3-0",
             "4-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "胜/胜",
-          "probability": 0.252,
-          "confidence": 60,
+          "probability": 0.12,
+          "confidence": 58,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -922,11 +922,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -937,11 +937,11 @@
             "2",
             "3"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -951,31 +951,31 @@
             "2-0",
             "3-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.209,
+          "probability": 0.12,
           "confidence": 54,
           "risk": "高",
-          "reason": "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.616,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.54,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -1094,11 +1094,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让负",
-          "probability": 0.336,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.38,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -1109,11 +1109,11 @@
             "1",
             "2"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -1123,31 +1123,31 @@
             "1-1",
             "2-2"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.18,
-          "confidence": 48,
+          "pick": "平/平",
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "平局方向下半场波动较大，结合强弱差和进球倾向给出更分散的半全场路径。",
-          "baseProbability": 0.25,
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "平",
-          "probability": 0.41,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.36,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -1266,11 +1266,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -1281,11 +1281,11 @@
             "2",
             "3"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -1295,31 +1295,31 @@
             "2-0",
             "3-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.252,
-          "confidence": 60,
+          "probability": 0.12,
+          "confidence": 54,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.581,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.51,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -1437,11 +1437,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让胜",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -1452,11 +1452,11 @@
             "3",
             "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -1466,21 +1466,21 @@
             "3-0",
             "4-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "胜/胜",
+          "probability": 0.12,
+          "confidence": 58,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -1599,11 +1599,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -1614,11 +1614,11 @@
             "1",
             "2"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -1628,31 +1628,31 @@
             "1-0",
             "2-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.209,
+          "probability": 0.12,
           "confidence": 54,
           "risk": "高",
-          "reason": "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.619,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.543,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -1771,60 +1771,60 @@
         "hdc": {
           "handicap": 1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算受让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "1球",
+          "exactGoals": "1",
           "exactGoalOptions": [
-            "2",
-            "3"
+            "1",
+            "2"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "0-2",
+          "pick": "0-1",
           "scoreOptions": [
-            "0-2",
-            "0-3"
+            "0-1",
+            "0-2"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/负",
-          "probability": 0.238,
-          "confidence": 58,
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "客队强度或反击效率占优，半场路径允许客队先建立优势。",
-          "baseProbability": 0.33,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "客胜",
-          "probability": 0.608,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.533,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -1943,11 +1943,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -1958,11 +1958,11 @@
             "1",
             "2"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -1972,31 +1972,31 @@
             "1-0",
             "2-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.209,
+          "probability": 0.12,
           "confidence": 54,
           "risk": "高",
-          "reason": "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.593,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.52,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -2115,11 +2115,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -2130,11 +2130,11 @@
             "3",
             "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -2144,31 +2144,31 @@
             "3-0",
             "4-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "平/胜",
+          "probability": 0.12,
+          "confidence": 54,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.676,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.593,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -2284,13 +2284,13 @@
       },
       "markets": {
         "hdc": {
-          "handicap": -1,
-          "pick": "让负",
-          "probability": 0.407,
+          "handicap": 1,
+          "pick": "让平",
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
-          "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.46,
+          "reason": "按主客队基础强弱估算受让1球方向。",
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -2301,11 +2301,11 @@
             "2",
             "3"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -2315,21 +2315,21 @@
             "0-2",
             "0-3"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/负",
-          "probability": 0.238,
-          "confidence": 58,
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "客队强度或反击效率占优，半场路径允许客队先建立优势。",
-          "baseProbability": 0.33,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         }
@@ -2448,60 +2448,60 @@
         "hdc": {
           "handicap": -1,
           "pick": "让胜",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "3球",
+          "exactGoals": "3",
           "exactGoalOptions": [
-            "2",
-            "3"
+            "3",
+            "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "2-0",
+          "pick": "2-1",
           "scoreOptions": [
-            "2-0",
-            "3-0"
+            "2-1",
+            "3-1"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "胜/胜",
+          "probability": 0.12,
+          "confidence": 58,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.733,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.643,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -2620,11 +2620,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -2635,11 +2635,11 @@
             "2",
             "3"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -2649,31 +2649,31 @@
             "2-0",
             "3-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.252,
-          "confidence": 60,
+          "probability": 0.12,
+          "confidence": 54,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.638,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.56,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -2792,11 +2792,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让胜",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -2807,11 +2807,11 @@
             "3",
             "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -2821,31 +2821,31 @@
             "2-1",
             "3-1"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "胜/胜",
+          "probability": 0.12,
+          "confidence": 58,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "强弱差和主队进攻倾向较明显，倾向主队半场建立优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.726,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.637,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -2964,11 +2964,11 @@
         "hdc": {
           "handicap": -1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
@@ -2979,11 +2979,11 @@
             "1",
             "2"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
@@ -2993,31 +2993,31 @@
             "1-0",
             "2-0"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/胜",
-          "probability": 0.209,
+          "probability": 0.12,
           "confidence": 54,
           "risk": "高",
-          "reason": "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
+          "reason": "主队方向占优但半场不确定性较高，倾向下半场兑现优势。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.627,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.55,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -3135,61 +3135,61 @@
       "markets": {
         "hdc": {
           "handicap": -1,
-          "pick": "让胜",
-          "probability": 0.371,
+          "pick": "让负",
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "1球",
+          "exactGoals": "1",
           "exactGoalOptions": [
-            "2",
-            "3"
+            "1",
+            "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "2-0",
+          "pick": "2-2",
           "scoreOptions": [
-            "2-0",
-            "3-0"
+            "2-2",
+            "3-3"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "平/平",
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "平局方向下半场波动较大，结合进球倾向给出半全场观察路径。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "主胜",
-          "probability": 0.699,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.613,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -3308,60 +3308,60 @@
         "hdc": {
           "handicap": 1,
           "pick": "让平",
-          "probability": 0.371,
+          "probability": 0.16,
           "confidence": 58,
           "risk": "中",
           "reason": "按主客队基础强弱估算受让1球方向。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.884,
           "sampleSize": 10
         },
         "ou": {
-          "pick": "2球",
-          "exactGoals": "2",
+          "pick": "3球",
+          "exactGoals": "3",
           "exactGoalOptions": [
-            "2",
-            "3"
+            "3",
+            "4+"
           ],
-          "probability": 0.37,
+          "probability": 0.16,
           "confidence": 62,
           "risk": "中",
           "reason": "根据赛事类型、赛程时段和进球分布模型给出具体总进球数观察值。",
-          "baseProbability": 0.42,
+          "baseProbability": 0.16,
           "modelWeight": 0.88,
           "sampleSize": 2
         },
         "score": {
-          "pick": "0-2",
+          "pick": "0-3",
           "scoreOptions": [
-            "0-2",
-            "0-3"
+            "0-3",
+            "0-4"
           ],
-          "probability": 0.173,
+          "probability": 0.08,
           "confidence": 42,
           "risk": "高",
           "reason": "比分玩法波动较大，当前仅作为高风险小比例串单候选。",
-          "baseProbability": 0.27,
+          "baseProbability": 0.08,
           "modelWeight": 0.64,
           "sampleSize": 2
         },
         "htft": {
           "pick": "平/负",
-          "probability": 0.238,
-          "confidence": 58,
+          "probability": 0.12,
+          "confidence": 52,
           "risk": "高",
-          "reason": "客队强度或反击效率占优，半场路径允许客队先建立优势。",
-          "baseProbability": 0.33,
+          "reason": "客队方向占优但早段不确定性较高，倾向下半场拉开。",
+          "baseProbability": 0.12,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
         "wdl": {
           "pick": "客胜",
-          "probability": 0.559,
+          "probability": 0.76,
           "confidence": 64,
           "risk": "中",
           "reason": "根据竞彩编号、赛程位置、主客队和基础胜负模型生成赛前方向。",
-          "baseProbability": 0.49,
+          "baseProbability": 0.76,
           "modelWeight": 1.14,
           "sampleSize": 16
         }
@@ -3951,11 +3951,11 @@
           "sampleSize": 10
         },
         "ou": {
-          "pick": "3球",
-          "exactGoals": "3",
+          "pick": "2球",
+          "exactGoals": "2",
           "exactGoalOptions": [
-            "3",
-            "4+"
+            "2",
+            "3"
           ],
           "probability": 0.37,
           "confidence": 62,
@@ -3966,10 +3966,10 @@
           "sampleSize": 2
         },
         "score": {
-          "pick": "2-1",
+          "pick": "1-1",
           "scoreOptions": [
-            "2-1",
-            "3-1"
+            "1-1",
+            "2-1"
           ],
           "probability": 0.173,
           "confidence": 42,
@@ -3980,12 +3980,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "胜/平",
-          "probability": 0.252,
-          "confidence": 60,
+          "pick": "平/胜",
+          "probability": 0.374,
+          "confidence": 54,
           "risk": "高",
-          "reason": "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。",
-          "baseProbability": 0.35,
+          "reason": "保留赛前固定半全场预测，用于历史复盘。",
+          "baseProbability": 0.52,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -4016,7 +4016,8 @@
           "pick": "2球",
           "exactGoals": "2",
           "exactGoalOptions": [
-            "2"
+            "2",
+            "3"
           ],
           "probability": 0.62,
           "confidence": 84,
@@ -4029,7 +4030,8 @@
         "score": {
           "pick": "1-1",
           "scoreOptions": [
-            "1-1"
+            "1-1",
+            "2-1"
           ],
           "probability": 0.42,
           "confidence": 82,
@@ -4040,11 +4042,11 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "负/平",
+          "pick": "平/胜",
           "probability": 0.374,
-          "confidence": 70,
+          "confidence": 54,
           "risk": "高",
-          "reason": "根据半场和全场比分做复盘方向。",
+          "reason": "保留赛前固定半全场预测，用于历史复盘。",
           "baseProbability": 0.52,
           "modelWeight": 0.72,
           "sampleSize": 0
@@ -4200,7 +4202,7 @@
           "pick": "2-0",
           "scoreOptions": [
             "2-0",
-            "3-0"
+            "2-1"
           ],
           "probability": 0.173,
           "confidence": 42,
@@ -4211,12 +4213,12 @@
           "sampleSize": 2
         },
         "htft": {
-          "pick": "平/胜",
-          "probability": 0.209,
+          "pick": "胜/胜",
+          "probability": 0.374,
           "confidence": 54,
           "risk": "高",
-          "reason": "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
-          "baseProbability": 0.29,
+          "reason": "保留赛前固定半全场预测，用于历史复盘。",
+          "baseProbability": 0.52,
           "modelWeight": 0.72,
           "sampleSize": 0
         },
@@ -4258,9 +4260,10 @@
           "sampleSize": 2
         },
         "score": {
-          "pick": "4-1",
+          "pick": "2-0",
           "scoreOptions": [
-            "4-1"
+            "2-0",
+            "2-1"
           ],
           "probability": 0.42,
           "confidence": 82,
@@ -4273,9 +4276,9 @@
         "htft": {
           "pick": "胜/胜",
           "probability": 0.374,
-          "confidence": 70,
+          "confidence": 54,
           "risk": "高",
-          "reason": "根据半场和全场比分做复盘方向。",
+          "reason": "保留赛前固定半全场预测，用于历史复盘。",
           "baseProbability": 0.52,
           "modelWeight": 0.72,
           "sampleSize": 0
@@ -4342,11 +4345,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.3897779512,
+      "planScore": 0.57436544,
       "stabilityScore": 0.98,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.391973,
+      "planProbability": 0.5776,
       "modelWeight": 1.14,
       "modelSamples": 32,
       "targetDate": "2026-06-14",
@@ -4372,11 +4375,41 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.26949234399999994,
+      "planScore": 0.57436544,
       "stabilityScore": 0.98,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.27101,
+      "planProbability": 0.5776,
+      "modelWeight": 1.14,
+      "modelSamples": 32,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.14，复盘样本 32，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-二串一-5-0-wdl-wdl",
+      "type": "明日二串一购买方案 · 稳健单 · 胜平负",
+      "planGroup": "二串一",
+      "planSize": 2,
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "wdl",
+        "wdl"
+      ],
+      "planScore": 0.57436544,
+      "stabilityScore": 0.98,
+      "protection": "稳健全中",
+      "risk": "中",
+      "planProbability": 0.5776,
       "modelWeight": 1.14,
       "modelSamples": 32,
       "targetDate": "2026-06-14",
@@ -4402,41 +4435,11 @@
         "hdc",
         "wdl"
       ],
-      "planScore": 0.24385770639999998,
-      "stabilityScore": 0.98,
+      "planScore": 0.11887616000000001,
+      "stabilityScore": 0.92,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.245231,
-      "modelWeight": 1.012,
-      "modelSamples": 26,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 26，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-二串一-3-1-wdl-hdc",
-      "type": "明日二串一购买方案 · 稳健单 · 胜平负+让球胜平负",
-      "planGroup": "二串一",
-      "planSize": 2,
-      "mode": "all",
-      "requiredHits": 2,
-      "matchIds": [
-        "004",
-        "005"
-      ],
-      "eventIds": [
-        "2040167",
-        "2040168"
-      ],
-      "markets": [
-        "wdl",
-        "hdc"
-      ],
-      "planScore": 0.24385770639999998,
-      "stabilityScore": 0.98,
-      "protection": "稳健全中",
-      "risk": "中",
-      "planProbability": 0.245231,
+      "planProbability": 0.1216,
       "modelWeight": 1.012,
       "modelSamples": 26,
       "targetDate": "2026-06-14",
@@ -4462,11 +4465,11 @@
         "score",
         "wdl"
       ],
-      "planScore": 0.101545464,
+      "planScore": 0.0539904,
       "stabilityScore": 0.6,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.114353,
+      "planProbability": 0.0608,
       "modelWeight": 0.89,
       "modelSamples": 18,
       "targetDate": "2026-06-14",
@@ -4495,11 +4498,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.15710904996800001,
+      "planScore": 0.42914293760000005,
       "stabilityScore": 0.92,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.16070893,
+      "planProbability": 0.43897600000000003,
       "modelWeight": 1.14,
       "modelSamples": 48,
       "targetDate": "2026-06-14",
@@ -4528,11 +4531,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.1421645305808,
-      "stabilityScore": 0.92,
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.145421983,
+      "planProbability": 0.092416,
       "modelWeight": 1.055,
       "modelSamples": 42,
       "targetDate": "2026-06-14",
@@ -4540,41 +4543,74 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串一-3-2-wdl-wdl-ou",
-      "type": "明日三串一购买方案 · 稳健单 · 胜平负+总进球数",
+      "id": "tomorrow-三串一-1-0-hdc-wdl-wdl",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
       "planGroup": "三串一",
       "planSize": 3,
       "mode": "all",
       "requiredHits": 3,
       "matchIds": [
+        "003",
         "004",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl"
+      ],
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
+      "protection": "稳健全中",
+      "risk": "中",
+      "planProbability": 0.092416,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-三串一-2-0-hdc-wdl-wdl",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "三串一",
+      "planSize": 3,
+      "mode": "all",
+      "requiredHits": 3,
+      "matchIds": [
+        "003",
         "005",
         "006"
       ],
       "eventIds": [
-        "2040167",
+        "2040166",
         "2040168",
         "2040169"
       ],
       "markets": [
+        "hdc",
         "wdl",
-        "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.14083380837733336,
-      "stabilityScore": 0.897,
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.14503001000000001,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
+      "planProbability": 0.092416,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串一-0-21-ou-wdl-wdl",
-      "type": "明日三串一购买方案 · 稳健单 · 总进球数+胜平负",
+      "id": "tomorrow-三串一-0-42-score-wdl-wdl",
+      "type": "明日三串一购买方案 · 进取单 · 比分+胜平负",
       "planGroup": "三串一",
       "planSize": 3,
       "mode": "all",
@@ -4590,48 +4626,15 @@
         "2040168"
       ],
       "markets": [
-        "ou",
+        "score",
         "wdl",
         "wdl"
       ],
-      "planScore": 0.14083380837733334,
-      "stabilityScore": 0.897,
-      "protection": "稳健全中",
-      "risk": "中",
-      "planProbability": 0.14503001,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-三串一-3-3-wdl-wdl-score",
-      "type": "明日三串一购买方案 · 进取单 · 胜平负+比分",
-      "planGroup": "三串一",
-      "planSize": 3,
-      "mode": "all",
-      "requiredHits": 3,
-      "matchIds": [
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "wdl",
-        "wdl",
-        "score"
-      ],
-      "planScore": 0.0609759470368,
+      "planScore": 0.0415502336,
       "stabilityScore": 0.64,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.067811329,
+      "planProbability": 0.046208,
       "modelWeight": 0.973,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -4660,11 +4663,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.581420847216,
+      "planScore": 0.8500608512,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.58469514,
+      "planProbability": 0.854848,
       "modelWeight": 1.14,
       "modelSamples": 48,
       "targetDate": "2026-06-14",
@@ -4693,11 +4696,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.5631914010096,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.566363034,
+      "planProbability": 0.6359680000000001,
       "modelWeight": 1.055,
       "modelSamples": 42,
       "targetDate": "2026-06-14",
@@ -4726,11 +4729,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.5627239793119999,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.56589298,
+      "planProbability": 0.6359680000000001,
       "modelWeight": 1.053,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -4738,65 +4741,65 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串二-3-2-wdl-wdl-ou",
-      "type": "明日三串二购买方案 · 保底2/3 · 胜平负+总进球数",
+      "id": "tomorrow-三串二-1-0-hdc-wdl-wdl",
+      "type": "明日三串二购买方案 · 保底2/3 · 让球胜平负+胜平负",
       "planGroup": "三串二",
       "planSize": 3,
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
+        "003",
         "004",
-        "005",
         "006"
       ],
       "eventIds": [
+        "2040166",
         "2040167",
-        "2040168",
         "2040169"
       ],
       "markets": [
+        "hdc",
         "wdl",
-        "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.5627239793119999,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.56589298,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
+      "planProbability": 0.6359680000000001,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串二-3-3-wdl-wdl-score",
-      "type": "明日三串二购买方案 · 保底2/3 · 胜平负+比分",
+      "id": "tomorrow-三串二-0-42-score-wdl-wdl",
+      "type": "明日三串二购买方案 · 保底2/3 · 比分+胜平负",
       "planGroup": "三串二",
       "planSize": 3,
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
+        "003",
         "004",
-        "005",
-        "006"
+        "005"
       ],
       "eventIds": [
+        "2040166",
         "2040167",
-        "2040168",
-        "2040169"
+        "2040168"
       ],
       "markets": [
+        "score",
         "wdl",
-        "wdl",
-        "score"
+        "wdl"
       ],
-      "planScore": 0.4494384079632,
+      "planScore": 0.5762020864000001,
       "stabilityScore": 0.82,
       "protection": "保底 2/3",
       "risk": "高",
-      "planProbability": 0.47329234200000003,
+      "planProbability": 0.6067840000000001,
       "modelWeight": 0.973,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -4828,11 +4831,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.058287457538128,
-      "stabilityScore": 0.92,
+      "planScore": 0.068072886272,
+      "stabilityScore": 0.89,
       "protection": "稳健全中",
       "risk": "高",
-      "planProbability": 0.05962301303,
+      "planProbability": 0.07023616,
       "modelWeight": 1.076,
       "modelSamples": 58,
       "targetDate": "2026-06-14",
@@ -4864,11 +4867,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.05783898319806999,
-      "stabilityScore": 0.903,
+      "planScore": 0.067384571904,
+      "stabilityScore": 0.855,
       "protection": "稳健全中",
       "risk": "高",
-      "planProbability": 0.05946230409999999,
+      "planProbability": 0.07023616,
       "modelWeight": 1.075,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
@@ -4876,8 +4879,8 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-四串一-0-2-hdc-wdl-wdl-ou",
-      "type": "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负+总进球数",
+      "id": "tomorrow-四串一-0-189-htft-wdl-wdl-wdl",
+      "type": "明日四串一购买方案 · 进取单 · 半全场+胜平负",
       "planGroup": "四串一",
       "planSize": 4,
       "mode": "all",
@@ -4895,56 +4898,20 @@
         "2040169"
       ],
       "markets": [
-        "hdc",
+        "htft",
         "wdl",
         "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.052337226259717,
-      "stabilityScore": 0.902,
-      "protection": "稳健全中",
+      "planScore": 0.048252241919999994,
+      "stabilityScore": 0.7,
+      "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.05380613371,
-      "modelWeight": 1.011,
-      "modelSamples": 44,
+      "planProbability": 0.05267712,
+      "modelWeight": 1.035,
+      "modelSamples": 48,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 44，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-四串一-0-83-ou-wdl-wdl-ou",
-      "type": "明日四串一购买方案 · 稳健单 · 总进球数+胜平负",
-      "planGroup": "四串一",
-      "planSize": 4,
-      "mode": "all",
-      "requiredHits": 4,
-      "matchIds": [
-        "003",
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040166",
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "ou",
-        "wdl",
-        "wdl",
-        "ou"
-      ],
-      "planScore": 0.051933216160859996,
-      "stabilityScore": 0.885,
-      "protection": "稳健全中",
-      "risk": "高",
-      "planProbability": 0.0536611037,
-      "modelWeight": 1.01,
-      "modelSamples": 36,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 36，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -4972,15 +4939,51 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.025389375313547995,
+      "planScore": 0.032069830656000005,
       "stabilityScore": 0.69,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.027802644889999995,
+      "planProbability": 0.03511808,
       "modelWeight": 1.015,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
       "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 50，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-四串一-0-1-hdc-wdl-wdl-hdc",
+      "type": "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "四串一",
+      "planSize": 4,
+      "mode": "all",
+      "requiredHits": 4,
+      "matchIds": [
+        "003",
+        "004",
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl",
+        "hdc"
+      ],
+      "planScore": 0.014206926848,
+      "stabilityScore": 0.86,
+      "protection": "稳健全中",
+      "risk": "高",
+      "planProbability": 0.01478656,
+      "modelWeight": 1.012,
+      "modelSamples": 52,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -5008,11 +5011,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.704604328024696,
+      "planScore": 0.8709556613119999,
       "stabilityScore": 0.98,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.70857233309,
+      "planProbability": 0.8758604799999999,
       "modelWeight": 1.076,
       "modelSamples": 58,
       "targetDate": "2026-06-14",
@@ -5044,11 +5047,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.70427229707912,
+      "planScore": 0.8709556613119999,
       "stabilityScore": 0.98,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.7082384323,
+      "planProbability": 0.8758604799999999,
       "modelWeight": 1.075,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
@@ -5056,8 +5059,8 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-四串二-0-2-hdc-wdl-wdl-ou",
-      "type": "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负+总进球数",
+      "id": "tomorrow-四串二-0-189-htft-wdl-wdl-wdl",
+      "type": "明日四串二购买方案 · 保底2/4 · 半全场+胜平负",
       "planGroup": "四串二",
       "planSize": 4,
       "mode": "atLeast",
@@ -5075,56 +5078,20 @@
         "2040169"
       ],
       "markets": [
-        "hdc",
+        "htft",
         "wdl",
         "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.690807944901272,
-      "stabilityScore": 0.98,
+      "planScore": 0.8413549527040002,
+      "stabilityScore": 0.88,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.6946982551299999,
-      "modelWeight": 1.011,
-      "modelSamples": 44,
+      "planProbability": 0.8706073600000002,
+      "modelWeight": 1.035,
+      "modelSamples": 48,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 44，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-四串二-0-83-ou-wdl-wdl-ou",
-      "type": "明日四串二购买方案 · 保底2/4 · 总进球数+胜平负",
-      "planGroup": "四串二",
-      "planSize": 4,
-      "mode": "atLeast",
-      "requiredHits": 2,
-      "matchIds": [
-        "003",
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040166",
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "ou",
-        "wdl",
-        "wdl",
-        "ou"
-      ],
-      "planScore": 0.6904627051018402,
-      "stabilityScore": 0.98,
-      "protection": "保底 2/4",
-      "risk": "高",
-      "planProbability": 0.6943510711000002,
-      "modelWeight": 1.01,
-      "modelSamples": 36,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 36，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -5152,15 +5119,51 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.6190744335192119,
+      "planScore": 0.8338553456640002,
       "stabilityScore": 0.87,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.6424599766699999,
+      "planProbability": 0.8653542400000002,
       "modelWeight": 1.015,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
       "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 50，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-四串二-0-1-hdc-wdl-wdl-hdc",
+      "type": "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负",
+      "planGroup": "四串二",
+      "planSize": 4,
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "matchIds": [
+        "003",
+        "004",
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl",
+        "hdc"
+      ],
+      "planScore": 0.682627438592,
+      "stabilityScore": 0.98,
+      "protection": "保底 2/4",
+      "risk": "高",
+      "planProbability": 0.68647168,
+      "modelWeight": 1.012,
+      "modelSamples": 52,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     }
   ],
@@ -5184,11 +5187,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.3897779512,
+      "planScore": 0.57436544,
       "stabilityScore": 0.98,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.391973,
+      "planProbability": 0.5776,
       "modelWeight": 1.14,
       "modelSamples": 32,
       "targetDate": "2026-06-14",
@@ -5214,11 +5217,41 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.26949234399999994,
+      "planScore": 0.57436544,
       "stabilityScore": 0.98,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.27101,
+      "planProbability": 0.5776,
+      "modelWeight": 1.14,
+      "modelSamples": 32,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.14，复盘样本 32，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-二串一-5-0-wdl-wdl",
+      "type": "明日二串一购买方案 · 稳健单 · 胜平负",
+      "planGroup": "二串一",
+      "planSize": 2,
+      "mode": "all",
+      "requiredHits": 2,
+      "matchIds": [
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "wdl",
+        "wdl"
+      ],
+      "planScore": 0.57436544,
+      "stabilityScore": 0.98,
+      "protection": "稳健全中",
+      "risk": "中",
+      "planProbability": 0.5776,
       "modelWeight": 1.14,
       "modelSamples": 32,
       "targetDate": "2026-06-14",
@@ -5244,41 +5277,11 @@
         "hdc",
         "wdl"
       ],
-      "planScore": 0.24385770639999998,
-      "stabilityScore": 0.98,
+      "planScore": 0.11887616000000001,
+      "stabilityScore": 0.92,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.245231,
-      "modelWeight": 1.012,
-      "modelSamples": 26,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 26，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-二串一-3-1-wdl-hdc",
-      "type": "明日二串一购买方案 · 稳健单 · 胜平负+让球胜平负",
-      "planGroup": "二串一",
-      "planSize": 2,
-      "mode": "all",
-      "requiredHits": 2,
-      "matchIds": [
-        "004",
-        "005"
-      ],
-      "eventIds": [
-        "2040167",
-        "2040168"
-      ],
-      "markets": [
-        "wdl",
-        "hdc"
-      ],
-      "planScore": 0.24385770639999998,
-      "stabilityScore": 0.98,
-      "protection": "稳健全中",
-      "risk": "中",
-      "planProbability": 0.245231,
+      "planProbability": 0.1216,
       "modelWeight": 1.012,
       "modelSamples": 26,
       "targetDate": "2026-06-14",
@@ -5304,11 +5307,11 @@
         "score",
         "wdl"
       ],
-      "planScore": 0.101545464,
+      "planScore": 0.0539904,
       "stabilityScore": 0.6,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.114353,
+      "planProbability": 0.0608,
       "modelWeight": 0.89,
       "modelSamples": 18,
       "targetDate": "2026-06-14",
@@ -5337,11 +5340,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.15710904996800001,
+      "planScore": 0.42914293760000005,
       "stabilityScore": 0.92,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.16070893,
+      "planProbability": 0.43897600000000003,
       "modelWeight": 1.14,
       "modelSamples": 48,
       "targetDate": "2026-06-14",
@@ -5370,11 +5373,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.1421645305808,
-      "stabilityScore": 0.92,
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.145421983,
+      "planProbability": 0.092416,
       "modelWeight": 1.055,
       "modelSamples": 42,
       "targetDate": "2026-06-14",
@@ -5382,41 +5385,74 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串一-3-2-wdl-wdl-ou",
-      "type": "明日三串一购买方案 · 稳健单 · 胜平负+总进球数",
+      "id": "tomorrow-三串一-1-0-hdc-wdl-wdl",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
       "planGroup": "三串一",
       "planSize": 3,
       "mode": "all",
       "requiredHits": 3,
       "matchIds": [
+        "003",
         "004",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl"
+      ],
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
+      "protection": "稳健全中",
+      "risk": "中",
+      "planProbability": 0.092416,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-三串一-2-0-hdc-wdl-wdl",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "三串一",
+      "planSize": 3,
+      "mode": "all",
+      "requiredHits": 3,
+      "matchIds": [
+        "003",
         "005",
         "006"
       ],
       "eventIds": [
-        "2040167",
+        "2040166",
         "2040168",
         "2040169"
       ],
       "markets": [
+        "hdc",
         "wdl",
-        "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.14083380837733336,
-      "stabilityScore": 0.897,
+      "planScore": 0.08931082239999999,
+      "stabilityScore": 0.88,
       "protection": "稳健全中",
       "risk": "中",
-      "planProbability": 0.14503001000000001,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
+      "planProbability": 0.092416,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串一-0-21-ou-wdl-wdl",
-      "type": "明日三串一购买方案 · 稳健单 · 总进球数+胜平负",
+      "id": "tomorrow-三串一-0-42-score-wdl-wdl",
+      "type": "明日三串一购买方案 · 进取单 · 比分+胜平负",
       "planGroup": "三串一",
       "planSize": 3,
       "mode": "all",
@@ -5432,48 +5468,15 @@
         "2040168"
       ],
       "markets": [
-        "ou",
+        "score",
         "wdl",
         "wdl"
       ],
-      "planScore": 0.14083380837733334,
-      "stabilityScore": 0.897,
-      "protection": "稳健全中",
-      "risk": "中",
-      "planProbability": 0.14503001,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-三串一-3-3-wdl-wdl-score",
-      "type": "明日三串一购买方案 · 进取单 · 胜平负+比分",
-      "planGroup": "三串一",
-      "planSize": 3,
-      "mode": "all",
-      "requiredHits": 3,
-      "matchIds": [
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "wdl",
-        "wdl",
-        "score"
-      ],
-      "planScore": 0.0609759470368,
+      "planScore": 0.0415502336,
       "stabilityScore": 0.64,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.067811329,
+      "planProbability": 0.046208,
       "modelWeight": 0.973,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -5502,11 +5505,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.581420847216,
+      "planScore": 0.8500608512,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.58469514,
+      "planProbability": 0.854848,
       "modelWeight": 1.14,
       "modelSamples": 48,
       "targetDate": "2026-06-14",
@@ -5535,11 +5538,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.5631914010096,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.566363034,
+      "planProbability": 0.6359680000000001,
       "modelWeight": 1.055,
       "modelSamples": 42,
       "targetDate": "2026-06-14",
@@ -5568,11 +5571,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.5627239793119999,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.56589298,
+      "planProbability": 0.6359680000000001,
       "modelWeight": 1.053,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -5580,65 +5583,65 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串二-3-2-wdl-wdl-ou",
-      "type": "明日三串二购买方案 · 保底2/3 · 胜平负+总进球数",
+      "id": "tomorrow-三串二-1-0-hdc-wdl-wdl",
+      "type": "明日三串二购买方案 · 保底2/3 · 让球胜平负+胜平负",
       "planGroup": "三串二",
       "planSize": 3,
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
+        "003",
         "004",
-        "005",
         "006"
       ],
       "eventIds": [
+        "2040166",
         "2040167",
-        "2040168",
         "2040169"
       ],
       "markets": [
+        "hdc",
         "wdl",
-        "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.5627239793119999,
+      "planScore": 0.6324065792000001,
       "stabilityScore": 0.98,
       "protection": "保底 2/3",
       "risk": "中",
-      "planProbability": 0.56589298,
-      "modelWeight": 1.053,
-      "modelSamples": 34,
+      "planProbability": 0.6359680000000001,
+      "modelWeight": 1.055,
+      "modelSamples": 42,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 34，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-三串二-3-3-wdl-wdl-score",
-      "type": "明日三串二购买方案 · 保底2/3 · 胜平负+比分",
+      "id": "tomorrow-三串二-0-42-score-wdl-wdl",
+      "type": "明日三串二购买方案 · 保底2/3 · 比分+胜平负",
       "planGroup": "三串二",
       "planSize": 3,
       "mode": "atLeast",
       "requiredHits": 2,
       "matchIds": [
+        "003",
         "004",
-        "005",
-        "006"
+        "005"
       ],
       "eventIds": [
+        "2040166",
         "2040167",
-        "2040168",
-        "2040169"
+        "2040168"
       ],
       "markets": [
+        "score",
         "wdl",
-        "wdl",
-        "score"
+        "wdl"
       ],
-      "planScore": 0.4494384079632,
+      "planScore": 0.5762020864000001,
       "stabilityScore": 0.82,
       "protection": "保底 2/3",
       "risk": "高",
-      "planProbability": 0.47329234200000003,
+      "planProbability": 0.6067840000000001,
       "modelWeight": 0.973,
       "modelSamples": 34,
       "targetDate": "2026-06-14",
@@ -5670,11 +5673,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.058287457538128,
-      "stabilityScore": 0.92,
+      "planScore": 0.068072886272,
+      "stabilityScore": 0.89,
       "protection": "稳健全中",
       "risk": "高",
-      "planProbability": 0.05962301303,
+      "planProbability": 0.07023616,
       "modelWeight": 1.076,
       "modelSamples": 58,
       "targetDate": "2026-06-14",
@@ -5706,11 +5709,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.05783898319806999,
-      "stabilityScore": 0.903,
+      "planScore": 0.067384571904,
+      "stabilityScore": 0.855,
       "protection": "稳健全中",
       "risk": "高",
-      "planProbability": 0.05946230409999999,
+      "planProbability": 0.07023616,
       "modelWeight": 1.075,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
@@ -5718,8 +5721,8 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-四串一-0-2-hdc-wdl-wdl-ou",
-      "type": "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负+总进球数",
+      "id": "tomorrow-四串一-0-189-htft-wdl-wdl-wdl",
+      "type": "明日四串一购买方案 · 进取单 · 半全场+胜平负",
       "planGroup": "四串一",
       "planSize": 4,
       "mode": "all",
@@ -5737,56 +5740,20 @@
         "2040169"
       ],
       "markets": [
-        "hdc",
+        "htft",
         "wdl",
         "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.052337226259717,
-      "stabilityScore": 0.902,
-      "protection": "稳健全中",
+      "planScore": 0.048252241919999994,
+      "stabilityScore": 0.7,
+      "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.05380613371,
-      "modelWeight": 1.011,
-      "modelSamples": 44,
+      "planProbability": 0.05267712,
+      "modelWeight": 1.035,
+      "modelSamples": 48,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 44，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-四串一-0-83-ou-wdl-wdl-ou",
-      "type": "明日四串一购买方案 · 稳健单 · 总进球数+胜平负",
-      "planGroup": "四串一",
-      "planSize": 4,
-      "mode": "all",
-      "requiredHits": 4,
-      "matchIds": [
-        "003",
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040166",
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "ou",
-        "wdl",
-        "wdl",
-        "ou"
-      ],
-      "planScore": 0.051933216160859996,
-      "stabilityScore": 0.885,
-      "protection": "稳健全中",
-      "risk": "高",
-      "planProbability": 0.0536611037,
-      "modelWeight": 1.01,
-      "modelSamples": 36,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 36，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -5814,15 +5781,51 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.025389375313547995,
+      "planScore": 0.032069830656000005,
       "stabilityScore": 0.69,
       "protection": "进取单",
       "risk": "高",
-      "planProbability": 0.027802644889999995,
+      "planProbability": 0.03511808,
       "modelWeight": 1.015,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
       "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 50，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-四串一-0-1-hdc-wdl-wdl-hdc",
+      "type": "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "四串一",
+      "planSize": 4,
+      "mode": "all",
+      "requiredHits": 4,
+      "matchIds": [
+        "003",
+        "004",
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl",
+        "hdc"
+      ],
+      "planScore": 0.014206926848,
+      "stabilityScore": 0.86,
+      "protection": "稳健全中",
+      "risk": "高",
+      "planProbability": 0.01478656,
+      "modelWeight": 1.012,
+      "modelSamples": 52,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -5850,11 +5853,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.704604328024696,
+      "planScore": 0.8709556613119999,
       "stabilityScore": 0.98,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.70857233309,
+      "planProbability": 0.8758604799999999,
       "modelWeight": 1.076,
       "modelSamples": 58,
       "targetDate": "2026-06-14",
@@ -5886,11 +5889,11 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.70427229707912,
+      "planScore": 0.8709556613119999,
       "stabilityScore": 0.98,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.7082384323,
+      "planProbability": 0.8758604799999999,
       "modelWeight": 1.075,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
@@ -5898,8 +5901,8 @@
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
-      "id": "tomorrow-四串二-0-2-hdc-wdl-wdl-ou",
-      "type": "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负+总进球数",
+      "id": "tomorrow-四串二-0-189-htft-wdl-wdl-wdl",
+      "type": "明日四串二购买方案 · 保底2/4 · 半全场+胜平负",
       "planGroup": "四串二",
       "planSize": 4,
       "mode": "atLeast",
@@ -5917,56 +5920,20 @@
         "2040169"
       ],
       "markets": [
-        "hdc",
+        "htft",
         "wdl",
         "wdl",
-        "ou"
+        "wdl"
       ],
-      "planScore": 0.690807944901272,
-      "stabilityScore": 0.98,
+      "planScore": 0.8413549527040002,
+      "stabilityScore": 0.88,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.6946982551299999,
-      "modelWeight": 1.011,
-      "modelSamples": 44,
+      "planProbability": 0.8706073600000002,
+      "modelWeight": 1.035,
+      "modelSamples": 48,
       "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 44，临场需再次确认开售状态和首发。",
-      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
-    },
-    {
-      "id": "tomorrow-四串二-0-83-ou-wdl-wdl-ou",
-      "type": "明日四串二购买方案 · 保底2/4 · 总进球数+胜平负",
-      "planGroup": "四串二",
-      "planSize": 4,
-      "mode": "atLeast",
-      "requiredHits": 2,
-      "matchIds": [
-        "003",
-        "004",
-        "005",
-        "006"
-      ],
-      "eventIds": [
-        "2040166",
-        "2040167",
-        "2040168",
-        "2040169"
-      ],
-      "markets": [
-        "ou",
-        "wdl",
-        "wdl",
-        "ou"
-      ],
-      "planScore": 0.6904627051018402,
-      "stabilityScore": 0.98,
-      "protection": "保底 2/4",
-      "risk": "高",
-      "planProbability": 0.6943510711000002,
-      "modelWeight": 1.01,
-      "modelSamples": 36,
-      "targetDate": "2026-06-14",
-      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 36，临场需再次确认开售状态和首发。",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     },
     {
@@ -5994,19 +5961,933 @@
         "wdl",
         "wdl"
       ],
-      "planScore": 0.6190744335192119,
+      "planScore": 0.8338553456640002,
       "stabilityScore": 0.87,
       "protection": "保底 2/4",
       "risk": "高",
-      "planProbability": 0.6424599766699999,
+      "planProbability": 0.8653542400000002,
       "modelWeight": 1.015,
       "modelSamples": 50,
       "targetDate": "2026-06-14",
       "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 50，临场需再次确认开售状态和首发。",
       "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
+    },
+    {
+      "id": "tomorrow-四串二-0-1-hdc-wdl-wdl-hdc",
+      "type": "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负",
+      "planGroup": "四串二",
+      "planSize": 4,
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "matchIds": [
+        "003",
+        "004",
+        "005",
+        "006"
+      ],
+      "eventIds": [
+        "2040166",
+        "2040167",
+        "2040168",
+        "2040169"
+      ],
+      "markets": [
+        "hdc",
+        "wdl",
+        "wdl",
+        "hdc"
+      ],
+      "planScore": 0.682627438592,
+      "stabilityScore": 0.98,
+      "protection": "保底 2/4",
+      "risk": "高",
+      "planProbability": 0.68647168,
+      "modelWeight": 1.012,
+      "modelSamples": 52,
+      "targetDate": "2026-06-14",
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。"
     }
   ],
   "planArchive": [
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串一-1-0-hdc-wdl-wdl",
+      "planId": "tomorrow-三串一-1-0-hdc-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "三串一",
+      "mode": "all",
+      "requiredHits": 3,
+      "risk": "中",
+      "protection": "稳健全中",
+      "stabilityScore": 0.887,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.11667520000000002,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.574,
+      "detail": "0/3 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串一-2-0-hdc-wdl-wdl",
+      "planId": "tomorrow-三串一-2-0-hdc-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "三串一",
+      "mode": "all",
+      "requiredHits": 3,
+      "risk": "中",
+      "protection": "稳健全中",
+      "stabilityScore": 0.887,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.11667520000000002,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.574,
+      "detail": "0/3 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串二-1-0-hdc-wdl-wdl",
+      "planId": "tomorrow-三串二-1-0-hdc-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日三串二购买方案 · 保底2/3 · 让球胜平负+胜平负",
+      "planGroup": "三串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "中",
+      "protection": "保底 2/3",
+      "stabilityScore": 0.98,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.6512896,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.574,
+      "detail": "0/3 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串二-2-0-hdc-wdl-wdl",
+      "planId": "tomorrow-三串二-2-0-hdc-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日三串二购买方案 · 保底2/3 · 让球胜平负+胜平负",
+      "planGroup": "三串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "中",
+      "protection": "保底 2/3",
+      "stabilityScore": 0.98,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.05，复盘样本 42，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.6512896,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.574,
+      "detail": "0/3 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-四串一-0-5-hdc-wdl-hdc-wdl",
+      "planId": "tomorrow-四串一-0-5-hdc-wdl-hdc-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+      "planGroup": "四串一",
+      "mode": "all",
+      "requiredHits": 4,
+      "risk": "高",
+      "protection": "稳健全中",
+      "stabilityScore": 0.871,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.023568390400000007,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让1球 让平",
+          "handicap": 1,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 4,
+      "result": "pending",
+      "probability": 0.481,
+      "detail": "0/4 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-四串二-0-5-hdc-wdl-hdc-wdl",
+      "planId": "tomorrow-四串二-0-5-hdc-wdl-hdc-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:55:23.316+08:00",
+      "type": "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负",
+      "planGroup": "四串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "高",
+      "protection": "保底 2/4",
+      "stabilityScore": 0.98,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.01，复盘样本 52，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.7124442112000001,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让2球 让胜",
+          "handicap": 2,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "hdc",
+          "marketName": "让球胜平负",
+          "pick": "受让1球 让平",
+          "handicap": 1,
+          "probability": 0.202,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 4,
+      "result": "pending",
+      "probability": 0.481,
+      "detail": "0/4 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-四串一-0-189-htft-wdl-wdl-wdl",
+      "planId": "tomorrow-四串一-0-189-htft-wdl-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:45:31.349+08:00",
+      "type": "明日四串一购买方案 · 进取单 · 半全场+胜平负",
+      "planGroup": "四串一",
+      "mode": "all",
+      "requiredHits": 4,
+      "risk": "高",
+      "protection": "进取单",
+      "stabilityScore": 0.7,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.043805184,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "htft",
+          "marketName": "半全场",
+          "pick": "平/负",
+          "probability": 0.12,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.632,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 4,
+      "result": "pending",
+      "probability": 0.5680000000000001,
+      "detail": "0/4 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-四串二-0-189-htft-wdl-wdl-wdl",
+      "planId": "tomorrow-四串二-0-189-htft-wdl-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:45:31.349+08:00",
+      "type": "明日四串二购买方案 · 保底2/4 · 半全场+胜平负",
+      "planGroup": "四串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "高",
+      "protection": "保底 2/4",
+      "stabilityScore": 0.88,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.03，复盘样本 48，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.828631552,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "htft",
+          "marketName": "半全场",
+          "pick": "平/负",
+          "probability": 0.12,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.632,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 4,
+      "result": "pending",
+      "probability": 0.5680000000000001,
+      "detail": "0/4 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-二串一-5-0-wdl-wdl",
+      "planId": "tomorrow-二串一-5-0-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:43:34.115+08:00",
+      "type": "明日二串一购买方案 · 稳健单 · 胜平负",
+      "planGroup": "二串一",
+      "mode": "all",
+      "requiredHits": 2,
+      "risk": "中",
+      "protection": "稳健全中",
+      "stabilityScore": 0.98,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 1.14，复盘样本 32，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.341172,
+      "picks": [
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.702,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040169",
+          "sportteryNo": "周六008",
+          "matchDate": "2026-06-14",
+          "kickoff": "12:00",
+          "competition": "世界杯",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "平",
+          "probability": 0.486,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 2,
+      "result": "pending",
+      "probability": 0.594,
+      "detail": "0/2 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串一-0-42-score-wdl-wdl",
+      "planId": "tomorrow-三串一-0-42-score-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:43:34.115+08:00",
+      "type": "明日三串一购买方案 · 进取单 · 比分+胜平负",
+      "planGroup": "三串一",
+      "mode": "all",
+      "requiredHits": 3,
+      "risk": "高",
+      "protection": "进取单",
+      "stabilityScore": 0.64,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 0.97，复盘样本 34，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.0426816,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "score",
+          "marketName": "比分",
+          "pick": "0-2 / 1-2",
+          "scoreOptions": [
+            "0-2",
+            "1-2"
+          ],
+          "probability": 0.08,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.702,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.5139999999999999,
+      "detail": "0/3 命中"
+    },
+    {
+      "schemaVersion": "tomorrow-tab-plans-v1",
+      "archiveId": "2026-06-13-tomorrow-三串二-0-42-score-wdl-wdl",
+      "planId": "tomorrow-三串二-0-42-score-wdl-wdl",
+      "date": "2026-06-13",
+      "generatedAt": "2026-06-13T12:43:34.115+08:00",
+      "type": "明日三串二购买方案 · 保底2/3 · 比分+胜平负",
+      "planGroup": "三串二",
+      "mode": "atLeast",
+      "requiredHits": 2,
+      "risk": "高",
+      "protection": "保底 2/3",
+      "stabilityScore": 0.82,
+      "note": "提前准备 2026-06-14 同一天的竞彩串单，按校准概率排序；玩法权重 0.97，复盘样本 34，临场需再次确认开售状态和首发。",
+      "socialNote": "组合来自中国竞彩网竞猜赛程，未见可核验异常，按谨慎方案处理。",
+      "targetDate": "2026-06-14",
+      "planProbability": 0.5651168,
+      "picks": [
+        {
+          "sourceEventId": "2040166",
+          "sportteryNo": "周六005",
+          "matchDate": "2026-06-14",
+          "kickoff": "03:00",
+          "competition": "世界杯",
+          "homeTeam": "卡塔尔",
+          "awayTeam": "瑞士",
+          "marketKey": "score",
+          "marketName": "比分",
+          "pick": "0-2 / 1-2",
+          "scoreOptions": [
+            "0-2",
+            "1-2"
+          ],
+          "probability": 0.08,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040167",
+          "sportteryNo": "周六006",
+          "matchDate": "2026-06-14",
+          "kickoff": "06:00",
+          "competition": "世界杯",
+          "homeTeam": "巴西",
+          "awayTeam": "摩洛哥",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "主胜",
+          "probability": 0.76,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        },
+        {
+          "sourceEventId": "2040168",
+          "sportteryNo": "周六007",
+          "matchDate": "2026-06-14",
+          "kickoff": "09:00",
+          "competition": "世界杯",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "marketKey": "wdl",
+          "marketName": "胜平负",
+          "pick": "客胜",
+          "probability": 0.702,
+          "status": "pre",
+          "hit": null,
+          "score": ""
+        }
+      ],
+      "settledPicks": 0,
+      "hitPicks": 0,
+      "totalPicks": 3,
+      "result": "pending",
+      "probability": 0.5139999999999999,
+      "detail": "0/3 命中"
+    },
     {
       "schemaVersion": "tomorrow-tab-plans-v1",
       "archiveId": "2026-06-13-tomorrow-二串一-0-10-score-wdl",
@@ -7869,8 +8750,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -8075,8 +8956,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -8446,8 +9327,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -8761,8 +9642,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -9038,8 +9919,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -9221,8 +10102,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -9498,8 +10379,8 @@
           "awayTeam": "土耳其",
           "marketKey": "hdc",
           "marketName": "让球胜平负",
-          "pick": "受让1球 让胜",
-          "handicap": 1,
+          "pick": "让1球 让胜",
+          "handicap": -1,
           "probability": 0.384,
           "status": "pre",
           "hit": null,
@@ -9803,12 +10684,16 @@
           "awayTeam": "波黑",
           "marketKey": "ou",
           "marketName": "总进球数",
-          "pick": "0球",
-          "exactGoals": "0",
+          "pick": "2球",
+          "exactGoals": "2",
           "probability": 0.277,
           "status": "finished",
-          "hit": false,
-          "score": "1-1"
+          "hit": true,
+          "score": "1-1",
+          "exactGoalOptions": [
+            "2",
+            "3"
+          ]
         },
         {
           "sourceEventId": "2040165",
@@ -9828,11 +10713,11 @@
         }
       ],
       "settledPicks": 2,
-      "hitPicks": 1,
+      "hitPicks": 2,
       "totalPicks": 2,
-      "result": "miss",
+      "result": "hit",
       "probability": 0.41300000000000003,
-      "detail": "1/2 命中"
+      "detail": "2/2 命中"
     },
     {
       "schemaVersion": "tomorrow-tab-plans-v1",
@@ -9917,11 +10802,15 @@
           "awayTeam": "波黑",
           "marketKey": "score",
           "marketName": "比分",
-          "pick": "0-0",
+          "pick": "1-1",
           "probability": 0.11,
           "status": "finished",
-          "hit": false,
-          "score": "1-1"
+          "hit": true,
+          "score": "1-1",
+          "scoreOptions": [
+            "1-1",
+            "2-1"
+          ]
         },
         {
           "sourceEventId": "2040165",
@@ -9941,11 +10830,11 @@
         }
       ],
       "settledPicks": 2,
-      "hitPicks": 1,
+      "hitPicks": 2,
       "totalPicks": 2,
-      "result": "miss",
+      "result": "hit",
       "probability": 0.3295,
-      "detail": "1/2 命中"
+      "detail": "2/2 命中"
     },
     {
       "schemaVersion": "tomorrow-tab-plans-v1",
@@ -10487,9 +11376,9 @@
     {
       "date": "2026-06-12",
       "type": "明日二串一购买方案 · 总进球数+胜平负",
-      "result": "miss",
+      "result": "hit",
       "probability": 0.41300000000000003,
-      "detail": "1/2 命中",
+      "detail": "2/2 命中",
       "archiveId": "2026-06-12-tomorrow-二串一-0-8-ou-wdl"
     },
     {
@@ -10503,9 +11392,9 @@
     {
       "date": "2026-06-12",
       "type": "明日二串一购买方案 · 比分+胜平负",
-      "result": "miss",
+      "result": "hit",
       "probability": 0.3295,
-      "detail": "1/2 命中",
+      "detail": "2/2 命中",
       "archiveId": "2026-06-12-tomorrow-二串一-0-12-score-wdl"
     },
     {
@@ -10584,19 +11473,28 @@
   "autoReview": {
     "label": "自动复盘",
     "reviewed": 15,
-    "hits": 2,
-    "hitRate": 0.13333333333333333,
-    "summary": "已自动复盘 15 个购买方案，命中 2 个。"
+    "hits": 4,
+    "hitRate": 0.26666666666666666,
+    "summary": "已自动复盘 15 个购买方案，命中 4 个。"
   },
   "dailyPlanSummaries": [
     {
       "date": "2026-06-13",
-      "totalPlans": 44,
+      "totalPlans": 55,
       "reviewedPlans": 0,
-      "pendingPlans": 44,
+      "pendingPlans": 55,
       "hitPlans": 0,
       "hitRate": 0,
       "planTypes": [
+        "明日三串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+        "明日三串二购买方案 · 保底2/3 · 让球胜平负+胜平负",
+        "明日四串一购买方案 · 稳健单 · 让球胜平负+胜平负",
+        "明日四串二购买方案 · 保底2/4 · 让球胜平负+胜平负",
+        "明日四串一购买方案 · 进取单 · 半全场+胜平负",
+        "明日四串二购买方案 · 保底2/4 · 半全场+胜平负",
+        "明日二串一购买方案 · 稳健单 · 胜平负",
+        "明日三串一购买方案 · 进取单 · 比分+胜平负",
+        "明日三串二购买方案 · 保底2/3 · 比分+胜平负",
         "明日二串一购买方案 · 比分+胜平负",
         "明日三串一购买方案 · 总进球数+胜平负",
         "明日三串二购买方案 · 总进球数+胜平负",
@@ -10627,15 +11525,15 @@
         "明日四串二购买方案 · 总进球数+胜平负+让球胜平负",
         "明日四串二购买方案 · 让球胜平负+胜平负+比分"
       ],
-      "summary": "2026-06-13 已推出 44 个购买方案，等待比赛完场后统计命中率。"
+      "summary": "2026-06-13 已推出 55 个购买方案，等待比赛完场后统计命中率。"
     },
     {
       "date": "2026-06-12",
       "totalPlans": 8,
       "reviewedPlans": 8,
       "pendingPlans": 0,
-      "hitPlans": 2,
-      "hitRate": 0.25,
+      "hitPlans": 4,
+      "hitRate": 0.5,
       "planTypes": [
         "明日二串一购买方案 · 让球胜平负",
         "明日二串一购买方案 · 胜平负",
@@ -10644,7 +11542,7 @@
         "明日二串一购买方案 · 胜平负+让球胜平负",
         "明日二串一购买方案 · 比分+胜平负"
       ],
-      "summary": "2026-06-12 已复盘 8 个购买方案，命中 2 个，命中率 25%。"
+      "summary": "2026-06-12 已复盘 8 个购买方案，命中 4 个，命中率 50%。"
     },
     {
       "date": "2026-06-11",
@@ -10682,14 +11580,14 @@
     {
       "market": "ou",
       "name": "总进球数",
-      "hits": 0,
+      "hits": 1,
       "total": 2,
       "streak": "只统计购买方案"
     },
     {
       "market": "score",
       "name": "比分",
-      "hits": 0,
+      "hits": 1,
       "total": 2,
       "streak": "高风险观察"
     },
@@ -10702,7 +11600,7 @@
     }
   ],
   "modelProfile": {
-    "generatedAt": "2026-06-13T12:25:23.596+08:00",
+    "generatedAt": "2026-06-13T13:35:23.931+08:00",
     "marketWeights": {
       "wdl": 1.14,
       "hdc": 0.884,
@@ -10722,14 +11620,14 @@
         "hitRate": 0.3
       },
       "ou": {
-        "hits": 0,
+        "hits": 1,
         "total": 2,
-        "hitRate": 0
+        "hitRate": 0.5
       },
       "score": {
-        "hits": 0,
+        "hits": 1,
         "total": 2,
-        "hitRate": 0
+        "hitRate": 0.5
       },
       "htft": {
         "hits": 0,

@@ -307,11 +307,19 @@ function getParlayInsight(picks) {
   );
 }
 
+function findParlayMatch(seed, index) {
+  const eventId = seed.eventIds?.[index];
+  const matchId = seed.matchIds?.[index];
+  return (
+    state.matches.find((item) => String(item.sourceEventId) === String(eventId)) ||
+    state.matches.find((item) => String(item.id) === String(matchId))
+  );
+}
+
 function getParlayPicks(seed, useLive = true) {
-  return seed.matchIds
-    .map((matchId, index) => {
-      const match = state.matches.find((item) => item.id === matchId);
-      const marketKey = seed.markets[index];
+  return (seed.markets || [])
+    .map((marketKey, index) => {
+      const match = findParlayMatch(seed, index);
       if (!match || !match.markets[marketKey]) return null;
       const market = match.markets[marketKey];
       const probability = useLive ? liveProbability(market.probability, match) : market.probability;
@@ -324,6 +332,13 @@ function getParlayPicks(seed, useLive = true) {
       };
     })
     .filter(Boolean);
+}
+
+function isCompleteParlay(seed) {
+  const expectedSize = seed.planSize || seed.markets?.length || seed.matchIds?.length || 0;
+  const picks = getParlayPicks(seed);
+  const eventIds = picks.map((pick) => String(pick.match.sourceEventId || pick.match.id));
+  return expectedSize > 0 && picks.length === expectedSize && new Set(eventIds).size === expectedSize;
 }
 
 function getParlayProbability(seed, useLive = true) {
@@ -690,7 +705,13 @@ function renderParlays() {
     return;
   }
 
-  const grouped = groupBy(state.data.parlaySeeds, (plan) => plan.planGroup || "其他");
+  const validPlans = state.data.parlaySeeds.filter(isCompleteParlay);
+  if (!validPlans.length) {
+    els.parlayList.innerHTML = `<div class="empty-state">当前没有可执行购买方案</div>`;
+    return;
+  }
+
+  const grouped = groupBy(validPlans, (plan) => plan.planGroup || "其他");
 
   els.parlayList.innerHTML = planGroupOrder
     .filter((group) => grouped[group]?.length)
