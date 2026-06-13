@@ -910,6 +910,77 @@ function htftModel(match, status, score, wdlPick, exactGoals) {
   };
 }
 
+function htftModelV2(match, status, score, wdlPick, exactGoals) {
+  if (status === "finished" && score.home !== null && score.away !== null) {
+    const halfScore = parseScore(match.sectionsNo1);
+    const half = halfScore.home !== null && halfScore.away !== null ? scoreResult(halfScore) : "平";
+    const full = scoreResult(score);
+    return {
+      pick: `${half}/${full}`,
+      probability: 0.52,
+      confidence: 70,
+      risk: "高",
+      reason: "根据半场和全场比分做复盘方向。",
+    };
+  }
+
+  const profile = getModelProfile(match);
+  const edge = profile.strengthEdge;
+  const absEdge = Math.abs(edge);
+  const goals = exactGoals === "4+" ? 4 : Number(exactGoals);
+  const lowGoalDraw = Number.isFinite(goals) && goals <= 1;
+  const kickoffHour = Number(String(match.matchTime || "00:00").slice(0, 2));
+  const lateOrEarly = Number.isFinite(kickoffHour) && (kickoffHour <= 4 || kickoffHour >= 21);
+  const handicap = confirmedHandicapLine(match) ?? estimateHandicapLine(match);
+  const deepFavorite = Math.abs(handicap) >= 2 || absEdge >= 22;
+  const balanced = absEdge <= 6;
+  const openGame = exactGoals === "4+" || Number(goals) >= 3 || profile.goalBias >= 4;
+  const variant = stableIndex(match, 3);
+
+  if (wdlPick === "主胜") {
+    const earlyControl = (deepFavorite || profile.attackEdge >= 7 || (openGame && !lateOrEarly)) && !lowGoalDraw;
+    const pick = earlyControl ? (variant === 0 ? "胜/胜" : variant === 1 ? "平/胜" : "胜/平") : "平/胜";
+    return {
+      pick,
+      probability: earlyControl ? 0.35 : 0.29,
+      confidence: earlyControl ? 60 : 54,
+      risk: "高",
+      reason: earlyControl ? "主队强势面或进攻倾向较明显，半场不再默认保守，优先观察主队早段压制。" : "主队方向占优但早段不确定性较高，倾向下半场兑现优势。",
+    };
+  }
+
+  if (wdlPick === "客胜") {
+    const earlyControl = (deepFavorite || profile.awayAttackEdge >= 6 || (openGame && !lateOrEarly)) && !lowGoalDraw;
+    const pick = earlyControl ? (variant === 0 ? "负/负" : variant === 1 ? "平/负" : "负/平") : "平/负";
+    return {
+      pick,
+      probability: earlyControl ? 0.33 : 0.28,
+      confidence: earlyControl ? 58 : 52,
+      risk: "高",
+      reason: earlyControl ? "客队强度或反击效率占优，半场路径允许客队先建立优势。" : "客队方向占优但早段仍偏谨慎，倾向下半场拉开。",
+    };
+  }
+
+  const drawPath = balanced
+    ? variant === 0
+      ? "平/平"
+      : variant === 1
+        ? "胜/平"
+        : "负/平"
+    : profile.goalBias <= 0 || lowGoalDraw
+      ? "平/平"
+      : edge >= 0
+        ? "胜/平"
+        : "负/平";
+  return {
+    pick: drawPath,
+    probability: drawPath === "平/平" ? 0.3 : 0.25,
+    confidence: drawPath === "平/平" ? 52 : 48,
+    risk: "高",
+    reason: "平局方向下半场波动较大，结合强弱差和进球倾向给出更分散的半全场路径。",
+  };
+}
+
 function estimateExactGoals(match, wdlPick) {
   const profile = getModelProfile(match);
   const seed = Math.abs(profile.strengthEdge);
@@ -937,7 +1008,7 @@ function buildMarkets(match, status, score, options = {}) {
   const handicap = handicapModel(match, score, wdl.pick, options.detail);
   const exactScore = scoreOptions[0];
   const scoreProbability = total === null ? (scoreOptions.length > 1 ? 0.27 : 0.2) : 0.82;
-  const htft = htftModel(match, status, score, wdl.pick, exactGoals);
+  const htft = htftModelV2(match, status, score, wdl.pick, exactGoals);
 
   const markets = {
     hdc: {
@@ -1170,25 +1241,49 @@ function combinations(items, size) {
 }
 
 function marketProducts(matches) {
-  const preferred = ["wdl", "hdc", "ou", "score"];
+  const preferred = ["wdl", "hdc", "ou", "score", "htft"];
+  const speculative = new Set(["score", "htft"]);
   return matches.reduce(
     (groups, match) =>
       groups.flatMap((group) =>
         preferred
           .filter((key) => match.markets[key] && match.betOptions?.[key]?.allUp !== false)
+          .filter((key) => !speculative.has(key) || !group.some((item) => speculative.has(item)))
           .map((market) => [...group, market]),
       ),
     [[]],
   );
 }
 
+function marketStabilityScore(marketKey, market) {
+  const base = { wdl: 0.94, hdc: 0.9, ou: 0.82, htft: 0.54, score: 0.48 }[marketKey] ?? 0.65;
+  const probabilityBoost = clamp((market.probability || 0) - 0.3, -0.12, 0.12);
+  const sampleBoost = Math.min((market.sampleSize || 0) / 100, 0.08);
+  return clamp(base + probabilityBoost + sampleBoost, 0.35, 0.98);
+}
+
+function planStabilityScore(matches, markets, mode, requiredHits) {
+  const scores = matches.map((match, index) => marketStabilityScore(markets[index], match.markets[markets[index]]));
+  const average = scores.reduce((sum, item) => sum + item, 0) / scores.length;
+  const guaranteeBoost = mode === "atLeast" ? 0.12 : 0;
+  const speculativePenalty = markets.filter((market) => market === "score" || market === "htft").length * 0.08;
+  const allHitPenalty = mode === "all" && markets.length >= 3 ? 0.06 : 0;
+  return clamp(average + guaranteeBoost - speculativePenalty - allHitPenalty, 0.25, 0.98);
+}
+
+function protectionLabel(plan) {
+  if (plan.mode === "atLeast") return `保底 ${plan.requiredHits}/${plan.planSize}`;
+  const hasSpeculative = plan.markets.some((market) => market === "score" || market === "htft");
+  return hasSpeculative ? "进取单" : "稳健全中";
+}
+
 function selectCategoryPlans(categoryPlans) {
-  const sorted = categoryPlans.sort((a, b) => b.planProbability - a.planProbability);
+  const sorted = categoryPlans.sort((a, b) => (b.planScore ?? b.planProbability) - (a.planScore ?? a.planProbability));
   const selected = sorted.slice(0, 5);
-  const scorePlan = sorted.find((plan) => plan.markets.includes("score"));
+  const scorePlan = sorted.find((plan) => plan.markets.includes("score") && (plan.stabilityScore ?? 0) >= 0.55);
   if (scorePlan && !selected.some((plan) => plan.id === scorePlan.id)) {
     selected[selected.length - 1] = scorePlan;
-    selected.sort((a, b) => b.planProbability - a.planProbability);
+    selected.sort((a, b) => (b.planScore ?? b.planProbability) - (a.planScore ?? a.planProbability));
   }
   return selected;
 }
@@ -1238,12 +1333,15 @@ function buildPurchasePlans(matches, targetDate) {
     combinations(candidates.slice(0, 8), category.size).forEach((group, groupIndex) => {
       marketProducts(group).forEach((markets, marketIndex) => {
         const probability = planProbability(group, markets, category.mode, category.requiredHits);
+        const stabilityScore = planStabilityScore(group, markets, category.mode, category.requiredHits);
+        const planScore = probability * (0.72 + stabilityScore * 0.28);
         const marketLabel = [...new Set(markets.map((market) => marketNamesForArchive()[market]))].join("+");
+        const protection = category.mode === "atLeast" ? `保底${category.requiredHits}/${category.size}` : markets.some((market) => market === "score" || market === "htft") ? "进取单" : "稳健单";
         const modelWeight = averageMarketWeight(group, markets);
         const modelSamples = totalMarketSamples(group, markets);
         categoryPlans.push({
           id: `tomorrow-${category.group}-${groupIndex}-${marketIndex}-${markets.join("-")}`,
-          type: `明日${category.group}购买方案 · ${marketLabel}`,
+          type: `明日${category.group}购买方案 · ${protection} · ${marketLabel}`,
           planGroup: category.group,
           planSize: category.size,
           mode: category.mode,
@@ -1251,7 +1349,10 @@ function buildPurchasePlans(matches, targetDate) {
           matchIds: group.map((match) => match.id),
           eventIds: group.map((match) => match.sourceEventId),
           markets,
-          risk: markets.includes("score") || category.size === 4 ? "高" : "中",
+          planScore,
+          stabilityScore: Number(stabilityScore.toFixed(3)),
+          protection: category.mode === "atLeast" ? `保底 ${category.requiredHits}/${category.size}` : markets.some((market) => market === "score" || market === "htft") ? "进取单" : "稳健全中",
+          risk: markets.includes("score") || markets.includes("htft") || category.size === 4 ? "高" : "中",
           planProbability: probability,
           modelWeight: Number(modelWeight.toFixed(3)),
           modelSamples,
@@ -1334,6 +1435,8 @@ function createPlanSnapshot(plan, matches, generatedAt, today) {
     mode: plan.mode,
     requiredHits: plan.requiredHits,
     risk: plan.risk,
+    protection: plan.protection,
+    stabilityScore: plan.stabilityScore,
     note: plan.note,
     socialNote: plan.socialNote,
     targetDate: plan.targetDate,

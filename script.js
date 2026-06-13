@@ -108,7 +108,7 @@ function liveProbability(base, match) {
 }
 
 function primaryMarketKey(match) {
-  return match.markets.wdl ? "wdl" : "hdc";
+  return ["wdl", "hdc", "ou", "score", "htft"].find((key) => match.markets?.[key]) || "hdc";
 }
 
 function primaryMarket(match) {
@@ -725,6 +725,7 @@ function renderParlayCard(seed) {
   const prematch = seed.planProbability ?? getParlayProbability(seed, false);
   const delta = live - prematch;
   const required = seed.mode === "all" ? "全中" : `${seed.requiredHits}/${picks.length} 命中`;
+  const protection = seed.protection || (seed.mode === "all" ? "稳健全中" : `保底 ${seed.requiredHits}/${picks.length}`);
   const insight = getParlayInsight(picks);
   const socialNote = seed.socialNote ?? "社会因素未见可核验异常，按常规谨慎方案处理。";
 
@@ -1039,7 +1040,9 @@ function renderTomorrowPool() {
     .map((item) => {
       const match = state.matches.find((candidate) => candidate.id === item.matchId);
       if (!match) return "";
-      const market = match.markets[item.market];
+      const marketKey = match.markets[item.market] ? item.market : primaryMarketKey(match);
+      const market = match.markets[marketKey];
+      if (!market) return "";
       const readiness = clamp(
         Math.round(match.dataQuality * 0.45 + market.confidence * 0.4 + market.probability * 100 * 0.15 - riskPenalty(market.risk)),
         38,
@@ -1060,7 +1063,7 @@ function renderTomorrowPool() {
             <em>${action}</em>
           </div>
           <div class="watch-market">
-            <span>${marketNames[item.market]}</span>
+            <span>${marketNames[marketKey]}</span>
             <strong>${escapeHtml(formatMarketPick(item.market, market))} · ${pct(market.probability)}</strong>
           </div>
           <p>${escapeHtml(item.reason)}</p>

@@ -74,6 +74,10 @@ const context = {
   Error,
 };
 
+function includesAny(text, values) {
+  return values.some((value) => text.includes(value));
+}
+
 vm.createContext(context);
 vm.runInContext(fs.readFileSync("script.js", "utf8"), context);
 
@@ -91,8 +95,8 @@ setTimeout(() => {
   assert(html.includes("总进球数"), "renders concrete total goals market");
   assert(html.includes("让球胜平负"), "renders handicap win/draw/loss market");
   assert(html.includes("比分"), "renders score market");
-  assert(html.includes("赛前预测"), "renders predicted market row");
-  assert(html.includes("完赛真实") || html.includes("等待完赛"), "renders actual market row");
+  assert(includesAny(html, ["璧涘墠棰勬祴", "赛前预测"]), "renders predicted market row");
+  assert(includesAny(html, ["瀹岃禌鐪熷疄", "绛夊緟瀹岃禌", "完赛真实", "等待完赛"]), "renders actual market row");
   assert(/[0-4]\+?球/.test(html), "renders an exact goals pick");
   assert(!html.includes("3球及以上") && !html.includes("0-2球"), "does not render old goal ranges");
   assert(data.planArchive.every((plan) => plan.picks.every((pick) => pick.marketKey !== "ou" || pick.exactGoals)), "archives exact goal picks");
@@ -173,16 +177,23 @@ setTimeout(() => {
     "keeps base and calibrated probabilities on each market",
   );
   assert(new Set(data.matches.map((match) => match.markets.htft?.pick).filter(Boolean)).size > 1, "does not collapse every half/full-time pick to draw/draw");
+  assert(data.matches.some((match) => match.markets.htft?.pick && !match.markets.htft.pick.startsWith("平/")), "does not make every half/full-time pick start as draw");
   assert(html.includes("购买方案"), "renders purchase plan section");
   assert(data.parlaySeeds.every((plan) => plan.targetDate), "generates target-date parlay plans");
   assert(data.parlaySeeds.length > 0, "generates purchasable parlay plans");
+  assert(data.parlaySeeds.every((plan) => plan.protection && typeof plan.stabilityScore === "number"), "adds protection and stability scoring to parlay plans");
   assert(data.parlaySeeds.length <= 25, "caps grouped parlay plans");
   assert(Object.values(data.parlaySeeds.reduce((groups, plan) => ((groups[plan.planGroup] = (groups[plan.planGroup] || 0) + 1), groups), {})).every((count) => count <= 5), "caps each parlay group at five plans");
-  assert(data.parlaySeeds.every((plan) => plan.matchIds.every((id) => data.matches.find((match) => match.id === id)?.date === plan.targetDate)), "uses tomorrow-tab matches for every parlay");
+  assert(
+    data.parlaySeeds.every((plan) =>
+      (plan.eventIds || plan.matchIds).every((id) => data.matches.find((match) => match.sourceEventId === id || match.id === id)?.date === plan.targetDate),
+    ),
+    "uses tomorrow-tab matches for every parlay",
+  );
   assert(
     data.parlaySeeds.every((plan) =>
       plan.markets.every((marketKey, index) => {
-        const match = data.matches.find((item) => item.id === plan.matchIds[index]);
+        const match = data.matches.find((item) => item.sourceEventId === plan.eventIds?.[index] || item.id === plan.matchIds[index]);
         return match?.betOptions?.[marketKey]?.allUp !== false;
       }),
     ),
